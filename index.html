@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sailesh Mishra | CAD & VLSI Design Engineer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+
+    .title {
+    font-family: 'Consolas', monospace;
+    font-weight: 600;
+    font-size: 2rem; /* ← you can change this value */
+    color: var(--accent-color); /* or any highlight color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    }
+
+    /* Global Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Poppins', sans-serif;
+    }
+    
+    :root {
+      --primary: #1a237e;
+      --secondary: #00bcd4;
+      --dark: #0d1b2a;
+      --light: #f5f7fa;
+      --accent: #ff4081;
+      --gray: #78909c;
+      --success: #00c853;
+    }
+    
+    body {
+      background-color: var(--light);
+      color: #333;
+      transition: all 0.3s ease;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    body.dark-mode header {
+      background: rgba(15, 15, 15, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    
+    body.dark-mode .logo {
+      color: var(--secondary);
+    }
+    
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    nav a {
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    body.dark-mode nav a {
+      color: #fff;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--primary);
+      transition: width 0.3s;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+    
+    .mode-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    
+    body.dark-mode .mode-toggle {
+      color: #fff;
+    }
+    
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 5% 5rem;
+    }
+    
+    .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('hero-bg.jpg') center/cover no-repeat;
+    opacity: 0.3; /* Adjust transparency so text stays readable */
+    }
+
+
+
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .tagline {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #00a5c0;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-outline {
+      border: 2px solid white;
+      color: white;
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    /* Chip Grid */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 3rem;
+    }
+    
+    .chip {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    /* About Section */
+
+    .about-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.5rem;
+    }
+
+    .profile-pic {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-pic:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    .about-text {
+    max-width: 600px;
+    text-align: left;
+    }
+
+    body.dark-mode .profile-pic {
+    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
+    }
+    .about {
+      padding: 6rem 5%;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    body.dark-mode .section-title h2 {
+      color: var(--secondary);
+    }
+    
+    .section-title .divider {
+      height: 4px;
+      width: 60px;
+      background: var(--secondary);
+      margin: 0 auto;
+    }
+    
+    .about-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .about-image {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      opacity: 0.2;
+    }
+    
+    .about-image-placeholder {
+      background: linear-gradient(45deg, #0d47a1, #4a148c);
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .about-image-placeholder i {
+      font-size: 10rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .about-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+    
+    body.dark-mode .about-text h3 {
+      color: #fff;
+    }
+    
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: var(--gray);
+    }
+    
+    body.dark-mode .about-text p {
+      color: #bdbdbd;
+    }
+    
+    /* Skills Section */
+    .skills {
+      padding: 6rem 5%;
+      background: rgba(240, 245, 255, 0.7);
+    }
+    
+    body.dark-mode .skills {
+      background: rgba(30, 30, 40, 0.5);
+    }
+    
+    .skills-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .skill-category {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    body.dark-mode .skill-category {
+      background: #1e1e2a;
+    }
+    
+    .skill-category:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skill-category h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    body.dark-mode .skill-category h3 {
+      color: var(--secondary);
+    }
+    
+    .skill-list {
+      list-style: none;
+    }
+    
+    .skill-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    body.dark-mode .skill-list li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .skill-list li i {
+      color: var(--secondary);
+      font-size: 0.8rem;
+    }
+    
+    .skill-list li:last-child {
+      border-bottom: none;
+    }
+    
+    /* Projects Section */
+    .projects {
+      padding: 6rem 5%;
+    }
+    
+    .projects-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    body.dark-mode .project-card {
+      background: #1e1e2a;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .project-image {
+      height: 200px;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .project-image i {
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .project-content {
+      padding: 1.5rem;
+    }
+    
+    .project-content h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      color: var(--dark);
+    }
+    
+    body.dark-mode .project-content h3 {
+      color: #fff;
+    }
+    
+    .project-content p {
+      color: var(--gray);
+      margin-bottom: 1.5rem;
+    }
+    
+    body.dark-mode .project-content p {
+      color: #bdbdbd;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .project-tag {
+      background: rgba(0, 188, 212, 0.1);
+      color: var(--secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+    
+    /* Experience & Education */
+    .timeline {
+      padding: 6rem 5%;
+      background: rgba(240, 245, 255, 0.7);
+    }
+    
+    body.dark-mode .timeline {
+      background: rgba(30, 30, 40, 0.5);
+    }
+    
+    .timeline-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .timeline-item {
+      display: flex;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+    
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .timeline-content {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      width: calc(50% - 4rem);
+      z-index: 1;
+    }
+    
+    body.dark-mode .timeline-content {
+      background: #1e1e2a;
+    }
+    
+    .timeline-content h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    body.dark-mode .timeline-content h3 {
+      color: var(--secondary);
+    }
+    
+    .timeline-date {
+      color: var(--secondary);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+    
+    .timeline-desc {
+      color: var(--gray);
+    }
+    
+    body.dark-mode .timeline-desc {
+      color: #bdbdbd;
+    }
+    
+    .timeline-middle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: var(--secondary);
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+    
+    .timeline-circle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary);
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+    
+    .timeline-circle i {
+      color: white;
+      font-size: 1rem;
+    }
+    
+    /* Contact Section */
+    .contact {
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, var(--primary) 0%, #283593 100%);
+      color: white;
+    }
+    
+    .contact-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-detail i {
+      font-size: 1.5rem;
+    }
+    
+    .contact-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      background: var(--secondary);
+      transform: translateY(-5px);
+    }
+    
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: white;
+      font-size: 1rem;
+    }
+    
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .contact-form button {
+      background: var(--secondary);
+      color: white;
+      padding: 0.9rem 1.8rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .contact-form button:hover {
+      background: #00a5c0;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline-item {
+        flex-direction: column;
+      }
+      
+      .timeline-item:nth-child(even) {
+        flex-direction: column;
+      }
+      
+      .timeline-content {
+        width: 100%;
+        margin-top: 2.5rem;
+      }
+      
+      .timeline-middle {
+        display: none;
+      }
+      
+      .timeline-circle {
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    
+    /* ===== Responsive Navigation (for mobile) ===== */
+    @media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        z-index: 2000;
+    }
+
+    .hamburger i {
+        font-size: 1.5rem;
+        color: var(--text-color, #333);
+    }
+
+    .hamburger.active i {
+    transform: rotate(180deg);
+    animation: popScale 0.3s ease;
+    }
+
+    /* Slide-in mobile menu */
+    nav {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;          /* hidden off-screen initially */
+    width: 70%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    padding: 4rem 2rem;
+    gap: 1.5rem;
+    transition: right 0.3s ease;
+    z-index: 1500;
+    }
+
+    body.dark-mode nav {
+    background: rgba(20, 20, 20, 0.97);
+    }
+
+    nav.active {
+    display: flex;
+    animation: slideInBounce 0.4s ease forwards;
+    }
+
+    nav.closing {
+    animation: slideOutBounce 0.4s ease forwards;
+    }
+
+
+    .hamburger {
+    display: block;
+    cursor: pointer;
+    z-index: 2000;
+    }
+
+    .hamburger i {
+    font-size: 1.8rem;
+    color: var(--dark);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ✨ Rotate animation when active */
+    .hamburger.active i {
+    transform: rotate(180deg) scale(1.1);
+    }
+
+
+    body.dark-mode .hamburger i {
+    color: #fff;
+    }
+
+    nav a {
+    font-size: 1.2rem;
+    text-align: right;
+    }
+
+    @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popScale {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+    }
+
+
+    /* 🔲 Overlay background for mobile menu */
+    .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    pointer-events: none;
+    animation: fadeOutOverlay 0.4s ease forwards;
+    z-index: 1400;
+    }
+
+    .overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: fadeInOverlay 0.4s ease forwards;
+    }
+
+
+    /* 🎯 Slide-in with bounce effect for mobile menu */
+    @keyframes slideInBounce {
+    0% {
+        right: -100%;
+        opacity: 0;
+    }
+    70% {
+        right: 10%;
+        opacity: 1;
+    }
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+    }
+
+    @keyframes slideOutBounce {
+    0% {
+        right: 0;
+        opacity: 1;
+    }
+    30% {
+        right: 10%;
+        opacity: 0.8;
+    }
+    100% {
+        right: -100%;
+        opacity: 0;
+    }
+    }
+    /* 🌫️ Overlay fade-in / fade-out animation */
+    @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+    }
+
+    @keyframes fadeOutOverlay {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+    }
+
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="overlay"></div>
+    <div class="logo">Sailesh M.</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#timeline">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="mode-toggle" id="modeToggle"><i class="fas fa-moon"></i></button>
+    <div class="hamburger"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <p class="tagline">👋 Hi, I'm Sailesh Mishra</p>
+      <h1 class="title">CAD & VLSI Design Engineer</h1>
+      <p>Innovative nanotech and VLSI enthusiast specializing in cutting-edge semiconductor technologies and pushing boundaries in semiconductor scaling.</p>
+      
+      <div class="cta-buttons">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+        <a href="https://www.linkedin.com/in/saileshmishra01" target="_blank" class="btn btn-outline"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      </div>
+      
+      <div class="chip-grid">
+        <span class="chip">VLSI Design</span>
+        <span class="chip">Semiconductor Scaling</span>
+        <span class="chip">Nanotechnology</span>
+        <span class="chip">Verilog HDL</span>
+        <span class="chip">SystemVerilog</span>
+        <span class="chip">Cadence Virtuoso</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="section-title">
+      <h2>About Me</h2>
+      <div class="about-container">
+        <img src="profile.jpg" alt="Sailesh Mishra" class="profile-pic">
+        <div class="about-text">
+            <p>👋 Hi! I’m a CAD & VLSI Design Engineer with a passion for chip design and automation...</p>
+        </div>
+</div>
+
+      <div class="divider"></div>
+    </div>
+    
+    <div class="about-content">
+      <div class="about-image">
+        <div class="about-image-placeholder">
+          <i class="fas fa-microchip"></i>
+        </div>
+      </div>
+      <div class="about-text">
+        <h3>Driving innovation in semiconductor technologies</h3>
+        <p>I'm a passionate Electronics & Communication Engineering student specializing in Microelectronics and VLSI at Silicon University. With hands-on experience across full-custom design, verification, IoT systems, and nanotech exploration, I strive to bridge theory with real-world applications in the semiconductor domain.</p>
+        <p>As an innovative Nanotech and VLSI enthusiast, I'm at the forefront of cutting-edge semiconductor technologies. My passion lies in pushing the boundaries of semiconductor scaling, exploring novel materials and architectures to overcome the limitations of traditional CMOS.</p>
+        <p>I consistently seek challenges that expand my skillset and contribute to groundbreaking advancements. My goal is to be a transformative force driving innovation that bridges the gap between theoretical nanotechnology and practical VLSI implementation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <div class="section-title">
+      <h2>Technical Skills</h2>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="skills-content">
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+          <ul class="skill-list">
+            <li><i class="fas fa-check-circle"></i> Cadence Virtuoso & Calibre</li>
+            <li><i class="fas fa-check-circle"></i> Xilinx ISE Suite (VHDL)</li>
+            <li><i class="fas fa-check-circle"></i> LTSpice, EDA Playground</li>
+            <li><i class="fas fa-check-circle"></i> Sue2, CppSim</li>
+            <li><i class="fas fa-check-circle"></i> Oracle VM, VirtualBox</li>
+            <li><i class="fas fa-check-circle"></i> Open Source Tools: Iverilog, Gtkwave, Yosys</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-code"></i> Programming</h3>
+          <ul class="skill-list">
+            <li><i class="fas fa-check-circle"></i> Verilog HDL</li>
+            <li><i class="fas fa-check-circle"></i> SystemVerilog</li>
+            <li><i class="fas fa-check-circle"></i> Python</li>
+            <li><i class="fas fa-check-circle"></i> SKILL</li>
+            <li><i class="fas fa-check-circle"></i> MS Office & GPTs</li>
+            <li><i class="fas fa-check-circle"></i> Linux & Windows</li>
+          </ul>
+        </div>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-network-wired"></i> Protocols</h3>
+          <ul class="skill-list">
+            <li><i class="fas fa-check-circle"></i> AMBA APB</li>
+            <li><i class="fas fa-check-circle"></i> AHB, ASB, AXB</li>
+            <li><i class="fas fa-check-circle"></i> SPI Protocol</li>
+            <li><i class="fas fa-check-circle"></i> UART Communication</li>
+            <li><i class="fas fa-check-circle"></i> LoRa Communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects">
+    <div class="section-title">
+      <h2>Projects & Designs</h2>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="projects-content">
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-exchange-alt"></i>
+          </div>
+          <div class="project-content">
+            <h3>APB Protocol</h3>
+            <p>Developed a UVM-based testbench for APB Protocol verification with randomized stimulus and coverage analysis.</p>
+            <div class="project-tags">
+              <span class="project-tag">SystemVerilog</span>
+              <span class="project-tag">UVM</span>
+              <span class="project-tag">Coverage</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <div class="project-content">
+            <h3>IoT Based Smart Hydroponics</h3>
+            <p>Built fully automated hydroponics system with RPi 4B, implementing smart NPK reservoir management and pH monitoring.</p>
+            <div class="project-tags">
+              <span class="project-tag">IoT</span>
+              <span class="project-tag">Python</span>
+              <span class="project-tag">Raspberry Pi</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-satellite"></i>
+          </div>
+          <div class="project-content">
+            <h3>CUBESat</h3>
+            <p>Designed LoRa communication on ESP32 and simulated antennas with practical tuning using a VNA.</p>
+            <div class="project-tags">
+              <span class="project-tag">Embedded Systems</span>
+              <span class="project-tag">LoRa</span>
+              <span class="project-tag">Antenna Design</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <div class="project-image">
+            <i class="fas fa-microchip"></i>
+          </div>
+          <div class="project-content">
+            <h3>Digital System Design</h3>
+            <p>LM70 Temperature Sensor-based SPI interface with RP-2040 MCU and layouts of logic gates & active devices.</p>
+            <div class="project-tags">
+              <span class="project-tag">Digital Design</span>
+              <span class="project-tag">SPI</span>
+              <span class="project-tag">Layout</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience & Education Timeline -->
+  <section id="timeline" class="timeline">
+    <div class="section-title">
+      <h2>Experience & Education</h2>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="timeline-container">
+      <div class="timeline-middle"></div>
+      
+      <div class="timeline-item">
+        <div class="timeline-circle"><i class="fas fa-graduation-cap"></i></div>
+        <div class="timeline-content">
+          <h3>Sevya Multimedia Technologies Pvt Ltd</h3>
+          <div class="timeline-date">2024 - Present | CAD Engineer Intern</div>
+          <p class="timeline-desc">Working on VLSI projects, learning advanced analog design concepts and IC fabrication processes.</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-circle"><i class="fas fa-university"></i></div>
+        <div class="timeline-content">
+          <h3>Silicon University</h3>
+          <div class="timeline-date">2021 - 2025 | B.Tech ECE</div>
+          <p class="timeline-desc">Specializing in Microelectronics & VLSI, CGPA: 7.97</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-circle"><i class="fas fa-certificate"></i></div>
+        <div class="timeline-content">
+          <h3>Professional Trainings</h3>
+          <div class="timeline-date">2021-2024 | Outstanding Grades</div>
+          <p class="timeline-desc">VLSI For Beginners, Verilog Full Custom Approach, SystemVerilog Verification</p>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-circle"><i class="fas fa-school"></i></div>
+        <div class="timeline-content">
+          <h3>ODM Public School</h3>
+          <div class="timeline-date">2018-2020 | Senior Secondary</div>
+          <p class="timeline-desc">Senior Secondary (12th): 79.20% | Secondary (10th): 78%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="section-title">
+      <h2>Contact Me</h2>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Let's Connect</h3>
+        <div class="contact-detail">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Silicon Hills, Bhubaneswar, Odisha 751024</span>
+        </div>
+        <div class="contact-detail">
+          <i class="fas fa-envelope"></i>
+          <span>saileshmishraofficial@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <i class="fab fa-linkedin"></i>
+          <span>linkedin.com/in/saileshmishra01</span>
+        </div>
+        <div class="contact-detail">
+          <i class="fab fa-github"></i>
+          <span>github.com/saileshmishraindia</span>
+        </div>
+        
+        <div class="contact-social">
+          <a href="mailto:saileshmishraofficial@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+          <a href="https://www.linkedin.com/in/saileshmishra01" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/saileshmishraindia" target="_blank" class="social-icon"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <form>
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Sailesh Mishra | CAD & VLSI Design Engineer</p>
+    <p>Innovating at the forefront of semiconductor technologies</p>
+  </footer>
+
+  <!-- Scripts -->
+<script>
+  // Dark mode toggle
+  const modeToggle = document.getElementById('modeToggle');
+  modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const icon = modeToggle.querySelector('i');
+    if (document.body.classList.contains('dark-mode')) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Form submission
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for your message! I will get back to you soon.');
+      form.reset();
+    });
+  }
+
+  // ✅ Hamburger menu toggle (with overlay + bounce)
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('nav');
+    const overlay = document.querySelector('.overlay');
+
+    if (hamburger && nav && overlay) {
+    hamburger.addEventListener('click', () => {
+        const icon = hamburger.querySelector('i');
+
+        if (!nav.classList.contains('active')) {
+        // open menu
+        nav.classList.add('active');
+        overlay.classList.add('active');
+        icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+        // close menu with bounce animation
+        nav.classList.add('closing');
+        overlay.classList.remove('active');
+        icon.classList.replace('fa-times', 'fa-bars');
+
+        nav.addEventListener('animationend', () => {
+            nav.classList.remove('active', 'closing');
+        }, { once: true });
+        }
+    });
+
+    // Close when link clicked
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+        nav.classList.add('closing');
+        overlay.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.replace('fa-times', 'fa-bars');
+
+        nav.addEventListener('animationend', () => {
+            nav.classList.remove('active', 'closing');
+        }, { once: true });
+        });
+    });
+
+    // Close when overlay clicked
+    overlay.addEventListener('click', () => {
+        nav.classList.add('closing');
+        overlay.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.replace('fa-times', 'fa-bars');
+
+        nav.addEventListener('animationend', () => {
+        nav.classList.remove('active', 'closing');
+        }, { once: true });
+    });
+    }
+
+
+</script>
+</body>
+</html>
