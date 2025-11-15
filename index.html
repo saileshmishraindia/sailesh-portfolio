@@ -355,6 +355,33 @@
       font-size: 10rem;
       color: rgba(255, 255, 255, 0.4);
     }
+
+    .about-image-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px; /* adjust height if needed */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .carousel-img.active {
+    opacity: 1;
+  }
+
+
     
     .about-text h3 {
       font-size: 1.8rem;
@@ -492,6 +519,12 @@
       align-items: center;
       justify-content: center;
     }
+
+    .project-svg-animation {
+      width: 100%;
+      padding: 10px 0;
+    }
+
     
     .project-image i {
       font-size: 4rem;
@@ -507,6 +540,32 @@
       margin-bottom: 0.8rem;
       color: var(--dark);
     }
+
+    /* Project image carousel */
+    .project-image-carousel {
+      position: relative;
+      width: 100%;
+      height: 200px; /* same as your project card image height */
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .project-image-carousel img.carousel-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .project-image-carousel img.carousel-img.active {
+      opacity: 1;
+    }
+
+
     
     body.dark-mode .project-content h3 {
       color: #fff;
@@ -966,7 +1025,7 @@
     <div class="section-title">
       <h2>About Me</h2>
       <div class="about-container">
-        <img src="profile.jpg" alt="Sailesh Mishra" class="profile-pic">
+        <img src="profile_pic2_centre_alligned.jpg" alt="Sailesh Mishra" class="profile-pic">
         <div class="about-text">
             <p>👋 Hi! I’m a CAD & VLSI Design Engineer with a passion for chip design and automation...</p>
         </div>
@@ -975,9 +1034,15 @@
       <div class="divider"></div>
     </div>
     <div class="about-content">
-      <div class="about-image">
+      <div class="about-image-carousel">
         <div class="about-image-placeholder">
-          <img src="mychip.jpg" alt="Microchip" class="about-image-img">
+          <img src="Aboutme_chip1.jpeg" alt="Microchip 1" class="carousel-img active">
+          <img src="Aboutme_chip2.jpeg" alt="Microchip 2" class="carousel-img">
+          <img src="Aboutme_chip3.jpeg" alt="Microchip 3" class="carousel-img">
+          <img src="Aboutme_chip4.jpeg" alt="Microchip 4" class="carousel-img">
+          <img src="Aboutme_chip5.jpeg" alt="Microchip 5" class="carousel-img">
+          <img src="Aboutme_chip6.jpeg" alt="Microchip 5" class="carousel-img">
+          <img src="Aboutme_chip7.jpeg" alt="Microchip 5" class="carousel-img">
         </div>
       </div>
       <div class="about-text">
@@ -988,6 +1053,7 @@
       </div>
     </div>
   </section>
+
 
   <!-- Skills Section -->
   <section id="skills" class="skills">
@@ -1046,8 +1112,12 @@
     <div class="projects-content">
       <div class="projects-grid">
         <a href="apb.html" class="project-card">
-        <div class="project-image">
-          <i class="fas fa-exchange-alt"></i>
+        <div class="project-image-carousel">
+          <img src="apb_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="apb_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="apb_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="apb_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="apb_project-image5.jpg" alt="Project 5" class="carousel-img">
         </div>
         <div class="project-content">
           <h3>APB Protocol</h3>
@@ -1060,10 +1130,19 @@
         </div>
       </a>
 
-        
+    
         <a href="hydroponics.html" class="project-card">
-        <div class="project-image">
-          <i class="fas fa-seedling"></i>
+        <div class="project-image-carousel">
+          <img src="hydroponics_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="hydroponics_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="hydroponics_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="hydroponics_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="hydroponics_project-image5.jpg" alt="Project 5" class="carousel-img">
+          <img src="hydroponics_project-image6.jpg" alt="Project 5" class="carousel-img">
+          <img src="hydroponics_project-image7.jpg" alt="Project 5" class="carousel-img">
+          <img src="hydroponics_project-image8.jpg" alt="Project 5" class="carousel-img">
+          <img src="hydroponics_project-image9.jpg" alt="Project 5" class="carousel-img">
+          <img src="hydroponics_project-image10.jpg" alt="Project 5" class="carousel-img">
         </div>
         <div class="project-content">
           <h3>IoT Based Smart Hydroponics</h3>
@@ -1078,8 +1157,12 @@
 
         
         <a href="cubesat.html" class="project-card">
-        <div class="project-image">
-          <i class="fas fa-satellite"></i>
+        <div class="project-image-carousel">
+          <img src="cubesat_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="cubesat_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="cubesat_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="cubesat_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="cubesat_project-image5.jpg" alt="Project 5" class="carousel-img">
         </div>
         <div class="project-content">
           <h3>CUBESat</h3>
@@ -1092,12 +1175,16 @@
         </div>
       </a>
 
-        <a href="digital.html" class="project-card">
-        <div class="project-image">
-          <i class="fas fa-microchip"></i>
+        <a href="LM70_digital.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="LM70_digital_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="LM70_digital_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="LM70_digital_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="LM70_digital_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="LM70_digital_project-image5.jpg" alt="Project 5" class="carousel-img">
         </div>
         <div class="project-content">
-          <h3>Digital System Design</h3>
+          <h3>SPI Based LM70 Temperature Monitor (Digital System Design)</h3>
           <p>LM70 Temperature Sensor-based SPI interface with RP-2040 MCU and layouts of logic gates & active devices.</p>
           <div class="project-tags">
             <span class="project-tag">Digital Design</span>
@@ -1106,6 +1193,131 @@
           </div>
         </div>
       </a>
+
+
+      <a href="power_supply.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="power_supply-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="power_supply-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="power_supply-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="power_supply-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="power_supply-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Voltage Regulated Power Supply</h3>
+          <p>Designed a regulated power supply with full-wave rectification and filtering.</p>
+          <div class="project-tags">
+            <span class="project-tag">Zener diode</span>
+            <span class="project-tag">Modeled transformer</span>
+            <span class="project-tag">LTspice</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="sram.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="digital_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="digital_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="digital_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="digital_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="digital_project-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>16x3 SRAM Module RTL Design</h3>
+          <p>Designed a 16 x 8 SRAM module using Verilog with FSM-based read/write operations.</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Design</span>
+            <span class="project-tag">SPI</span>
+            <span class="project-tag">Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="risc.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="risc-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="risc-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="risc-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="risc-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="risc-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>5 Stage 32-Bit RISC-V CPU</h3>
+          <p>Designed a 32 bit 5-stage pipelined RISC-V processor using TL-Verilog.</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Design</span>
+            <span class="project-tag">SPI</span>
+            <span class="project-tag">Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="digital_sys_verification.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="digital_project-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="digital_project-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="digital_project-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="digital_project-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="digital_project-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Digital System Verification</h3>
+          <p>Designed a 16 x 8 SRAM module using Verilog with FSM-based read/write operations.</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Design</span>
+            <span class="project-tag">SPI</span>
+            <span class="project-tag">Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="pdk.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="pdk-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="pdk-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="pdk-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="pdk-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="pdk-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Process Design Kit</h3>
+          <p>Everything about PDK (industrial).</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Design</span>
+            <span class="project-tag">SPI</span>
+            <span class="project-tag">Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+
+      <a href="analog_layout.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="analog_layout-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="analog_layout-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="analog_layout-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="analog_layout-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="analog_layout-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Analog Layout</h3>
+          <p>Everything about Analog Layout (industrial).</p>
+          <div class="project-tags">
+            <span class="project-tag">Digital Design</span>
+            <span class="project-tag">SPI</span>
+            <span class="project-tag">Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+
+
       </div>
     </div>
   </section>
@@ -1298,6 +1510,30 @@
         }, { once: true });
     });
     }
+    // About section image carousel
+    const slides = document.querySelectorAll('.carousel-img');
+    let currentSlide = 0;
+
+    setInterval(() => 
+    {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 3000); // Change image every 3 seconds
+
+    // Project image carousels auto-slide
+    document.querySelectorAll('.project-image-carousel').forEach(carousel => {
+    const images = carousel.querySelectorAll('.carousel-img');
+    let currentIndex = 0;
+
+    setInterval(() => {
+      images[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % images.length;
+      images[currentIndex].classList.add('active');
+    }, 3000); // change image every 3 seconds
+  });
+
+
 
 </script>
 </body>
