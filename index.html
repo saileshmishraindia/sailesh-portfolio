@@ -977,6 +977,93 @@
     }
 
     }
+
+    /* ============================
+    Achievements Full Banner
+    =============================*/
+
+    #achievements {
+        position: relative;
+        width: 100%;
+        height: 85vh;
+        overflow: hidden;
+        margin-top: 120px;
+    }
+
+    .achievements-slider {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+    overflow: hidden;
+    }
+
+    .ach-slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .ach-slide.active {
+        opacity: 1;
+    }
+
+    /* Overlay gradient */
+    .achievements-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to bottom,
+            rgba(10, 0, 40, 0.6),
+            rgba(20, 0, 70, 0.6)
+        );
+        z-index: 3;
+    }
+
+    /* Center text */
+    .achievements-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #fff;
+        z-index: 5;
+    }
+
+    .achievements-content h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 10px 0;
+        letter-spacing: 2px;
+    }
+
+    .achievements-content p {
+        font-size: 1.15rem;
+        opacity: 0.8;
+        max-width: 700px;
+        margin: auto;
+    }
+
+    @media (max-width: 768px) {
+        #achievements {
+            height: 70vh;
+        }
+        .achievements-content h2 {
+            font-size: 2.2rem;
+        }
+        .achievements-content p {
+            font-size: 1rem;
+        }
+    }
     
   </style>
 </head>
@@ -1370,6 +1457,83 @@
     </div>
   </section>
 
+
+  <!-- Gallery -->
+   <section id="achievements">
+    <div class="achievements-slider">
+        <div class="ach-slide" style="background-image: url('achievement1.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement2.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement3.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement4.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement5.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement6.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement7.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement8.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement9.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement10.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement11.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement12.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement13.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement14.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement15.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement16.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement17.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement18.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement19.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement20.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement21.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement22.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement23.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement24.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement25.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement26.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement27.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement28.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement29.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement30.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement31.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement32.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement33.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement34.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement35.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement36.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement37.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement38.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement39.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement40.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement41.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement42.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement43.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement44.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement45.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement46.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement47.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement48.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement49.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement50.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement51.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement52.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement53.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement54.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement55.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement56.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement57.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement58.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement59.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement60.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement61.jpg');"></div>
+        <div class="ach-slide" style="background-image: url('achievement62.jpg');"></div>
+    </div>
+
+    <div class="achievements-overlay"></div>
+
+    <div class="achievements-content">
+        <span class="ach-small-title">🏆 My Journey</span>
+        <h2>Achievements & Milestones</h2>
+        <p>Proud moments, recognitions, certifications and breakthroughs that shaped my path.</p>
+    </div>
+</section>
+
   <!-- Contact Section -->
   <section id="contact" class="contact">
     <div class="section-title">
@@ -1531,9 +1695,22 @@
       currentIndex = (currentIndex + 1) % images.length;
       images[currentIndex].classList.add('active');
     }, 3000); // change image every 3 seconds
-  });
+  
+
+    let achIndex = 0;
+    const achSlides = document.querySelectorAll('.ach-slide');
+
+    function showAchievementSlides() {
+        achSlides.forEach(s => s.classList.remove('active'));
+        achSlides[achIndex].classList.add('active');
+        achIndex = (achIndex + 1) % achSlides.length;
+    }
+
+    showAchievementSlides();
+    setInterval(showAchievementSlides, 3000);
 
 
+});
 
 </script>
 </body>
