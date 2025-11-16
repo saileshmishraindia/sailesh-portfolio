@@ -797,8 +797,13 @@
       }
       
       .timeline-item {
-        flex-direction: column;
-      }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 4rem 0;
+        position: relative;
+        }
+
       
       .timeline-item:nth-child(even) {
         flex-direction: column;
@@ -808,10 +813,22 @@
         width: 100%;
         margin-top: 2.5rem;
       }
+
+      .timeline-container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
       
       .timeline-middle {
-        display: none;
-      }
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 100%;
+        background: var(--secondary);  /* same color as before */
+        z-index: 0;
+    }
       
       .timeline-circle {
         top: 0;
@@ -979,6 +996,174 @@
     }
 
     /* ============================
+    TIMELINE FIXED VERSION
+    ============================ */
+
+    .timeline {
+    padding: 6rem 5%;
+    background: rgba(240, 245, 255, 0.7);
+    }
+
+    body.dark-mode .timeline {
+    background: rgba(30, 30, 40, 0.5);
+    }
+
+    /* Main wrapper */
+    .timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    }
+
+    /* THE PERFECT STRAIGHT VERTICAL LINE */
+    .timeline-middle {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--secondary);
+    transform: translateX(-50%);
+    z-index: 0;
+    }
+
+    /* Timeline item */
+    .timeline-item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4rem 0;
+    position: relative;
+    }
+
+    /* Alternate flipping */
+    .timeline-item:nth-child(even) {
+    flex-direction: row-reverse;
+    }
+
+    /* THE NEW FIXED IMAGE BOX (536 × 185.89 px) */
+    .timeline-box {
+    width: 536px;
+    height: 185.89px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 1;
+    }
+
+    .timeline-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    }
+
+    /* Timeline content card */
+    .timeline-content {
+    width: 536px;
+    background: white;
+    padding: 1.8rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+    }
+
+    body.dark-mode .timeline-content {
+    background: #1e1e2a;
+    }
+
+    .timeline-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    }
+
+    body.dark-mode .timeline-content h3 {
+    color: var(--secondary);
+    }
+
+    .timeline-date {
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    }
+
+    .timeline-desc {
+    color: var(--gray);
+    }
+
+    body.dark-mode .timeline-desc {
+    color: #bdbdbd;
+    }
+
+    /* The circle in the middle */
+    .timeline-circle {
+    position: absolute;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    }
+
+    .timeline-circle i {
+    color: white;
+    font-size: 1rem;
+    }
+
+    /* MOBILE VIEW */
+    @media (max-width: 992px) {
+    .timeline-middle {
+        display: none;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        flex-direction: column;
+    }
+
+    .timeline-box,
+    .timeline-content {
+        width: 100%;
+    }
+
+    .timeline-circle {
+        left: 50%;
+        top: -20px;
+        transform: translateX(-50%);
+    }
+    }
+
+
+    .slider-box {
+    position: relative;
+    overflow: hidden;
+    }
+
+    .slider-box .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    }
+
+    .slider-box .slide.active {
+    opacity: 1;
+    }
+
+
+
+    /* ============================
     Achievements Full Banner
     =============================*/
 
@@ -1103,6 +1288,12 @@
         <span class="chip">Verilog HDL</span>
         <span class="chip">SystemVerilog</span>
         <span class="chip">Cadence Virtuoso</span>
+        <span class="chip">CMOS Characterization</span>
+        <span class="chip">UVM</span>
+        <span class="chip">TL-Verilog</span>
+        <span class="chip">DRC Development - PDK</span>
+        <span class="chip">Protocols & Communication</span>
+        <span class="chip">RISC-V</span>
       </div>
     </div>
   </section>
@@ -1128,8 +1319,14 @@
           <img src="Aboutme_chip3.jpeg" alt="Microchip 3" class="carousel-img">
           <img src="Aboutme_chip4.jpeg" alt="Microchip 4" class="carousel-img">
           <img src="Aboutme_chip5.jpeg" alt="Microchip 5" class="carousel-img">
-          <img src="Aboutme_chip6.jpeg" alt="Microchip 5" class="carousel-img">
-          <img src="Aboutme_chip7.jpeg" alt="Microchip 5" class="carousel-img">
+          <img src="Aboutme_chip6.jpeg" alt="Microchip 6" class="carousel-img">
+          <img src="Aboutme_chip7.jpeg" alt="Microchip 7" class="carousel-img">
+          <img src="Aboutme_chip8.jpeg" alt="Microchip 8" class="carousel-img">
+          <img src="Aboutme_chip9.jpeg" alt="Microchip 9" class="carousel-img">
+          <img src="Aboutme_chip10.jpeg" alt="Microchip 10" class="carousel-img">
+          <img src="Aboutme_chip11.jpeg" alt="Microchip 11" class="carousel-img">
+          <img src="Aboutme_chip12.jpeg" alt="Microchip 12" class="carousel-img">
+          <img src="Aboutme_chip13.jpeg" alt="Microchip 13" class="carousel-img">
         </div>
       </div>
       <div class="about-text">
@@ -1192,7 +1389,7 @@
   <!-- Projects Section -->
   <section id="projects" class="projects">
     <div class="section-title">
-      <h2>Projects & Designs</h2>
+      <h2>Engineering Endeavours</h2>
       <div class="divider"></div>
     </div>
     
@@ -1295,7 +1492,7 @@
           <p>Designed a regulated power supply with full-wave rectification and filtering.</p>
           <div class="project-tags">
             <span class="project-tag">Zener diode</span>
-            <span class="project-tag">Modeled transformer</span>
+            <span class="project-tag">Modelled transformer</span>
             <span class="project-tag">LTspice</span>
           </div>
         </div>
@@ -1315,8 +1512,8 @@
           <p>Designed a 16 x 8 SRAM module using Verilog with FSM-based read/write operations.</p>
           <div class="project-tags">
             <span class="project-tag">Digital Design</span>
-            <span class="project-tag">SPI</span>
-            <span class="project-tag">Layout</span>
+            <span class="project-tag">Memory Architecture</span>
+            <span class="project-tag">Advance Sequential circuit</span>
           </div>
         </div>
       </a>
@@ -1334,9 +1531,10 @@
           <h3>5 Stage 32-Bit RISC-V CPU</h3>
           <p>Designed a 32 bit 5-stage pipelined RISC-V processor using TL-Verilog.</p>
           <div class="project-tags">
-            <span class="project-tag">Digital Design</span>
-            <span class="project-tag">SPI</span>
-            <span class="project-tag">Layout</span>
+            <span class="project-tag">System Architecture</span>
+            <span class="project-tag">TL Verilog</span>
+            <span class="project-tag">Pipelining</span>
+            <span class="project-tag">Advance RTL Design</span>
           </div>
         </div>
       </a>
@@ -1354,9 +1552,9 @@
           <h3>Digital System Verification</h3>
           <p>Designed a 16 x 8 SRAM module using Verilog with FSM-based read/write operations.</p>
           <div class="project-tags">
-            <span class="project-tag">Digital Design</span>
-            <span class="project-tag">SPI</span>
-            <span class="project-tag">Layout</span>
+            <span class="project-tag">RTL</span>
+            <span class="project-tag">Memory Design</span>
+            <span class="project-tag">Advance RTL Design</span>
           </div>
         </div>
       </a>
@@ -1374,9 +1572,12 @@
           <h3>Process Design Kit</h3>
           <p>Everything about PDK (industrial).</p>
           <div class="project-tags">
-            <span class="project-tag">Digital Design</span>
-            <span class="project-tag">SPI</span>
-            <span class="project-tag">Layout</span>
+            <span class="project-tag">DRC Development</span>
+            <span class="project-tag">Rule File.rules</span>
+            <span class="project-tag">nmDRC</span>
+            <span class="project-tag">nmLVS</span>
+            <span class="project-tag">GDS/Oasis</span>
+            <span class="project-tag">DFM</span>
           </div>
         </div>
       </a>
@@ -1395,9 +1596,51 @@
           <h3>Analog Layout</h3>
           <p>Everything about Analog Layout (industrial).</p>
           <div class="project-tags">
-            <span class="project-tag">Digital Design</span>
-            <span class="project-tag">SPI</span>
-            <span class="project-tag">Layout</span>
+            <span class="project-tag">Physical Design & Verification</span>
+            <span class="project-tag">Standard Cell</span>
+            <span class="project-tag">Rules & Regulations in Layout</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="analog_design.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="analog_design-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="analog_design-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="analog_design-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="analog_design-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="analog_design-image5.jpg" alt="Project 5" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Analog Design</h3>
+          <p>Everything about Analog Design.</p>
+          <div class="project-tags">
+            <span class="project-tag">Cadence</span>
+            <span class="project-tag">LinearTechnology</span>
+            <span class="project-tag">Op-amp</span>
+            <span class="project-tag">Small Signal Analysis</span>
+          </div>
+        </div>
+      </a>
+
+
+      <a href="dsp.html" class="project-card">
+        <div class="project-image-carousel">
+          <img src="dsp-image1.jpg" alt="Project 1" class="carousel-img active">
+          <img src="dsp-image2.jpg" alt="Project 2" class="carousel-img">
+          <img src="dsp-image3.jpg" alt="Project 3" class="carousel-img">
+          <img src="dsp-image4.jpg" alt="Project 4" class="carousel-img">
+          <img src="dsp-image5.jpg" alt="Project 5" class="carousel-img">
+          <img src="dsp-image6.jpg" alt="Project 6" class="carousel-img">
+        </div>
+        <div class="project-content">
+          <h3>Digital Signal Processing</h3>
+          <p>Everything about Signal Processing & Applications in MATLAB.</p>
+          <div class="project-tags">
+            <span class="project-tag">DSP</span>
+            <span class="project-tag">MATLAB</span>
+            <span class="project-tag">Image Processing</span>
           </div>
         </div>
       </a>
@@ -1411,51 +1654,78 @@
 
   <!-- Experience & Education Timeline -->
   <section id="timeline" class="timeline">
-    <div class="section-title">
-      <h2>Experience & Education</h2>
-      <div class="divider"></div>
-    </div>
-    
-    <div class="timeline-container">
-      <div class="timeline-middle"></div>
-      
-      <div class="timeline-item">
-        <div class="timeline-circle"><i class="fas fa-graduation-cap"></i></div>
-        <div class="timeline-content">
-          <h3>Sevya Multimedia Technologies Pvt Ltd</h3>
-          <div class="timeline-date">2024 - Present | CAD Engineer Intern</div>
-          <p class="timeline-desc">Working on VLSI projects, learning advanced analog design concepts and IC fabrication processes.</p>
-        </div>
+  <div class="section-title">
+    <h2>Experience & Education</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="timeline-container">
+
+    <div class="timeline-middle"></div>
+
+    <!-- ITEM 1 -->
+    <div class="timeline-item">
+      <div class="timeline-box">
+        <img src="sevya_adi_logo.jpg">
       </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-circle"><i class="fas fa-university"></i></div>
-        <div class="timeline-content">
-          <h3>Silicon University</h3>
-          <div class="timeline-date">2021 - 2025 | B.Tech ECE</div>
-          <p class="timeline-desc">Specializing in Microelectronics & VLSI, CGPA: 7.97</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-circle"><i class="fas fa-certificate"></i></div>
-        <div class="timeline-content">
-          <h3>Professional Trainings</h3>
-          <div class="timeline-date">2021-2024 | Outstanding Grades</div>
-          <p class="timeline-desc">VLSI For Beginners, Verilog Full Custom Approach, SystemVerilog Verification</p>
-        </div>
-      </div>
-      
-      <div class="timeline-item">
-        <div class="timeline-circle"><i class="fas fa-school"></i></div>
-        <div class="timeline-content">
-          <h3>ODM Public School</h3>
-          <div class="timeline-date">2018-2020 | Senior Secondary</div>
-          <p class="timeline-desc">Senior Secondary (12th): 79.20% | Secondary (10th): 78%</p>
-        </div>
+      <div class="timeline-circle"><i class="fas fa-graduation-cap"></i></div>
+      <div class="timeline-content">
+        <h3>Sevya Multimedia Technologies Pvt Ltd</h3>
+        <div class="timeline-date">2025 - Present | CAD Engineer at Analog Devices Inc. (Contractor)</div>
+        <p class="timeline-desc">Working on VLSI projects, learning advanced analog design concepts and IC fabrication processes.</p>
       </div>
     </div>
-  </section>
+
+    <!-- ITEM 2 -->
+    <div class="timeline-item">
+      <div class="timeline-box">
+        <img src="silicon_university_logo.jpg">
+      </div>
+      <div class="timeline-circle"><i class="fas fa-university"></i></div>
+      <div class="timeline-content">
+        <h3>Silicon University</h3>
+        <div class="timeline-date">2021 - 2025 | B.Tech (ECE)</div>
+        <p class="timeline-desc">Specialization in Microelectronics & VLSI</p>
+      </div>
+    </div>
+
+    <!-- ITEM 3 -->
+    <div class="timeline-item">
+      <div class="timeline-box slider-box">
+        <img src="training1.jpg" class="slide active">
+        <img src="training2.jpg" class="slide">
+        <img src="training3.jpg" class="slide">
+        <img src="training4.jpg" class="slide">
+        <img src="training5.jpg" class="slide">
+        <img src="training6.jpg" class="slide">
+        <img src="training7.jpg" class="slide">
+        <img src="training8.jpg" class="slide">
+    </div>
+
+      <div class="timeline-circle"><i class="fas fa-certificate"></i></div>
+      <div class="timeline-content">
+        <h3>Professional Trainings</h3>
+        <div class="timeline-date">2021 - 2024</div>
+        <p class="timeline-desc">VLSI For Beginners, Verilog Full Custom Approach, SV Verification.</p>
+      </div>
+    </div>
+
+    <!-- ITEM 4 -->
+    <div class="timeline-item">
+      <div class="timeline-box">
+        <img src="school_logo.jpg">
+      </div>
+      <div class="timeline-circle"><i class="fas fa-school"></i></div>
+      <div class="timeline-content">
+        <h3>ODM Public School</h3>
+        <div class="timeline-date">2018 - 2020</div>
+        <p class="timeline-desc">Senior Secondary</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 
   <!-- Gallery -->
@@ -1582,7 +1852,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2023 Sailesh Mishra | CAD & VLSI Design Engineer</p>
+    <p>&copy; 2025 Sailesh Mishra | CAD & VLSI Design Engineer</p>
     <p>Innovating at the forefront of semiconductor technologies</p>
   </footer>
 
@@ -1708,6 +1978,22 @@
 
     showAchievementSlides();
     setInterval(showAchievementSlides, 3000);
+
+    // Select Item 3's slider safely
+    const slider = document.querySelectorAll('.timeline-item')[2].querySelector('.slider-box');
+
+    if (slider) {
+    const slides = slider.querySelectorAll('.slide');
+    let index = 0;
+
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }, 2500);
+}
+
+
 
 
 });
