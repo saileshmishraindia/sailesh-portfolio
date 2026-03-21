@@ -25,7 +25,7 @@
     }
     
     :root {
-      --primary: #1a237e;
+      --primary: #1a237e; 
       --secondary: #00bcd4;
       --dark: #0d1b2a;
       --light: #f5f7fa;
@@ -299,9 +299,18 @@
       color: var(--primary);
       margin-bottom: 1rem;
     }
+
+    #contact .section-title h2 {
+      color: #6ec6ff; /* light blue */
+    }
     
     body.dark-mode .section-title h2 {
       color: var(--secondary);
+    }
+    
+    #contact.body.dark-mode .section-title h2,
+    body.dark-mode #contact .section-title h2 {
+      color: #82b1ff; /* slightly darker light blue in dark mode */
     }
     
     .section-title .divider {
@@ -1355,6 +1364,104 @@
         margin: auto;
     }
 
+    /* Reviews Section - Dark Gray Style */
+    .reviews {
+        background: #2d333a; /* Dark gray color */
+        color: #fff;
+        padding: 6rem 5%;
+        font-family: 'Comic Sans MS', cursive; /* chalk-like font */
+        position: relative;
+    }
+
+    .reviews .section-title h2 {
+        color: #fff;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    .reviews .divider {
+        background: #fff;
+    }
+
+    .reviews-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+    }
+
+    .review-card {
+        background: 
+            linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+            url('school-blackboard_.jpg') center/cover;
+        border: 6px solid #7a3e1d;
+        border-radius: 6px;
+        padding: 1.5rem; 
+        text-align: center;
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 4px 15px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+        position: relative;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.6s ease forwards;
+        overflow: hidden;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .review-card:nth-child(odd) {
+        animation-delay: 0.1s;
+    }
+
+    .review-card:nth-child(even) {
+        animation-delay: 0.2s;
+    }
+
+    .review-card:nth-child(odd) {
+        transform: rotate(-1deg) translateY(20px);
+    }
+
+    .review-card:nth-child(even) {
+        transform: rotate(1deg) translateY(20px);
+    }
+
+    .review-card:hover {
+        transform: scale(1.05) rotate(0deg);
+    }
+
+    .review-card::before {
+        content: '"';
+        font-size: 3rem;
+        color: rgba(255,255,255,0.3);
+        position: absolute;
+        top: 10px;
+        left: 15px;
+    }
+
+    .review-card p {
+        font-size: 1rem;
+        line-height: 1.8;
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
+        font-style: italic;
+        color: #fff;
+        font-family: 'Patrick Hand', cursive;
+        text-shadow: 0 0 5px rgba(255,255,255,0.3);
+    }
+
+    .review-card span {
+        font-weight: bold;
+        color: #ccc;
+    }
+
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
     @media (max-width: 768px) {
         #achievements {
             height: 70vh;
@@ -1975,7 +2082,61 @@
   </div>
 </section>
 
-
+  <!-- Reviews Section -->
+  <section id="reviews" class="reviews">
+    <div class="section-title">
+      <h2>What my Mentees say ?</h2>
+      <div class="divider"></div>
+    </div>
+    
+    <div class="reviews-container">
+      <div class="review-card">
+        <p>""</p>
+        <p>"___________________"</p>
+        <span>- Anushka Bhattacharjee, Final Year (ECE) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>""</p>
+        <p>"___________________"</p>
+        <span>- Madhusmita Rout, Final Year (ECE) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>""</p>
+        <p>"___________________"</p>
+        <span>- S.Nirlipta Nitinimagna, Final Year (ECE) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>""</p>
+        <p>"___________________"</p>
+        <span>- Anurag Panigrahi, 3rd Year (ECE) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>"During my first year in college, I was having trouble understanding some of the concepts in electronics. Then, sir became my mentor and helped me understand the concepts better. His way of teaching has helped me clear most of my doubts and helped me feel more confident in electronics. Thank you sir for guiding me and helping me understand the concepts better."</p>
+        <span>- Aarushi Mukherjee, 2nd Year (ECE,spec.VLSI) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>"Actually I was not that lucky to have sir as a mentor in VLSI domain, Because I was very late, But again he is Outstanding in making things very clear & made me see-through dynamic microelectronics phenomenas inside the devices. Whether it's Analog or Digital, HE IS THE BEST !!!"</p>
+        <span>- Priyanka Dash, 3rd Year (ETC) | IIIT Bhubaneswar</span>
+      </div>
+      <div class="review-card">
+        <p>"Sir, you made complex topics very simple to grab. His precise & practical approach is amazing, which makes the simulation feel more aligned with the technical aspects/requiments of circuits. I don't think so anyone would have this kind of preciseness in choosing values. Thanks a lot sir for improving my analytic skills to the next level."</p>
+        <span>- Sashank Yadav, 2nd Year (ECE) | NIT Rourkela</span>
+      </div>
+      <div class="review-card">
+        <p>""</p>
+        <p>"___________________"</p>
+        <span>- Mayank Mahaptra, 3rd Year (ECE) | Silicon University</span>
+      </div>
+      <div class="review-card">
+        <p>"Incredible style of teaching Sir ! The way you visualize the Microelectronics concepts of VLSI like CLM, Body Bias effect & CMOS Fabrication makes things crystal clear. Thank You so much sir."</p>
+        <span>- Aditya Roshan Sharma, 3rd Year (ETC) | IIT Bhubaneswar</span>
+      </div>
+      <div class="review-card">
+        <p>"One of the lovely decision in my career is when I approached you at the library in my 4th Sem. That's lovely because hours of well researched & well prepared Microelectro-intensive lectures felt (& still feeling) like movies. Thank you so much for all your efforts & sleepless nights making ppts for us and answering my doubts clearly as Kohinoor..."</p>
+        <span>- Bhabisyajit, 3rd Year (EEE) | Silicon University</span>
+      </div>
+    </div>
+  </section>
 
   <!-- Gallery -->
    <section id="achievements">
@@ -2125,9 +2286,16 @@
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
+      const target = document.querySelector(this.getAttribute('href'));
+      target.scrollIntoView({
         behavior: 'smooth'
       });
+      if (this.getAttribute('href') === '#contact') {
+        setTimeout(() => {
+          const nameInput = target.querySelector('input[type="text"]');
+          if (nameInput) nameInput.focus();
+        }, 1000);
+      }
     });
   });
 
@@ -2141,7 +2309,7 @@
     });
   }
 
-  // ✅ Hamburger menu toggle (with overlay + bounce)
+  // Hamburger menu toggle (with overlay + bounce)
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('nav');
     const overlay = document.querySelector('.overlay');
@@ -2228,9 +2396,6 @@
     }, 3000); // change image every 3 seconds
 
     
-
-
-
     let achIndex = 0;
     const achSlides = document.querySelectorAll('.ach-slide');
 
