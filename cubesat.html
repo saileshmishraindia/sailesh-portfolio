@@ -1,13 +1,843 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CubeSat Project</title>
-    <meta charset="UTF-8"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CubeSat LoRa Communication Project | Orbit Lab SIT Analysis</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary: #1a237e;
+      --secondary: #00bcd4;
+      --accent: #ff4081;
+      --dark: #0d1b2a;
+      --light: #f5f7fa;
+      --gray: #78909c;
+    }
+
+    body {
+      background-color: var(--light);
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(26, 35, 126, 0.98);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      padding: 1.5rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo i {
+      color: var(--secondary);
+    }
+
+    nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      color: #fff;
+      padding: 120px 5% 80px;
+      text-align: center;
+      margin-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+      animation: slideInDown 0.8s ease;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      opacity: 0.95;
+      position: relative;
+      z-index: 1;
+      animation: slideInUp 0.8s ease 0.2s backwards;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: var(--secondary);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 8px 20px rgba(0, 188, 212, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 188, 212, 0.4);
+    }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Overview Grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border-left: 5px solid var(--secondary);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* Features Section */
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--secondary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.5rem;
+    }
+
+    .feature-item h4 {
+      font-size: 1.2rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-item p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* Specs Section */
+    .specs-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .spec-box {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .spec-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      border-bottom: 2px solid var(--secondary);
+      padding-bottom: 15px;
+    }
+
+    .spec-item {
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .spec-item:last-child {
+      border-bottom: none;
+    }
+
+    .spec-label {
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    .spec-value {
+      font-size: 1.1rem;
+      margin-top: 5px;
+    }
+
+    /* Parameters Grid */
+    .parameters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .param-card {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      border: 2px solid var(--secondary);
+    }
+
+    .param-card h4 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .param-value {
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .param-desc {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .content-block h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    .content-block ul {
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .content-block li {
+      margin-bottom: 15px;
+      padding-left: 30px;
+      position: relative;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .content-block li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--secondary);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* Antenna Comparison */
+    .antenna-comparison {
+      background: #f8f9fa;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    .antenna-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .antenna-row:last-child {
+      border-bottom: none;
+    }
+
+    .antenna-cell {
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .antenna-cell.header {
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--light);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 40px 5%;
+      margin-top: 80px;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+    }
+
+    .footer-links {
+      margin-top: 20px;
+    }
+
+    .footer-links a {
+      color: var(--secondary);
+      margin: 0 15px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        gap: 1.5rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .specs-container {
+        grid-template-columns: 1fr;
+      }
+
+      .antenna-row {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 50px 5%;
+      }
+    }
+  </style>
 </head>
-<body style="font-family: Arial; padding: 40px;">
-    <h1>CUBESat</h1>
-    <p>This is the project page for CubeSat communication & antenna design.</p>
-    <a href="index.html">← Back to Portfolio</a>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <i class="fas fa-satellite"></i>
+      CubeSat Lab
+    </div>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#lora">LoRa Tech</a>
+      <a href="#parameters">Parameters</a>
+      <a href="#antenna">Antenna</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>CubeSat LoRa Communication Project</h1>
+    <p>Advanced Orbital Lab SIT Analysis & System Integration</p>
+    <a href="#overview" class="cta-button">Explore Project <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <!-- Overview Section -->
+  <section id="overview">
+    <div class="section-title">
+      <h2>Project Overview</h2>
+      <p>Understanding LoRa Technology for Space Communications</p>
+    </div>
+
+    <div class="overview-grid">
+      <div class="card">
+        <i class="fas fa-broadcast-tower"></i>
+        <h3>LoRa Technology</h3>
+        <p>Long-range, low-power wireless communication technology ideal for CubeSat operations and distributed sensor networks across vast distances.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-satellite"></i>
+        <h3>CubeSat Standard</h3>
+        <p>1U CubeSat (10cm × 10cm × 10cm) with minimal payload architecture, optimized for orbital deployment and reliable communication.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-wifi"></i>
+        <h3>Star Topology</h3>
+        <p>Centralized network architecture where all devices communicate through a gateway, enabling scalability and efficient resource management.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LoRa Technology Section -->
+  <section id="lora">
+    <div class="section-title">
+      <h2>LoRa Fundamentals</h2>
+      <p>Key Technologies Enabling Long-Range Communication</p>
+    </div>
+
+    <div class="two-column">
+      <div class="content-block">
+        <h3>Core Technologies</h3>
+        <ul>
+          <li><strong>Spread Spectrum Modulation:</strong> Spreads signal over wide bandwidth for interference resistance</li>
+          <li><strong>Chirp Spread Spectrum (CSS):</strong> Uses frequency-changing signals for robust communication</li>
+          <li><strong>Forward Error Correction:</strong> LDPC codes enable error detection and correction</li>
+          <li><strong>Multipath Resistance:</strong> Handles signal reflections in complex environments</li>
+          <li><strong>Doppler Resilience:</strong> Maintains communication despite relative motion between transmitter and receiver</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h3>Why LoRaWAN Selects Star Topology</h3>
+        <ul>
+          <li><strong>Centralized Control:</strong> Gateway manages network and coordinates communication</li>
+          <li><strong>Scalability:</strong> Add devices without impacting performance</li>
+          <li><strong>Efficient Routing:</strong> All data flows through central gateway</li>
+          <li><strong>Simplified Design:</strong> End devices only communicate with gateway</li>
+          <li><strong>Resilience:</strong> Gateway acts as filter reducing interference</li>
+          <li><strong>Management:</strong> Single point for configuration and monitoring</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="features-list" style="margin-top: 50px;">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-signal"></i>
+        </div>
+        <div>
+          <h4>Exceptional Sensitivity</h4>
+          <p>LoRa can decode transmissions 19.5 dB below the noise floor, enabling reliable communication over extreme distances in aerospace applications.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div>
+          <h4>Integrated FEC</h4>
+          <p>LDPC error correction codes automatically detect and correct transmission errors without user intervention, ensuring data integrity.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <div>
+          <h4>Low Power Consumption</h4>
+          <p>Optimized for battery-powered devices, extending operational lifetime critical for space missions and remote deployments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Configuration Parameters Section -->
+  <section id="parameters">
+    <div class="section-title">
+      <h2>LoRa Configuration Parameters</h2>
+      <p>Fine-Tuning Communication Performance</p>
+    </div>
+
+    <div class="parameters-grid">
+      <div class="param-card">
+        <h4><i class="fas fa-broadcast-tower" style="color: var(--secondary);"></i> Carrier Frequency (CF)</h4>
+        <div class="param-value">860 - 1020 MHz</div>
+        <div class="param-desc">Determines center transmission frequency. Higher CF offers better range in open environments; lower CF preferred for indoor applications.</div>
+      </div>
+
+      <div class="param-card">
+        <h4><i class="fas fa-expand" style="color: var(--secondary);"></i> Spreading Factor (SF)</h4>
+        <div class="param-value">6 - 12</div>
+        <div class="param-desc">Ratio between symbol and chip rate. Higher SF increases range and noise immunity but increases airtime and energy consumption.</div>
+      </div>
+
+      <div class="param-card">
+        <h4><i class="fas fa-wave-square" style="color: var(--secondary);"></i> Bandwidth (BW)</h4>
+        <div class="param-value">125 - 500 kHz</div>
+        <div class="param-desc">Higher BW provides faster data rates; lower BW provides better sensitivity. Trade-off between throughput and range.</div>
+      </div>
+
+      <div class="param-card">
+        <h4><i class="fas fa-lock" style="color: var(--secondary);"></i> Coding Rate (CR)</h4>
+        <div class="param-value">4/5 to 4/8</div>
+        <div class="param-desc">Determines FEC level. Higher CR provides stronger protection against interference but increases airtime and energy requirements.</div>
+      </div>
+    </div>
+
+    <div class="spec-box" style="margin-top: 50px; grid-column: 1 / -1;">
+      <h3>SF & Energy Consumption Relationship</h3>
+      <p style="margin-bottom: 20px;">Each increase in SF:</p>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+        <div>
+          <p><strong>✓ Doubles chips per symbol</strong> (2^SF formula)</p>
+          <p><strong>✓ Halves transmission rate</strong></p>
+          <p><strong>✓ Doubles air time</strong></p>
+          <p><strong>✓ Increases range & resilience</strong></p>
+        </div>
+        <div>
+          <p><strong>⚠ Increases energy consumption</strong></p>
+          <p><strong>⚠ Reduces data throughput</strong></p>
+          <p><strong>⚠ Greater bandwidth requirements</strong></p>
+          <p><strong>⚠ Extended communication latency</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SX1272 Transceiver Section -->
+  <section style="background: #f8f9fa;">
+    <div class="section-title">
+      <h2>SX1272 LoRa Transceiver</h2>
+      <p>Industry-Leading Long-Range Radio Module</p>
+    </div>
+
+    <div class="specs-container">
+      <div class="spec-box">
+        <h3><i class="fas fa-microchip"></i> Key Features</h3>
+        <div class="spec-item">
+          <div class="spec-label">SENSITIVITY</div>
+          <div class="spec-value">-137 dBm (Ultra-low)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">RANGE</div>
+          <div class="spec-value">Several kilometers (open environment)</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">POWER CONSUMPTION</div>
+          <div class="spec-value">Minimal current draw</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">BANDWIDTH OPTIONS</div>
+          <div class="spec-value">125 kHz, 250 kHz, 500 kHz</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">SPREADING FACTORS</div>
+          <div class="spec-value">SF6 to SF12</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">ERROR CORRECTION</div>
+          <div class="spec-value">LDPC Codes</div>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <h3><i class="fas fa-tasks"></i> Applications</h3>
+        <div class="spec-item">
+          <div class="spec-label">IoT & SENSORS</div>
+          <div class="spec-value">Smart cities, environmental monitoring</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">ASSET TRACKING</div>
+          <div class="spec-value">Logistics, agriculture, wildlife</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">SMART GRID</div>
+          <div class="spec-value">Energy management systems</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">PUBLIC SAFETY</div>
+          <div class="spec-value">Emergency services, disaster management</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">AEROSPACE</div>
+          <div class="spec-value">CubeSat communication, satellite telemetry</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Antenna Design Section -->
+  <section id="antenna">
+    <div class="section-title">
+      <h2>Antenna Design & Optimization</h2>
+      <p>Maximum Efficiency at 433 MHz LoRa Band</p>
+    </div>
+
+    <div class="antenna-comparison">
+      <div class="antenna-row">
+        <div class="antenna-cell header">Parameter</div>
+        <div class="antenna-cell header">Antenna-1</div>
+        <div class="antenna-cell header">Antenna-2 (Selected)</div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>Radiating Element</strong></div>
+        <div class="antenna-cell">16.2 cm</div>
+        <div class="antenna-cell">16 cm</div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>Radial La</strong></div>
+        <div class="antenna-cell">3.2 cm</div>
+        <div class="antenna-cell">3.2 cm</div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>Radial Lb</strong></div>
+        <div class="antenna-cell">17.5 cm</div>
+        <div class="antenna-cell">18 cm</div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>Operating Frequency</strong></div>
+        <div class="antenna-cell">434.18 MHz</div>
+        <div class="antenna-cell">432.2 MHz</div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>VSWR</strong></div>
+        <div class="antenna-cell">1.2</div>
+        <div class="antenna-cell"><span style="color: var(--secondary); font-weight: 700;">1.181 ★</span></div>
+      </div>
+      <div class="antenna-row">
+        <div class="antenna-cell"><strong>Smith Chart (Impedance)</strong></div>
+        <div class="antenna-cell">46.5Ω + j9.2Ω</div>
+        <div class="antenna-cell"><span style="color: var(--secondary); font-weight: 700;">50Ω + j8.6Ω ★</span></div>
+      </div>
+    </div>
+
+    <div class="features-list" style="margin-top: 50px;">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-circle"></i>
+        </div>
+        <div>
+          <h4>Radiating Element</h4>
+          <p>Conductive metal structure resonating at desired frequency. Size, shape, and material directly impact gain, directivity, and radiation pattern.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-share-alt"></i>
+        </div>
+        <div>
+          <h4>Radials</h4>
+          <p>Conductive elements extending radially from base. Form ground plane, improve impedance matching, enhance gain, and broaden frequency range.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div>
+          <h4>VSWR (Voltage Standing Wave Ratio)</h4>
+          <p>Measures impedance match between antenna and transmission line. Lower VSWR indicates better efficiency and minimal signal reflections.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <i class="fas fa-compass"></i>
+        </div>
+        <div>
+          <h4>Smith Chart Analysis</h4>
+          <p>Graphical representation of impedance characteristics. Antenna-2's near-perfect 50Ω match maximizes power transfer and efficiency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CubeSat Architecture Section -->
+  <section style="background: #f8f9fa;">
+    <div class="section-title">
+      <h2>CubeSat Architecture</h2>
+      <p>Minimal Payload for Maximum Performance</p>
+    </div>
+
+    <div class="overview-grid">
+      <div class="card">
+        <i class="fas fa-cube"></i>
+        <h3>Form Factor</h3>
+        <p><strong>Target: &lt;1U</strong><br>Standard size: 4" × 4" × 4" (10cm × 10cm × 10cm)<br>Optimized for CubeSat launch vehicle compatibility.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-briefcase"></i>
+        <h3>Minimal Payload</h3>
+        <p>Streamlined component selection focusing on communication subsystem with LoRa transceiver and supporting electronics.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-network-wired"></i>
+        <h3>System Integration</h3>
+        <p>ESP32 MCU with WiFi capability, SX1272 LoRa transceiver, optimized antenna, and integration with ground station infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <h3>CubeSat LoRa Communication Project</h3>
+    <p>Orbit Lab System Integration Test (SIT) Analysis</p>
+    <p style="margin-top: 20px; font-size: 0.9rem; color: #aaa;">Advanced VLSI Lab | Silicon Tech Institute</p>
+    <div class="footer-links">
+      <a href="#"><i class="fab fa-github"></i> GitHub</a>
+      <a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+    <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem;">
+      © 2024 CubeSat Project Team. All rights reserved. | Designed for Advanced Orbital Communications
+    </p>
+  </footer>
 </body>
 </html>
