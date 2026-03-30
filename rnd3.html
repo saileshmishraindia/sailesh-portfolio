@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VLSI in AI/ML | Research Paper Analysis</title>
+  <style>
+    :root {
+      --bg: #14070a;
+      --ink: #fff8f6;
+      --muted: #f1d8d5;
+      --primary: #ff6a5f;
+      --secondary: #fff0ed;
+      --accent: #ffd8cf;
+      --ai-glow: #7ef7e7;
+      --ai-glow-soft: rgba(126, 247, 231, 0.18);
+      --glass: rgba(255, 255, 255, 0.09);
+      --glass-line: rgba(255, 255, 255, 0.16);
+      --paper: rgba(255, 250, 248, 0.84);
+      --paper-strong: rgba(255, 253, 252, 0.92);
+      --paper-ink: #4e141b;
+      --paper-muted: #805058;
+      --paper-line: rgba(118, 27, 37, 0.12);
+      --shadow: 0 32px 90px rgba(50, 7, 13, 0.26);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", "Poppins", sans-serif;
+      color: var(--ink);
+      line-height: 1.68;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(255, 106, 95, 0.16), transparent 22%),
+        radial-gradient(circle at 76% 22%, rgba(126, 247, 231, 0.12), transparent 18%),
+        radial-gradient(circle at 86% 8%, rgba(255, 255, 255, 0.09), transparent 20%),
+        radial-gradient(circle at 54% 100%, rgba(255, 200, 190, 0.08), transparent 26%),
+        linear-gradient(180deg, #19070a 0%, #2f0b12 46%, #130609 100%);
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      opacity: 0.42;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        radial-gradient(circle at 34% 18%, rgba(126, 247, 231, 0.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 18% 32%, rgba(255, 106, 95, 0.28) 0 2px, transparent 3px),
+        radial-gradient(circle at 72% 24%, rgba(255, 232, 227, 0.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 70%, rgba(255, 106, 95, 0.18) 0 2px, transparent 3px);
+      background-size: 52px 52px, 52px 52px, 220px 220px, 260px 260px, 300px 300px, 280px 280px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.25));
+    }
+
+    body::after {
+      opacity: 0.18;
+      background-image:
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.15) 46% 54%, transparent 54%),
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.1) 46% 54%, transparent 54%),
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.12) 46% 54%, transparent 54%);
+      background-size: 180px 240px, 220px 260px, 200px 240px;
+      background-position: 7% 17%, 84% 14%, 56% 76%;
+      background-repeat: no-repeat;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(40, 10, 15, 0.58);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 48px rgba(32, 4, 9, 0.22);
+    }
+
+    .topbar-inner,
+    .hero,
+    .section,
+    .footer-inner {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.16rem;
+    }
+
+    .brand-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand-title {
+      font-size: 1.03rem;
+      font-weight: 700;
+      color: #fff9f8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: rgba(255, 241, 239, 0.84);
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .hero-wrap {
+      padding: 3.3rem 0 1.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.92fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .hero-summary,
+    .section-card,
+    .paper-card,
+    .insight-card,
+    .playbook-card,
+    .matrix,
+    .closing-card {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 2.35rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-line);
+      backdrop-filter: blur(22px);
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
+        linear-gradient(145deg, rgba(53, 11, 17, 0.95), rgba(122, 26, 37, 0.9) 52%, rgba(194, 53, 69, 0.78));
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 10%, rgba(255, 255, 255, 0.08) 10% 10.5%, transparent 10.5% 100%),
+        linear-gradient(transparent 0 16%, rgba(255, 214, 210, 0.08) 16% 16.7%, transparent 16.7% 100%),
+        radial-gradient(circle at 24% 72%, rgba(126, 247, 231, 0.14) 0 14px, transparent 15px),
+        radial-gradient(circle at 80% 18%, rgba(255, 255, 255, 0.14) 0 16px, transparent 17px),
+        radial-gradient(circle at 71% 76%, rgba(255, 123, 123, 0.18) 0 11px, transparent 12px);
+      opacity: 0.92;
+      mix-blend-mode: screen;
+    }
+
+    .hero-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 4vw, 3.95rem);
+      line-height: 1.04;
+      margin-bottom: 1rem;
+      max-width: 11ch;
+    }
+
+    .hero-panel p {
+      font-size: 1.05rem;
+      max-width: 62ch;
+      color: rgba(255, 241, 239, 0.88);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .ai-flair-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .ai-flair-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff8f7;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      box-shadow: 0 0 0 1px rgba(126, 247, 231, 0.06) inset;
+    }
+
+    .ai-flair-chip.ai {
+      color: var(--ai-glow);
+      border-color: rgba(126, 247, 231, 0.22);
+      box-shadow: 0 0 18px rgba(126, 247, 231, 0.1);
+    }
+
+    .ai-schematic {
+      margin-top: 1.35rem;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .ai-schematic-copy h2 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+    }
+
+    .ai-schematic-copy p {
+      font-size: 0.9rem;
+      color: rgba(255, 241, 239, 0.8);
+      max-width: none;
+    }
+
+    .ai-schematic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .ai-schematic-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff7f6;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .ai-schematic-tag.ai {
+      color: var(--ai-glow);
+      border-color: rgba(126, 247, 231, 0.2);
+      box-shadow: 0 0 16px rgba(126, 247, 231, 0.08);
+    }
+
+    .ai-schematic-visual {
+      min-height: 185px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .ai-schematic-visual svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.82rem 1.12rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(255, 225, 220, 0.95));
+      color: #6f131e;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff8f7;
+    }
+
+    .compute-map {
+      margin-top: 1.4rem;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .compute-map-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .compute-map-head h2 {
+      font-size: 1.04rem;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+    }
+
+    .compute-map-head span {
+      color: rgba(255, 241, 239, 0.76);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .compute-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      position: relative;
+    }
+
+    .compute-grid::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0.08));
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .compute-node {
+      position: relative;
+      z-index: 1;
+      min-height: 154px;
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px);
+    }
+
+    .compute-node strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      min-height: 2rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(126, 247, 231, 0.16));
+      font-size: 0.78rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .compute-node h3 {
+      font-size: 1rem;
+      line-height: 1.24;
+      margin-bottom: 0.38rem;
+      color: #ffffff;
+    }
+
+    .compute-node p {
+      font-size: 0.88rem;
+      color: rgba(255, 241, 239, 0.82);
+      max-width: none;
+    }
+
+    .hero-summary,
+    .section-card,
+    .paper-card,
+    .insight-card,
+    .playbook-card,
+    .matrix,
+    .closing-card {
+      background: linear-gradient(180deg, var(--paper-strong), var(--paper));
+      border: 1px solid var(--paper-line);
+      color: var(--paper-ink);
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 28px 72px rgba(53, 8, 15, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .hero-summary {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-grid,
+    .stack-grid,
+    .papers-grid,
+    .insight-grid,
+    .playbook-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-card,
+    .summary-box,
+    .stack-item,
+    .insight-card,
+    .playbook-card,
+    .paper-card,
+    .bibliography-item {
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .stat-card {
+      padding: 1rem;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: #61131d;
+      margin-bottom: 0.36rem;
+    }
+
+    .stat-card span,
+    .summary-box p,
+    .section-head p,
+    .paper-card p,
+    .paper-card li,
+    .insight-card p,
+    .playbook-card p,
+    td,
+    .closing-card p,
+    .bibliography-item,
+    .filter-meta {
+      color: var(--paper-muted);
+    }
+
+    .summary-box {
+      padding: 1rem 1.05rem;
+    }
+
+    .summary-box h2,
+    .section-head h2 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .summary-box h2 {
+      margin-bottom: 0.72rem;
+      color: #5d121c;
+    }
+
+    .section {
+      padding: 1rem 0 1.5rem;
+    }
+
+    .section-card,
+    .closing-card {
+      padding: 2rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #a22b39;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .stack-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .stack-item {
+      padding: 1.2rem;
+    }
+
+    .stack-item h3,
+    .paper-card h3,
+    .insight-card h3,
+    .playbook-card h3,
+    .matrix h3,
+    .closing-card h3 {
+      color: var(--paper-ink);
+      font-size: 1.04rem;
+      line-height: 1.28;
+      margin-bottom: 0.5rem;
+    }
+
+    .equation-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.3rem;
+    }
+
+    .equation-chip {
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.94rem;
+      color: #fff5f4;
+      background: linear-gradient(135deg, rgba(58, 10, 18, 0.97), rgba(122, 26, 37, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      overflow-x: auto;
+    }
+
+    .papers-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .paper-card {
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    .paper-topline,
+    .paper-meta,
+    .bibliography-actions,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .paper-index,
+    .pill,
+    .chip,
+    .tool-btn,
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    .paper-index {
+      min-width: 48px;
+      padding: 0.48rem 0.72rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 106, 95, 0.18));
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      color: #7a1825;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pill,
+    .chip {
+      padding: 0.28rem 0.74rem;
+      background: rgba(162, 43, 57, 0.1);
+      color: #872330;
+      font-size: 0.76rem;
+      letter-spacing: 0.03em;
+    }
+
+    .tag-row {
+      margin-top: 0.2rem;
+    }
+
+    .paper-card ul {
+      padding-left: 1.05rem;
+    }
+
+    .paper-card li + li {
+      margin-top: 0.3rem;
+    }
+
+    .paper-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .paper-link,
+    .tool-btn {
+      min-height: 40px;
+      padding: 0.7rem 0.96rem;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      color: var(--paper-ink);
+      font-size: 0.9rem;
+    }
+
+    .paper-link:hover,
+    .tool-btn:hover {
+      background: rgba(255, 106, 95, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .insight-grid,
+    .playbook-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .insight-card,
+    .playbook-card {
+      padding: 1.3rem;
+    }
+
+    .matrix {
+      margin-top: 1.1rem;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.9rem 0.75rem;
+      border-bottom: 1px solid rgba(118, 27, 37, 0.1);
+      vertical-align: top;
+    }
+
+    th {
+      color: #9c2c3a;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .bibliography-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      counter-reset: refs;
+    }
+
+    .bibliography-item {
+      list-style: none;
+      position: relative;
+      padding: 1rem 1rem 1rem 3rem;
+    }
+
+    .bibliography-item::before {
+      counter-increment: refs;
+      content: counter(refs);
+      position: absolute;
+      left: 0.95rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(162, 43, 57, 0.12);
+      color: #7b1826;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .closing-card {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-inner {
+      text-align: center;
+      color: rgba(255, 228, 224, 0.74);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .closing-card,
+      .ai-schematic,
+      .stack-grid,
+      .papers-grid,
+      .insight-grid,
+      .playbook-grid,
+      .compute-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .equation-strip,
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .compute-grid::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner,
+      .section-head,
+      .compute-map-head,
+      .bibliography-actions {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .hero-wrap {
+        padding-top: 2rem;
+      }
+
+      .hero-panel,
+      .hero-summary,
+      .section-card,
+      .closing-card {
+        padding: 1.35rem;
+      }
+
+      .equation-strip,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-kicker">Research Paper Analysis</span>
+        <span class="brand-title">VLSI in AI/ML</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Portfolio</a>
+        <a href="#papers">Paper Library</a>
+        <a href="#insights">Insights</a>
+        <a href="#playbook">Design Playbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <div class="hero-panel">
+        <h1>VLSI in AI/ML</h1>
+        <p>
+          This research cluster tracks the AI hardware stack from model-scale growth to chip architecture and finally to advanced packaging.
+          Together, the three papers show that modern AI acceleration is not just about better algorithms. It depends on efficient arithmetic,
+          silicon-aware architecture, heterogeneous integration, and packaging strategies that can feed ever-larger models without breaking power budgets.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#papers">Explore Papers</a>
+          <a class="btn btn-secondary" href="#insights">See Cross-Paper Insights</a>
+        </div>
+
+        <div class="ai-flair-row" aria-label="AI hardware highlights">
+          <span class="ai-flair-chip ai">Neural Compute</span>
+          <span class="ai-flair-chip">Dataflow Silicon</span>
+          <span class="ai-flair-chip ai">Memory-Centric AI</span>
+          <span class="ai-flair-chip">Datacenter Packaging</span>
+        </div>
+
+        <div class="ai-schematic" aria-label="AI model to hardware pipeline">
+          <div class="ai-schematic-copy">
+            <h2>Model-to-Silicon Pipeline</h2>
+            <p>
+              The reviewed papers collectively describe an AI deployment path that begins with model scaling,
+              passes through accelerator and memory architecture, and lands in package-level integration where
+              bandwidth and thermals decide whether performance is actually realizable.
+            </p>
+            <div class="ai-schematic-tags">
+              <span class="ai-schematic-tag ai">Transformer Scale</span>
+              <span class="ai-schematic-tag">Precision Scaling</span>
+              <span class="ai-schematic-tag ai">2.5D Integration</span>
+            </div>
+          </div>
+          <div class="ai-schematic-visual">
+            <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI hardware pipeline schematic">
+              <defs>
+                <linearGradient id="aiTrace" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fff8f7" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#ff9c93" stop-opacity="0.92"/>
+                </linearGradient>
+                <linearGradient id="aiNeon" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#7ef7e7" stop-opacity="0.98"/>
+                  <stop offset="100%" stop-color="#d9fffa" stop-opacity="0.9"/>
+                </linearGradient>
+              </defs>
+              <rect x="26" y="44" width="78" height="54" rx="14" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.22)"/>
+              <rect x="130" y="28" width="86" height="86" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.24)"/>
+              <rect x="242" y="44" width="72" height="54" rx="14" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.22)"/>
+              <path d="M66 126 C98 104, 124 104, 152 126" fill="none" stroke="url(#aiTrace)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M188 126 C216 104, 242 104, 278 126" fill="none" stroke="url(#aiTrace)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M104 70 H130" fill="none" stroke="rgba(255,255,255,0.78)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M216 70 H242" fill="none" stroke="rgba(255,255,255,0.78)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M150 68 C162 42, 184 42, 196 68" fill="none" stroke="url(#aiNeon)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="170" cy="52" r="4.5" fill="#7ef7e7"/>
+              <circle cx="184" cy="52" r="4.5" fill="#7ef7e7"/>
+              <circle cx="82" cy="70" r="5.5" fill="#fff7f6"/>
+              <circle cx="155" cy="58" r="6" fill="#ffd8d3"/>
+              <circle cx="191" cy="58" r="6" fill="#ffd8d3"/>
+              <circle cx="278" cy="70" r="5.5" fill="#fff7f6"/>
+              <path d="M148 80 L170 52 L194 86" fill="none" stroke="rgba(255,255,255,0.82)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M150 96 H196" fill="none" stroke="rgba(255,255,255,0.42)" stroke-width="2" stroke-dasharray="4 6"/>
+              <text x="43" y="120" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">Model</text>
+              <text x="151" y="136" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">Accelerator</text>
+              <text x="250" y="120" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">Package</text>
+              <text x="28" y="30" fill="rgba(255,255,255,0.58)" font-size="11" font-family="Segoe UI, sans-serif">parameter growth</text>
+              <text x="225" y="30" fill="rgba(255,255,255,0.58)" font-size="11" font-family="Segoe UI, sans-serif">bandwidth + thermals</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="compute-map" aria-label="AI hardware stack">
+          <div class="compute-map-head">
+            <h2>AI Hardware Stack</h2>
+            <span>Model scale, silicon architecture, and package integration</span>
+          </div>
+          <div class="compute-grid">
+            <article class="compute-node">
+              <strong>01</strong>
+              <h3>Model Scale</h3>
+              <p>Pre-trillion-parameter models push training toward exa-scale compute and make efficiency a first-order commercialization constraint.</p>
+            </article>
+            <article class="compute-node">
+              <strong>02</strong>
+              <h3>Chip Architecture</h3>
+              <p>Precision scaling, digital accelerators, analog in-memory compute, and software co-design shape usable AI throughput per watt.</p>
+            </article>
+            <article class="compute-node">
+              <strong>03</strong>
+              <h3>Advanced Packaging</h3>
+              <p>2.5D integration expands memory bandwidth, interconnect density, and total package capability for datacenter AI systems.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-summary">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <strong>3</strong>
+            <span>papers reviewed</span>
+          </div>
+          <div class="stat-card">
+            <strong>3</strong>
+            <span>AI hardware layers</span>
+          </div>
+          <div class="stat-card">
+            <strong>1</strong>
+            <span>end-to-end narrative</span>
+          </div>
+          <div class="stat-card">
+            <strong>2.5D</strong>
+            <span>integration focus</span>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <h2>What this collection shows</h2>
+          <p>
+            AI acceleration is now a full-stack VLSI problem. Training scale, arithmetic precision, accelerator organization, memory movement,
+            packaging density, and thermal feasibility all interact. The papers make it clear that no single block can solve AI efficiency alone.
+          </p>
+        </div>
+
+        <div class="summary-box">
+          <h2>Core takeaway</h2>
+          <p>
+            The winning AI hardware platforms will be the ones that co-optimize model requirements with architecture and package integration.
+            In other words, the path from foundation models to deployable systems runs through silicon efficiency, not just parameter count.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Research Scope</span>
+          <h2>Three complementary views of AI-oriented VLSI</h2>
+          <p>The papers cover AI scaling pressure, hardware architecture response, and package-level integration as a single connected engineering story.</p>
+        </div>
+      </div>
+
+      <div class="stack-grid">
+        <article class="stack-item">
+          <h3>Compute Demand Explosion</h3>
+          <p>Large language and foundation models are driving parameter counts and training demands toward exa-scale infrastructure.</p>
+        </article>
+        <article class="stack-item">
+          <h3>Hardware Co-Design</h3>
+          <p>AI chips increasingly depend on precision-aware algorithms, specialized datapaths, and software support to maintain throughput-per-watt.</p>
+        </article>
+        <article class="stack-item">
+          <h3>System Integration</h3>
+          <p>2.5D packaging and heterogeneous integration now decide whether memory, logic, thermals, and bandwidth can scale together.</p>
+        </article>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">AI throughput = ops/s x utilization</div>
+        <div class="equation-chip">Energy efficiency ~ performance / power</div>
+        <div class="equation-chip">Package value = logic + memory + interconnect</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="papers">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Paper Library</span>
+          <h2>Annotated AI hardware dossier</h2>
+          <p>Each paper contributes a different layer of the AI hardware story, from computational pressure to implementation strategy.</p>
+        </div>
+      </div>
+
+      <div class="papers-grid">
+        <article class="paper-card">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P01</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Scaling</span>
+              <span class="pill">Supercomputing</span>
+            </div>
+            <h3>AI Computing in Large-Scale Era</h3>
+            <p>This paper frames the AI landscape around pre-trillion-scale models, exa-scale training demand, and the centrality of compute efficiency.</p>
+          </div>
+          <ul>
+            <li>Connects transformer-driven model growth to a major rise in infrastructure requirements.</li>
+            <li>Highlights computing power, algorithm design, and application correctness as linked forces.</li>
+            <li>Positions efficiency as a commercialization bottleneck, not just a design metric.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="chip">Foundation Models</span>
+            <span class="chip">Exa-scale</span>
+            <span class="chip">Compute Efficiency</span>
+          </div>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/3. VLSI in AIML/AI_Computing_in_Large-Scale_Era_Pre-trillion-scale_Neural_Network_Models_and_Exa-scale_Supercomputing.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P02</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Architecture</span>
+              <span class="pill">AI Hardware</span>
+            </div>
+            <h3>Challenges and Opportunities in AI Hardware Design</h3>
+            <p>This paper argues for an end-to-end AI hardware strategy covering arithmetic, architecture, integration, and software enablement.</p>
+          </div>
+          <ul>
+            <li>Discusses precision scaling to maintain iso-accuracy while reducing cost.</li>
+            <li>Explores digital accelerators, analog in-memory hardware, and heterogeneous integration.</li>
+            <li>Shows that software support is inseparable from successful AI silicon deployment.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="chip">Precision Scaling</span>
+            <span class="chip">Analog In-Memory</span>
+            <span class="chip">Co-Design</span>
+          </div>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/3. VLSI in AIML/Challenges_and_Opportunities_in_AI_Hardware_Design.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P03</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Packaging</span>
+              <span class="pill">Datacenter AI</span>
+            </div>
+            <h3>2.5D Packaging in the AI Data Center Era</h3>
+            <p>This paper shifts the discussion from chips to packages, showing that bandwidth, thermals, and interconnect density are now performance drivers.</p>
+          </div>
+          <ul>
+            <li>Explains why 2.5D packaging became standard in the fastest HPC and AI systems.</li>
+            <li>Identifies larger interposers, richer interconnect layers, passives, and thermal solutions as key scaling levers.</li>
+            <li>Clarifies that future AI performance growth depends on packaging, not only transistor design.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="chip">2.5D Integration</span>
+            <span class="chip">Bandwidth</span>
+            <span class="chip">Thermals</span>
+          </div>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/3. VLSI in AIML/Opportunities_and_Challenges_of_2.5D_Packaging_in_the_AI_Data_Center_Era.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="insights">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Synthesis</span>
+          <h2>Cross-paper insights</h2>
+          <p>The three papers line up cleanly into a layered AI hardware narrative.</p>
+        </div>
+      </div>
+
+      <div class="insight-grid">
+        <article class="insight-card">
+          <h3>Model growth rewrites hardware assumptions</h3>
+          <p>As AI models move toward pre-trillion scale, compute systems must optimize for throughput, memory movement, and energy at a much larger systems level.</p>
+        </article>
+        <article class="insight-card">
+          <h3>AI efficiency depends on co-design</h3>
+          <p>The architecture paper shows that arithmetic, chip microarchitecture, software enablement, and device options have to evolve together.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Packaging is now part of the compute architecture</h3>
+          <p>The 2.5D paper makes clear that package-level integration is no longer backend packaging detail; it is core AI system design.</p>
+        </article>
+      </div>
+
+      <div class="matrix">
+        <h3>Technique-to-impact matrix</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Representative paper</th>
+              <th>Primary objective</th>
+              <th>Main engineering pressure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Model-scale infrastructure</td>
+              <td>AI Computing in Large-Scale Era</td>
+              <td>Support huge training demand efficiently</td>
+              <td>Exa-scale compute cost and correctness at scale</td>
+            </tr>
+            <tr>
+              <td>Chip architecture</td>
+              <td>Challenges and Opportunities in AI Hardware Design</td>
+              <td>Improve latency, throughput, and energy efficiency</td>
+              <td>Algorithm-hardware-software coordination</td>
+            </tr>
+            <tr>
+              <td>Advanced integration</td>
+              <td>2.5D Packaging in the AI Data Center Era</td>
+              <td>Increase package-level performance density</td>
+              <td>Interposer scale, interconnect, memory, and thermal closure</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="playbook">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Practical Use</span>
+          <h2>AI hardware design playbook</h2>
+          <p>The literature suggests a disciplined progression from model requirements to deployed silicon systems.</p>
+        </div>
+      </div>
+
+      <div class="playbook-grid">
+        <article class="playbook-card">
+          <h3>1. Start from workload scale</h3>
+          <p>Quantify parameter growth, training demand, memory traffic, and latency targets before architectural decisions are locked.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>2. Co-design arithmetic and architecture</h3>
+          <p>Precision scaling, datapath design, and memory organization should be shaped by AI tolerance and target accuracy.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>3. Treat software as part of the hardware plan</h3>
+          <p>Compiler, runtime, mapping, and model support decide whether a nominal accelerator advantage is actually usable.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>4. Plan heterogeneous integration early</h3>
+          <p>AI hardware increasingly spans logic, memory, analog elements, and packaging technologies, so integration strategy cannot be delayed.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>5. Design for bandwidth and thermals together</h3>
+          <p>2.5D and related approaches help only if interconnect density, passives, and cooling architecture close simultaneously.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>6. Measure value in performance-per-watt</h3>
+          <p>The core commercial metric across all three papers is not raw compute alone, but useful AI throughput under realistic power limits.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibliography">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">References</span>
+          <h2>Working bibliography</h2>
+          <p>A compact citation list for this AI and VLSI research set.</p>
+        </div>
+      </div>
+
+      <div class="bibliography-actions">
+        <div class="filter-meta">3 source papers compiled for this analysis page</div>
+      </div>
+
+      <ol class="bibliography-list">
+        <li class="bibliography-item">AI Computing in Large-Scale Era: Pre-trillion-scale Neural Network Models and Exa-scale Supercomputing.</li>
+        <li class="bibliography-item">Challenges and Opportunities in AI Hardware Design.</li>
+        <li class="bibliography-item">Opportunities and Challenges of 2.5D Packaging in the AI Data Center Era.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="closing-card section-card">
+      <div>
+        <span class="section-kicker">Final Reading</span>
+        <h3>Why this paper set matters</h3>
+        <p>
+          These papers compress the AI hardware problem into a useful engineering arc: larger models create demand, accelerator innovation responds,
+          and advanced packaging makes that response physically deployable at system scale. That makes the set highly relevant for anyone working
+          at the intersection of VLSI, HPC, and machine-learning infrastructure.
+        </p>
+      </div>
+      <div>
+        <h3>Recommended reading order</h3>
+        <p>
+          Start with the large-scale AI compute paper for macro context, then move to the AI hardware-design paper for architectural levers,
+          and finish with the 2.5D packaging paper to understand how datacenter deployment constraints reshape the silicon roadmap.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Research Paper Analysis Series • Er. Sailesh Mishra • VLSI in AI/ML</p>
+    </div>
+  </footer>
+</body>
+</html>

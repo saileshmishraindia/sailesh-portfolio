@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Low Power VLSI Design | Research Paper Analysis</title>
+  <style>
+    :root {
+      --bg: #21090d;
+      --surface: rgba(255, 255, 255, 0.08);
+      --surface-alt: rgba(255, 255, 255, 0.12);
+      --ink: #fff8f8;
+      --muted: #ecd2d4;
+      --primary: #ff6b6b;
+      --secondary: #ffdede;
+      --accent: #ffffff;
+      --line: rgba(255, 255, 255, 0.18);
+      --paper: rgba(255, 248, 246, 0.82);                                                                                          
+      --paper-strong: rgba(255, 252, 251, 0.9);
+      --paper-border: rgba(126, 24, 36, 0.12);
+      --paper-ink: #53131d;
+      --paper-muted: #85545c;
+      --shadow: 0 30px 80px rgba(54, 4, 10, 0.34);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", "Poppins", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 107, 107, 0.2), transparent 24%),
+        radial-gradient(circle at 82% 8%, rgba(255, 255, 255, 0.12), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(255, 184, 184, 0.08), transparent 28%),
+        linear-gradient(180deg, #24080d 0%, #3a0f16 42%, #17070a 100%);
+      color: var(--ink);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 12% 28%, rgba(255, 107, 107, 0.3) 0 2px, transparent 3px),
+        radial-gradient(circle at 26% 62%, rgba(255, 220, 220, 0.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 74% 22%, rgba(255, 255, 255, 0.2) 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 72%, rgba(255, 107, 107, 0.18) 0 2px, transparent 3px);
+      background-size: 48px 48px, 48px 48px, 240px 240px, 320px 320px, 360px 360px, 280px 280px;
+      background-position: center, center, 0 0, 0 0, 0 0, 0 0;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.25));
+    }
+
+    body::after {
+      z-index: -1;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(115deg, transparent 0 46%, rgba(255, 255, 255, 0.18) 46% 54%, transparent 54%),
+        linear-gradient(115deg, transparent 0 46%, rgba(255, 255, 255, 0.1) 46% 54%, transparent 54%),
+        linear-gradient(115deg, transparent 0 46%, rgba(255, 255, 255, 0.14) 46% 54%, transparent 54%);
+      background-size: 180px 240px, 220px 280px, 200px 260px;
+      background-position: 6% 18%, 82% 14%, 58% 78%;
+      background-repeat: no-repeat;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(42, 11, 16, 0.58);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 50px rgba(39, 5, 11, 0.22);
+    }
+
+    .topbar-inner,
+    .hero,
+    .section,
+    .footer-inner {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .brand-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--secondary);
+    }
+
+    .brand-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #f6fbff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(231, 244, 255, 0.82);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .hero-wrap {
+      padding: 3.5rem 0 1.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .hero-summary,
+    .section-card,
+    .paper-card,
+    .insight-card,
+    .playbook-card,
+    .matrix,
+    .closing-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(22px);
+    }
+
+    .hero-summary,
+    .section-card,
+    .paper-card,
+    .insight-card,
+    .playbook-card,
+    .matrix,
+    .closing-card {
+      background: linear-gradient(180deg, var(--paper-strong), var(--paper));
+      border: 1px solid var(--paper-border);
+      color: var(--paper-ink);
+      box-shadow:
+        0 30px 80px rgba(54, 4, 10, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .hero-panel {
+      padding: 2.4rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.14), transparent 24%),
+        linear-gradient(145deg, rgba(54, 10, 17, 0.94), rgba(117, 22, 34, 0.88) 48%, rgba(183, 46, 64, 0.76));
+      color: #fff;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 12%, rgba(255, 255, 255, 0.09) 12% 12.6%, transparent 12.6% 100%),
+        linear-gradient(transparent 0 18%, rgba(255, 214, 214, 0.09) 18% 18.8%, transparent 18.8% 100%),
+        radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.14) 0 18px, transparent 19px),
+        radial-gradient(circle at 68% 72%, rgba(255, 120, 120, 0.18) 0 12px, transparent 13px);
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .hero-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 0.78rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3.7rem);
+      line-height: 1.08;
+      margin-bottom: 1rem;
+      max-width: 12ch;
+    }
+
+    .hero-panel p {
+      font-size: 1.05rem;
+      max-width: 62ch;
+      color: rgba(255, 241, 241, 0.88);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1.7rem;
+    }
+
+    .hero-schematic {
+      margin-top: 1.35rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      align-items: stretch;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-schematic-copy h2 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: #000000;
+    }
+
+    .hero-schematic-copy p {
+      font-size: 0.9rem;
+      color: rgba(255, 239, 239, 0.78);
+      max-width: none;
+    }
+
+    .hero-schematic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .hero-schematic-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-schematic-svg {
+      min-height: 170px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .hero-schematic-svg svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-taxonomy {
+      margin-top: 1.8rem;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .hero-taxonomy-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-taxonomy-head h2 {
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      color: #000000;
+    }
+
+    .hero-taxonomy-head span {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .taxonomy-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.85rem;
+      position: relative;
+    }
+
+    .taxonomy-flow::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+      transform: translateY(-50%);
+      z-index: 0;
+    }
+
+    .taxonomy-node {
+      position: relative;
+      z-index: 1;
+      min-height: 142px;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .taxonomy-node strong {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      min-height: 2rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      font-size: 0.78rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .taxonomy-node h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+      color: #000000;
+    }
+
+    .taxonomy-node p {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: none;
+    }
+
+    .taxonomy-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .taxonomy-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.85rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 219, 219, 0.96));
+      color: #6d121d;
+      box-shadow: 0 18px 34px rgba(107, 18, 29, 0.26);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-summary {
+      padding: 1.4rem;
+      display: grid;
+      gap: 1rem;
+      background: linear-gradient(180deg, rgba(68, 14, 22, 0.56), rgba(44, 10, 16, 0.5));
+    }
+
+    .stat-grid,
+    .focus-grid,
+    .insight-grid,
+    .playbook-grid,
+    .papers-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.45);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(126, 24, 36, 0.1);
+      padding: 1.05rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: #000000;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-card span {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .summary-box {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .summary-box h2,
+    .section-head h2 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .summary-box h2 {
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-summary .summary-box p,
+    .hero-summary .stat-card span {
+      color: #ffffff;
+    }
+
+    .hero-summary .summary-box h2 {
+      color: #000000;
+    }
+
+    .summary-box p,
+    .section-head p,
+    .paper-card p,
+    .insight-card p,
+    .playbook-card p,
+    .closing-card p,
+    td,
+    li {
+      color: var(--paper-muted);
+    }
+
+    .summary-box h2,
+    .section-head h2,
+    .focus-item h3,
+    .paper-card h3,
+    .insight-card h3,
+    .playbook-card h3,
+    .matrix h3,
+    .closing-card h3 {
+      color: var(--paper-ink);
+    }
+
+    .section {
+      padding: 1rem 0 1.5rem;
+    }
+
+    .section-card {
+      padding: 2rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #a42d3b;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .focus-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .focus-item {
+      padding: 1.15rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 245, 243, 0.62));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .focus-item h3,
+    .paper-card h3,
+    .insight-card h3,
+    .playbook-card h3,
+    .matrix h3,
+    .closing-card h3 {
+      font-size: 1.05rem;
+      line-height: 1.3;
+      margin-bottom: 0.55rem;
+      color: var(--paper-ink);
+    }
+
+    .equation-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.4rem;
+    }
+
+    .equation-chip {
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(58, 10, 18, 0.96), rgba(120, 24, 36, 0.9));
+      color: #fff4f4;
+      padding: 1rem;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.94rem;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .papers-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .paper-card {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+    }
+
+    .paper-card[hidden] {
+      display: none;
+    }
+
+    .paper-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .paper-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 46px;
+      min-height: 46px;
+      padding: 0.55rem;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 107, 107, 0.18));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #7d1927;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .paper-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.28rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(166, 45, 59, 0.1);
+      color: #8a2432;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .paper-card ul {
+      padding-left: 1.05rem;
+    }
+
+    .paper-card li + li {
+      margin-top: 0.32rem;
+    }
+
+    .paper-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .filter-toolbar,
+    .bibliography-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .filter-controls,
+    .bibliography-tools {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn,
+    .tool-btn {
+      border: 1px solid rgba(126, 24, 36, 0.12);
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--paper-ink);
+      padding: 0.68rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .tool-btn:hover,
+    .filter-btn.is-active {
+      background: rgba(255, 107, 107, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .filter-search {
+      min-width: min(340px, 100%);
+      flex: 1;
+      max-width: 420px;
+      border: 1px solid rgba(126, 24, 36, 0.12);
+      background: rgba(255, 255, 255, 0.56);
+      color: var(--paper-ink);
+      padding: 0.8rem 1rem;
+      border-radius: 999px;
+      font: inherit;
+      backdrop-filter: blur(16px);
+    }
+
+    .filter-search::placeholder {
+      color: rgba(110, 45, 53, 0.58);
+    }
+
+    .filter-meta {
+      color: var(--paper-muted);
+    }
+
+    .filter-meta {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0.7rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.52);
+      color: var(--paper-ink);
+      border: 1px solid rgba(126, 24, 36, 0.12);
+    }
+
+    .paper-link:hover {
+      background: rgba(255, 107, 107, 0.14);
+    }
+
+    .insight-grid,
+    .playbook-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .insight-card,
+    .playbook-card,
+    .closing-card,
+    .matrix {
+      padding: 1.35rem;
+    }
+
+    .matrix {
+      margin-top: 1.15rem;
+      overflow-x: auto;
+    }
+
+    .bibliography-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.4rem;
+      counter-reset: references;
+    }
+
+    .bibliography-item {
+      list-style: none;
+      position: relative;
+      padding: 1rem 1rem 1rem 3.2rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 245, 243, 0.72));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+      color: var(--paper-muted);
+    }
+
+    .bibliography-item::before {
+      counter-increment: references;
+      content: counter(references);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(166, 45, 59, 0.12);
+      color: #7d1927;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.9rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9c2b3a;
+    }
+
+    td {
+      color: var(--paper-muted);
+    }
+
+    .closing-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-inner {
+      color: rgba(214, 229, 244, 0.68);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .closing-card,
+      .hero-schematic,
+      .focus-grid,
+      .insight-grid,
+      .playbook-grid,
+      .papers-grid,
+      .taxonomy-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .equation-strip,
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-search {
+        min-width: 100%;
+        max-width: none;
+      }
+
+      .taxonomy-flow::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner,
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .hero-wrap {
+        padding-top: 2rem;
+      }
+
+      .hero-panel,
+      .hero-summary,
+      .section-card {
+        padding: 1.35rem;
+      }
+
+      .equation-strip,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-toolbar,
+      .bibliography-actions {
+        align-items: stretch;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-kicker">Research Paper Analysis</span>
+        <span class="brand-title">Low Power VLSI Design</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Portfolio</a>
+        <a href="#papers">Paper Library</a>
+        <a href="#insights">Insights</a>
+        <a href="#playbook">Design Playbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <div class="hero-panel">
+        <h1>Low Power VLSI Design</h1>
+        <p>
+          This research cluster studies power minimization from system architecture down to device technology.
+          The selected papers show that meaningful energy reduction is not tied to a single trick: it comes from
+          coordinated decisions across voltage scaling, clock management, memory design, mixed-signal interfaces,
+          decoder adaptation, and physical implementation.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#papers">Explore Papers</a>
+          <a class="btn btn-secondary" href="#insights">See Cross-Paper Insights</a>
+        </div>
+
+        <div class="hero-schematic" aria-label="Low-power VLSI technical motif">
+          <div class="hero-schematic-copy">
+            <h2>Power Pathway</h2>
+            <p>Architecture, switching control, memory strategy, and physical closure form the dominant optimization chain across the reviewed papers.</p>
+            <div class="hero-schematic-tags">
+              <span class="hero-schematic-tag">alphaCV²f</span>
+              <span class="hero-schematic-tag">Clock Gating</span>
+              <span class="hero-schematic-tag">Leakage Control</span>
+            </div>
+          </div>
+          <div class="hero-schematic-svg">
+            <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Waveform and chip motif">
+              <defs>
+                <linearGradient id="traceGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#ff9fa8" stop-opacity="0.92"/>
+                </linearGradient>
+              </defs>
+              <rect x="24" y="24" width="120" height="88" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.22)"/>
+              <rect x="48" y="48" width="72" height="40" rx="10" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.28)"/>
+              <path d="M36 136 H82 V118 H118 V150 H154 V126 H194 V142 H236 V98 H284" fill="none" stroke="url(#traceGlow)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+              <path d="M144 68 H190 L210 52 H264" fill="none" stroke="rgba(255,255,255,0.82)" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="190" cy="68" r="6" fill="#fff6f6"/>
+              <circle cx="210" cy="52" r="6" fill="#fff6f6"/>
+              <circle cx="236" cy="98" r="7" fill="#ffd5d8"/>
+              <text x="48" y="101" fill="rgba(255,255,255,0.74)" font-size="12" font-family="Segoe UI, sans-serif">SRAM / DVFS / Clock</text>
+              <text x="198" y="44" fill="rgba(255,255,255,0.8)" font-size="11" font-family="Segoe UI, sans-serif">signal activity</text>
+              <text x="226" y="160" fill="rgba(255,255,255,0.8)" font-size="11" font-family="Segoe UI, sans-serif">energy path</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="hero-taxonomy" aria-label="Low-power VLSI taxonomy">
+          <div class="hero-taxonomy-head">
+            <h2>Visual Taxonomy</h2>
+            <span>Power optimization across the full chip stack</span>
+          </div>
+
+          <div class="taxonomy-flow">
+            <article class="taxonomy-node">
+              <strong>01</strong>
+              <h3>System Architecture</h3>
+              <p>Choose the right throughput target, workload model, and hardware partition before implementation begins.</p>
+            </article>
+            <article class="taxonomy-node">
+              <strong>02</strong>
+              <h3>Digital Activity Control</h3>
+              <p>Suppress avoidable toggling using DVFS, clock gating, and iteration-aware control logic.</p>
+            </article>
+            <article class="taxonomy-node">
+              <strong>03</strong>
+              <h3>Block-Level Specialization</h3>
+              <p>Optimize SRAM, memory macros, and ADC interfaces where system energy is often concentrated.</p>
+            </article>
+            <article class="taxonomy-node">
+              <strong>04</strong>
+              <h3>Technology and Layout Closure</h3>
+              <p>Align device selection, leakage behavior, placement, routing, and parasitic control with the power budget.</p>
+            </article>
+          </div>
+
+          <div class="taxonomy-tags">
+            <span class="taxonomy-tag">Architecture</span>
+            <span class="taxonomy-tag">Clock Gating</span>
+            <span class="taxonomy-tag">DVFS</span>
+            <span class="taxonomy-tag">SRAM</span>
+            <span class="taxonomy-tag">SAR ADC</span>
+            <span class="taxonomy-tag">Physical Design</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-summary">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <strong>10</strong>
+            <span>papers reviewed</span>
+          </div>
+          <div class="stat-card">
+            <strong>6</strong>
+            <span>power-reduction levers</span>
+          </div>
+          <div class="stat-card">
+            <strong>4</strong>
+            <span>analysis layers</span>
+          </div>
+          <div class="stat-card">
+            <strong>1</strong>
+            <span>unified design narrative</span>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <h2>What this collection shows ?</h2>
+          <p>
+            The strongest low-power designs are usually built in stages: architecture first, then voltage and activity
+            control, then circuit-level optimization, then layout-aware closure. Several papers also reinforce that
+            memory and data-converter blocks dominate real system budgets, so block-specific strategies matter.
+          </p>
+        </div>
+
+        <div class="summary-box">
+          <h2>Core takeaway</h2>
+          <p>
+            Dynamic power, leakage power, and switching activity must be treated together. The surveyed work repeatedly
+            converges on the same principle: if switching is unnecessary, stop it; if voltage can be lowered, scale it;
+            if the architecture is wrong, later optimizations will not recover the loss.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Research Scope</span>
+          <h2>Four complementary views of low-power design</h2>
+          <p>The papers form a balanced stack covering architectural exploration, digital implementation, memory specialization, and analog or physical realization.</p>
+        </div>
+      </div>
+
+      <div class="focus-grid">
+        <div class="focus-item">
+          <h3>Architectural Optimization</h3>
+          <p>High-level power planning, design-space exploration, and system-level tradeoffs before RTL commitment.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Digital Activity Control</h3>
+          <p>Clock gating, DVFS, and low-power memory implementation strategies for reducing unnecessary switching.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Device and Circuit Innovation</h3>
+          <p>Emerging transistor options, subthreshold operation, and low-power mixed-signal blocks such as SAR ADCs.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Backend and Reliability Pressure</h3>
+          <p>Physical design, routing, density, and node scaling constraints that reshape practical power closure.</p>
+        </div>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">Pdynamic = alpha x C x V^2 x f</div>
+        <div class="equation-chip">Pleakage = Ileak x VDD</div>
+        <div class="equation-chip">Energy/op = Power / Throughput</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="papers">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Paper Library</span>
+          <h2>Annotated research map</h2>
+          <p>Each card captures the technical focus, the paper’s contribution, and why it matters to low-power VLSI practice.</p>
+        </div>
+      </div>
+
+      <div class="filter-toolbar">
+        <div class="filter-controls">
+          <button class="filter-btn is-active" type="button" data-filter="all">All Papers</button>
+          <button class="filter-btn" type="button" data-filter="survey">Surveys</button>
+          <button class="filter-btn" type="button" data-filter="digital">Digital</button>
+          <button class="filter-btn" type="button" data-filter="memory">Memory</button>
+          <button class="filter-btn" type="button" data-filter="analog">Analog</button>
+          <button class="filter-btn" type="button" data-filter="physical">Physical</button>
+        </div>
+        <input class="filter-search" id="paperSearch" type="search" placeholder="Search by topic, technique, or block..." aria-label="Search papers">
+      </div>
+
+      <div class="filter-meta" id="paperCount">Showing 10 of 10 papers</div>
+
+      <div class="papers-grid">
+        <article class="paper-card" data-category="survey" data-search="survey cryptographic hardware dvfs low-power review security architecture">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P01</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Survey</span>
+              <span class="pill">Cryptographic Hardware</span>
+            </div>
+            <h3>Comprehensive Review of Low-Power VLSI Design Techniques</h3>
+            <p>This review frames low-power VLSI as a security-aware design problem, especially for cryptographic hardware where efficiency cannot compromise robustness.</p>
+          </div>
+          <ul>
+            <li>Reviews DVFS, activity management, and broader low-power strategies in secure silicon.</li>
+            <li>Shows that power optimization must coexist with system integrity and attack resilience.</li>
+            <li>Useful as the umbrella paper that connects classic power methods with application-specific constraints.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Comprehensive_Review_of_Low-Power_VLSI_Design_Techniques_Challenges_Cryptographic_Implementations_and_Future_Prospects.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="memory" data-search="memory sram finfet tfet cnfet ultra-low-power 6t subthreshold device technology">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P02</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Memory</span>
+              <span class="pill">Emerging Devices</span>
+            </div>
+            <h3>32 nm Ultra-Low-Power 6T SRAM Cell Using FinFET, TFET, and CNFET</h3>
+            <p>This paper compares advanced device technologies for a 6T SRAM cell operating in the low-voltage regime.</p>
+          </div>
+          <ul>
+            <li>Evaluates FinFET, TFET, CNFET, and hybrid combinations under subthreshold supply levels.</li>
+            <li>Reports the FinFET-TFET hybrid as the lowest total-power option in the presented comparison.</li>
+            <li>Demonstrates how device choice directly changes leakage, parasitics, and memory suitability.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Design_of_a_32nm_Ultra-Low_Power_6T_SRAM_Cell_Analyzing_Emerging_Technologies_such_as_FinFET_TFET_and_CNFET_for_energy-efficient_applicatio.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="digital" data-search="digital sequential logic clock gating johnson counter activity switching dynamic power">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P03</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Sequential Logic</span>
+              <span class="pill">Clock Gating</span>
+            </div>
+            <h3>Optimized Clock-Gated Johnson Counter for Sequential Circuits</h3>
+            <p>The work targets switching reduction in sequential logic by inserting clock gating into a Johnson counter architecture.</p>
+          </div>
+          <ul>
+            <li>Positions low-power sequential logic as a first-order requirement in modern scaled VLSI.</li>
+            <li>Uses clock gating to reduce avoidable transitions, one of the fastest routes to lower dynamic power.</li>
+            <li>Relevant because counters and control logic are repeated heavily across digital subsystems.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Energy-Efficient_Sequential_Circuit_Design_Using_Optimized_Clock-Gated_Johnson_Counter_for_Low-Power_VLSI_Applications.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="survey" data-search="system level industrial methodology architecture design space exploration high-level optimization">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P04</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">System Level</span>
+              <span class="pill">Industrial Methodology</span>
+            </div>
+            <h3>High-Level Low-Power System Design Optimization</h3>
+            <p>This industrial paper argues that the biggest power savings are decided before detailed implementation even begins.</p>
+          </div>
+          <ul>
+            <li>States that architectural choices can reduce power by 80% or more, while weak choices can cost roughly 5x.</li>
+            <li>Promotes early evaluation of multiple hardware options before committing to RTL.</li>
+            <li>Important because it explains why back-end or gate-level fixes alone rarely deliver the best outcome.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/High-level_low-power_system_design_optimization.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="digital" data-search="communication ldpc decoder dvfs awgn workload adaptation voltage scaling frequency scaling">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P05</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Communication</span>
+              <span class="pill">DVFS</span>
+            </div>
+            <h3>Low-Power LDPC Decoder Using DVFS for AWGN Channels</h3>
+            <p>The decoder architecture adapts operating conditions after estimating the iteration budget needed for frame convergence.</p>
+          </div>
+          <ul>
+            <li>Applies DVFS to an LDPC decoder so voltage and frequency follow workload demand.</li>
+            <li>Targets real-time decoding while trimming energy for frames that do not need worst-case effort.</li>
+            <li>Demonstrates a strong example of algorithm-aware hardware adaptation.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Low-Power_VLSI_Design_of_LDPC_Decoder_Using_DVFS_for_AWGN_Channels.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="survey" data-search="survey low power techniques implementation strategies leakage mobile medical portable electronics">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P06</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Survey</span>
+              <span class="pill">Implementation Strategies</span>
+            </div>
+            <h3>Low Power Design Techniques and Implementation Strategies in VLSI Circuits</h3>
+            <p>This survey emphasizes the market push from portable, wireless, and medical electronics toward stricter power budgets.</p>
+          </div>
+          <ul>
+            <li>Frames leakage current, power management, and optimization as central design concerns.</li>
+            <li>Connects low-power priorities to real deployment classes such as battery-operated mobile systems.</li>
+            <li>Useful for mapping application pressure to engineering decisions.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Low_power_design_techniques_and_implementation_strategies_adopted_in_VLSI_circuits.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="survey" data-search="literature review sub-100 nm leakage dynamic power soc battery life scaling methodologies">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P07</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Literature Review</span>
+              <span class="pill">Sub-100 nm</span>
+            </div>
+            <h3>Low Power VLSI Circuit Design Strategies and Methodologies</h3>
+            <p>This literature review focuses on leakage and dynamic power as dominant concerns in dense, deeply scaled technologies.</p>
+          </div>
+          <ul>
+            <li>Highlights battery life and SoC complexity as the driving context for low-power design.</li>
+            <li>Stresses that below 100 nm, leakage becomes too large to ignore in system power budgets.</li>
+            <li>Complements the broader surveys by giving stronger emphasis to scaling-era constraints.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Low_power_VLSI_circuits_design_strategies_and_methodologies_A_literature_review.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="memory" data-search="memory block hdl implementation clock gating power gating subthreshold adiabatic voltage scaling">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P08</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Memory Block</span>
+              <span class="pill">HDL Implementation</span>
+            </div>
+            <h3>Power-Efficient VLSI Design and HDL Implementation of a Low-Power Memory Block</h3>
+            <p>This paper combines low-power theory with a practical memory-block case study and implementation methodology.</p>
+          </div>
+          <ul>
+            <li>Discusses voltage scaling, power gating, clock gating, adiabatic ideas, and subthreshold operation.</li>
+            <li>Uses a memory block to compare power before and after optimization.</li>
+            <li>Strong bridge paper between conceptual low-power techniques and implementation-driven RTL work.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Power-Efficient_VLSI_Design_Techniques_Methodology_and_HDL_Implementation_of_a_Low_Power_Memory_Block.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="analog" data-search="analog mixed signal sar adc wireless sensing comparator split capacitor dac ultra low power">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P09</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Mixed Signal</span>
+              <span class="pill">SAR ADC</span>
+            </div>
+            <h3>Ultra-Low-Power 12-Bit SAR ADC for Wireless Sensing</h3>
+            <p>This ADC paper shows how low-power design extends beyond digital logic into sensing front ends that dominate energy in edge devices.</p>
+          </div>
+          <ul>
+            <li>Uses a split-capacitor DAC and dynamic comparator for low-power conversion.</li>
+            <li>Reports 2 micro-watt power at 100 kS/s with 1.8 V supply for 12-bit sensing use cases.</li>
+            <li>Important because sensor nodes require both digital efficiency and analog interface discipline.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/Ultra_low_power_12-Bit_SAR_ADC_for_wireless_sensing_applications.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+
+        <article class="paper-card" data-category="physical" data-search="physical design power challenges routing placement timing area closure asic node scaling">
+          <div>
+            <div class="paper-topline">
+              <span class="paper-index">P10</span>
+            </div>
+            <div class="paper-meta">
+              <span class="pill">Physical Design</span>
+              <span class="pill">Implementation Pressure</span>
+            </div>
+            <h3>VLSI Physical Design and Power Challenges</h3>
+            <p>The paper situates low-power design inside real physical implementation pressure, especially as device dimensions continue to shrink.</p>
+          </div>
+          <ul>
+            <li>Connects power dissipation with placement, routing, node scaling, and ASIC implementation constraints.</li>
+            <li>Shows that power is not only a logic-level issue but also a closure and manufacturability issue.</li>
+            <li>Rounds out the collection by anchoring theory to implementation reality.</li>
+          </ul>
+          <div class="paper-actions">
+            <a class="paper-link" href="../Research Papers/1. Low Power VLSI Design/VLSI_Physical_Design_and_Power_Challenges.pdf" target="_blank">Open PDF</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="insights">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Synthesis</span>
+          <h2>Cross-paper insights</h2>
+          <p>The value of this paper set is the overlap: different authors arrive at a consistent low-power design philosophy from different angles.</p>
+        </div>
+      </div>
+
+      <div class="insight-grid">
+        <article class="insight-card">
+          <h3>Architecture dominates the ceiling</h3>
+          <p>System-level exploration appears early for a reason. Once the architecture wastes activity or requires an oversized voltage target, later optimizations only trim the edges.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Activity reduction is the fastest win</h3>
+          <p>Clock gating, adaptive iteration control, and workload-aware scaling all aim at the same objective: stop useless switching before it burns dynamic power.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Memory and interfaces matter disproportionately</h3>
+          <p>SRAM cells, memory blocks, and ADC front ends are treated as first-class optimization targets because practical systems spend substantial energy there.</p>
+        </article>
+      </div>
+
+      <div class="matrix">
+        <h3>Technique-to-impact matrix</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Representative papers</th>
+              <th>Primary effect</th>
+              <th>Main tradeoff</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DVFS</td>
+              <td>Cryptographic review, LDPC decoder</td>
+              <td>Reduces dynamic power through voltage and frequency adaptation</td>
+              <td>Needs control intelligence and timing margin management</td>
+            </tr>
+            <tr>
+              <td>Clock gating</td>
+              <td>Johnson counter, low-power memory block</td>
+              <td>Cuts avoidable switching activity in inactive logic</td>
+              <td>Adds enable logic and verification overhead</td>
+            </tr>
+            <tr>
+              <td>Subthreshold or low-voltage operation</td>
+              <td>6T SRAM paper, low-power memory block</td>
+              <td>Strong energy reduction per operation</td>
+              <td>Lower speed and tighter noise-margin concerns</td>
+            </tr>
+            <tr>
+              <td>Emerging device technology</td>
+              <td>FinFET, TFET, CNFET SRAM study</td>
+              <td>Improves leakage behavior and device-level efficiency</td>
+              <td>Technology readiness and model maturity</td>
+            </tr>
+            <tr>
+              <td>Architecture-level exploration</td>
+              <td>High-level system optimization</td>
+              <td>Largest absolute power savings before implementation</td>
+              <td>Requires early modeling discipline and design-space tooling</td>
+            </tr>
+            <tr>
+              <td>Layout-aware closure</td>
+              <td>Physical design and power challenges</td>
+              <td>Prevents backend losses from undoing front-end gains</td>
+              <td>Multi-objective tradeoff with congestion, timing, and area</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="playbook">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Practical Use</span>
+          <h2>Design playbook derived from the literature</h2>
+          <p>This is the engineering sequence suggested by the combined evidence in the ten papers.</p>
+        </div>
+      </div>
+
+      <div class="playbook-grid">
+        <article class="playbook-card">
+          <h3>1. Set the power target at architecture stage</h3>
+          <p>Estimate workload, throughput, and energy budget early. Compare multiple architectures before writing detailed RTL.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>2. Minimize unnecessary activity</h3>
+          <p>Introduce clock gating, iteration-aware control, and workload adaptation so toggles only occur when useful work is happening.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>3. Attack memory and interface blocks directly</h3>
+          <p>Optimize SRAM, memory macros, and converters separately. These blocks often dominate total energy more than datapath logic suggests.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>4. Use voltage scaling carefully</h3>
+          <p>Lower supply wherever timing and noise margins allow, but validate stability, leakage behavior, and performance recovery paths.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>5. Choose devices and topology with intent</h3>
+          <p>For deeply optimized blocks, transistor technology and analog topology can shift the power floor in ways digital-only methods cannot.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>6. Close the loop in physical design</h3>
+          <p>Re-check IR drop, clock-tree burden, congestion, parasitics, and routing impact so backend implementation preserves the front-end power plan.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibliography">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">References</span>
+          <h2>Working bibliography</h2>
+          <p>A compact citation list for this low-power VLSI review set, with quick export actions for reuse in notes or reports.</p>
+        </div>
+      </div>
+
+      <div class="bibliography-actions">
+        <div class="filter-meta">10 source papers compiled for this analysis page</div>
+        <div class="bibliography-tools">
+          <button class="tool-btn" id="copyBibliography" type="button">Copy bibliography</button>
+          <button class="tool-btn" id="downloadBibliography" type="button">Download .txt</button>
+        </div>
+      </div>
+
+      <ol class="bibliography-list" id="bibliographyList">
+        <li class="bibliography-item">Comprehensive Review of Low-Power VLSI Design Techniques: Challenges, Cryptographic Implementations, and Future Prospects.</li>
+        <li class="bibliography-item">Design of a 32nm Ultra-Low Power 6T SRAM Cell Analyzing Emerging Technologies such as FinFET, TFET, and CNFET for energy-efficient applications.</li>
+        <li class="bibliography-item">Energy-Efficient Sequential Circuit Design Using Optimized Clock-Gated Johnson Counter for Low-Power VLSI Applications.</li>
+        <li class="bibliography-item">High-Level Low-Power System Design Optimization.</li>
+        <li class="bibliography-item">Low-Power VLSI Design of LDPC Decoder Using DVFS for AWGN Channels.</li>
+        <li class="bibliography-item">Low Power Design Techniques and Implementation Strategies Adopted in VLSI Circuits.</li>
+        <li class="bibliography-item">Low Power VLSI Circuits Design Strategies and Methodologies: A Literature Review.</li>
+        <li class="bibliography-item">Power-Efficient VLSI Design: Techniques, Methodology, and HDL Implementation of a Low Power Memory Block.</li>
+        <li class="bibliography-item">Ultra Low Power 12-Bit SAR ADC for Wireless Sensing Applications.</li>
+        <li class="bibliography-item">VLSI Physical Design and Power Challenges.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="closing-card section-card">
+      <div>
+        <span class="section-kicker">Final Reading</span>
+        <h3>Why this research cluster is useful</h3>
+        <p>
+          The set does more than define low-power VLSI. It shows how the discipline scales from equations and surveys to real blocks such as SRAMs,
+          decoders, counters, memory systems, and SAR ADCs. That makes it a strong foundation for both academic study and engineering interviews.
+        </p>
+      </div>
+      <div>
+        <h3>Recommended reading order</h3>
+        <p>
+          Start with the surveys and the high-level methodology paper, move next to the Johnson counter and LDPC decoder for digital techniques,
+          then study the SRAM and SAR ADC papers for block-level specialization, and finish with the physical-design paper to reconnect everything to implementation reality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Research Paper Analysis Series • Er. Sailesh Mishra • Low Power VLSI Design</p>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const paperCards = document.querySelectorAll('.paper-card');
+    const paperSearch = document.getElementById('paperSearch');
+    const paperCount = document.getElementById('paperCount');
+    const bibliographyList = document.getElementById('bibliographyList');
+    const copyBibliography = document.getElementById('copyBibliography');
+    const downloadBibliography = document.getElementById('downloadBibliography');
+
+    let activeFilter = 'all';
+
+    function updatePaperView() {
+      const query = (paperSearch.value || '').trim().toLowerCase();
+      let visible = 0;
+
+      paperCards.forEach((card) => {
+        const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
+        const matchesSearch = !query || card.dataset.search.toLowerCase().includes(query) || card.textContent.toLowerCase().includes(query);
+        const shouldShow = matchesFilter && matchesSearch;
+        card.hidden = !shouldShow;
+        if (shouldShow) {
+          visible += 1;
+        }
+      });
+
+      paperCount.textContent = `Showing ${visible} of ${paperCards.length} papers`;
+    }
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activeFilter = button.dataset.filter;
+        filterButtons.forEach((item) => item.classList.remove('is-active'));
+        button.classList.add('is-active');
+        updatePaperView();
+      });
+    });
+
+    paperSearch.addEventListener('input', updatePaperView);
+
+    function bibliographyText() {
+      return Array.from(bibliographyList.querySelectorAll('.bibliography-item'))
+        .map((item, index) => `${index + 1}. ${item.textContent.trim()}`)
+        .join('\r\n');
+    }
+
+    copyBibliography.addEventListener('click', async () => {
+      const text = bibliographyText();
+      await navigator.clipboard.writeText(text);
+      copyBibliography.textContent = 'Copied';
+      setTimeout(() => {
+        copyBibliography.textContent = 'Copy bibliography';
+      }, 1400);
+    });
+
+    downloadBibliography.addEventListener('click', () => {
+      const blob = new Blob([bibliographyText()], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = 'low-power-vlsi-bibliography.txt';
+      anchor.click();
+      URL.revokeObjectURL(url);
+    });
+
+    updatePaperView();
+  </script>
+</body>
+</html>
