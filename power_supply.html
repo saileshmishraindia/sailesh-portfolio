@@ -585,6 +585,157 @@
       margin-top: 1rem;
     }
 
+    .inline-math {
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff4cf;
+      white-space: nowrap;
+    }
+
+    .analysis-hero-band {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.35rem 0 1.35rem;
+    }
+
+    .analysis-kpi {
+      padding: 1.2rem 1.25rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(16, 30, 53, 0.96), rgba(10, 20, 37, 0.92));
+      box-shadow: var(--shadow);
+    }
+
+    .analysis-kpi-label {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.35rem;
+    }
+
+    .analysis-kpi-value {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.3rem);
+      font-weight: 700;
+      color: #ecf5ff;
+      margin-bottom: 0.35rem;
+    }
+
+    .analysis-kpi p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .analysis-deep-grid,
+    .analysis-summary-grid {
+      display: grid;
+      gap: 1.35rem;
+      margin-top: 1.35rem;
+    }
+
+    .analysis-deep-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .analysis-summary-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .analysis-card {
+      padding: 1.6rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(180deg, rgba(10, 21, 39, 0.96), rgba(19, 34, 59, 0.88));
+      box-shadow: var(--shadow);
+    }
+
+    .analysis-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+    }
+
+    .analysis-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .analysis-item {
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .analysis-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .analysis-item strong {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.35rem;
+      font-size: 1rem;
+      color: #ecf4ff;
+    }
+
+    .analysis-item strong::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      box-shadow: 0 0 16px rgba(94, 234, 212, 0.35);
+      flex: 0 0 auto;
+    }
+
+    .analysis-item p {
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .equation {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+      font-size: 1rem;
+      line-height: 1.45;
+      padding: 0.75rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      margin-top: 0.45rem;
+    }
+
+    .analysis-table {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .analysis-table-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: end;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .analysis-table-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .analysis-table-row span:last-child {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
     .highlights-grid,
     .use-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -679,7 +830,10 @@
       .hero-grid,
       .overview-grid,
       .spec-grid,
-      .figures-grid {
+      .figures-grid,
+      .analysis-hero-band,
+      .analysis-deep-grid,
+      .analysis-summary-grid {
         grid-template-columns: 1fr;
       }
 
@@ -968,9 +1122,27 @@
         <div class="section-head reveal">
           <div>
             <span class="section-kicker">Engineering Analysis</span>
-            <h2>Component choices and calculated checkpoints</h2>
-            <p>The numbers below are taken from the project analysis and organized to make the electrical story readable at a glance.</p>
+            <h2>Mathematical analysis and design calculations</h2>
+            <p>The section below now follows the full mathematical flow from input source to final load, including ripple, bias current, transient response, power, and efficiency estimates.</p>
           </div>
+        </div>
+
+        <div class="analysis-hero-band">
+          <article class="analysis-kpi reveal">
+            <span class="analysis-kpi-label">Regulated Output</span>
+            <span class="analysis-kpi-value">6.1 V</span>
+            <p>Final emitter-follower output after zener clamping and BJT buffering.</p>
+          </article>
+          <article class="analysis-kpi reveal">
+            <span class="analysis-kpi-label">Load Capability</span>
+            <span class="analysis-kpi-value">58.7 mA</span>
+            <p>Estimated current through the 104 ohm load at the documented output voltage.</p>
+          </article>
+          <article class="analysis-kpi reveal">
+            <span class="analysis-kpi-label">Efficiency</span>
+            <span class="analysis-kpi-value">2.98%</span>
+            <p>Low by design, reflecting the simplicity and educational clarity of the linear approach.</p>
+          </article>
         </div>
 
         <div class="spec-grid">
@@ -1023,7 +1195,7 @@
           </article>
 
           <article class="spec-card reveal">
-            <h3>Key components and formulas</h3>
+            <h3>Key components and governing relations</h3>
             <div class="spec-table">
               <div class="spec-row">
                 <div>
@@ -1068,7 +1240,123 @@
                 <span class="spec-value">58.7 mA</span>
               </div>
             </div>
-            <div class="formula-note">Representative relations: Vout ~ Vz - Vbe, ripple estimate Delta V ~ Iload / (f x C), and LC cutoff fc ~ 1 / (2 pi sqrt(LC)).</div>
+            <div class="formula-note">Core design relations used throughout the analysis: <span class="inline-math">V<sub>out</sub> &asymp; V<sub>Z</sub> - V<sub>BE</sub></span>, <span class="inline-math">&Delta;V &asymp; I<sub>load</sub> / (fC)</span>, and <span class="inline-math">f<sub>c</sub> &asymp; 1 / (2&pi;&radic;(LC))</span>.</div>
+          </article>
+        </div>
+
+        <div class="analysis-deep-grid">
+          <article class="analysis-card reveal">
+            <h3>Step-by-step voltage chain</h3>
+            <div class="analysis-list">
+              <div class="analysis-item">
+                <strong>1. AC input source</strong>
+                <p>The mains source is modeled as a sinusoid with 50 Hz frequency and a peak value of 339.41 V.</p>
+                <span class="equation">Vin(t) = 339.41 sin(2 pi x 50t) V, with Vrms ~ 339.41 / sqrt(2) ~ 240 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>2. Transformer step-down</strong>
+                <p>The inductors are modeled with a turns ratio of about 20:1, reducing the primary peak voltage to the secondary side.</p>
+                <span class="equation">n = sqrt(L1 / L2) = sqrt(400 mH / 1 mH) = 20</span>
+                <span class="equation">Vsec,peak = 339.41 / 20 ~ 16.97 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>3. Bridge rectifier drop</strong>
+                <p>Two diodes conduct in each half-cycle, so the bridge removes about 1.4 V from the secondary peak.</p>
+                <span class="equation">Vdc,peak = 16.97 - 2 x 0.7 ~ 15.57 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>4. Filtered pre-regulation voltage</strong>
+                <p>With a 100 Hz ripple frequency after full-wave rectification and C1 = 246 uF, the capacitor ripple estimate is about 4.07 V at 100 mA.</p>
+                <span class="equation">Delta V ~ Iload / (f x C) = 0.1 / (100 x 246 x 10^-6) ~ 4.07 V</span>
+                <span class="equation">Smoothed DC minimum ~ 15.57 - 4.07 / 2 ~ 13.5 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>5. LC cutoff behavior</strong>
+                <p>The LC network is tuned well below the 100 Hz ripple component, so it strongly attenuates ripple before regulation.</p>
+                <span class="equation">fc ~ 1 / (2 pi sqrt(LC)) = 1 / (2 pi sqrt(1 mH x 246 uF)) ~ 10.1 Hz</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="analysis-card reveal">
+            <h3>Regulation, load, and power math</h3>
+            <div class="analysis-list">
+              <div class="analysis-item">
+                <strong>6. Zener regulation current</strong>
+                <p>The zener is biased from the filtered rail through a 60 ohm resistor, establishing a 6.8 V reference node.</p>
+                <span class="equation">VR2 = 13.5 - 6.8 = 6.7 V</span>
+                <span class="equation">IR2 = 6.7 / 60 ~ 111.7 mA</span>
+                <span class="equation">Iz = IR2 - Iload, and should remain above about 5 mA</span>
+              </div>
+              <div class="analysis-item">
+                <strong>7. Emitter follower output</strong>
+                <p>The 2N3904 output node follows the zener base voltage minus the base-emitter drop.</p>
+                <span class="equation">Vout ~ Vb - Vbe ~ 6.8 - 0.7 ~ 6.1 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>8. Output capacitor transient support</strong>
+                <p>For a 50 mA load step lasting 1 ms, the 100 uF output capacitor limits the output droop to around half a volt.</p>
+                <span class="equation">Delta V = I x Delta t / C = 50 x 10^-3 x 1 x 10^-3 / 100 x 10^-6 = 0.5 V</span>
+              </div>
+              <div class="analysis-item">
+                <strong>9. Load current</strong>
+                <p>Using a 104 ohm resistive load, the final current draw is just under 60 mA.</p>
+                <span class="equation">Iload = 6.1 / 104 ~ 58.7 mA</span>
+              </div>
+              <div class="analysis-item">
+                <strong>10. Power and efficiency</strong>
+                <p>The output rail is stable but the topology is intentionally simple, so efficiency remains low in exchange for transparency and ease of study.</p>
+                <span class="equation">Pin ~ 12 W (repository design estimate)</span>
+                <span class="equation">Pout = 6.1 x 0.0587 ~ 0.358 W</span>
+                <span class="equation">eta ~ (0.358 / 12) x 100 ~ 2.98%</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="analysis-summary-grid">
+          <article class="analysis-card reveal">
+            <h3>Voltage summary table</h3>
+            <div class="analysis-table">
+              <div class="analysis-table-row">
+                <span>Secondary peak voltage</span>
+                <span>16.97 V</span>
+              </div>
+              <div class="analysis-table-row">
+                <span>After bridge rectifier</span>
+                <span>15.57 V</span>
+              </div>
+              <div class="analysis-table-row">
+                <span>Minimum filtered DC</span>
+                <span>~13.5 V</span>
+              </div>
+              <div class="analysis-table-row">
+                <span>After zener reference</span>
+                <span>6.8 V</span>
+              </div>
+              <div class="analysis-table-row">
+                <span>Final emitter output</span>
+                <span>6.1 V</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="analysis-card reveal">
+            <h3>Interpretation</h3>
+            <div class="analysis-list">
+              <div class="analysis-item">
+                <strong>Ripple vs cutoff</strong>
+                <p>The 100 Hz ripple sits well above the 10.1 Hz LC cutoff, which is why the filter substantially smooths the rectified waveform.</p>
+              </div>
+              <div class="analysis-item">
+                <strong>Why the buffer matters</strong>
+                <p>The zener establishes the voltage reference, but the transistor supplies the load current, so the reference node stays less disturbed.</p>
+              </div>
+              <div class="analysis-item">
+                <strong>Main tradeoff</strong>
+                <p>This architecture is electrically easy to understand and stable for light loads, but it sacrifices efficiency because it relies on linear drops and dissipation.</p>
+              </div>
+            </div>
           </article>
         </div>
       </div>
