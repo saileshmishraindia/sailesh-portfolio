@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voltage Regulated Power Supply | Sailesh Mishra</title>
+  <meta name="description" content="Professional project showcase for a voltage regulated power supply circuit with bridge rectification, LC filtering, zener regulation, and emitter follower buffering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08111f;
+      --bg-soft: #0f1b31;
+      --panel: rgba(12, 24, 43, 0.82);
+      --panel-strong: #132542;
+      --card: rgba(255, 255, 255, 0.06);
+      --text: #ebf2ff;
+      --muted: #97aac7;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #5eead4;
+      --accent-2: #f59e0b;
+      --accent-3: #7dd3fc;
+      --danger: #fb7185;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 14px;
+      --content-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(94, 234, 212, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(125, 211, 252, 0.14), transparent 22%),
+        linear-gradient(180deg, #07101d 0%, #08111f 42%, #0a1526 100%);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .page-shell {
+      width: min(var(--content-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(8, 17, 31, 0.68);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .topbar-inner {
+      width: min(var(--content-width), calc(100% - 2rem));
+      margin: 0 auto;
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.24), rgba(125, 211, 252, 0.2));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .brand-copy small,
+    .eyebrow,
+    .section-kicker,
+    .metric-label,
+    .chip,
+    .spec-label,
+    .footer-note {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .brand-copy strong {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+
+    .topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link,
+    .button {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      padding: 0.82rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .nav-link:hover,
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: rgba(94, 234, 212, 0.45);
+      background: rgba(94, 234, 212, 0.08);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), #34d399);
+      color: #05202b;
+      border-color: transparent;
+      box-shadow: 0 16px 34px rgba(52, 211, 153, 0.22);
+    }
+
+    .hero {
+      position: relative;
+      padding: 4.5rem 0 2.5rem;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 1rem auto auto 50%;
+      width: min(680px, 70vw);
+      height: min(680px, 70vw);
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.14), transparent 60%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1.6rem;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .glass-card,
+    .figure-card,
+    .stage-card,
+    .spec-card,
+    .highlight-card,
+    .summary-card,
+    .cta-card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .hero-panel {
+      padding: 2.4rem;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(19, 37, 66, 0.92), rgba(10, 19, 36, 0.86)),
+        radial-gradient(circle at top right, rgba(94, 234, 212, 0.12), transparent 35%);
+    }
+
+    .hero-panel::after,
+    .hero-stats::before,
+    .figure-card::before,
+    .cta-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(130deg, rgba(255, 255, 255, 0.05), transparent 35%, transparent 65%, rgba(255, 255, 255, 0.02));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      box-shadow: 0 0 20px rgba(94, 234, 212, 0.5);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.05;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 5vw, 5.4rem);
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+      margin-bottom: 1rem;
+    }
+
+    .hero-lead {
+      max-width: 64ch;
+      font-size: 1.06rem;
+      color: #d4dff2;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.72rem 1rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: #d7e4fb;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .hero-stats {
+      padding: 1.7rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      background:
+        linear-gradient(180deg, rgba(20, 38, 68, 0.92), rgba(10, 18, 33, 0.9));
+    }
+
+    .metric {
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metric-value {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+
+    .metric-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .metric p {
+      font-size: 0.92rem;
+      color: #d0dbef;
+    }
+
+    .summary-card {
+      padding: 1.7rem;
+      background:
+        linear-gradient(145deg, rgba(9, 23, 42, 0.96), rgba(16, 36, 63, 0.92));
+    }
+
+    .summary-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .summary-card p {
+      color: #d3def4;
+      margin-bottom: 1.2rem;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .summary-list span {
+      display: block;
+      padding: 0.85rem 1rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d9e6fa;
+    }
+
+    main section {
+      padding: 1.5rem 0 0.4rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1.5rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-2);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.55rem;
+    }
+
+    .section-head p {
+      max-width: 66ch;
+      color: var(--muted);
+    }
+
+    .overview-grid,
+    .figures-grid,
+    .spec-grid,
+    .highlights-grid,
+    .use-grid {
+      display: grid;
+      gap: 1.35rem;
+    }
+
+    .overview-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .glass-card {
+      padding: 1.8rem;
+    }
+
+    .glass-card p + p {
+      margin-top: 1rem;
+    }
+
+    .overview-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.2rem;
+    }
+
+    .overview-detail-grid div {
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .overview-detail-grid strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.98rem;
+    }
+
+    .overview-points {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .overview-points div,
+    .use-card {
+      padding: 1rem 1.05rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .overview-points strong,
+    .use-card strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 1.02rem;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .stage-card {
+      padding: 1.4rem;
+      background: linear-gradient(180deg, rgba(17, 34, 60, 0.96), rgba(8, 18, 34, 0.9));
+    }
+
+    .stage-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: #05202b;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      margin-bottom: 1rem;
+    }
+
+    .stage-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .stage-card p {
+      font-size: 0.96rem;
+      color: var(--muted);
+    }
+
+    .figures-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .figure-card {
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(16, 33, 58, 0.95), rgba(7, 17, 31, 0.92));
+    }
+
+    .figure-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      min-height: 320px;
+    }
+
+    .figure-frame img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .figure-meta {
+      padding: 1rem 0.35rem 0.2rem;
+    }
+
+    .figure-meta h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .figure-meta p {
+      color: var(--muted);
+    }
+
+    .spec-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .spec-card {
+      padding: 1.6rem;
+      background: linear-gradient(180deg, rgba(10, 21, 39, 0.96), rgba(19, 34, 59, 0.88));
+    }
+
+    .spec-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .spec-table {
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .spec-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      align-items: end;
+    }
+
+    .spec-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .spec-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .spec-row strong {
+      font-size: 1rem;
+      display: block;
+    }
+
+    .spec-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .formula-note {
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.18);
+      color: #fce7b2;
+      margin-top: 1rem;
+    }
+
+    .highlights-grid,
+    .use-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .highlight-card,
+    .use-card {
+      padding: 1.35rem;
+    }
+
+    .highlight-card {
+      background: linear-gradient(180deg, rgba(17, 33, 59, 0.92), rgba(7, 17, 31, 0.9));
+    }
+
+    .highlight-card h3,
+    .use-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .highlight-card p,
+    .use-card p {
+      color: var(--muted);
+    }
+
+    .cta-card {
+      margin: 1.6rem 0 3rem;
+      padding: 2rem;
+      background:
+        linear-gradient(135deg, rgba(94, 234, 212, 0.12), rgba(245, 158, 11, 0.12)),
+        linear-gradient(180deg, rgba(10, 22, 39, 0.96), rgba(16, 34, 58, 0.94));
+    }
+
+    .cta-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .cta-card p {
+      max-width: 68ch;
+      color: #d9e4f7;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-bar {
+      width: min(var(--content-width), calc(100% - 2rem));
+      margin: 0 auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .overview-grid,
+      .spec-grid,
+      .figures-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-grid,
+      .highlights-grid,
+      .use-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-panel {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        padding: 0.8rem 0;
+        align-items: flex-start;
+      }
+
+      .topbar-nav {
+        gap: 0.45rem;
+      }
+
+      .nav-link,
+      .button {
+        padding: 0.72rem 0.95rem;
+      }
+
+      .hero {
+        padding-top: 3rem;
+      }
+
+      .hero-panel,
+      .hero-stats,
+      .summary-card,
+      .glass-card,
+      .stage-card,
+      .spec-card,
+      .highlight-card,
+      .use-card,
+      .cta-card {
+        border-radius: 22px;
+      }
+
+      .hero-panel,
+      .hero-stats,
+      .summary-card,
+      .glass-card,
+      .spec-card,
+      .highlight-card,
+      .use-card,
+      .cta-card {
+        padding: 1.35rem;
+      }
+
+      .hero-stats,
+      .process-grid,
+      .highlights-grid,
+      .use-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .overview-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        align-items: flex-start;
+      }
+
+      .figure-frame {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">PS</span>
+        <span class="brand-copy">
+          <small>Engineering Project</small>
+          <strong>Voltage Regulated Power Supply</strong>
+        </span>
+      </a>
+      <nav class="topbar-nav">
+        <a class="nav-link" href="#overview">Overview</a>
+        <a class="nav-link" href="#architecture">Architecture</a>
+        <a class="nav-link" href="#analysis">Analysis</a>
+        <a class="button primary" href="https://github.com/saileshmishraindia/Voltage-Regulated-Power-Supply-Circuit" target="_blank" rel="noreferrer">View Repository</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="page-shell hero-grid">
+        <article class="hero-panel reveal">
+          <div>
+            <span class="eyebrow">Analog Power Electronics Showcase</span>
+            <h1>Voltage regulated power supply with emitter follower stability.</h1>
+            <p class="hero-lead">This project converts mains AC into a stable low-voltage DC rail through transformer isolation, full-wave bridge rectification, LC filtering, zener clamping, and transistor buffering. The design focuses on ripple reduction, voltage stability, and practical load driving capability.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="https://github.com/saileshmishraindia/Voltage-Regulated-Power-Supply-Circuit" target="_blank" rel="noreferrer">Open GitHub Project</a>
+              <a class="button" href="#figures">See Circuit Figures</a>
+              <a class="button" href="index.html">Back to Portfolio</a>
+            </div>
+          </div>
+          <div class="hero-chips">
+            <span class="chip">230 V AC input</span>
+            <span class="chip">20:1 transformer step-down</span>
+            <span class="chip">Bridge rectifier</span>
+            <span class="chip">LC ripple filtering</span>
+            <span class="chip">6.8 V zener reference</span>
+            <span class="chip">2N3904 emitter follower</span>
+          </div>
+        </article>
+
+        <aside class="hero-side">
+          <div class="hero-stats glass-card reveal">
+            <div class="metric">
+              <span class="metric-label">Final Output</span>
+              <span class="metric-value">6.1 V</span>
+              <p>Emitter follower output after zener-based regulation.</p>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Load Current</span>
+              <span class="metric-value">58.7 mA</span>
+              <p>Estimated current delivery for a 104 ohm load.</p>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Filter Cutoff</span>
+              <span class="metric-value">10.1 Hz</span>
+              <p>Low-pass LC behavior to suppress 100 Hz ripple content.</p>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Stages</span>
+              <span class="metric-value">4</span>
+              <p>Rectification, filtering, regulation, and buffering.</p>
+            </div>
+          </div>
+
+          <div class="summary-card reveal">
+            <h3>Design intent</h3>
+            <p>The circuit demonstrates a disciplined analog power chain that is simple enough for study, yet structured like a real engineering design with isolation, smoothing, reference clamping, and load buffering.</p>
+            <div class="summary-list">
+              <span>Stable low-voltage DC from a high-voltage AC source</span>
+              <span>Reduced ripple before the regulation stage</span>
+              <span>Improved output stiffness using a transistor buffer</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Project Overview</span>
+            <h2>Why this supply matters</h2>
+            <p>This design is a classic example of how discrete analog blocks work together to turn noisy AC input into a cleaner and more dependable DC output for small electronic loads.</p>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+          <article class="glass-card reveal">
+            <p>The project uses a transformer-isolated input stage, a full-wave bridge rectifier, an LC filter, a zener regulator, and a 2N3904 emitter follower. The result is a regulated output around 6.1 V with better load handling than a zener-only arrangement.</p>
+            <p>From an engineering perspective, the emitter follower is the key refinement. It prevents the zener node from being directly burdened by the output load and lowers output impedance, which improves practical voltage stability.</p>
+            <p>The front end is equally important: after the transformer reduces the mains voltage, the bridge rectifier converts both halves of the AC cycle into pulsating DC, and the LC network suppresses the resulting 100 Hz ripple before the signal reaches the regulation stage. That means the zener diode is not asked to clean up a highly disturbed waveform on its own.</p>
+            <p>This also makes the design tradeoff easier to understand. The circuit gives up efficiency and some voltage headroom across the diode path and transistor junction, but in return it gains isolation, smoother DC behavior, clearer regulation, and a more robust output node for light-load analog or embedded applications.</p>
+            <div class="overview-detail-grid">
+              <div>
+                <strong>Ripple management</strong>
+                Full-wave rectification doubles the ripple frequency, and the LC stage is tuned to attenuate that component before regulation.
+              </div>
+              <div>
+                <strong>Reference integrity</strong>
+                The zener establishes a stable base reference while the transistor carries the heavier current path to the load.
+              </div>
+              <div>
+                <strong>Practical outcome</strong>
+                The output is cleaner, stiffer, and more usable than a bare rectifier or zener-only supply built at the same complexity level.
+              </div>
+            </div>
+          </article>
+
+          <aside class="glass-card reveal">
+            <div class="overview-points">
+              <div>
+                <strong>Objective</strong>
+                Convert 230 V AC RMS into a usable regulated DC rail using standard discrete devices.
+              </div>
+              <div>
+                <strong>Core strategy</strong>
+                Clean the waveform first, clamp a reference next, then buffer the final output for the load.
+              </div>
+              <div>
+                <strong>Best fit</strong>
+                Educational analog labs, low-power sensor rails, embedded prototypes, and test setups.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">System Architecture</span>
+            <h2>Signal path from mains to regulated DC</h2>
+            <p>Each block addresses a different problem in the conversion chain, from voltage reduction and rectification to ripple suppression and load-aware output regulation.</p>
+          </div>
+        </div>
+
+        <div class="process-grid">
+          <article class="stage-card reveal">
+            <span class="stage-index">01</span>
+            <h3>AC Input + Transformer</h3>
+            <p>A 230 V AC source is stepped down using a modeled transformer with an effective turns ratio of approximately 20:1.</p>
+          </article>
+          <article class="stage-card reveal">
+            <span class="stage-index">02</span>
+            <h3>Full-Wave Rectifier</h3>
+            <p>Four diodes form a bridge rectifier to convert the secondary AC waveform into pulsating DC.</p>
+          </article>
+          <article class="stage-card reveal">
+            <span class="stage-index">03</span>
+            <h3>LC Filtering</h3>
+            <p>An inductor and capacitor combination attenuates ripple, producing a much smoother pre-regulation voltage.</p>
+          </article>
+          <article class="stage-card reveal">
+            <span class="stage-index">04</span>
+            <h3>Zener Regulation</h3>
+            <p>A 6.8 V zener with a 60 ohm series resistor establishes a controlled reference node.</p>
+          </article>
+          <article class="stage-card reveal">
+            <span class="stage-index">05</span>
+            <h3>Emitter Follower Output</h3>
+            <p>A 2N3904 transistor buffers the regulated node so the output can drive load current more effectively.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="figures">
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Project Figures</span>
+            <h2>Circuit structure and output behavior</h2>
+            <p>The original repository includes a block diagram and an output waveform that make the design intent and simulated behavior immediately visible.</p>
+          </div>
+        </div>
+
+        <div class="figures-grid">
+          <article class="figure-card reveal">
+            <div class="figure-frame">
+              <img src="https://raw.githubusercontent.com/saileshmishraindia/Voltage-Regulated-Power-Supply-Circuit/main/Block_Diagram.png" alt="Block diagram of the voltage regulated power supply circuit">
+            </div>
+            <div class="figure-meta">
+              <h3>Block diagram</h3>
+              <p>A high-level breakdown of the power conversion pipeline from AC source to buffered DC output.</p>
+            </div>
+          </article>
+
+          <article class="figure-card reveal">
+            <div class="figure-frame">
+              <img src="https://raw.githubusercontent.com/saileshmishraindia/Voltage-Regulated-Power-Supply-Circuit/main/Output.png" alt="Output waveform of the regulated power supply">
+            </div>
+            <div class="figure-meta">
+              <h3>Output waveform</h3>
+              <p>The waveform snapshot shows the intended smoothed and regulated behavior after the filtering and regulation stages.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Engineering Analysis</span>
+            <h2>Component choices and calculated checkpoints</h2>
+            <p>The numbers below are taken from the project analysis and organized to make the electrical story readable at a glance.</p>
+          </div>
+        </div>
+
+        <div class="spec-grid">
+          <article class="spec-card reveal">
+            <h3>Electrical checkpoints</h3>
+            <div class="spec-table">
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Source Peak</span>
+                  <strong>Modeled AC input</strong>
+                </div>
+                <span class="spec-value">339.41 V</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Transformer Ratio</span>
+                  <strong>Primary to secondary</strong>
+                </div>
+                <span class="spec-value">20:1</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Secondary Peak</span>
+                  <strong>After step-down</strong>
+                </div>
+                <span class="spec-value">16.97 V</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">After Rectifier</span>
+                  <strong>Including diode losses</strong>
+                </div>
+                <span class="spec-value">15.57 V</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Zener Reference</span>
+                  <strong>UMZ6.8EN regulation node</strong>
+                </div>
+                <span class="spec-value">6.8 V</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Final Output</span>
+                  <strong>Emitter follower estimate</strong>
+                </div>
+                <span class="spec-value">6.1 V</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="spec-card reveal">
+            <h3>Key components and formulas</h3>
+            <div class="spec-table">
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Rectifier Diodes</span>
+                  <strong>RF05VAM1S bridge network</strong>
+                </div>
+                <span class="spec-value">4 devices</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Filter Network</span>
+                  <strong>L = 1 mH, C1 = 246 uF</strong>
+                </div>
+                <span class="spec-value">fc ~ 10.1 Hz</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Series Resistor</span>
+                  <strong>Current limiting into zener</strong>
+                </div>
+                <span class="spec-value">60 ohm</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Output Buffer</span>
+                  <strong>2N3904 NPN transistor</strong>
+                </div>
+                <span class="spec-value">Vout ~ Vb - 0.7</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Output Capacitor</span>
+                  <strong>Transient support</strong>
+                </div>
+                <span class="spec-value">100 uF</span>
+              </div>
+              <div class="spec-row">
+                <div>
+                  <span class="spec-label">Load Estimate</span>
+                  <strong>R1 = 104 ohm</strong>
+                </div>
+                <span class="spec-value">58.7 mA</span>
+              </div>
+            </div>
+            <div class="formula-note">Representative relations: Vout ~ Vz - Vbe, ripple estimate Delta V ~ Iload / (f x C), and LC cutoff fc ~ 1 / (2 pi sqrt(LC)).</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Performance View</span>
+            <h2>What the design achieves in practice</h2>
+            <p>The circuit is intentionally simple, so the tradeoff is clear: strong educational value and stable low-power output at the cost of linear-regulator efficiency.</p>
+          </div>
+        </div>
+
+        <div class="highlights-grid">
+          <article class="highlight-card reveal">
+            <h3>Voltage regulation</h3>
+            <p>The zener and transistor stages maintain an output near 6.1 V across reasonable load changes and input ripple variations.</p>
+          </article>
+          <article class="highlight-card reveal">
+            <h3>Ripple reduction</h3>
+            <p>The LC filter suppresses the 100 Hz ripple component from full-wave rectification before the voltage reaches the regulation stage.</p>
+          </article>
+          <article class="highlight-card reveal">
+            <h3>Load capability</h3>
+            <p>The emitter follower improves current delivery by isolating the zener node from direct load demand.</p>
+          </article>
+          <article class="highlight-card reveal">
+            <h3>Transient smoothing</h3>
+            <p>The output capacitor helps minimize output fluctuations during short load-step events.</p>
+          </article>
+          <article class="highlight-card reveal">
+            <h3>Protection behavior</h3>
+            <p>Diode drops and the series resistor help limit overcurrent stress and clamp the reference stage safely.</p>
+          </article>
+          <article class="highlight-card reveal">
+            <h3>Efficiency tradeoff</h3>
+            <p>The project estimates roughly 3 percent efficiency, which is expected for a simple linear approach and acceptable for learning-focused low-power use.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="page-shell">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Applications</span>
+            <h2>Where this architecture fits</h2>
+            <p>This is a practical reference design for low-power analog and embedded environments where simplicity and transparency matter more than high conversion efficiency.</p>
+          </div>
+        </div>
+
+        <div class="use-grid">
+          <article class="use-card reveal">
+            <h3>Embedded prototypes</h3>
+            <p>Useful for powering small controller boards or sensor interfaces that need a simple regulated DC source.</p>
+          </article>
+          <article class="use-card reveal">
+            <h3>Electronics laboratories</h3>
+            <p>Clear stage-by-stage behavior makes it ideal for demonstrations of rectification, filtering, and regulation.</p>
+          </article>
+          <article class="use-card reveal">
+            <h3>Reference generation</h3>
+            <p>The zener stage illustrates how a basic voltage reference can be stabilized before being buffered for output.</p>
+          </article>
+          <article class="use-card reveal">
+            <h3>Measurement setups</h3>
+            <p>Suitable for low-power auxiliary rails in bench experiments and proof-of-concept circuits.</p>
+          </article>
+          <article class="use-card reveal">
+            <h3>Learning analog design</h3>
+            <p>Shows the practical value of combining passive filtering with active buffering in a compact topology.</p>
+          </article>
+          <article class="use-card reveal">
+            <h3>Discrete power studies</h3>
+            <p>Good foundation for comparing classical linear supplies with later switch-mode alternatives.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="page-shell">
+        <div class="cta-card reveal">
+          <div class="cta-layout">
+            <div>
+              <span class="section-kicker">Project Access</span>
+              <h2>Review the original repository and supporting project files.</h2>
+              <p>The GitHub project contains the source material, figures, and supporting references behind this showcase page. Use it as the technical source of truth for the circuit design and analysis.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="button primary" href="https://github.com/saileshmishraindia/Voltage-Regulated-Power-Supply-Circuit" target="_blank" rel="noreferrer">Open Repository</a>
+              <a class="button" href="index.html">Return to Portfolio</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-bar">
+      <div>
+        <strong>Voltage Regulated Power Supply</strong><br>
+        Built as a standalone project page for Sailesh Mishra's engineering portfolio.
+      </div>
+      <div class="footer-note">Analog design | rectification | regulation | buffering</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.reveal').forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>

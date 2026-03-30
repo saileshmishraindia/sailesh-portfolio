@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SRAM Interactive Playground</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #0b0e1c;
+        --panel: #101528;
+        --panel-soft: #0c0f1e;
+        --line: #1b2240;
+        --text: #e5e5e5;
+        --muted: #7e8bb5;
+        --cyan: #00d2ff;
+        --green: #00ff88;
+        --amber: #ffcc66;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: radial-gradient(circle at top right, rgba(0, 210, 255, 0.08), transparent 24%), var(--bg);
+        color: var(--text);
+        margin: 0;
+        font-family: 'Fira Code', monospace;
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+        margin-top: 0;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 20px 0 8px;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        color: var(--cyan);
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #9ab6d6;
+        width: min(920px, calc(100% - 40px));
+        margin: 0 auto 24px;
+        line-height: 1.7;
+    }
+
+    .container {
+        width: min(1200px, 92%);
+        margin: 0 auto;
+        padding-bottom: 30px;
+    }
+
+    .top-grid,
+    .bottom-grid,
+    .waveform-grid {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        gap: 20px;
+        margin-top: 24px;
+    }
+
+    .card {
+        background: var(--panel);
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 0 22px rgba(0, 255, 255, 0.08);
+        border: 1px solid var(--line);
+    }
+
+    .card h3 {
+        margin-bottom: 12px;
+        color: #10d0ff;
+    }
+
+    .card p,
+    .card li {
+        color: #c8d3f0;
+        line-height: 1.7;
+    }
+
+    .overview-list {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    pre {
+        background: var(--panel-soft);
+        padding: 15px;
+        border-radius: 10px;
+        overflow-x: auto;
+        border: 1px solid #1f2640;
+        height: 390px;
+        margin: 0;
+    }
+
+    code {
+        font-size: 0.88rem;
+    }
+
+    .code-stack {
+        display: grid;
+        gap: 14px;
+    }
+
+    .code-pane {
+        display: grid;
+        gap: 8px;
+    }
+
+    .code-pane pre {
+        height: 220px;
+    }
+
+    .code-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #bfeeff;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .code-label::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 10px rgba(0, 210, 255, 0.35);
+    }
+
+    .button-row {
+        text-align: center;
+        margin: 22px 0 10px;
+    }
+
+    button,
+    .link-btn {
+        background: var(--cyan);
+        color: #000;
+        padding: 12px 25px;
+        margin: 10px;
+        border-radius: 8px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s ease;
+        font-family: inherit;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    button:hover,
+    .link-btn:hover {
+        background: #00eaff;
+        transform: translateY(-1px);
+    }
+
+    .secondary-btn {
+        background: transparent;
+        color: var(--cyan);
+        border: 1px solid rgba(0, 210, 255, 0.4);
+    }
+
+    .secondary-btn:hover {
+        background: rgba(0, 210, 255, 0.08);
+    }
+
+    #waveCanvas {
+        width: 100%;
+        height: 340px;
+        background: #000;
+        border: 2px solid #00d0ff57;
+        border-radius: 10px;
+        display: block;
+    }
+
+    .memory-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .memory-cell {
+        border: 1px solid #1f2640;
+        border-radius: 10px;
+        padding: 12px;
+        background: #0c1326;
+        transition: 0.25s ease;
+    }
+
+    .memory-cell.active {
+        border-color: var(--green);
+        box-shadow: 0 0 16px rgba(0, 255, 136, 0.18);
+    }
+
+    .memory-cell .addr {
+        color: var(--muted);
+        display: block;
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+    }
+
+    .memory-cell .value {
+        color: var(--green);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .status-log {
+        min-height: 110px;
+        background: #0c1326;
+        border: 1px solid #1f2640;
+        border-radius: 10px;
+        padding: 14px;
+        color: #b7c6e6;
+        line-height: 1.7;
+    }
+
+    .status-log h4 {
+        margin: 0 0 10px;
+        color: var(--cyan);
+        font-size: 1rem;
+    }
+
+    .status-log p {
+        margin: 0 0 10px;
+        color: #c8d3f0;
+    }
+
+    .status-log ul {
+        margin: 0;
+        padding-left: 18px;
+        color: #b7c6e6;
+    }
+
+    .status-log li + li {
+        margin-top: 6px;
+    }
+
+    .status-log strong {
+        color: var(--amber);
+    }
+
+    .signal-state-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 10px 0 14px;
+    }
+
+    .signal-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid #2b3a5e;
+        background: #111a31;
+        color: #a9bde3;
+        font-size: 0.82rem;
+    }
+
+    .signal-pill.active {
+        color: #d9fff0;
+        border-color: rgba(0, 255, 136, 0.45);
+        background: rgba(0, 255, 136, 0.12);
+        box-shadow: 0 0 14px rgba(0, 255, 136, 0.12);
+    }
+
+    .signal-pill.inactive {
+        color: #8ba0c7;
+        border-color: rgba(139, 160, 199, 0.2);
+    }
+
+    .signal-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.9;
+    }
+
+    .timing-table {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+    }
+
+    .timing-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 12px;
+        border-radius: 10px;
+        background: #0c1326;
+        border: 1px solid #1f2640;
+    }
+
+    .timing-row strong {
+        color: var(--amber);
+    }
+
+    .timing-note {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid #24406b;
+        background: rgba(0, 210, 255, 0.05);
+        color: #bfeeff;
+        line-height: 1.7;
+    }
+
+    .signal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    .tag {
+        padding: 9px 12px;
+        border-radius: 999px;
+        border: 1px solid #24406b;
+        background: rgba(0, 210, 255, 0.08);
+        color: #bfeeff;
+        font-size: 0.85rem;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 38px;
+        padding-bottom: 30px;
+        color: #6f7ca0;
+    }
+
+    .footer a {
+        color: var(--cyan);
+        text-decoration: none;
+    }
+
+    @media (max-width: 920px) {
+        .top-grid,
+        .bottom-grid,
+        .waveform-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .memory-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 560px) {
+        .memory-grid {
+            grid-template-columns: 1fr;
+        }
+
+        button,
+        .link-btn {
+            width: calc(100% - 20px);
+            margin: 8px 10px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>SRAM Interactive Playground</h1>
+<p class="subtitle">A parameterized SystemVerilog SRAM design inspired by the EDA Playground reference, presented in the same interactive style as the APB page. This view highlights the memory array, control interface, example RTL, and a simple write-then-read waveform demonstration.</p>
+
+<div class="container">
+    <div class="top-grid">
+        <div class="card">
+            <h3>SRAM Block Diagram</h3>
+            <svg width="100%" height="320" viewBox="0 0 560 320" role="img" aria-label="SRAM block diagram">
+                <rect x="180" y="40" width="200" height="220" rx="16" fill="#12203d" stroke="#0ff" stroke-width="2"></rect>
+                <text x="247" y="80" fill="#0ff" font-size="22">SRAM</text>
+                <text x="233" y="108" fill="#8fdfff" font-size="14">Memory Array</text>
+
+                <rect x="215" y="135" width="130" height="38" rx="10" fill="#0d1730" stroke="#39ffbf" stroke-width="1.5"></rect>
+                <text x="239" y="160" fill="#39ffbf" font-size="16">Read / Write</text>
+
+                <rect x="215" y="188" width="130" height="38" rx="10" fill="#0d1730" stroke="#ffcc66" stroke-width="1.5"></rect>
+                <text x="237" y="212" fill="#ffcc66" font-size="16">Control Logic</text>
+
+                <line x1="40" y1="90" x2="180" y2="90" stroke="#00eaff" stroke-width="3" marker-end="url(#arrow)"></line>
+                <text x="52" y="78" fill="#00eaff" font-size="15">ADDR[7:0]</text>
+
+                <line x1="40" y1="140" x2="180" y2="140" stroke="#00eaff" stroke-width="3" marker-end="url(#arrow)"></line>
+                <text x="52" y="128" fill="#00eaff" font-size="15">DIN[7:0]</text>
+
+                <line x1="40" y1="190" x2="180" y2="190" stroke="#00eaff" stroke-width="3" marker-end="url(#arrow)"></line>
+                <text x="52" y="178" fill="#00eaff" font-size="15">WE / EN / CLK</text>
+
+                <line x1="380" y1="140" x2="515" y2="140" stroke="#39ffbf" stroke-width="3" marker-end="url(#arrow)"></line>
+                <text x="410" y="128" fill="#39ffbf" font-size="15">DOUT[7:0]</text>
+
+                <defs>
+                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="#00eaff"></polygon>
+                    </marker>
+                </defs>
+            </svg>
+            <div class="signal-tags">
+                <span class="tag">ADDR_WIDTH = 8</span>
+                <span class="tag">DATA_WIDTH = 8</span>
+                <span class="tag">DEPTH = 256</span>
+                <span class="tag">Synchronous Access</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>SystemVerilog Code (User Editable)</h3>
+            <div class="code-stack">
+                <div class="code-pane">
+                    <div class="code-label">Design</div>
+<pre><code class="language-verilog" id="designCodeBlock">module SRAM #(
+    parameter ADDR_WIDTH = 8,
+    parameter DATA_WIDTH = 8,
+    parameter DEPTH = 256
+)(
+    input clk,
+    input reset,
+    input [ADDR_WIDTH-1:0] addr,
+    input [DATA_WIDTH-1:0] din,
+    input we,
+    input en,
+    output reg [DATA_WIDTH-1:0] dout
+);
+
+reg [DATA_WIDTH-1:0] mem [0:DEPTH-1];
+integer i;
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        dout &lt;= {DATA_WIDTH{1'b0}};
+        for (i = 0; i &lt; DEPTH; i = i + 1)
+            mem[i] &lt;= {DATA_WIDTH{1'b0}};
+    end else if (en) begin
+        if (we)
+            mem[addr] &lt;= din;
+        else
+            dout &lt;= mem[addr];
+    end
+end
+
+endmodule</code></pre>
+                </div>
+
+                <div class="code-pane">
+                    <div class="code-label">Testbench</div>
+<pre><code class="language-verilog" id="testbenchCodeBlock">module tb_SRAM;
+    parameter ADDR_WIDTH = 8;
+    parameter DATA_WIDTH = 8;
+    parameter DEPTH = 256;
+
+    reg clk, reset, we, en;
+    reg [ADDR_WIDTH-1:0] addr;
+    reg [DATA_WIDTH-1:0] din;
+    wire [DATA_WIDTH-1:0] dout;
+
+    SRAM #(ADDR_WIDTH, DATA_WIDTH, DEPTH) uut (
+        .clk(clk), .reset(reset), .addr(addr), .din(din),
+        .we(we), .en(en), .dout(dout)
+    );
+endmodule</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-grid">
+        <div class="card">
+            <h3>Design Notes</h3>
+            <ul class="overview-list">
+                <li>The SRAM is parameterized by address width, data width, and memory depth for reuse across multiple small-memory scenarios.</li>
+                <li>When <strong>en</strong> is asserted and <strong>we</strong> is high, the input data is written into the selected address on the clock edge.</li>
+                <li>When <strong>en</strong> is asserted and <strong>we</strong> is low, data is read from the selected location and driven on <strong>dout</strong>.</li>
+                <li>The example interaction below performs a reset, writes <strong>0x3C</strong> to address <strong>0x0A</strong>, then reads it back to confirm functional behavior.</li>
+                <li>This is a visual teaching aid like the APB page, not a real HDL simulator, but it reflects the expected transaction flow of the reference design.</li>
+            </ul>
+            <div style="margin-top: 18px;">
+                <a class="link-btn" href="https://www.edaplayground.com/x/ff52" target="_blank" rel="noreferrer">Open EDA Playground Reference</a>
+                <a class="link-btn secondary-btn" href="index.html">Back to Portfolio</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Memory Snapshot</h3>
+            <div class="memory-grid" id="memoryGrid">
+                <div class="memory-cell" data-address="00"><span class="addr">ADDR 0x00</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="04"><span class="addr">ADDR 0x04</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="08"><span class="addr">ADDR 0x08</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="0A"><span class="addr">ADDR 0x0A</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="10"><span class="addr">ADDR 0x10</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="14"><span class="addr">ADDR 0x14</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="18"><span class="addr">ADDR 0x18</span><span class="value">0x00</span></div>
+                <div class="memory-cell" data-address="1C"><span class="addr">ADDR 0x1C</span><span class="value">0x00</span></div>
+            </div>
+            <h3 style="margin-top: 22px;">Transaction Log</h3>
+            <div class="status-log" id="statusLog">
+                <h4>Transaction walkthrough</h4>
+                <p>Press Run Simulation to step through a beginner-friendly SRAM example.</p>
+                <ul>
+                    <li>The sequence starts with <strong>reset</strong> so the viewer can see memory initialize to a known state.</li>
+                    <li>It then performs a <strong>write</strong> of <strong>0x3C</strong> into <strong>address 0x0A</strong>.</li>
+                    <li>Finally, it performs a <strong>read</strong> from the same address so you can compare the waveform and memory snapshot together.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="waveform-grid">
+        <div class="card">
+            <h3>SRAM Waveform Viewer</h3>
+            <canvas id="waveCanvas" width="1100" height="340"></canvas>
+        </div>
+
+        <div class="card">
+            <h3>Timing Reference</h3>
+            <div class="timing-table">
+                <div class="timing-row">
+                    <strong>Reset</strong>
+                    <span><strong>RESET = 1</strong> clears the output register and returns the visible memory state to 0x00.</span>
+                </div>
+                <div class="timing-row">
+                    <strong>Write</strong>
+                    <span><strong>EN = 1, WE = 1</strong> drives DIN into the selected address on the active clock edge.</span>
+                </div>
+                <div class="timing-row">
+                    <strong>Hold</strong>
+                    <span><strong>EN = 0</strong> leaves the array unchanged and preserves the last committed contents.</span>
+                </div>
+                <div class="timing-row">
+                    <strong>Read</strong>
+                    <span><strong>EN = 1, WE = 0</strong> returns the stored word from the selected address onto DOUT.</span>
+                </div>
+            </div>
+            <div class="timing-note">
+                Demonstrated sequence: reset the SRAM, write <strong>0x3C</strong> into <strong>address 0x0A</strong>, idle for one phase, then reassert <strong>EN</strong> with <strong>WE = 0</strong> to read the same location back. This mirrors the control pattern shown in the example testbench and makes the relationship between waveform transitions and memory contents explicit.
+            </div>
+        </div>
+    </div>
+
+    <div class="button-row">
+        <button onclick="runSimulation()">Run Simulation</button>
+        <button onclick="resetSimulation()">Reset</button>
+    </div>
+
+    <div class="footer">
+        <p>Back to Portfolio → <a href="index.html">Home</a></p>
+    </div>
+</div>
+
+<script>
+hljs.highlightAll();
+
+let ctx = null;
+let frame = 0;
+let running = false;
+const totalFrames = 360;
+const writeAddress = "0A";
+const writeData = "3C";
+
+function drawGrid() {
+    ctx.strokeStyle = "#0a3a3a";
+    ctx.lineWidth = 1;
+    for (let y = 20; y < 340; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(1100, y);
+        ctx.stroke();
+    }
+}
+
+function drawSignal(label, y, level, valueText = "") {
+    ctx.fillStyle = "#00ff88";
+    ctx.font = "14px Fira Code";
+    ctx.fillText(label, 10, y - 10);
+
+    ctx.strokeStyle = level ? "#00ff44" : "#46607e";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(140, y - (level ? 20 : 0));
+    ctx.lineTo(980, y - (level ? 20 : 0));
+    ctx.stroke();
+
+    if (valueText) {
+        ctx.fillStyle = "#ffcc66";
+        ctx.fillText(valueText, 1010, y - 6);
+    }
+}
+
+function getPhase(currentFrame) {
+    if (currentFrame < 70) return "reset";
+    if (currentFrame < 170) return "write";
+    if (currentFrame < 240) return "idle";
+    return "read";
+}
+
+function updateMemoryView(phase) {
+    document.querySelectorAll('.memory-cell').forEach((cell) => {
+        cell.classList.remove('active');
+        if (cell.dataset.address === writeAddress) {
+            const valueNode = cell.querySelector('.value');
+            if (phase === 'write' || phase === 'idle' || phase === 'read') {
+                valueNode.textContent = '0x' + writeData;
+            } else {
+                valueNode.textContent = '0x00';
+            }
+            if (phase !== 'reset') {
+                cell.classList.add('active');
+            }
+        }
+    });
+}
+
+function buildSignalStateMarkup(signalState) {
+    const labels = [
+        ['RESET', signalState.reset],
+        ['EN', signalState.en],
+        ['WE', signalState.we],
+        ['ADDR', signalState.addr],
+        ['DIN', signalState.din],
+        ['DOUT', signalState.dout]
+    ];
+
+    return `
+        <div class="signal-state-grid">
+            ${labels.map(([label, active]) => `
+                <span class="signal-pill ${active ? 'active' : 'inactive'}">
+                    <span class="signal-dot"></span>
+                    ${label}: ${active ? 'active' : 'idle'}
+                </span>
+            `).join('')}
+        </div>
+    `;
+}
+
+function updateLog(phase, signalState) {
+    const statusLog = document.getElementById('statusLog');
+    if (phase === 'reset') {
+        statusLog.innerHTML = `
+            <h4>Phase 1: Reset and initialization</h4>
+            <p>The SRAM begins in a clean state so the reader can separate initialization behavior from actual memory transactions.</p>
+            ${buildSignalStateMarkup(signalState)}
+            <ul>
+                <li><strong>RESET = 1</strong> forces the output register <strong>DOUT</strong> to <strong>0x00</strong>.</li>
+                <li>The visible memory cells are cleared, which means no old value can be mistaken for valid stored data.</li>
+                <li>While reset is active, the read and write controls are not meaningful for normal operation.</li>
+                <li>Beginner takeaway: most digital systems start from a known state before meaningful data transfer begins.</li>
+            </ul>
+        `;
+    } else if (phase === 'write') {
+        statusLog.innerHTML = `
+            <h4>Phase 2: Write transaction</h4>
+            <p>This is the moment when the controller stores a data word into the SRAM array.</p>
+            ${buildSignalStateMarkup(signalState)}
+            <ul>
+                <li><strong>EN = 1</strong> means the memory block is enabled and allowed to respond.</li>
+                <li><strong>WE = 1</strong> selects a write operation instead of a read operation.</li>
+                <li><strong>ADDR = 0x0A</strong> points to the target memory location.</li>
+                <li><strong>DIN = 0x3C</strong> is the value waiting to be stored.</li>
+                <li>On the active clock edge, the SRAM commits <strong>0x3C</strong> into address <strong>0x0A</strong>.</li>
+                <li>Beginner takeaway: data is not written just because it appears on the bus. The address, control lines, and clock edge must align together.</li>
+            </ul>
+        `;
+    } else if (phase === 'idle') {
+        statusLog.innerHTML = `
+            <h4>Phase 3: Hold or idle interval</h4>
+            <p>The write has already completed, so the SRAM simply retains its stored contents.</p>
+            ${buildSignalStateMarkup(signalState)}
+            <ul>
+                <li>The written word <strong>0x3C</strong> remains stored at <strong>address 0x0A</strong>.</li>
+                <li>Because the memory is not being actively accessed, the array content stays unchanged.</li>
+                <li>This phase helps the viewer see that SRAM keeps data after the write cycle finishes, as long as power is maintained.</li>
+                <li>Beginner takeaway: an SRAM cell is a storage element, not just a temporary wire. Data persists between transactions.</li>
+            </ul>
+        `;
+    } else {
+        statusLog.innerHTML = `
+            <h4>Phase 4: Read transaction</h4>
+            <p>The controller now asks the SRAM to return the word stored earlier at the same address.</p>
+            ${buildSignalStateMarkup(signalState)}
+            <ul>
+                <li><strong>EN = 1</strong> enables the memory block again.</li>
+                <li><strong>WE = 0</strong> switches the operation from write mode to read mode.</li>
+                <li><strong>ADDR = 0x0A</strong> selects the location that was written in the previous phase.</li>
+                <li>The SRAM places the stored value on <strong>DOUT</strong>, which now becomes <strong>0x3C</strong>.</li>
+                <li>Compare the waveform and the memory snapshot: both confirm that the read data matches the previously written value.</li>
+                <li>Beginner takeaway: a successful read proves that the earlier write reached the correct address and that the memory retained the value.</li>
+            </ul>
+        `;
+    }
+}
+
+function renderFrame() {
+    if (!running) return;
+
+    ctx.clearRect(0, 0, 1100, 340);
+    drawGrid();
+
+    const phase = getPhase(frame);
+    const clkHigh = frame % 20 < 10;
+    const reset = phase === 'reset';
+    const en = phase === 'write' || phase === 'read';
+    const we = phase === 'write';
+    const addrText = phase === 'write' || phase === 'read' || phase === 'idle' ? '0x0A' : '0x00';
+    const dinText = phase === 'write' ? '0x3C' : '0x00';
+    const doutText = phase === 'read' ? '0x3C' : '0x00';
+    const signalState = {
+        reset,
+        en,
+        we,
+        addr: phase !== 'reset',
+        din: phase === 'write',
+        dout: phase === 'read'
+    };
+
+    drawSignal('CLK', 60, clkHigh ? 1 : 0);
+    drawSignal('RESET', 100, reset ? 1 : 0);
+    drawSignal('EN', 140, en ? 1 : 0);
+    drawSignal('WE', 180, we ? 1 : 0);
+    drawSignal('ADDR', 220, (phase !== 'reset') ? 1 : 0, addrText);
+    drawSignal('DIN', 260, phase === 'write' ? 1 : 0, dinText);
+    drawSignal('DOUT', 300, phase === 'read' ? 1 : 0, doutText);
+
+    updateMemoryView(phase);
+    updateLog(phase, signalState);
+
+    frame += 1;
+    if (frame < totalFrames) {
+        requestAnimationFrame(renderFrame);
+    } else {
+        running = false;
+    }
+}
+
+function runSimulation() {
+    if (running) return;
+    ctx = document.getElementById('waveCanvas').getContext('2d');
+    frame = 0;
+    running = true;
+    renderFrame();
+}
+
+function resetSimulation() {
+    running = false;
+    if (!ctx) {
+        ctx = document.getElementById('waveCanvas').getContext('2d');
+    }
+    ctx.clearRect(0, 0, 1100, 340);
+    drawGrid();
+    document.getElementById('statusLog').innerHTML = `
+        <h4>Transaction walkthrough</h4>
+        <p>Press Run Simulation to step through a beginner-friendly SRAM example.</p>
+        ${buildSignalStateMarkup({ reset: false, en: false, we: false, addr: false, din: false, dout: false })}
+        <ul>
+            <li>The sequence starts with <strong>reset</strong> so the viewer can see memory initialize to a known state.</li>
+            <li>It then performs a <strong>write</strong> of <strong>0x3C</strong> into <strong>address 0x0A</strong>.</li>
+            <li>Finally, it performs a <strong>read</strong> from the same address so you can compare the waveform and memory snapshot together.</li>
+        </ul>
+    `;
+    document.querySelectorAll('.memory-cell').forEach((cell) => {
+        cell.classList.remove('active');
+        cell.querySelector('.value').textContent = '0x00';
+    });
+}
+
+window.onload = () => {
+    ctx = document.getElementById('waveCanvas').getContext('2d');
+    drawGrid();
+};
+</script>
+
+</body>
+</html>
