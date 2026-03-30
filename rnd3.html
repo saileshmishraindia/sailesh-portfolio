@@ -205,6 +205,22 @@
       position: relative;
       z-index: 1;
     }
+    
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.34rem 0.72rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff9f8;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
     h1 {
       font-size: clamp(2.35rem, 4vw, 3.95rem);
@@ -344,6 +360,21 @@
       border: 1px solid rgba(255, 255, 255, 0.14);
       color: #fff8f7;
     }
+    
+    .hero-note {
+      margin-top: 1rem;
+      padding: 0.95rem 1rem;
+      border-radius: var(--radius-lg);
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 241, 239, 0.84);
+      font-size: 0.92rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    
+    .hero-note strong {
+      color: #ffffff;
+    }
 
     .compute-map {
       margin-top: 1.4rem;
@@ -446,6 +477,22 @@
       padding: 1.4rem;
       display: grid;
       gap: 1rem;
+    }
+    
+    .summary-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(162, 43, 57, 0.1);
+      border: 1px solid rgba(162, 43, 57, 0.14);
+      color: #7f1d2a;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .stat-grid,
@@ -824,6 +871,7 @@
   <div class="hero-wrap">
     <section class="hero">
       <div class="hero-panel">
+          <span class="hero-kicker">Research Cluster</span>
         <h1>VLSI in AI/ML</h1>
         <p>
           This research cluster tracks the AI hardware stack from model-scale growth to chip architecture and finally to advanced packaging.
@@ -917,9 +965,14 @@
             </article>
           </div>
         </div>
+        
+        <div class="hero-note">
+          <strong>Reading frame:</strong> follow the story from model demand to accelerator design to package integration. That order makes the bandwidth, thermal, and silicon-efficiency tradeoffs much clearer.
+        </div>
       </div>
 
       <aside class="hero-summary">
+        <span class="summary-label">Research Snapshot</span>
         <div class="stat-grid">
           <div class="stat-card">
             <strong>3</strong>

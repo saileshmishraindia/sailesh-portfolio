@@ -222,6 +222,22 @@
       position: relative;
       z-index: 1;
     }
+    
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.34rem 0.72rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff9f8;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
 
     .eyebrow {
       display: inline-flex;
@@ -443,12 +459,43 @@
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.14);
     }
+    
+    .hero-note {
+      margin-top: 1rem;
+      padding: 0.95rem 1rem;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 241, 241, 0.84);
+      font-size: 0.92rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    
+    .hero-note strong {
+      color: #ffffff;
+    }
 
     .hero-summary {
       padding: 1.4rem;
       display: grid;
       gap: 1rem;
       background: linear-gradient(180deg, rgba(68, 14, 22, 0.56), rgba(44, 10, 16, 0.5));
+    }
+    
+    .summary-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .stat-grid,
@@ -931,6 +978,7 @@
   <div class="hero-wrap">
     <section class="hero">
       <div class="hero-panel">
+          <span class="hero-kicker">Research Cluster</span>
         <h1>Low Power VLSI Design</h1>
         <p>
           This research cluster studies power minimization from system architecture down to device technology.
@@ -1013,9 +1061,14 @@
             <span class="taxonomy-tag">Physical Design</span>
           </div>
         </div>
+        
+        <div class="hero-note">
+          <strong>Reading frame:</strong> read this collection as a stacked power-reduction workflow, starting at architecture, then activity control, then block specialization, and finally layout-aware closure.
+        </div>
       </div>
 
       <aside class="hero-summary">
+        <span class="summary-label">Research Snapshot</span>
         <div class="stat-grid">
           <div class="stat-card">
             <strong>10</strong>

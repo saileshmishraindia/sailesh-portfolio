@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTL Design | Research Paper Analysis</title>
+  <style>
+    :root {
+      --bg: #12060a;
+      --ink: #fff8f7;
+      --muted: #f1d9d6;
+      --primary: #ff6a5f;
+      --secondary: #fff0ed;
+      --accent: #ffd8cf;
+      --ai-glow: #93fff0;
+      --ai-glow-soft: rgba(147, 255, 240, 0.18);
+      --glass: rgba(255, 255, 255, 0.08);
+      --paper: rgba(255, 250, 248, 0.85);
+      --paper-strong: rgba(255, 253, 252, 0.93);
+      --paper-ink: #4f141c;
+      --paper-muted: #7f525a;
+      --paper-line: rgba(118, 27, 37, 0.12);
+      --glass-line: rgba(255, 255, 255, 0.16);
+      --shadow: 0 30px 84px rgba(52, 6, 13, 0.24);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", "Poppins", sans-serif;
+      color: var(--ink);
+      line-height: 1.68;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(255, 106, 95, 0.18), transparent 22%),
+        radial-gradient(circle at 78% 16%, rgba(147, 255, 240, 0.12), transparent 18%),
+        radial-gradient(circle at 84% 8%, rgba(255, 255, 255, 0.08), transparent 20%),
+        radial-gradient(circle at 58% 100%, rgba(255, 204, 196, 0.08), transparent 25%),
+        linear-gradient(180deg, #16060a 0%, #2d0c13 46%, #110509 100%);
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      opacity: 0.42;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        radial-gradient(circle at 20% 28%, rgba(255, 106, 95, 0.26) 0 2px, transparent 3px),
+        radial-gradient(circle at 62% 24%, rgba(147, 255, 240, 0.22) 0 2px, transparent 3px),
+        radial-gradient(circle at 82% 66%, rgba(255, 232, 227, 0.18) 0 2px, transparent 3px);
+      background-size: 52px 52px, 52px 52px, 260px 260px, 280px 280px, 300px 300px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.25));
+    }
+
+    body::after {
+      opacity: 0.16;
+      background-image:
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.14) 46% 54%, transparent 54%),
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.1) 46% 54%, transparent 54%),
+        linear-gradient(118deg, transparent 0 46%, rgba(255, 255, 255, 0.12) 46% 54%, transparent 54%);
+      background-size: 190px 240px, 220px 260px, 210px 240px;
+      background-position: 7% 16%, 83% 15%, 54% 76%;
+      background-repeat: no-repeat;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(39, 10, 15, 0.58);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 48px rgba(32, 4, 9, 0.22);
+    }
+
+    .topbar-inner,
+    .hero,
+    .section,
+    .footer-inner {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.16rem;
+    }
+
+    .brand-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand-title {
+      font-size: 1.03rem;
+      font-weight: 700;
+      color: #fff9f8;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: rgba(255, 241, 239, 0.84);
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .hero-wrap {
+      padding: 3.3rem 0 1.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr 0.92fr;
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .hero-summary,
+    .section-card,
+    .analysis-card,
+    .metric-card,
+    .insight-card,
+    .playbook-card,
+    .closing-card,
+    .matrix {
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 2.35rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--glass-line);
+      backdrop-filter: blur(22px);
+      background:
+        radial-gradient(circle at 16% 20%, rgba(255, 255, 255, 0.14), transparent 24%),
+        linear-gradient(145deg, rgba(54, 11, 17, 0.95), rgba(119, 25, 37, 0.9) 52%, rgba(184, 50, 68, 0.78));
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border-radius: calc(var(--radius-xl) - 10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 40%),
+        radial-gradient(circle at 82% 22%, var(--ai-glow-soft), transparent 20%);
+      pointer-events: none;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, transparent 0 10%, rgba(255, 255, 255, 0.08) 10% 10.5%, transparent 10.5% 100%),
+        linear-gradient(transparent 0 16%, rgba(255, 214, 210, 0.08) 16% 16.7%, transparent 16.7% 100%),
+        radial-gradient(circle at 28% 72%, rgba(147, 255, 240, 0.14) 0 14px, transparent 15px),
+        radial-gradient(circle at 80% 18%, rgba(255, 255, 255, 0.14) 0 16px, transparent 17px);
+      opacity: 0.92;
+      mix-blend-mode: screen;
+    }
+
+    .hero-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.34rem 0.72rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff9f8;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 4vw, 3.9rem);
+      line-height: 1.04;
+      margin-bottom: 1rem;
+      max-width: 11ch;
+    }
+
+    .hero-panel p {
+      font-size: 1.05rem;
+      max-width: 62ch;
+      color: rgba(255, 241, 239, 0.88);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.45rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.82rem 1.12rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(255, 225, 220, 0.95));
+      color: #6f131e;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff8f7;
+    }
+
+    .rtl-flair-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+
+    .rtl-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff7f6;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .rtl-chip.highlight {
+      color: var(--ai-glow);
+      border-color: rgba(147, 255, 240, 0.22);
+      box-shadow: 0 0 16px rgba(147, 255, 240, 0.08);
+    }
+
+    .rtl-schematic {
+      margin-top: 1.3rem;
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .rtl-schematic-copy h2 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+    }
+
+    .rtl-schematic-copy p {
+      font-size: 0.9rem;
+      color: rgba(255, 241, 239, 0.8);
+      max-width: none;
+    }
+
+    .rtl-schematic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .rtl-schematic-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff7f6;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .rtl-schematic-tag.highlight {
+      color: var(--ai-glow);
+      border-color: rgba(147, 255, 240, 0.2);
+      box-shadow: 0 0 16px rgba(147, 255, 240, 0.08);
+    }
+
+    .rtl-schematic-visual {
+      min-height: 195px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+    }
+
+    .rtl-schematic-visual svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-note {
+      margin-top: 1rem;
+      padding: 0.95rem 1rem;
+      border-radius: var(--radius-lg);
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 241, 239, 0.84);
+      font-size: 0.92rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-note strong {
+      color: #ffffff;
+    }
+
+    .hero-summary,
+    .section-card,
+    .analysis-card,
+    .metric-card,
+    .insight-card,
+    .playbook-card,
+    .closing-card,
+    .matrix {
+      background: linear-gradient(180deg, var(--paper-strong), var(--paper));
+      border: 1px solid var(--paper-line);
+      color: var(--paper-ink);
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 28px 72px rgba(53, 8, 15, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-summary::before,
+    .section-card::before,
+    .closing-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 18%),
+        linear-gradient(90deg, transparent 0 92%, rgba(118, 27, 37, 0.04) 92% 100%);
+      pointer-events: none;
+    }
+
+    .hero-summary > *,
+    .section-card > *,
+    .closing-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-summary,
+    .section-card,
+    .closing-card {
+      padding: 2rem;
+    }
+
+    .hero-summary {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .summary-label {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 30px;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(162, 43, 57, 0.1);
+      border: 1px solid rgba(162, 43, 57, 0.14);
+      color: #7f1d2a;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .stat-grid,
+    .metric-grid,
+    .insight-grid,
+    .playbook-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .stat-grid,
+    .metric-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric-card,
+    .summary-box,
+    .analysis-card,
+    .insight-card,
+    .playbook-card,
+    .bibliography-item {
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .metric-card,
+    .summary-box,
+    .analysis-card,
+    .insight-card,
+    .playbook-card,
+    .bibliography-item {
+      padding: 1.05rem 1.1rem;
+    }
+
+    .metric-card strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: #61131d;
+      margin-bottom: 0.35rem;
+    }
+
+    .metric-card span,
+    .summary-box p,
+    .analysis-card p,
+    .analysis-card li,
+    .insight-card p,
+    .playbook-card p,
+    td,
+    .closing-card p,
+    .bibliography-item {
+      color: var(--paper-muted);
+    }
+
+    .summary-box h2,
+    .section-head h2 {
+      font-size: 1.45rem;
+      line-height: 1.2;
+      color: #5d121c;
+    }
+
+    .summary-box h2,
+    .analysis-card h3 {
+      margin-bottom: 0.7rem;
+    }
+
+    .section {
+      padding: 1rem 0 1.5rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-kicker {
+      display: block;
+      margin-bottom: 0.45rem;
+      color: #a22b39;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .metric-card h3,
+    .analysis-card h3,
+    .insight-card h3,
+    .playbook-card h3,
+    .matrix h3,
+    .closing-card h3 {
+      color: var(--paper-ink);
+      font-size: 1.04rem;
+      line-height: 1.28;
+      margin-bottom: 0.5rem;
+    }
+
+    .equation-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-top: 1.3rem;
+    }
+
+    .equation-chip {
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.94rem;
+      color: #fff5f4;
+      background: linear-gradient(135deg, rgba(58, 10, 18, 0.97), rgba(122, 26, 37, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      overflow-x: auto;
+    }
+
+    .analysis-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .analysis-card ul {
+      padding-left: 1.05rem;
+    }
+
+    .analysis-card li + li {
+      margin-top: 0.32rem;
+    }
+
+    .metric-grid {
+      margin-top: 1rem;
+    }
+
+    .insight-grid,
+    .playbook-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .matrix {
+      margin-top: 1.1rem;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.9rem 0.75rem;
+      border-bottom: 1px solid rgba(118, 27, 37, 0.1);
+      vertical-align: top;
+    }
+
+    th {
+      color: #9c2c3a;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .bibliography-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      counter-reset: refs;
+    }
+
+    .bibliography-item {
+      list-style: none;
+      position: relative;
+      padding: 1rem 1rem 1rem 3rem;
+    }
+
+    .bibliography-item::before {
+      counter-increment: refs;
+      content: counter(refs);
+      position: absolute;
+      left: 0.95rem;
+      top: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(162, 43, 57, 0.12);
+      color: #7b1826;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .closing-card {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .footer {
+      padding: 0 0 2.5rem;
+    }
+
+    .footer-inner {
+      text-align: center;
+      color: rgba(255, 228, 224, 0.74);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .rtl-schematic,
+      .analysis-layout,
+      .closing-card,
+      .insight-grid,
+      .playbook-grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .equation-strip,
+      .stat-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner,
+      .section-head,
+      .hero-panel,
+      .hero-summary,
+      .section-card,
+      .closing-card {
+        padding: 1.35rem;
+      }
+
+      .topbar-inner,
+      .section-head {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .hero-wrap {
+        padding-top: 2rem;
+      }
+
+      .equation-strip,
+      .stat-grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-kicker">Research Paper Analysis</span>
+        <span class="brand-title">RTL Design</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Portfolio</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#insights">Insights</a>
+        <a href="#bibliography">Bibliography</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <div class="hero-panel">
+        <span class="hero-kicker">Single-Paper Dossier</span>
+        <h1>RTL Design</h1>
+        <p>
+          This paper centers on configurable logic block design for secure nonvolatile FPGA fabrics using hybrid MTJ/CMOS logic-in-memory ideas.
+          The result is a research story that sits at the intersection of RTL architecture, hardware security, low-power design, and emerging-memory integration.
+          It is especially relevant because it links architecture-level CLB decisions to concrete gains in delay, power, area-equivalent cost, and CPA resilience.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#analysis">Explore Analysis</a>
+          <a class="btn btn-secondary" href="#insights">See Key Findings</a>
+        </div>
+
+        <div class="rtl-flair-row" aria-label="RTL paper themes">
+          <span class="rtl-chip highlight">Secure FPGA</span>
+          <span class="rtl-chip">MTJ/CMOS Hybrid</span>
+          <span class="rtl-chip highlight">CPA Resistance</span>
+          <span class="rtl-chip">Nonvolatile Logic</span>
+        </div>
+
+        <div class="rtl-schematic" aria-label="Secure CLB design motif">
+          <div class="rtl-schematic-copy">
+            <h2>Secure CLB Focus</h2>
+            <p>
+              The paper studies configurable logic block organization as a security-aware design problem. Rather than treating FPGA security as an add-on,
+              it embeds low-power and side-channel resistance directly into the CLB structure using MTJ/CMOS logic-in-memory design choices.
+            </p>
+            <div class="rtl-schematic-tags">
+              <span class="rtl-schematic-tag highlight">MTJ Logic-in-Memory</span>
+              <span class="rtl-schematic-tag">PRESENT</span>
+              <span class="rtl-schematic-tag highlight">AES SBOX</span>
+            </div>
+          </div>
+          <div class="rtl-schematic-visual">
+            <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Secure FPGA CLB diagram">
+              <defs>
+                <linearGradient id="rtlTrace" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#fff7f6" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#ff9b92" stop-opacity="0.92"/>
+                </linearGradient>
+                <linearGradient id="rtlGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#93fff0" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#e5fffb" stop-opacity="0.88"/>
+                </linearGradient>
+              </defs>
+              <rect x="32" y="48" width="98" height="74" rx="16" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.22)"/>
+              <rect x="144" y="34" width="76" height="102" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.24)"/>
+              <rect x="234" y="48" width="94" height="74" rx="16" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.22)"/>
+              <path d="M130 85 H144" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M220 85 H234" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M58 156 C114 130, 162 130, 182 158" fill="none" stroke="url(#rtlTrace)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M182 158 C202 130, 248 130, 304 156" fill="none" stroke="url(#rtlTrace)" stroke-width="4" stroke-linecap="round"/>
+              <path d="M166 72 L182 52 L198 72" fill="none" stroke="url(#rtlGlow)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M162 96 H202" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-dasharray="4 6"/>
+              <circle cx="76" cy="85" r="6" fill="#fff7f6"/>
+              <circle cx="182" cy="52" r="5.5" fill="#93fff0"/>
+              <circle cx="286" cy="85" r="6" fill="#fff7f6"/>
+              <text x="50" y="138" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">Secure LUT</text>
+              <text x="159" y="151" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">MTJ/CMOS CLB</text>
+              <text x="246" y="138" fill="rgba(255,255,255,0.8)" font-size="12" font-family="Segoe UI, sans-serif">Crypto / BNN</text>
+              <text x="26" y="30" fill="rgba(255,255,255,0.58)" font-size="11" font-family="Segoe UI, sans-serif">low power + side-channel resilience</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="hero-note">
+          <strong>Reading frame:</strong> treat this as a fabric-level architecture paper, not only a device paper. The real contribution is how security, memory behavior, and power efficiency collapse into one CLB-level design decision.
+        </div>
+      </div>
+
+      <aside class="hero-summary">
+        <span class="summary-label">Research Snapshot</span>
+        <div class="stat-grid">
+          <div class="metric-card">
+            <strong>12</strong>
+            <span>pages reviewed</span>
+          </div>
+          <div class="metric-card">
+            <strong>85%</strong>
+            <span>power reduction reported</span>
+          </div>
+          <div class="metric-card">
+            <strong>42%</strong>
+            <span>delay reduction reported</span>
+          </div>
+          <div class="metric-card">
+            <strong>86%</strong>
+            <span>transistor reduction reported</span>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <h2>What this paper shows</h2>
+          <p>
+            RTL-oriented programmable logic research can simultaneously target power, security, and nonvolatility when the CLB itself is redesigned.
+            This paper shows that the configurable-logic abstraction is rich enough to absorb emerging-device benefits and side-channel resistance at the block level.
+          </p>
+        </div>
+
+        <div class="summary-box">
+          <h2>Core takeaway</h2>
+          <p>
+            Secure-by-design FPGA blocks become more practical when logic and memory are co-located and when CLB architecture is evaluated against real workloads such as PRESENT,
+            AES SBOX, and BNN layers, not just isolated benchmark primitives.
+          </p>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <section class="section" id="analysis">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Paper Analysis</span>
+          <h2>MTJ/CMOS secure CLB architecture</h2>
+          <p>The paper proposes two hybrid logic-in-memory CLB designs and evaluates them against a previously published secure CLB baseline.</p>
+        </div>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">Goal = low power + CPA resistance + nonvolatility</div>
+        <div class="equation-chip">CLB value = delay + power + transistor cost + resilience</div>
+        <div class="equation-chip">Workloads = PRESENT + AES SBOX + BNN layers</div>
+      </div>
+
+      <div class="analysis-layout">
+        <article class="analysis-card">
+          <h3>Architecture focus</h3>
+          <p>
+            The core idea is to redesign the FPGA configurable logic block using a hybrid CMOS and magnetic tunnel junction framework.
+            Instead of treating nonvolatile behavior or security as separate enhancements, the proposed CLBs integrate those goals into the basic block structure.
+          </p>
+          <ul>
+            <li>Two CLB variants are proposed: a single-output version and a multioutput version.</li>
+            <li>The designs are compared against the secure CLB by Zooker et al. as the state-of-the-art reference point.</li>
+            <li>The logic-in-memory approach targets both lower switching cost and stronger resistance to correlation-based power analysis.</li>
+          </ul>
+        </article>
+
+        <article class="analysis-card">
+          <h3>Why it matters for RTL design</h3>
+          <p>
+            Although the paper is device-aware, its architectural relevance is very strong for RTL and reconfigurable design thinking. It asks what happens when the programmable primitive itself changes.
+          </p>
+          <ul>
+            <li>RTL-centric design usually assumes a fixed FPGA fabric; this paper challenges that assumption.</li>
+            <li>Security and efficiency are moved below the HDL layer into the CLB abstraction.</li>
+            <li>This is useful for understanding how future programmable fabrics may alter synthesis and mapping assumptions.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric-card">
+          <h3>Single-output CLB</h3>
+          <p>Reported gains include 42% lower delay, 85% lower power, and 86% fewer equivalent transistors versus the referenced secure counterpart.</p>
+        </article>
+        <article class="metric-card">
+          <h3>Multioutput CLB</h3>
+          <p>Reported gains include 33% lower delay, 18% lower power, and 63% fewer equivalent transistors versus the same baseline.</p>
+        </article>
+        <article class="metric-card">
+          <h3>PRESENT implementation</h3>
+          <p>For one round of PRESENT, the paper reports strong savings in transistor count, delay, and power for both proposed CLB options.</p>
+        </article>
+        <article class="metric-card">
+          <h3>BNN convolution mapping</h3>
+          <p>The paper extends the comparison beyond cryptography by showing strong benefits on binarized neural-network convolution layers as well.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="insights">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Key Findings</span>
+          <h2>What stands out technically</h2>
+          <p>The value of the paper is not just in the reported percentages, but in the way it reframes secure FPGA fabric design.</p>
+        </div>
+      </div>
+
+      <div class="insight-grid">
+        <article class="insight-card">
+          <h3>Security is embedded at the CLB level</h3>
+          <p>The proposed approach resists CPA attacks by design rather than relying entirely on post-design countermeasures.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Emerging memory alters programmable logic economics</h3>
+          <p>MTJ integration changes the power and area tradeoff enough to make nonvolatile secure fabrics substantially more attractive.</p>
+        </article>
+        <article class="insight-card">
+          <h3>Evaluation spans real workloads</h3>
+          <p>The inclusion of PRESENT, AES SBOX, and BNN layers gives the reported improvements better architectural credibility than abstract toy examples alone.</p>
+        </article>
+      </div>
+
+      <div class="matrix">
+        <h3>Comparison framing</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Baseline question</th>
+              <th>What the paper contributes</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Power</td>
+              <td>Can secure FPGA logic remain power-efficient?</td>
+              <td>Shows large power reductions relative to the secure CLB reference.</td>
+              <td>Critical for IoT, AI edge, and automotive deployments with tight budgets.</td>
+            </tr>
+            <tr>
+              <td>Delay</td>
+              <td>Does added security create timing penalties?</td>
+              <td>Reports lower delay despite the security focus.</td>
+              <td>Improves the practicality of secure reconfigurable logic.</td>
+            </tr>
+            <tr>
+              <td>Area-equivalent cost</td>
+              <td>Is the secure primitive too expensive to scale?</td>
+              <td>Reports major equivalent-transistor reductions.</td>
+              <td>Helps determine whether the idea can scale into larger programmable fabrics.</td>
+            </tr>
+            <tr>
+              <td>Attack resilience</td>
+              <td>Do the designs hold up under CPA-style analysis?</td>
+              <td>Studies resiliency under CPA and across different TMR ratios and voltages.</td>
+              <td>Moves the work from efficiency-only into genuine secure-hardware relevance.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Design Playbook</span>
+          <h2>Lessons for RTL and reconfigurable design</h2>
+          <p>The paper suggests a practical set of design lessons for anyone working on programmable logic and secure digital architectures.</p>
+        </div>
+      </div>
+
+      <div class="playbook-grid">
+        <article class="playbook-card">
+          <h3>1. Do not isolate security from architecture</h3>
+          <p>If the block primitive is vulnerable, higher-level countermeasures may be too expensive or too fragile. Build resistance into the block definition.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>2. Evaluate configurable logic with real mappings</h3>
+          <p>Cryptographic rounds and BNN layers expose practical strengths and weaknesses better than tiny synthetic examples.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>3. Treat memory behavior as part of logic architecture</h3>
+          <p>Logic-in-memory and nonvolatility change the optimization space for power, state retention, and side-channel visibility.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>4. Compare across multiple operating assumptions</h3>
+          <p>Resilience under different TMR ratios and voltages gives a more realistic picture of robustness than single-point evaluation.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>5. Think beyond fixed FPGA fabrics</h3>
+          <p>This work is useful because it reframes the CLB itself as a design variable rather than an immutable implementation target.</p>
+        </article>
+        <article class="playbook-card">
+          <h3>6. Link emerging devices to architecture-level value</h3>
+          <p>The strongest argument for MTJ integration is not novelty by itself, but measurable gains in secure programmable logic efficiency.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="bibliography">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Reference</span>
+          <h2>Working bibliography</h2>
+          <p>A focused single-paper reference for this RTL design analysis.</p>
+        </div>
+      </div>
+
+      <ol class="bibliography-list">
+        <li class="bibliography-item">MTJ/CMOS-Based CLB Design for Low-Power and CPA-Resistant Secure Nonvolatile FPGA.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="closing-card section-card">
+      <div>
+        <span class="section-kicker">Final Reading</span>
+        <h3>Why this paper matters</h3>
+        <p>
+          This paper is valuable because it turns secure FPGA logic into a block-level architecture problem rather than a narrow implementation tweak.
+          It connects programmable logic, low-power design, side-channel resistance, and emerging memory technologies in a way that is directly relevant to future secure reconfigurable platforms.
+        </p>
+      </div>
+      <div>
+        <h3>Recommended emphasis</h3>
+        <p>
+          Focus first on the reported comparative gains, then on the evaluation workloads, and finally on the security analysis under CPA and operating-condition variation.
+          That sequence makes the architectural significance of the work much easier to judge.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Research Paper Analysis Series • Er. Sailesh Mishra • RTL Design</p>
+    </div>
+  </footer>
+</body>
+</html>
