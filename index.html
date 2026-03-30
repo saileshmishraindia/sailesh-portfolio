@@ -142,6 +142,26 @@
       overflow: hidden;
       padding: 8rem 5% 5rem;
     }
+
+    .hero-video-background {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-video-background iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 177.78vh;
+      height: 56.25vw;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%) scale(1.18);
+      border: 0;
+    }
     
     .hero::before {
     content: '';
@@ -151,12 +171,21 @@
     width: 100%;
     height: 100%;
     background: url('hero-bg.jpg') center/cover no-repeat;
-    opacity: 0.3; /* Adjust transparency so text stays readable */
+    opacity: 0.18;
+    z-index: 0;
+    }
+
+    .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(13, 27, 42, 0.76), rgba(40, 53, 147, 0.58));
+    z-index: 1;
     }
 
     .hero-content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -1700,6 +1729,15 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero">
+    <div class="hero-video-background" aria-hidden="true">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/lQHNducx3do?autoplay=1&mute=1&controls=0&loop=1&playlist=lQHNducx3do&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3"
+        title=""
+        allow="autoplay; encrypted-media; picture-in-picture"
+        referrerpolicy="strict-origin-when-cross-origin"
+        tabindex="-1">
+      </iframe>
+    </div>
     <div class="hero-content">
       <h1 class="title">CAD Developer & VLSI Design Engineer</h1>
       <p>Innovative nanotech and VLSI enthusiast specializing in cutting-edge semiconductor technologies and pushing boundaries in semiconductor scaling.</p>
