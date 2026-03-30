@@ -994,6 +994,18 @@
     
     /* ===== Responsive Navigation (for mobile) ===== */
     @media (max-width: 768px) {
+    .hero-video-background {
+      display: none;
+    }
+
+    .hero::before {
+      opacity: 0.32;
+    }
+
+    .hero::after {
+      background: linear-gradient(135deg, rgba(13, 27, 42, 0.84), rgba(40, 53, 147, 0.7));
+    }
+
     nav {
         display: none;
     }
