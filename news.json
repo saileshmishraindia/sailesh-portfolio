@@ -1,0 +1,61 @@
+{
+  "updatedAt": "April 2026",
+  "featured": {
+    "eyebrow": "Semiconductor Pulse",
+    "title": "Tracking the shifts shaping AI silicon, advanced packaging, and next-generation manufacturing.",
+    "description": "A curated snapshot of what major semiconductor players are pushing right now, from AI compute platforms and packaging ecosystems to foundry economics and manufacturing scale."
+  },
+  "chips": [
+    {
+      "icon": "fa-layer-group",
+      "title": "Advanced Packaging",
+      "text": "Chiplets, dense interconnects, and system-level integration remain central to performance scaling."
+    },
+    {
+      "icon": "fa-brain",
+      "title": "AI Silicon",
+      "text": "Model growth is pushing every layer of the stack, from GPUs and CPUs to memory and power delivery."
+    },
+    {
+      "icon": "fa-industry",
+      "title": "Foundry Race",
+      "text": "Capacity, node execution, and ecosystem readiness are still the decisive variables for scale."
+    }
+  ],
+  "items": [
+    {
+      "badge": "Intel",
+      "category": "AI Benchmarking",
+      "date": "April 2026",
+      "title": "Intel highlighted open, scalable AI performance in MLPerf Inference v6.0.",
+      "summary": "The signal here is broader than a benchmark score: Intel is continuing to position its AI stack around openness, deployability, and heterogeneous compute across enterprise workloads.",
+      "sourceLabel": "Intel Newsroom",
+      "sourceUrl": "https://newsroom.intel.com/artificial-intelligence/intel-delivers-ai-performance-mlperf-inference-v6-0"
+    },
+    {
+      "badge": "NVIDIA",
+      "category": "Interconnect Ecosystem",
+      "date": "March 2026",
+      "title": "NVIDIA expanded its AI ecosystem through NVLink Fusion with Marvell.",
+      "summary": "This reinforces the direction of tightly integrated AI infrastructure, where interconnect strategy, platform alliances, and system architecture matter as much as raw accelerator performance.",
+      "sourceLabel": "NVIDIA Newsroom",
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-ai-ecosystem-expands-as-marvell-joins-forces-through-nvlink-fusion"
+    },
+    {
+      "badge": "Foundries",
+      "category": "Industry Watch",
+      "date": "Current Cycle",
+      "title": "TSMC and Samsung remain central to the discussion around node leadership, advanced packaging, and manufacturing resilience.",
+      "summary": "For engineers, the practical takeaway is clear: process maturity, packaging capacity, yield learning, and ecosystem support are increasingly inseparable from product competitiveness."
+    },
+    {
+      "badge": "Energy",
+      "category": "AI Infrastructure",
+      "date": "March 2026",
+      "title": "Power efficiency is now a first-order design story, not a secondary optimization.",
+      "summary": "NVIDIA's recent discussion around power-flexible AI factories reflects an industry-wide reality: future compute growth depends on energy-aware architecture, packaging, cooling, and deployment economics.",
+      "sourceLabel": "NVIDIA Blog",
+      "sourceUrl": "https://blogs.nvidia.com/blog/energy-efficiency-ai-factories-grid/"
+    }
+  ]
+}
