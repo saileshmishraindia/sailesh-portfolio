@@ -500,6 +500,8 @@
 
     .stat-grid,
     .focus-grid,
+    .basics-grid,
+    .level-grid,
     .insight-grid,
     .playbook-grid,
     .papers-grid {
@@ -611,12 +613,162 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
+    .visual-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 1.2rem 0 1.35rem;
+    }
+
+    .visual-card {
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 245, 243, 0.74));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    }
+
+    .visual-card img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .visual-card figcaption {
+      padding: 0.95rem 1rem 1rem;
+    }
+
+    .visual-card strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--paper-ink);
+      font-size: 0.98rem;
+    }
+
+    .visual-card span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.9rem;
+    }
+
+    .visual-card a {
+      color: #8a2432;
+      font-weight: 700;
+    }
+
+    .basics-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 1.2rem;
+    }
+
+    .level-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      margin-top: 1.2rem;
+    }
+
     .focus-item {
       padding: 1.15rem;
       border-radius: var(--radius-md);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 245, 243, 0.62));
       border: 1px solid rgba(126, 24, 36, 0.1);
       backdrop-filter: blur(18px);
+    }
+
+    .level-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(126, 24, 36, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 245, 243, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .level-visual img {
+      display: block;
+      width: 100%;
+      height: 148px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.6rem;
+    }
+
+    .level-visual figcaption {
+      padding: 0.65rem 0.8rem 0.8rem;
+      border-top: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .level-visual strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .level-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .level-visual a {
+      color: #8a2432;
+      font-weight: 700;
+    }
+
+    .basics-grid .focus-item,
+    .level-grid .focus-item {
+      min-height: 100%;
+    }
+
+    .section-intro {
+      margin-bottom: 1.1rem;
+      padding: 1.15rem 1.2rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.48), rgba(255, 246, 244, 0.68));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .section-intro strong {
+      color: var(--paper-ink);
+    }
+
+    .basics-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1.1rem;
+    }
+
+    .basics-list-item {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 245, 243, 0.72));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .basics-list-item strong {
+      color: var(--paper-ink);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .example-table-wrap {
+      margin-top: 1.2rem;
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 245, 243, 0.72));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .example-table-wrap table {
+      border-collapse: collapse;
+    }
+
+    .example-table-wrap th,
+    .example-table-wrap td {
+      border: 1px solid #000000;
     }
 
     .focus-item h3,
@@ -788,6 +940,10 @@
       font-weight: 600;
     }
 
+    .bibliography-actions .filter-meta {
+      color: #8b6b1f;
+    }
+
     .paper-link {
       display: inline-flex;
       align-items: center;
@@ -821,6 +977,15 @@
     .matrix {
       margin-top: 1.15rem;
       overflow-x: auto;
+    }
+
+    .matrix table {
+      border-collapse: collapse;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid #000000;
     }
 
     .bibliography-list {
@@ -904,6 +1069,9 @@
       .closing-card,
       .hero-schematic,
       .focus-grid,
+      .visual-gallery,
+      .basics-grid,
+      .level-grid,
       .insight-grid,
       .playbook-grid,
       .papers-grid,
@@ -968,6 +1136,7 @@
       </div>
       <nav class="nav-links">
         <a href="index.html">Portfolio</a>
+        <a href="#basics">Basics</a>
         <a href="#papers">Paper Library</a>
         <a href="#insights">Insights</a>
         <a href="#playbook">Design Playbook</a>
@@ -1088,7 +1257,7 @@
         </div>
 
         <div class="summary-box">
-          <h2>What this collection shows ?</h2>
+          <h2>What does this collection show?</h2>
           <p>
             The strongest low-power designs are usually built in stages: architecture first, then voltage and activity
             control, then circuit-level optimization, then layout-aware closure. Several papers also reinforce that
@@ -1108,6 +1277,426 @@
     </section>
   </div>
 
+  <section class="section" id="basics">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Foundation First</span>
+          <h2>Let us understand from beginning</h2>
+          <p>A clean starting point for Low Power VLSI Design, from what VLSI is to how real mobile processors save energy in practice.</p>
+        </div>
+      </div>
+
+      <div class="section-intro">
+        <p><strong>Low Power VLSI Design</strong> is not a single technique. It is a layered engineering approach where architecture, logic, circuits, memory, and device technology all work together to reduce power while still meeting performance, area, and reliability targets.</p>
+      </div>
+
+      <div class="visual-gallery" aria-label="Low power VLSI visual references">
+        <figure class="visual-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Diopsis.jpg"
+            alt="A VLSI integrated circuit die"
+            loading="lazy"
+            referrerpolicy="no-referrer">
+          <figcaption>
+            <strong>Integrated Circuit Die</strong>
+            <span>A real die image helps readers connect VLSI to the physical reality of dense on-chip integration.</span>
+            <span><a href="https://en.wikipedia.org/wiki/Very-large-scale_integration" target="_blank" rel="noopener noreferrer">Source</a></span>
+          </figcaption>
+        </figure>
+
+        <figure class="visual-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/MOS_Capacitor.svg"
+            alt="Metal oxide semiconductor capacitor structure on p-type silicon"
+            loading="lazy"
+            referrerpolicy="no-referrer">
+          <figcaption>
+            <strong>MOS Structure</strong>
+            <span>This cross-section is useful when explaining why capacitance, threshold voltage, and channel formation dominate CMOS power behavior.</span>
+            <span><a href="https://en.wikipedia.org/wiki/MOSFET" target="_blank" rel="noopener noreferrer">Source</a></span>
+          </figcaption>
+        </figure>
+
+        <figure class="visual-card">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/MOSFET_functioning_body.svg"
+            alt="MOSFET cross-section showing off and on channel formation"
+            loading="lazy"
+            referrerpolicy="no-referrer">
+          <figcaption>
+            <strong>Channel Formation</strong>
+            <span>Readers can immediately see how a gate voltage turns conduction on, which is the core of switching power in digital VLSI.</span>
+            <span><a href="https://en.wikipedia.org/wiki/MOSFET" target="_blank" rel="noopener noreferrer">Source</a></span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="basics-grid">
+        <div class="focus-item">
+          <h3>1. Understanding VLSI First</h3>
+          <p>VLSI means Very Large Scale Integration, where millions or billions of transistors are integrated on a single chip. A chip can be viewed like a miniature city: transistors act as buildings, wires act as roads, and blocks such as ALUs, caches, and I/O act as neighborhoods.</p>
+        </div>
+        <div class="focus-item">
+          <h3>2. Why Low Power Matters?</h3>
+          <p>Low power matters because battery-operated systems must last longer, hot chips are harder to cool, and large compute deployments become expensive when every watt multiplies across millions of devices.</p>
+        </div>
+        <div class="focus-item">
+          <h3>3. The Power Problem</h3>
+          <p>Power is mainly split into dynamic power during switching, static power caused by leakage even when idle, and short-circuit power during brief PMOS and NMOS overlap in transitions.</p>
+        </div>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">Pdynamic = alpha x C_L x VDD^2 x f</div>
+        <div class="equation-chip">Pstatic = Ileakage x VDD</div>
+        <div class="equation-chip">Pshort-circuit = brief overlap current during switching</div>
+      </div>
+
+      <div class="basics-list">
+        <div class="basics-list-item">
+          <strong>Dynamic power</strong>
+          It depends on switching activity, load capacitance, supply voltage, and frequency. This is why voltage scaling and clock management are so effective.
+        </div>
+        <div class="basics-list-item">
+          <strong>Static power</strong>
+          It comes mainly from leakage currents, and it becomes a dominant concern in deeply scaled nodes such as 7 nm and 5 nm.
+        </div>
+        <div class="basics-list-item">
+          <strong>Design principle</strong>
+          If switching is unnecessary, stop it. If voltage can be reduced safely, scale it. If leakage dominates, isolate or gate the idle block.
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top: 1.6rem;">
+        <div>
+          <span class="section-kicker">Design Stack</span>
+          <h2>Levels of low-power design</h2>
+          <p>Low-power engineering is applied across multiple abstraction levels, not just at the transistor level.</p>
+        </div>
+      </div>
+
+      <div class="level-grid">
+        <div class="focus-item">
+          <h3>System Level</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="System on chip block diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>System partitioning view</strong>
+              <span>At system level, designers reduce energy by changing the overall workload path, memory traffic, and hardware-software split.</span>
+            </figcaption>
+          </figure>
+          <p>Simplify algorithms, improve scheduling, and reduce unnecessary computation before hardware is fixed.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Architectural Level</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Global_Task_Scheduling.jpg"
+              alt="ARM big.LITTLE global task scheduling diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Workload-aware architecture</strong>
+              <span>Architectural power savings often come from mapping heavy and light tasks onto different cores, caches, and interconnect resources.</span>
+            </figcaption>
+          </figure>
+          <p>Optimize CPU, memory, and buses with strategies such as clock gating, workload adaptation, and better data movement.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Logic / RTL Level</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Register_transfer_level_-_example_toggler.svg"
+              alt="Register transfer level example showing register and combinational logic"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>RTL switching model</strong>
+              <span>This is the level where engineers control toggling, gating, state transitions, and synthesizable structure before gates are generated.</span>
+            </figcaption>
+          </figure>
+          <p>Reduce switching activity, use low-power cell libraries, and write RTL that avoids redundant transitions.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Circuit Level</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/CMOS_inverter.svg"
+              alt="CMOS inverter schematic"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>CMOS circuit behavior</strong>
+              <span>Circuit-level optimization focuses on transistor stacks, threshold choices, capacitances, and short-circuit current during switching.</span>
+            </figcaption>
+          </figure>
+          <p>Apply transistor sizing, multi-threshold CMOS, and low-leakage structures where speed and power must be balanced carefully.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Device Level</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+              alt="Double-gate FinFET device diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>FinFET device structure</strong>
+              <span>At device level, geometry and materials directly influence leakage, electrostatics, parasitics, and low-voltage efficiency.</span>
+            </figcaption>
+          </figure>
+          <p>Leverage FinFETs, SOI, and emerging devices to reshape leakage, parasitics, and low-voltage behavior.</p>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top: 1.6rem;">
+        <div>
+          <span class="section-kicker">Core Techniques</span>
+          <h2>What engineers actually use?</h2>
+          <p>The practical toolbox is a mix of voltage control, activity suppression, leakage reduction, and workload-aware specialization.</p>
+        </div>
+      </div>
+
+      <div class="basics-grid">
+        <div class="focus-item">
+          <h3>Voltage Scaling</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Threshold_formation_nowatermark.gif"
+              alt="Threshold-voltage and channel-formation diagram for a MOSFET"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Voltage versus switching behavior</strong>
+              <span>Voltage scaling works because transistor current and switching speed change strongly around threshold, so lowering VDD can save large amounts of dynamic power.</span>
+            </figcaption>
+          </figure>
+          <p>Lower VDD to reduce dynamic power quadratically, usually with DVFS so voltage and frequency follow workload demand.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Clock Gating</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Clock_gating_waveform.png"
+              alt="Clock gating timing waveform showing gated clock behavior"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Pruning the clock tree</strong>
+              <span>A gated clock waveform makes the idea visible immediately: when enable is off, sequential blocks stop toggling and dynamic power drops.</span>
+            </figcaption>
+          </figure>
+          <p>Stop the clock to idle sequential logic so registers and control paths do not switch when no useful work is happening.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Power Gating</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Big.Little_Cluster_Switching.png"
+              alt="big.LITTLE cluster switching diagram showing one cluster active and another turned off"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Whole blocks can be shut down</strong>
+              <span>Power gating is the stronger version of idling: instead of only stopping toggles, an unused domain is disconnected so standby leakage falls sharply.</span>
+            </figcaption>
+          </figure>
+          <p>Completely shut down inactive blocks with sleep transistors to cut leakage during idle periods.</p>
+        </div>
+        <div class="focus-item">
+          <h3>MTCMOS</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Cmos_impurity_profile-en.svg"
+              alt="CMOS cross-section showing transistor regions in an n-well process"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Mixed-threshold CMOS fabric</strong>
+              <span>MTCMOS relies on using faster low-Vth devices only where timing is critical and higher-Vth devices where leakage reduction matters more.</span>
+            </figcaption>
+          </figure>
+          <p>Use low-threshold devices on critical paths for speed and high-threshold devices on non-critical paths for lower leakage.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Resource Sharing</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Multiplexer_4-to-1.svg"
+              alt="4-to-1 multiplexer diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>One block, many inputs</strong>
+              <span>Resource sharing is often implemented with selection logic like muxes, allowing several data paths to reuse one expensive hardware unit.</span>
+            </figcaption>
+          </figure>
+          <p>Reuse expensive hardware units such as multipliers instead of duplicating them across every data path.</p>
+        </div>
+        <div class="focus-item">
+          <h3>Approximate and Near-Threshold</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/MOSFET_DepletionRegion.png"
+              alt="MOSFET below-threshold depletion region diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Operating near the edge</strong>
+              <span>Near-threshold design pushes operation closer to the device limit, while approximate computing accepts bounded error to unlock far lower energy per operation.</span>
+            </figcaption>
+          </figure>
+          <p>For error-tolerant workloads like AI inference, lower precision or near-threshold operation can save substantial energy.</p>
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top: 1.6rem;">
+        <div>
+          <span class="section-kicker">Design Flow</span>
+          <h2>How low-power design is executed?</h2>
+          <p>Successful low-power chips are built through a staged flow rather than a late-stage optimization pass.</p>
+        </div>
+      </div>
+
+      <div class="basics-list">
+        <div class="basics-list-item">
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="System on chip block diagram used for early specification planning"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Targets are fixed here</strong>
+              <span>Specification defines the power, performance, area, interfaces, and workload goals that shape every later low-power decision.</span>
+            </figcaption>
+          </figure>
+          <strong>Specification</strong>
+          Define power, performance, and area targets from the start.
+        </div>
+        <div class="basics-list-item">
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMCortexA57A53.jpg"
+              alt="ARM Cortex A57 and A53 big.LITTLE processor chip"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Architectural partitioning</strong>
+              <span>At architecture stage, designers choose the block mix, memory organization, accelerators, and performance tiers that determine the energy envelope.</span>
+            </figcaption>
+          </figure>
+          <strong>Architecture Design</strong>
+          Choose data paths, memory structure, and algorithm partitioning for efficiency.
+        </div>
+        <div class="basics-list-item">
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Register_transfer_level_-_example_toggler.svg"
+              alt="Register-transfer-level diagram with register and combinational logic"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Behavior described in HDL</strong>
+              <span>RTL is where the design becomes explicit in registers, state updates, and combinational logic that tools can synthesize.</span>
+            </figcaption>
+          </figure>
+          <strong>RTL Design</strong>
+          Write synthesizable logic that avoids unnecessary activity.
+        </div>
+        <div class="basics-list-item">
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Baops.gif"
+              alt="Boolean operation representations used in logic synthesis"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>RTL becomes gates</strong>
+              <span>Logic synthesis transforms abstract logic into optimized gate-level structures using timing, area, and power constraints.</span>
+            </figcaption>
+          </figure>
+          <strong>Logic Synthesis</strong>
+          Map the RTL to low-power cell libraries and timing-aware implementations.
+        </div>
+        <div class="basics-list-item">
+          <figure class="level-visual">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b9/PD_Flow.gif"
+              alt="ASIC physical design back-end flow diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Back-end closure and signoff</strong>
+              <span>Physical design and verification cover floorplanning, placement, clock-tree synthesis, routing, and final checks before tape-out.</span>
+              <span><a href="https://en.wikipedia.org/wiki/Physical_design_(electronics)" target="_blank" rel="noopener noreferrer">Source</a></span>
+            </figcaption>
+          </figure>
+          <strong>Physical Design and Verification</strong>
+          Perform power-aware floorplanning, routing, and analysis using industrial power tools.
+        </div>
+      </div>
+
+      <div class="section-head" style="margin-top: 1.6rem;">
+        <div>
+          <span class="section-kicker">Real-World View</span>
+          <h2>Example: a mobile processor power map</h2>
+          <p>A mobile SoC is a strong example because it mixes CPU cores, GPU, memory, peripherals, and AI hardware under a strict energy budget.</p>
+        </div>
+      </div>
+
+      <div class="example-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Block</th>
+              <th>Typical Technique</th>
+              <th>Practical Meaning</th>
+              <th>Main Power Saved</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU Cores</td>
+              <td>DVFS, clock gating, power gating</td>
+              <td>Big cores run when performance is needed; idle cores are slowed, gated, or fully shut down.</td>
+              <td>Dynamic and Static</td>
+            </tr>
+            <tr>
+              <td>GPU</td>
+              <td>Clock gating, voltage scaling, resource sharing</td>
+              <td>Idle shader units stop switching, and low-load rendering uses lower voltage.</td>
+              <td>Dynamic</td>
+            </tr>
+            <tr>
+              <td>Caches and Memory</td>
+              <td>Low-leakage SRAM, bank gating, partial activation</td>
+              <td>Only the required memory banks and lines stay active.</td>
+              <td>Dynamic and Static</td>
+            </tr>
+            <tr>
+              <td>I/O and Peripherals</td>
+              <td>Power islands, DVFS</td>
+              <td>Wi-Fi, GPS, or Bluetooth blocks are isolated and powered only when needed.</td>
+              <td>Static</td>
+            </tr>
+            <tr>
+              <td>AI Accelerators</td>
+              <td>Approximate computing, near-threshold operation</td>
+              <td>Reduced precision and lower voltage cut switching and energy per inference.</td>
+              <td>Dynamic and Static</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="section-card">
       <div class="section-head">
@@ -1121,18 +1710,62 @@
       <div class="focus-grid">
         <div class="focus-item">
           <h3>Architectural Optimization</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Global_Task_Scheduling.jpg"
+              alt="ARM task scheduling diagram for architecture-level optimization"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Architecture sets the envelope</strong>
+              <span>High-level scheduling and core assignment decide how much work moves through compute, cache, and interconnect before RTL is even written.</span>
+            </figcaption>
+          </figure>
           <p>High-level power planning, design-space exploration, and system-level tradeoffs before RTL commitment.</p>
         </div>
         <div class="focus-item">
           <h3>Digital Activity Control</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Enable_flipflps.drawio.png"
+              alt="Enabled flip-flops diagram showing activity control"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Only switch when useful</strong>
+              <span>Enable-driven and gated-clock structures suppress wasteful internal toggles, which is the fastest way to cut dynamic power.</span>
+            </figcaption>
+          </figure>
           <p>Clock gating, DVFS, and low-power memory implementation strategies for reducing unnecessary switching.</p>
         </div>
         <div class="focus-item">
           <h3>Device and Circuit Innovation</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+              alt="Double-gate FinFET device diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Power floor moves at device level</strong>
+              <span>Transistor structure, threshold behavior, and circuit topology shape leakage, drive strength, and low-voltage robustness.</span>
+            </figcaption>
+          </figure>
           <p>Emerging transistor options, subthreshold operation, and low-power mixed-signal blocks such as SAR ADCs.</p>
         </div>
         <div class="focus-item">
           <h3>Backend and Reliability Pressure</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/The_three_basic_DRC_checks.svg"
+              alt="Design rule checking diagram showing width spacing and enclosure checks"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Layout rules reshape power closure</strong>
+              <span>Routing density, enclosure limits, and signoff checks constrain how aggressively front-end power ideas survive into silicon.</span>
+            </figcaption>
+          </figure>
           <p>Physical design, routing, density, and node scaling constraints that reshape practical power closure.</p>
         </div>
       </div>
@@ -1406,14 +2039,47 @@
       <div class="insight-grid">
         <article class="insight-card">
           <h3>Architecture dominates the ceiling</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="System-on-chip block diagram showing architecture decisions"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Big decisions happen early</strong>
+              <span>Once blocks, caches, buses, and performance tiers are fixed, later optimization can only recover part of the power budget.</span>
+            </figcaption>
+          </figure>
           <p>System-level exploration appears early for a reason. Once the architecture wastes activity or requires an oversized voltage target, later optimizations only trim the edges.</p>
         </article>
         <article class="insight-card">
           <h3>Activity reduction is the fastest win</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Clock_gating_waveform.png"
+              alt="Clock gating waveform showing how switching activity is suppressed"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Dynamic power tracks toggling</strong>
+              <span>Gating and workload-aware enable control remove immediate switching waste without waiting for deeper process or backend changes.</span>
+            </figcaption>
+          </figure>
           <p>Clock gating, adaptive iteration control, and workload-aware scaling all aim at the same objective: stop useless switching before it burns dynamic power.</p>
         </article>
         <article class="insight-card">
           <h3>Memory and interfaces matter disproportionately</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/SRAM_Cell_(6_Transistors).svg"
+              alt="6-transistor SRAM cell diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Small blocks can dominate system energy</strong>
+              <span>Memory cells, converters, and I/O-adjacent circuitry are accessed so often that their per-operation energy strongly affects the total.</span>
+            </figcaption>
+          </figure>
           <p>SRAM cells, memory blocks, and ADC front ends are treated as first-class optimization targets because practical systems spend substantial energy there.</p>
         </article>
       </div>
@@ -1485,26 +2151,92 @@
       <div class="playbook-grid">
         <article class="playbook-card">
           <h3>1. Set the power target at architecture stage</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="Architecture-stage system block diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Budget before implementation</strong>
+              <span>Architecture work defines workload split, memory movement, and performance headroom before detailed design hardens those costs.</span>
+            </figcaption>
+          </figure>
           <p>Estimate workload, throughput, and energy budget early. Compare multiple architectures before writing detailed RTL.</p>
         </article>
         <article class="playbook-card">
           <h3>2. Minimize unnecessary activity</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Enable_flipflps.drawio.png"
+              alt="Enabled flip-flops clock-control diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Kill idle switching first</strong>
+              <span>Fine-grain enables and gated clocks trim wasted transitions with relatively direct RTL and synthesis support.</span>
+            </figcaption>
+          </figure>
           <p>Introduce clock gating, iteration-aware control, and workload adaptation so toggles only occur when useful work is happening.</p>
         </article>
         <article class="playbook-card">
           <h3>3. Attack memory and interface blocks directly</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ADC_voltage_resolution.svg"
+              alt="ADC voltage resolution diagram representing converter interface design"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Optimize the heavy hitters separately</strong>
+              <span>Converters, SRAM macros, and interface logic often need their own power treatment because their energy scales differently from datapath logic.</span>
+            </figcaption>
+          </figure>
           <p>Optimize SRAM, memory macros, and converters separately. These blocks often dominate total energy more than datapath logic suggests.</p>
         </article>
         <article class="playbook-card">
           <h3>4. Use voltage scaling carefully</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Threshold_formation_nowatermark.gif"
+              alt="MOS threshold and channel formation visual related to voltage scaling"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Voltage savings change device behavior</strong>
+              <span>Reducing supply cuts dynamic power quickly, but it also interacts with threshold, margin, leakage, and recovery time.</span>
+            </figcaption>
+          </figure>
           <p>Lower supply wherever timing and noise margins allow, but validate stability, leakage behavior, and performance recovery paths.</p>
         </article>
         <article class="playbook-card">
           <h3>5. Choose devices and topology with intent</h3>
+          <figure class="level-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+              alt="FinFET device cross-section used to illustrate device choices"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Topology can lower the floor</strong>
+              <span>Device structure and circuit style directly influence leakage, gain, drive, and operation at reduced voltage.</span>
+            </figcaption>
+          </figure>
           <p>For deeply optimized blocks, transistor technology and analog topology can shift the power floor in ways digital-only methods cannot.</p>
         </article>
         <article class="playbook-card">
           <h3>6. Close the loop in physical design</h3>
+          <figure class="level-visual">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b9/PD_Flow.gif"
+              alt="Physical design flow diagram"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Verify the backend reality</strong>
+              <span>Placement, CTS, routing, and signoff checks determine whether the intended power plan survives parasitics and implementation pressure.</span>
+            </figcaption>
+          </figure>
           <p>Re-check IR drop, clock-tree burden, congestion, parasitics, and routing impact so backend implementation preserves the front-end power plan.</p>
         </article>
       </div>
@@ -1522,7 +2254,7 @@
       </div>
 
       <div class="bibliography-actions">
-        <div class="filter-meta">10 source papers compiled for this analysis page</div>
+        <div class="filter-meta">10 source papers compiled for this analysis page.</div>
         <div class="bibliography-tools">
           <button class="tool-btn" id="copyBibliography" type="button">Copy bibliography</button>
           <button class="tool-btn" id="downloadBibliography" type="button">Download .txt</button>
@@ -1548,7 +2280,7 @@
     <div class="closing-card section-card">
       <div>
         <span class="section-kicker">Final Reading</span>
-        <h3>Why this research cluster is useful</h3>
+        <h3>Why this research cluster is useful?</h3>
         <p>
           The set does more than define low-power VLSI. It shows how the discipline scales from equations and surveys to real blocks such as SRAMs,
           decoders, counters, memory systems, and SAR ADCs. That makes it a strong foundation for both academic study and engineering interviews.
