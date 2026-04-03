@@ -501,7 +501,6 @@
     justify-content: space-between;
     padding: 1rem 3.25rem;
     border-top: 1px solid #c8a96e;
-    opacity: 0.7;
     }
 
     .about-vision-footer-text {
@@ -509,14 +508,16 @@
     font-weight: 300;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6b5a3e;
+    color: #000080;
+    opacity: 0.7;
     }
 
     .about-vision-footer-ornament {
     font-size: 1.1rem;
     letter-spacing: 4px;
-    color: #b87333;
-    opacity: 0.5;
+    color: #4e2f16;
+    opacity: 1;
+    font-weight: 700;
     }
 
     body.dark-mode .profile-pic {
@@ -582,9 +583,13 @@
     border-color: rgba(240, 196, 106, 0.24);
     }
 
-    body.dark-mode .about-vision-footer-text,
+    body.dark-mode .about-vision-footer-text {
+    color: #000080;
+    }
+
     body.dark-mode .about-vision-footer-ornament {
-    color: #f0c46a;
+    color: #4f2e07;
+    opacity: 1;
     }
 
     @media (max-width: 600px) {
@@ -617,6 +622,80 @@
 
     .about {
       padding: 6rem 5%;
+    }
+
+    #about > *,
+    #rnd > *,
+    #skills > *,
+    #projects > *,
+    #timeline > *,
+    #mentorship > *,
+    #achievements > *,
+    #contact > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+      will-change: opacity, transform;
+    }
+
+    #about.section-visible > *,
+    #rnd.section-visible > *,
+    #skills.section-visible > *,
+    #projects.section-visible > *,
+    #timeline.section-visible > *,
+    #mentorship.section-visible > *,
+    #achievements.section-visible > *,
+    #contact.section-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #about.section-visible > *:nth-child(1),
+    #rnd.section-visible > *:nth-child(1),
+    #skills.section-visible > *:nth-child(1),
+    #projects.section-visible > *:nth-child(1),
+    #timeline.section-visible > *:nth-child(1),
+    #mentorship.section-visible > *:nth-child(1),
+    #achievements.section-visible > *:nth-child(1),
+    #contact.section-visible > *:nth-child(1) {
+      transition-delay: 0.04s;
+    }
+
+    #about.section-visible > *:nth-child(2),
+    #rnd.section-visible > *:nth-child(2),
+    #skills.section-visible > *:nth-child(2),
+    #projects.section-visible > *:nth-child(2),
+    #timeline.section-visible > *:nth-child(2),
+    #mentorship.section-visible > *:nth-child(2),
+    #achievements.section-visible > *:nth-child(2),
+    #contact.section-visible > *:nth-child(2) {
+      transition-delay: 0.12s;
+    }
+
+    #about.section-visible > *:nth-child(3),
+    #rnd.section-visible > *:nth-child(3),
+    #skills.section-visible > *:nth-child(3),
+    #projects.section-visible > *:nth-child(3),
+    #timeline.section-visible > *:nth-child(3),
+    #mentorship.section-visible > *:nth-child(3),
+    #achievements.section-visible > *:nth-child(3),
+    #contact.section-visible > *:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #about > *,
+      #rnd > *,
+      #skills > *,
+      #projects > *,
+      #timeline > *,
+      #mentorship > *,
+      #achievements > *,
+      #contact > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
     
     .section-title {
@@ -2096,7 +2175,6 @@
               <div class="about-vision-rule"></div>
               <p class="about-vision-title">Vision Statement</p>
               <p class="about-vision-lead">The Theory of Value Addition<br>&amp; Multiplication</p>
-              <p class="about-vision-name">- Er. Sailesh</p>
             </div>
             <div class="about-vision-body">
               <div class="about-vision-principle">
@@ -2143,7 +2221,7 @@
               </div>
             </div>
             <div class="about-vision-footer">
-              <span class="about-vision-footer-text">Value . Excellence . Purpose</span>
+              <span class="about-vision-footer-text"><b>Value . Excellence . Purpose</b></span>
               <span class="about-vision-footer-ornament">✦ ✦ ✦</span>
             </div>
           </div>
@@ -2937,6 +3015,28 @@
       alert('Thank you for your message! I will get back to you soon.');
       form.reset();
     });
+  }
+
+  // Fade sections in as they enter the viewport
+  const revealSections = document.querySelectorAll('#about, #rnd, #skills, #projects, #timeline, #mentorship, #achievements, #contact');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (prefersReducedMotion) {
+    revealSections.forEach(section => section.classList.add('section-visible'));
+  } else {
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -6% 0px'
+    });
+
+    revealSections.forEach(section => sectionObserver.observe(section));
   }
 
   // Hamburger menu toggle (with overlay + bounce)
