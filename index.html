@@ -1096,6 +1096,15 @@
       padding: 0.85rem;
     }
 
+    .news-item-visual-logo {
+      max-width: min(76%, 240px);
+      max-height: 44px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.16));
+    }
+
     .news-item-visual-wordmark {
       font-family: 'Segoe UI', 'Poppins', sans-serif;
       font-size: 1.2rem;
@@ -1143,6 +1152,10 @@
         linear-gradient(45deg, #0b1e43, #1b4fb5);
     }
 
+    .news-item-visual-intel .news-item-visual-brand {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+    }
+
     .news-item-visual-intel .news-item-visual-label {
       background: rgba(4, 28, 72, 0.42);
     }
@@ -1157,6 +1170,10 @@
         linear-gradient(45deg, #07120d, #315f14);
     }
 
+    .news-item-visual-nvidia .news-item-visual-brand {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+    }
+
     .news-item-visual-nvidia .news-item-visual-label {
       background: rgba(9, 21, 10, 0.44);
     }
@@ -1165,6 +1182,10 @@
       background:
         linear-gradient(135deg, rgba(30, 40, 60, 0.96), rgba(243, 167, 69, 0.85)),
         linear-gradient(45deg, #141d2b, #5d6b7c);
+    }
+
+    .news-item-visual-foundries .news-item-visual-brand {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
     }
 
     .news-item-visual-foundries .news-item-visual-label {
@@ -3569,6 +3590,8 @@
         className: 'news-item-visual-intel',
         icon: 'fa-microchip',
         label: 'Company',
+        imageSrc: 'intel_logo.jpg',
+        imageAlt: 'Intel logo',
         wordmark: 'Intel',
         submark: 'AI silicon'
       };
@@ -3579,6 +3602,8 @@
         className: 'news-item-visual-nvidia',
         icon: 'fa-brain',
         label: 'Company',
+        imageSrc: 'nvidia_logo.jpg',
+        imageAlt: 'NVIDIA logo',
         wordmark: 'NVIDIA',
         submark: 'Compute stack'
       };
@@ -3589,6 +3614,8 @@
         className: 'news-item-visual-foundries',
         icon: 'fa-industry',
         label: 'Sector',
+        imageSrc: 'TSMC-Samsung.jpg',
+        imageAlt: 'TSMC and Samsung logos',
         wordmark: 'TSMC | Samsung',
         submark: 'Foundries'
       };
@@ -3672,7 +3699,9 @@
         ? `
           <div class="news-item-visual ${visualTheme.className}" aria-hidden="true">
             <div class="news-item-visual-brand">
-              <div class="news-item-visual-wordmark">${escapeHtml(visualTheme.wordmark || visualTheme.label)}</div>
+              ${visualTheme.imageSrc
+                ? `<img class="news-item-visual-logo" src="${escapeHtml(visualTheme.imageSrc)}" alt="${escapeHtml(visualTheme.imageAlt || visualTheme.label)}">`
+                : `<div class="news-item-visual-wordmark">${escapeHtml(visualTheme.wordmark || visualTheme.label)}</div>`}
               <div class="news-item-visual-submark">${escapeHtml(visualTheme.submark || '')}</div>
             </div>
             <span class="news-item-visual-label"><i class="fas ${visualTheme.icon}"></i> ${escapeHtml(visualTheme.label)}</span>
