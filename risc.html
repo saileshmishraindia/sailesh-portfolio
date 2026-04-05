@@ -6,7 +6,7 @@
 	<title>5 Stage 32-Bit RISC-V CPU | Project Dossier</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2 ?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 	<style>
 		:root {
 			--bg: #07111f;
@@ -170,6 +170,73 @@
 			box-shadow: var(--shadow);
 			position: relative;
 			overflow: hidden;
+		}
+
+		.course-prompt {
+			position: fixed;
+			inset: 0;
+			z-index: 60;
+			display: grid;
+			place-items: center;
+			padding: 1rem;
+			background: rgba(4, 10, 18, 0.7);
+			backdrop-filter: blur(14px);
+		}
+
+		.course-prompt[hidden] {
+			display: none;
+		}
+
+		.course-dialog {
+			width: min(560px, 100%);
+			padding: 1.35rem;
+			border-radius: 24px;
+			border: 1px solid rgba(111, 239, 253, 0.16);
+			background: linear-gradient(180deg, rgba(14, 25, 42, 0.98), rgba(8, 16, 28, 0.96));
+			box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
+		}
+
+		.course-dialog-head {
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
+			gap: 1rem;
+			margin-bottom: 0.8rem;
+		}
+
+		.course-dialog-title {
+			font-size: 1.25rem;
+			line-height: 1.25;
+		}
+
+		.course-dialog-head .section-kicker {
+			margin-bottom: 1px;
+		}
+
+		.course-dialog p {
+			color: var(--muted);
+			line-height: 1.7;
+		}
+
+		.course-dialog-actions {
+			display: flex;
+			justify-content: flex-end;
+			gap: 0.75rem;
+			margin-top: 1.1rem;
+			flex-wrap: wrap;
+		}
+
+		.course-dialog-close {
+			width: 38px;
+			height: 38px;
+			border: 0;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.06);
+			color: #ffffff;
+			font: inherit;
+			font-size: 1.35rem;
+			line-height: 1;
+			cursor: pointer;
 		}
 
 		.hero-card::before,
@@ -1190,10 +1257,39 @@
 			h1 {
 				max-width: none;
 			}
+
+			.course-dialog {
+				padding: 1.15rem;
+			}
+
+			.course-dialog-actions {
+				justify-content: stretch;
+			}
+
+			.course-dialog-actions .btn {
+				width: 100%;
+			}
 		}
 	</style>
 </head>
 <body>
+	<div class="course-prompt" id="coursePrompt" hidden>
+		<div class="course-dialog" role="dialog" aria-modal="true" aria-labelledby="coursePromptTitle">
+			<div class="course-dialog-head">
+				<div>
+					<span class="section-kicker">Learning Path</span>
+					<h2 class="course-dialog-title" id="coursePromptTitle">Wish to Learn TL-Verilog ?</h2>
+				</div>
+				<button class="course-dialog-close" id="coursePromptClose" type="button" aria-label="Close TL-Verilog prompt">×</button>
+			</div>
+			<p>This CPU page already shows the finished architecture story. If you want the learning path behind it, choose Let's Go and open a dedicated TL-Verilog course page first.</p>
+			<div class="course-dialog-actions">
+				<button class="btn btn-secondary" id="coursePromptDismiss" type="button">Not Now</button>
+				<a class="btn btn-primary" id="coursePromptPrimary" href="riscv_course.html">Let's Go</a>
+			</div>
+		</div>
+	</div>
+
 	<header class="topbar">
 		<div class="topbar-inner">
 			<div class="brand">
@@ -1215,7 +1311,7 @@
 		<section class="hero">
 			<article class="hero-card hero-main">
 				<span class="hero-kicker">Makerchip-Inspired Learning Flow</span>
-				<h1>Designing a clean 5-stage RISC-V CPU in TL-Verilog</h1>
+				<h1>Designing a clean 32 Bit 5-stage RISC-V CPU using TL-Verilog</h1>
 				<p>
 					This page presents the processor the way an engineer would want to review it: architecture first, pipeline behavior second, and implementation flow third.
 					It borrows the visual rhythm of Makerchip's editor-diagram workflow, but translates it into a polished static project page focused on clarity, reviewability, and execution detail.
@@ -1255,7 +1351,7 @@
 <pre><span class="code-comment">// 5-stage timing-abstract pipeline</span>
 <span class="code-key">|cpu</span>
 	<span class="code-stage">@0</span>
-		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span> ? 32'h0 : <span class="code-signal">$next_pc</span>;
+		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span>  ? 32'h0 : <span class="code-signal">$next_pc</span>;
 		<span class="code-signal">$imem_addr</span> = <span class="code-signal">$pc</span>;
 
 	<span class="code-stage">@1</span>
@@ -1267,7 +1363,7 @@
 		<span class="code-signal">$alu_out</span> = <span class="code-signal">$src1_value</span> + <span class="code-signal">$src2_value</span>;
 
 	<span class="code-stage">@3</span>
-		<span class="code-signal">$wb_data</span> = <span class="code-signal">$is_load</span> ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;
+		<span class="code-signal">$wb_data</span> = <span class="code-signal">$is_load</span>  ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;
 
 	<span class="code-stage">@4</span>
 		<span class="code-signal">$rf_wr_en</span> = <span class="code-signal">$rd_valid</span>;</pre>
@@ -1636,7 +1732,7 @@
 <pre><span class="code-comment">// timing-abstract CPU structure</span>
 <span class="code-key">|cpu</span>
 	<span class="code-stage">@0</span>
-		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span> ? 32'h0 : <span class="code-signal">$pc_next</span>;
+		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span>  ? 32'h0 : <span class="code-signal">$pc_next</span>;
 		<span class="code-signal">$instr</span> = <span class="code-signal">$imem</span>[<span class="code-signal">$pc</span>[9:2]];
 
 	<span class="code-stage">@1</span>
@@ -1645,11 +1741,11 @@
 		<span class="code-signal">$src2_val</span> = <span class="code-signal">$rf_rd_data2</span>;
 
 	<span class="code-stage">@2</span>
-		<span class="code-signal">$alu_out</span> = <span class="code-signal">$is_add</span> ? <span class="code-signal">$src1_val</span> + <span class="code-signal">$src2_val</span> :
-							 <span class="code-signal">$is_and</span> ? <span class="code-signal">$src1_val</span> & <span class="code-signal">$src2_val</span> : 32'b0;
+		<span class="code-signal">$alu_out</span> = <span class="code-signal">$is_add</span>  ? <span class="code-signal">$src1_val</span> + <span class="code-signal">$src2_val</span> :
+							 <span class="code-signal">$is_and</span>  ? <span class="code-signal">$src1_val</span> & <span class="code-signal">$src2_val</span> : 32'b0;
 
 	<span class="code-stage">@4</span>
-		<span class="code-signal">$rf_wr_data</span> = <span class="code-signal">$wb_sel_mem</span> ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;</pre>
+		<span class="code-signal">$rf_wr_data</span> = <span class="code-signal">$wb_sel_mem</span>  ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;</pre>
 					</section>
 
 					<section class="code-pane" id="pane-rtl" role="tabpanel">
@@ -1665,13 +1761,13 @@ always_ff @(posedge clk) begin
 end
 
 always_comb begin
-	alu_in1   = forward_a_sel ? ex_mem_result : id_ex_rs1;
-	alu_in2   = forward_b_sel ? mem_wb_result : id_ex_rs2;
+	alu_in1   = forward_a_sel  ? ex_mem_result : id_ex_rs1;
+	alu_in2   = forward_b_sel  ? mem_wb_result : id_ex_rs2;
 	alu_out   = run_alu(id_ex_alu_op, alu_in1, alu_in2);
 	take_br   = branch_check(id_ex_branch, alu_in1, alu_in2);
 end
 
-assign wb_data = mem_wb_is_load ? mem_wb_rdata : mem_wb_alu_out;</pre>
+assign wb_data = mem_wb_is_load  ? mem_wb_rdata : mem_wb_alu_out;</pre>
 					</section>
 
 					<section class="code-pane" id="pane-checks" role="tabpanel">
@@ -1746,7 +1842,7 @@ cover(branch_taken && !pipeline_flush_error);
 					</button>
 					<div class="card-block">
 						<h3>Why this matters</h3>
-						<p>One of the easiest ways to weaken a CPU page is to stop at a static pipeline drawing. A real review usually asks, “What happens instruction by instruction?” This workbench answers that question directly.</p>
+						<p>One of the easiest ways to weaken a CPU page is to stop at a static pipeline drawing. A real review usually asks, “What happens instruction by instruction ?” This workbench answers that question directly.</p>
 					</div>
 				</div>
 
@@ -1838,6 +1934,10 @@ cover(branch_taken && !pipeline_flush_error);
 
 	<script>
 		(() => {
+			const coursePrompt = document.getElementById('coursePrompt');
+			const coursePromptClose = document.getElementById('coursePromptClose');
+			const coursePromptDismiss = document.getElementById('coursePromptDismiss');
+			const coursePromptPrimary = document.getElementById('coursePromptPrimary');
 			const ideTabs = Array.from(document.querySelectorAll('.ide-tab'));
 			const idePanels = Array.from(document.querySelectorAll('.ide-panel'));
 			const stageButtons = Array.from(document.querySelectorAll('.stage-button'));
@@ -1867,7 +1967,7 @@ cover(branch_taken && !pipeline_flush_error);
 				stageButtons.forEach((item) => {
 					const isActive = item === button;
 					item.classList.toggle('active', isActive);
-					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+					item.setAttribute('aria-selected', isActive  ? 'true' : 'false');
 				});
 
 				fields.badge.textContent = button.dataset.badge;
@@ -1895,7 +1995,7 @@ cover(branch_taken && !pipeline_flush_error);
 				ideTabs.forEach((item) => {
 					const isActive = item === button;
 					item.classList.toggle('active', isActive);
-					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+					item.setAttribute('aria-selected', isActive  ? 'true' : 'false');
 				});
 
 				idePanels.forEach((panel) => {
@@ -2000,7 +2100,7 @@ cover(branch_taken && !pipeline_flush_error);
 				tabButtons.forEach((item) => {
 					const isActive = item === button;
 					item.classList.toggle('active', isActive);
-					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+					item.setAttribute('aria-selected', isActive  ? 'true' : 'false');
 				});
 
 				panes.forEach((pane) => {
@@ -2040,7 +2140,7 @@ cover(branch_taken && !pipeline_flush_error);
 
 					row.slice(1).forEach((cellText) => {
 						const cell = document.createElement('div');
-						cell.className = `wave-cell${cellText ? ' active' : ''}`;
+						cell.className = `wave-cell${cellText  ? ' active' : ''}`;
 						cell.textContent = cellText || '·';
 						executionFields.waveGrid.appendChild(cell);
 					});
@@ -2060,13 +2160,54 @@ cover(branch_taken && !pipeline_flush_error);
 					executionButtons.forEach((item) => {
 						const isActive = item === button;
 						item.classList.toggle('active', isActive);
-						item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+						item.setAttribute('aria-selected', isActive  ? 'true' : 'false');
 					});
 					renderExecution(button.dataset.scenario);
 				});
 			});
 
+			const closeCoursePrompt = () => {
+				if (coursePrompt) {
+					coursePrompt.hidden = true;
+				}
+			};
+
+			const openCoursePrompt = () => {
+				if (coursePrompt) {
+					coursePrompt.hidden = false;
+				}
+			};
+
+			if (coursePromptClose) {
+				coursePromptClose.addEventListener('click', closeCoursePrompt);
+			}
+
+			if (coursePromptDismiss) {
+				coursePromptDismiss.addEventListener('click', closeCoursePrompt);
+			}
+
+			if (coursePrompt) {
+				coursePrompt.addEventListener('click', (event) => {
+					if (event.target === coursePrompt) {
+						closeCoursePrompt();
+					}
+				});
+			}
+
+			if (coursePromptPrimary) {
+				coursePromptPrimary.addEventListener('click', () => {
+					closeCoursePrompt();
+				});
+			}
+
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					closeCoursePrompt();
+				}
+			});
+
 			renderExecution('arith');
+			window.setTimeout(openCoursePrompt, 260);
 		})();
 	</script>
 </body>

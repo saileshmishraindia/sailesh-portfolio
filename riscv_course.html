@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn TL-Verilog | RISC-V Course Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2 ?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-deep: #040b14;
+      --panel: rgba(10, 21, 37, 0.9);
+      --panel-strong: rgba(15, 28, 48, 0.96);
+      --line: rgba(118, 152, 191, 0.18);
+      --text: #e8f1ff;
+      --muted: #9ab0cf;
+      --cyan: #6feffd;
+      --cyan-soft: rgba(111, 239, 253, 0.14);
+      --amber: #ffc86b;
+      --success: #6ff7b3;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: "Space Grotesk", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 12%, rgba(111, 239, 253, 0.08), transparent 22%),
+        radial-gradient(circle at 88% 12%, rgba(255, 200, 107, 0.08), transparent 20%),
+        linear-gradient(180deg, #08101d 0%, #06111f 46%, #040a12 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: 0.18;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35));
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(4, 12, 22, 0.76);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .topbar-inner,
+    .hero,
+    .section,
+    .footer-inner {
+      width: min(1240px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: grid;
+      gap: 0.14rem;
+    }
+
+    .brand-kicker,
+    .section-kicker,
+    .pill,
+    .step-index,
+    .checkpoint-label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 700;
+    }
+
+    .brand-kicker {
+      color: var(--cyan);
+      font-size: 0.72rem;
+    }
+
+    .brand-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.85rem;
+    }
+
+    .nav-links a {
+      color: rgba(232, 241, 255, 0.8);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .hero-wrap {
+      padding: 2.1rem 0 1.3rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 1.2rem;
+      align-items: stretch;
+    }
+
+    .card,
+    .hero-card,
+    .lesson-card,
+    .example-card,
+    .practice-card,
+    .closing-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16, 28, 46, 0.96), rgba(9, 18, 31, 0.94));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before,
+    .lesson-card::before,
+    .closing-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 20%),
+        linear-gradient(90deg, transparent 0 92%, rgba(111, 239, 253, 0.04) 92% 100%);
+      pointer-events: none;
+    }
+
+    .hero-card > *,
+    .lesson-card > *,
+    .closing-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-main,
+    .hero-side,
+    .section-card,
+    .lesson-card,
+    .example-card,
+    .practice-card,
+    .closing-card {
+      padding: 1.6rem;
+    }
+
+    .hero-kicker,
+    .section-kicker,
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.34rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 239, 253, 0.18);
+      background: rgba(111, 239, 253, 0.08);
+      color: var(--cyan);
+      font-size: 0.75rem;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.05;
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: clamp(2.5rem, 4vw, 4.2rem);
+      max-width: 11ch;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .hero-main p {
+      margin-top: 1rem;
+      max-width: 62ch;
+      font-size: 1.03rem;
+    }
+
+    .hero-actions,
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0.85rem 1.15rem;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(111, 239, 253, 0.94), rgba(157, 246, 255, 0.92));
+      color: #03111b;
+      box-shadow: 0 14px 30px rgba(111, 239, 253, 0.18);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .hero-list,
+    .example-list,
+    .practice-list,
+    .checkpoint-list {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .hero-list div,
+    .example-item,
+    .practice-item,
+    .checkpoint-item {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-list strong,
+    .checkpoint-item strong,
+    .example-item strong,
+    .practice-item strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .section {
+      padding: 0.95rem 0 1.5rem;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-head h2 {
+      margin-top: 0.8rem;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+    }
+
+    .roadmap-grid,
+    .basics-grid,
+    .language-group-grid,
+    .syntax-grid,
+    .example-grid,
+    .practice-grid,
+    .closing-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .roadmap-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .basics-grid,
+    .language-group-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .syntax-grid,
+    .example-grid,
+    .practice-grid,
+    .closing-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .step-index {
+      color: var(--amber);
+      font-size: 0.74rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+
+    .lesson-card h3,
+    .example-card h3,
+    .practice-card h3,
+    .closing-card h3 {
+      font-size: 1.28rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .basics-card h3,
+    .difference-card h3 {
+      font-size: 1.28rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .basics-card,
+    .difference-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16, 28, 46, 0.96), rgba(9, 18, 31, 0.94));
+      box-shadow: var(--shadow);
+      padding: 1.6rem;
+    }
+
+    .basics-copy {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .language-group {
+      padding: 1rem 1.05rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .language-group strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.45rem;
+    }
+
+    .basics-note {
+      padding: 1rem 1.05rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(111, 239, 253, 0.16);
+      background: rgba(111, 239, 253, 0.08);
+    }
+
+    .basics-note strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.45rem;
+    }
+
+    .difference-table-wrap {
+      margin-top: 1rem;
+      overflow-x: auto;
+      border-radius: 18px;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 1px #000000;
+    }
+
+    .difference-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: #ffffff;
+      color: #09111d;
+    }
+
+    .difference-table th,
+    .difference-table td {
+      border: 1px solid #000000;
+      padding: 0.9rem 0.85rem;
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.58;
+    }
+
+    .difference-table th {
+      background: #eaf2fb;
+      color: #03111b;
+      font-size: 0.86rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .difference-table td:first-child {
+      font-weight: 700;
+      width: 90px;
+    }
+
+    pre {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 239, 253, 0.12);
+      background: rgba(4, 12, 22, 0.82);
+      color: #dff8ff;
+      overflow-x: auto;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    code {
+      font-family: "IBM Plex Mono", monospace;
+    }
+
+    .checkpoint-list {
+      margin-top: 0;
+    }
+
+    .checkpoint-label {
+      color: var(--success);
+      font-size: 0.74rem;
+      margin-bottom: 0.35rem;
+      display: inline-block;
+    }
+
+    .footer {
+      padding: 0 0 2.4rem;
+    }
+
+    .footer-inner {
+      color: rgba(232, 241, 255, 0.62);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (min-width: 1400px) and (orientation: landscape) {
+      .topbar-inner,
+      .hero,
+      .section,
+      .footer-inner {
+        width: calc(100% - 2rem);
+      }
+
+      .hero {
+        grid-template-columns: 1.14fr 0.86fr;
+        gap: 1.4rem;
+      }
+
+      .hero-main,
+      .hero-side,
+      .lesson-card,
+      .example-card,
+      .practice-card,
+      .closing-card {
+        padding: 1.9rem;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .basics-grid,
+      .language-group-grid,
+      .roadmap-grid,
+      .syntax-grid,
+      .example-grid,
+      .practice-grid,
+      .closing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner,
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-main,
+      .hero-side,
+      .basics-card,
+      .difference-card,
+      .lesson-card,
+      .example-card,
+      .practice-card,
+      .closing-card {
+        padding: 1.25rem;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-kicker">Course Companion</span>
+        <span class="brand-title">TL-Verilog for RISC-V Builders</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#basics">Basics</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#syntax">Syntax</a>
+        <a href="#examples">Examples</a>
+        <a href="#practice">Practice</a>
+        <a href="risc.html">Back to CPU page</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-wrap">
+    <section class="hero">
+      <article class="hero-card hero-main">
+        <span class="hero-kicker">TL-Verilog Learning Path</span>
+        <h1>Learn the language behind the pipeline.</h1>
+        <p>
+          TL-Verilog is useful because it lets you describe intent at the timing and transaction level before dropping into repetitive RTL detail.
+          This page is a compact course companion focused on the exact mindset needed to understand the RISC-V CPU project.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#basics">Start with basics</a>
+          <a class="btn btn-secondary" href="risc.html">Open the CPU dossier</a>
+        </div>
+        <div class="hero-list">
+          <div>
+            <strong>Goal</strong>
+            Move from plain RTL thinking into stage-aware TL-Verilog reasoning.
+          </div>
+          <div>
+            <strong>Best use</strong>
+            Learn this page first, then revisit the RISC-V pipeline page with the language model in mind.
+          </div>
+          <div>
+            <strong>Outcome</strong>
+            You should be able to read staged signals, understand pipeline abstraction, and map it back to generated RTL.
+          </div>
+        </div>
+      </article>
+
+      <aside class="hero-card hero-side">
+        <span class="section-kicker">Quick Orientation</span>
+        <div class="checkpoint-list">
+          <div class="checkpoint-item">
+            <span class="checkpoint-label">Checkpoint 1</span>
+            <strong>Know what TL-Verilog changes</strong>
+            It changes how timing is expressed. Instead of wiring every stage manually, you describe which stage owns the work.
+          </div>
+          <div class="checkpoint-item">
+            <span class="checkpoint-label">Checkpoint 2</span>
+            <strong>Think in flows, not only wires</strong>
+            Pipelines, valid signals, transaction movement, and derived stage logic become easier to reason about.
+          </div>
+          <div class="checkpoint-item">
+            <span class="checkpoint-label">Checkpoint 3</span>
+            <strong>Stay anchored to hardware</strong>
+            TL-Verilog is still hardware design. It simply compresses repetitive register-transfer bookkeeping.
+          </div>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <section class="section" id="basics">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Basics</span>
+        <h2>What makes an HDL different from software languages ?</h2>
+        <p>This section is meant to give a new microelectronics, engineering, or VLSI learner the right mental model before jumping into TL-Verilog syntax.</p>
+      </div>
+    </div>
+
+    <div class="basics-grid">
+      <article class="basics-card basics-copy">
+        <div>
+          <h3>What is a Hardware Description Language ?</h3>
+          <p>A Hardware Description Language, or HDL, is a formal language used to model, describe, simulate, and synthesize digital electronic systems. It lets a designer express both hardware structure, meaning the interconnection of logic blocks, and hardware behavior, meaning how signals evolve over time.</p>
+          <p>Unlike conventional programming languages, an HDL describes inherent parallelism, timing relationships, signal interaction, and register transfer behavior. That matters because real hardware does not execute as a single linear instruction stream. Multiple logic operations happen concurrently, often on the same clock edge.</p>
+          <p>HDLs are used across the design flow: behavioral modeling, RTL design, verification and simulation, synthesis, FPGA implementation, and ASIC implementation. TL-Verilog belongs in this family because it still describes real hardware, but with a timing-oriented abstraction that reduces repetitive RTL bookkeeping.</p>
+        </div>
+
+        <div class="basics-note">
+          <strong>Practical distinction</strong>
+          In digital design, the useful first distinction is not that every general-purpose language is useless for hardware work, but that HDLs are written to directly describe hardware behavior and hardware structure in a form that design tools can simulate and, for synthesizable subsets, turn into logic.
+        </div>
+      </article>
+
+      <article class="basics-card basics-copy">
+        <div>
+          <h3>Synthesizable vs non-synthesizable context</h3>
+          <p>For a beginner, a clean working distinction is this: some code can be synthesized into hardware, and some code cannot. In the strict RTL design sense, synthesizable code is the subset of a hardware language that a synthesis tool can translate into a circuit made of combinational logic, sequential storage elements, and the interconnect that binds them together.</p>
+          <p>That is the context of the word synthesizable. It does not just mean executable. It means a tool can derive a corresponding hardware implementation from the description. In practice, that means gates, multiplexers, adders, registers, memories, clocked elements, and the required connectivity. Passive and active device details appear more directly at lower abstraction levels, while RTL normally focuses on logic structure and clocked behavior.</p>
+          <p>So when you write Verilog, VHDL, SystemVerilog, or TL-Verilog in a synthesizable style, you are not merely instructing a processor. You are describing hardware that can be built onto an FPGA or carried forward into an ASIC flow.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="language-group-grid" style="margin-top: 1rem;">
+      <article class="basics-card">
+        <h3>Two broad categories learners should know first</h3>
+        <div class="language-group-grid">
+          <div class="language-group">
+            <strong>i. Non-synthesizable / general-purpose software languages</strong>
+            <p>C, C#, C++, Python, Java, and JavaScript are usually used to write software algorithms, applications, drivers, automation, and analysis code. They are not the normal direct language for describing gate-level or RTL hardware structure.</p>
+          </div>
+          <div class="language-group">
+            <strong>ii. Synthesizable HDL families and synthesizable subsets</strong>
+            <p>Verilog, VHDL, SystemVerilog, and TL-Verilog are used to describe hardware that can be simulated and, within synthesizable subsets, turned into real digital logic. Analog-oriented dialects exist too, but the key beginner focus here is digital hardware description.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="basics-card">
+        <h3>Why the same statement means different things</h3>
+        <p>In Verilog, if you write <code>assign y = A &amp; B;</code>, you are not just asking a CPU to evaluate a temporary expression. You are describing a continuous combinational relationship. The synthesis tool can infer AND logic that produces <code>y</code> from <code>A</code> and <code>B</code>. If the signals are vectors, the operation becomes a bitwise hardware operation across those signal widths.</p>
+        <p>Similarly in VHDL, a statement like <code>y &lt;= A and B;</code> describes an AND operation in hardware. For multi-bit signals, corresponding bits are ANDed in parallel. That is why HDLs naturally express concurrency and structure. In ordinary software languages such as C, C++, Java, or Python, the same-looking expression is just an operation executed by an already existing processor. It does not, by itself, define a new circuit implementation for synthesis.</p>
+      </article>
+    </div>
+
+    <article class="difference-card" style="margin-top: 1rem;">
+      <h3>10-point difference: HDL vs non-HDL</h3>
+      <p>This comparison is intentionally beginner-focused. It is framed around how these languages behave in a digital design flow, not around every possible research or tool-assisted exception.</p>
+
+      <div class="difference-table-wrap">
+        <table class="difference-table" aria-label="Ten point difference between HDL and non-HDL languages">
+          <thead>
+            <tr>
+              <th>Point</th>
+              <th>HDL / Synthesizable language</th>
+              <th>Non-HDL / general-purpose language</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Describes hardware structure or hardware behavior in a form suitable for simulation and often synthesis.</td>
+              <td>Describes software procedures, algorithms, applications, or data processing steps executed by a processor.</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Concurrency is natural. Many signals and operations can conceptually exist and update in parallel.</td>
+              <td>Execution is primarily sequential, even when the language supports threads or asynchronous control constructs.</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Time, clocks, signal events, and cycle boundaries are fundamental to the model.</td>
+              <td>Time is usually external to the program logic unless explicitly modeled by the programmer.</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Synthesizable code can be converted by tools into gates, registers, muxes, memories, and interconnect.</td>
+              <td>Source code normally compiles into software instructions for a CPU, not into a new hardware circuit.</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Assignments often express hardware relationships, such as combinational equations or clocked storage updates.</td>
+              <td>Assignments usually mean storing a computed value in memory during program execution.</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Signal width, bit slicing, buses, and logic states are first-class concerns during design.</td>
+              <td>Bit-level control exists, but it is not the default structural model used to create hardware blocks.</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Verification often asks whether the described circuit behaves correctly over cycles and events.</td>
+              <td>Verification usually asks whether software control flow, data handling, and outputs are correct for the algorithm.</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>The target implementation can be an FPGA bitstream or part of an ASIC design flow.</td>
+              <td>The target implementation is usually a runnable binary, bytecode artifact, or interpreted program.</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Hardware cost matters directly: area, timing, power, latency, throughput, and resource sharing.</td>
+              <td>Software performance matters too, but area and gate-level implementation are not usually directly described in the code.</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>A statement such as <code>assign y = A &amp; B;</code> can infer actual combinational AND logic in hardware.</td>
+              <td>An expression such as <code>y = A & B;</code> in C-like languages only computes a result on an existing processor and does not itself synthesize a fresh logic circuit.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Roadmap</span>
+        <h2>A practical order to learn TL-Verilog</h2>
+        <p>Do not start with every language feature. Start with the small subset that explains a pipelined CPU clearly.</p>
+      </div>
+    </div>
+
+    <div class="roadmap-grid">
+      <article class="lesson-card">
+        <span class="step-index">Step 01</span>
+        <h3>Understand pipeline stages</h3>
+        <p>Learn how stage notation groups work by time. In a CPU, fetch, decode, execute, memory, and writeback are the natural first anchors.</p>
+        <pre><code>|cpu
+  @0
+    $pc = /reset  ? 0 : >>1$next_pc;
+  @1
+    $instr = /imem[$pc];</code></pre>
+      </article>
+
+      <article class="lesson-card">
+        <span class="step-index">Step 02</span>
+        <h3>Track signal movement</h3>
+        <p>Signals can be referenced relative to earlier stages. That means the design reads like a timing story instead of a pile of always blocks.</p>
+        <pre><code>@2
+  $rs1_value = /rf[$rs1];
+@3
+  $alu_result = $rs1_value + $imm;
+@4
+  $wb_data = $alu_result;</code></pre>
+      </article>
+
+      <article class="lesson-card">
+        <span class="step-index">Step 03</span>
+        <h3>Map abstraction back to RTL</h3>
+        <p>Always ask which registers, muxes, and controls are implied. TL-Verilog is most valuable when you can still picture the resulting hardware structure.</p>
+        <pre><code>Question to ask each time:
+Which stage owns this value ?
+Which earlier stage produced it ?
+When does it become architecturally visible ?</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="syntax">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Syntax Core</span>
+        <h2>The small syntax set that matters first</h2>
+        <p>These are the constructs that make the RISC-V project readable. Master these before touching advanced macros or generators.</p>
+      </div>
+    </div>
+
+    <div class="syntax-grid">
+      <article class="example-card">
+        <h3>Stage markers</h3>
+        <p>Use stage markers like <code>@0</code>, <code>@1</code>, and <code>@2</code> to show where work logically happens in time.</p>
+        <div class="example-list">
+          <div class="example-item">
+            <strong>Why it matters</strong>
+            A pipelined CPU stops feeling like five disconnected code islands and starts reading like one timed flow.
+          </div>
+          <div class="example-item">
+            <strong>What to watch for</strong>
+            If a signal appears in the wrong stage, your mental timing model is already drifting.
+          </div>
+        </div>
+      </article>
+
+      <article class="example-card">
+        <h3>Stage-relative references</h3>
+        <p>References like <code>&gt;&gt;1</code> or values reused from earlier stages let you express pipeline movement directly rather than instantiating every register transfer by hand.</p>
+        <div class="example-list">
+          <div class="example-item">
+            <strong>Why it matters</strong>
+            You can trace dependencies cleanly across the pipeline.
+          </div>
+          <div class="example-item">
+            <strong>What to watch for</strong>
+            Be explicit about where data becomes valid so hazards do not get hidden by nicer syntax.
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Worked Examples</span>
+        <h2>Read TL-Verilog like an engineer</h2>
+        <p>Each example below ties the language directly to what your CPU page is already showing in its architecture and execution sections.</p>
+      </div>
+    </div>
+
+    <div class="example-grid">
+      <article class="example-card">
+        <h3>Instruction fetch path</h3>
+        <p>The fetch stage is usually the easiest place to get comfortable because it has obvious time ordering: current PC, memory access, next PC selection.</p>
+        <pre><code>@0
+  $pc = /reset  ? 32'b0 : >>1$next_pc;
+  $imem_addr = $pc;
+@1
+  $instr = /imem[$imem_addr];</code></pre>
+      </article>
+
+      <article class="example-card">
+        <h3>ALU computation path</h3>
+        <p>Decode prepares operands, execute combines them, and later stages commit the result. TL-Verilog makes that separation visible with much less boilerplate.</p>
+        <pre><code>@2
+  $op_a = /rf[$rs1];
+  $op_b = $is_imm  ? $imm : /rf[$rs2];
+@3
+  $alu_out = $op_a + $op_b;
+@4
+  $rd_value = $alu_out;</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="practice">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Practice</span>
+        <h2>Exercises that actually build intuition</h2>
+        <p>These are the right next steps if the goal is to get from reading TL-Verilog to using it in the RISC-V project confidently.</p>
+      </div>
+    </div>
+
+    <div class="practice-grid">
+      <article class="practice-card">
+        <h3>Exercise 1: Stage audit</h3>
+        <div class="practice-list">
+          <div class="practice-item">
+            <strong>Task</strong>
+            Pick one instruction and label exactly where fetch, decode, execute, memory, and writeback occur.
+          </div>
+          <div class="practice-item">
+            <strong>What you should learn</strong>
+            You will stop reading the code as plain text and start reading it as timed hardware behavior.
+          </div>
+        </div>
+      </article>
+
+      <article class="practice-card">
+        <h3>Exercise 2: Hazard review</h3>
+        <div class="practice-list">
+          <div class="practice-item">
+            <strong>Task</strong>
+            Take a load-use sequence and mark the cycle when the loaded data becomes safe for the dependent instruction.
+          </div>
+          <div class="practice-item">
+            <strong>What you should learn</strong>
+            Better syntax does not remove hazards. It only makes the timing story easier to inspect.
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="closing-grid">
+      <article class="closing-card">
+        <span class="section-kicker">Study Loop</span>
+        <h3>How to use this with the CPU page</h3>
+        <p>Read this course page once, then return to the RISC-V dossier and compare its pipeline, execution trace, and code views against the stage concepts introduced here.</p>
+      </article>
+      <article class="closing-card">
+        <span class="section-kicker">Next Step</span>
+        <h3>Go back and inspect the project</h3>
+        <p>The course matters only if it improves your reading of the real design. Use the project page to test whether the timing, dataflow, and control logic now feel more legible.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="risc.html">Return to "Designing a 32 Bit 5-stage RISC-V CPU using TL-Verilog"</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>TL-Verilog learning companion • linked from the 5 Stage 32-Bit RISC-V CPU project page</p>
+    </div>
+  </footer>
+</body>
+</html>
