@@ -6,7 +6,7 @@
   <title>Learn TL-Verilog | RISC-V Course Companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2 ?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2  ?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07111f;
@@ -269,6 +269,11 @@
       margin-top: 1rem;
     }
 
+    .hero-list {
+      margin-top: 0.25rem;
+      gap: 0.85rem;
+    }
+
     .hero-list div,
     .example-item,
     .practice-item,
@@ -277,6 +282,10 @@
       border-radius: var(--radius-md);
       border: 1px solid rgba(255, 255, 255, 0.08);
       background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-list > div {
+      padding: 0.9rem 1rem;
     }
 
     .hero-list strong,
@@ -367,6 +376,26 @@
       gap: 0.95rem;
     }
 
+    .basics-points {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .basics-points p {
+      margin: 0;
+      text-align: justify;
+    }
+
+    .comparison-points {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .comparison-points p {
+      margin: 0;
+      text-align: justify;
+    }
+
     .language-group {
       padding: 1rem 1.05rem;
       border-radius: var(--radius-md);
@@ -393,25 +422,79 @@
       margin-bottom: 0.45rem;
     }
 
+    .basics-visual {
+      margin: 0.35rem 0 0.2rem;
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 239, 253, 0.14);
+      background:
+        linear-gradient(180deg, rgba(7, 18, 30, 0.94), rgba(8, 16, 28, 0.88)),
+        rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+    }
+
+    .basics-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .visual-caption {
+      margin-top: 0.8rem;
+      color: #c7d8ef;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .hero-mini-visual {
+      margin: 0.7rem 0 0.75rem;
+      padding: 0.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(111, 239, 253, 0.14);
+      background: linear-gradient(180deg, rgba(8, 18, 31, 0.92), rgba(7, 15, 27, 0.88));
+      overflow: hidden;
+    }
+
+    .hero-mini-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .checkpoint-visual {
+      margin: 0.7rem 0 0.75rem;
+      padding: 0.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(111, 239, 253, 0.14);
+      background: linear-gradient(180deg, rgba(8, 18, 31, 0.92), rgba(7, 15, 27, 0.88));
+      overflow: hidden;
+    }
+
+    .checkpoint-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     .difference-table-wrap {
       margin-top: 1rem;
       overflow-x: auto;
       border-radius: 18px;
-      background: #ffffff;
-      box-shadow: inset 0 0 0 1px #000000;
+      background: linear-gradient(180deg, rgba(11, 23, 38, 0.98), rgba(8, 18, 31, 0.94));
+      box-shadow: inset 0 0 0 1px rgba(111, 239, 253, 0.16);
     }
 
     .difference-table {
       width: 100%;
       border-collapse: collapse;
       min-width: 860px;
-      background: #ffffff;
-      color: #09111d;
+      background: rgba(9, 19, 32, 0.98);
+      color: #dceaff;
     }
 
     .difference-table th,
     .difference-table td {
-      border: 1px solid #000000;
+      border: 1px solid rgba(111, 239, 253, 0.14);
       padding: 0.9rem 0.85rem;
       text-align: left;
       vertical-align: top;
@@ -419,8 +502,8 @@
     }
 
     .difference-table th {
-      background: #eaf2fb;
-      color: #03111b;
+      background: linear-gradient(180deg, rgba(17, 40, 64, 0.98), rgba(13, 31, 49, 0.98));
+      color: #6feffd;
       font-size: 0.86rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -429,6 +512,138 @@
     .difference-table td:first-child {
       font-weight: 700;
       width: 90px;
+      color: #ffc86b;
+      background: rgba(111, 239, 253, 0.04);
+    }
+
+    .difference-breakdown {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .difference-breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .difference-explainer-card {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(16, 28, 46, 0.96), rgba(9, 18, 31, 0.94));
+      box-shadow: var(--shadow);
+      padding: 1.35rem;
+      overflow: hidden;
+    }
+
+    .difference-point-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 239, 253, 0.18);
+      background: rgba(111, 239, 253, 0.08);
+      color: var(--cyan);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .difference-explainer-card h3 {
+      margin-top: 0.8rem;
+      margin-bottom: 0.6rem;
+      font-size: 1.18rem;
+    }
+
+    .difference-visual {
+      margin: 0.8rem 0;
+      padding: 0.9rem;
+      border-radius: 18px;
+      border: 1px solid rgba(111, 239, 253, 0.14);
+      background: linear-gradient(180deg, rgba(8, 18, 31, 0.92), rgba(7, 15, 27, 0.88));
+      overflow: hidden;
+    }
+
+    .difference-visual svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .difference-copy {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .difference-side-note {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .difference-side-note strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: #ffffff;
+    }
+
+    .takeaway-note {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      border: 1px solid rgba(111, 239, 253, 0.16);
+      background: rgba(111, 239, 253, 0.08);
+    }
+
+    .takeaway-note strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: #f78989;
+    }
+
+    .float-node {
+      animation: floatNode 4.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .pulse-node {
+      animation: pulseNode 2.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .flow-line {
+      stroke-dasharray: 10 10;
+      animation: flowDash 8s linear infinite;
+    }
+
+    @keyframes floatNode {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes pulseNode {
+      0%, 100% {
+        opacity: 0.72;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes flowDash {
+      from {
+        stroke-dashoffset: 0;
+      }
+      to {
+        stroke-dashoffset: -40;
+      }
     }
 
     pre {
@@ -496,6 +711,7 @@
       .hero,
       .basics-grid,
       .language-group-grid,
+      .difference-breakdown-grid,
       .roadmap-grid,
       .syntax-grid,
       .example-grid,
@@ -516,6 +732,7 @@
       .hero-side,
       .basics-card,
       .difference-card,
+      .difference-explainer-card,
       .lesson-card,
       .example-card,
       .practice-card,
@@ -563,14 +780,72 @@
         <div class="hero-list">
           <div>
             <strong>Goal</strong>
+            <div class="hero-mini-visual" aria-label="Diagram showing the learning goal from plain RTL thinking to stage-aware TL-Verilog reasoning">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="24" y="40" width="156" height="58" rx="16" fill="#142f4b" stroke="#ffc86b" stroke-opacity="0.45"></rect>
+                <text x="102" y="64" text-anchor="middle" fill="#ffc86b" font-size="16" font-weight="700">Plain RTL view</text>
+                <text x="102" y="86" text-anchor="middle" fill="#d6e4f8" font-size="13">signals and registers only</text>
+
+                <path d="M180 69 L320 69" stroke="#e8f1ff" stroke-width="4" stroke-dasharray="8 8"></path>
+                <polygon points="310,61 328,69 310,77" fill="#e8f1ff"></polygon>
+
+                <rect x="328" y="26" width="70" height="34" rx="12" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <rect x="328" y="74" width="70" height="34" rx="12" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <text x="363" y="47" text-anchor="middle" fill="#6feffd" font-size="14">@ ID</text>
+                <text x="363" y="95" text-anchor="middle" fill="#6feffd" font-size="14">@ EX</text>
+
+                <rect x="414" y="40" width="82" height="58" rx="16" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.45"></rect>
+                <text x="455" y="64" text-anchor="middle" fill="#6ff7b3" font-size="16" font-weight="700">TLV</text>
+                <text x="455" y="86" text-anchor="middle" fill="#d6e4f8" font-size="13">stage-aware</text>
+              </svg>
+            </div>
             Move from plain RTL thinking into stage-aware TL-Verilog reasoning.
           </div>
           <div>
             <strong>Best use</strong>
+            <div class="hero-mini-visual" aria-label="Diagram showing the ideal study loop from course page to CPU dossier">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="24" y="42" width="144" height="56" rx="16" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <text x="96" y="64" text-anchor="middle" fill="#6feffd" font-size="15" font-weight="700">Course page</text>
+                <text x="96" y="86" text-anchor="middle" fill="#d6e4f8" font-size="13">learn the ideas</text>
+
+                <path d="M168 70 L276 70" stroke="#6ff7b3" stroke-width="4"></path>
+                <polygon points="266,62 284,70 266,78" fill="#6ff7b3"></polygon>
+
+                <rect x="284" y="42" width="144" height="56" rx="16" fill="#12304d" stroke="#ffc86b" stroke-opacity="0.5"></rect>
+                <text x="356" y="64" text-anchor="middle" fill="#ffc86b" font-size="15" font-weight="700">CPU dossier</text>
+                <text x="356" y="86" text-anchor="middle" fill="#d6e4f8" font-size="13">see it in context</text>
+
+                <path d="M356 108 C356 128, 160 128, 160 102" fill="none" stroke="#e8f1ff" stroke-width="3" stroke-dasharray="8 8"></path>
+                <polygon points="152,105 160,90 168,105" fill="#e8f1ff"></polygon>
+                <text x="260" y="138" text-anchor="middle" fill="#9ab0cf" font-size="13">repeat the loop</text>
+              </svg>
+            </div>
             Learn this page first, then revisit the RISC-V pipeline page with the language model in mind.
           </div>
           <div>
             <strong>Outcome</strong>
+            <div class="hero-mini-visual" aria-label="Diagram showing the learning outcome of reading staged signals, pipeline abstraction, and RTL mapping">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="28" y="34" width="120" height="72" rx="16" fill="#142f4b" stroke="#6feffd" stroke-opacity="0.48"></rect>
+                <rect x="200" y="34" width="120" height="72" rx="16" fill="#142f4b" stroke="#ffc86b" stroke-opacity="0.48"></rect>
+                <rect x="372" y="34" width="120" height="72" rx="16" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.48"></rect>
+
+                <text x="88" y="60" text-anchor="middle" fill="#6feffd" font-size="15" font-weight="700">Read</text>
+                <text x="88" y="82" text-anchor="middle" fill="#d6e4f8" font-size="13">staged signals</text>
+
+                <text x="260" y="60" text-anchor="middle" fill="#ffc86b" font-size="15" font-weight="700">Understand</text>
+                <text x="260" y="82" text-anchor="middle" fill="#d6e4f8" font-size="13">pipeline abstraction</text>
+
+                <text x="432" y="60" text-anchor="middle" fill="#6ff7b3" font-size="15" font-weight="700">Map</text>
+                <text x="432" y="82" text-anchor="middle" fill="#d6e4f8" font-size="13">back to RTL</text>
+
+                <path d="M148 70 L200 70" stroke="#e8f1ff" stroke-width="4"></path>
+                <path d="M320 70 L372 70" stroke="#e8f1ff" stroke-width="4"></path>
+                <polygon points="190,62 208,70 190,78" fill="#e8f1ff"></polygon>
+                <polygon points="362,62 380,70 362,78" fill="#e8f1ff"></polygon>
+              </svg>
+            </div>
             You should be able to read staged signals, understand pipeline abstraction, and map it back to generated RTL.
           </div>
         </div>
@@ -582,16 +857,80 @@
           <div class="checkpoint-item">
             <span class="checkpoint-label">Checkpoint 1</span>
             <strong>Know what TL-Verilog changes</strong>
+            <div class="checkpoint-visual" aria-label="Diagram showing manual stage wiring replaced by stage-owned timing intent">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="18" y="40" width="140" height="54" rx="14" fill="#142f4b" stroke="#ffc86b" stroke-opacity="0.45"></rect>
+                <text x="88" y="62" text-anchor="middle" fill="#ffc86b" font-size="15" font-weight="700">Manual RTL</text>
+                <text x="88" y="82" text-anchor="middle" fill="#d6e4f8" font-size="13">stage-by-stage wiring</text>
+
+                <path d="M158 67 L248 67" stroke="#e8f1ff" stroke-width="4" stroke-dasharray="8 8"></path>
+                <polygon points="238,59 256,67 238,75" fill="#e8f1ff"></polygon>
+
+                <rect x="256" y="24" width="112" height="34" rx="12" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <rect x="256" y="72" width="112" height="34" rx="12" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <text x="312" y="45" text-anchor="middle" fill="#6feffd" font-size="14">@ decode</text>
+                <text x="312" y="93" text-anchor="middle" fill="#6feffd" font-size="14">@ execute</text>
+
+                <rect x="390" y="40" width="112" height="54" rx="14" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.45"></rect>
+                <text x="446" y="62" text-anchor="middle" fill="#6ff7b3" font-size="15" font-weight="700">TL-Verilog</text>
+                <text x="446" y="82" text-anchor="middle" fill="#d6e4f8" font-size="11">stage-owned intent</text>
+              </svg>
+            </div>
             It changes how timing is expressed. Instead of wiring every stage manually, you describe which stage owns the work.
           </div>
           <div class="checkpoint-item">
             <span class="checkpoint-label">Checkpoint 2</span>
             <strong>Think in flows, not only wires</strong>
+            <div class="checkpoint-visual" aria-label="Diagram showing a flowing instruction transaction across pipeline stages">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="18" y="44" width="86" height="48" rx="14" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <rect x="126" y="44" width="86" height="48" rx="14" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <rect x="234" y="44" width="86" height="48" rx="14" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <rect x="342" y="44" width="86" height="48" rx="14" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+
+                <text x="61" y="72" text-anchor="middle" fill="#dff8ff" font-size="14">Fetch</text>
+                <text x="169" y="72" text-anchor="middle" fill="#dff8ff" font-size="14">Decode</text>
+                <text x="277" y="72" text-anchor="middle" fill="#dff8ff" font-size="14">Execute</text>
+                <text x="385" y="72" text-anchor="middle" fill="#dff8ff" font-size="14">Writeback</text>
+
+                <path d="M104 68 L126 68" stroke="#6ff7b3" stroke-width="4"></path>
+                <path d="M212 68 L234 68" stroke="#6ff7b3" stroke-width="4"></path>
+                <path d="M320 68 L342 68" stroke="#6ff7b3" stroke-width="4"></path>
+                <polygon points="118,61 132,68 118,75" fill="#6ff7b3"></polygon>
+                <polygon points="226,61 240,68 226,75" fill="#6ff7b3"></polygon>
+                <polygon points="334,61 348,68 334,75" fill="#6ff7b3"></polygon>
+
+                <circle cx="169" cy="108" r="10" fill="#ffc86b"></circle>
+                <circle cx="277" cy="108" r="10" fill="#ffc86b"></circle>
+                <circle cx="385" cy="108" r="10" fill="#ffc86b"></circle>
+                <text x="277" y="128" text-anchor="middle" fill="#9ab0cf" font-size="13">signals move as a timed flow</text>
+              </svg>
+            </div>
             Pipelines, valid signals, transaction movement, and derived stage logic become easier to reason about.
           </div>
           <div class="checkpoint-item">
             <span class="checkpoint-label">Checkpoint 3</span>
             <strong>Stay anchored to hardware</strong>
+            <div class="checkpoint-visual" aria-label="Diagram showing abstraction still mapping to real hardware blocks">
+              <svg viewBox="0 0 520 140" role="img" aria-hidden="true">
+                <rect x="28" y="38" width="148" height="62" rx="16" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+                <text x="102" y="64" text-anchor="middle" fill="#6feffd" font-size="16" font-weight="700">TL-Verilog view</text>
+                <text x="102" y="86" text-anchor="middle" fill="#d6e4f8" font-size="13">clean staged abstraction</text>
+
+                <path d="M176 69 L278 69" stroke="#e8f1ff" stroke-width="4" stroke-dasharray="8 8"></path>
+                <polygon points="268,61 286,69 268,77" fill="#e8f1ff"></polygon>
+
+                <rect x="286" y="28" width="58" height="38" rx="10" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+                <rect x="356" y="28" width="58" height="38" rx="10" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+                <rect x="426" y="28" width="58" height="38" rx="10" fill="#142f4b" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+                <rect x="321" y="84" width="128" height="30" rx="10" fill="#142f4b" stroke="#ffc86b" stroke-opacity="0.5"></rect>
+
+                <text x="315" y="52" text-anchor="middle" fill="#6ff7b3" font-size="13">Mux</text>
+                <text x="385" y="52" text-anchor="middle" fill="#6ff7b3" font-size="13">Reg</text>
+                <text x="455" y="52" text-anchor="middle" fill="#6ff7b3" font-size="13">ALU</text>
+                <text x="385" y="104" text-anchor="middle" fill="#ffc86b" font-size="11">Real hardware structure</text>
+              </svg>
+            </div>
             TL-Verilog is still hardware design. It simply compresses repetitive register-transfer bookkeeping.
           </div>
         </div>
@@ -610,32 +949,154 @@
 
     <div class="basics-grid">
       <article class="basics-card basics-copy">
-        <div>
-          <h3>What is a Hardware Description Language ?</h3>
-          <p>A Hardware Description Language, or HDL, is a formal language used to model, describe, simulate, and synthesize digital electronic systems. It lets a designer express both hardware structure, meaning the interconnection of logic blocks, and hardware behavior, meaning how signals evolve over time.</p>
-          <p>Unlike conventional programming languages, an HDL describes inherent parallelism, timing relationships, signal interaction, and register transfer behavior. That matters because real hardware does not execute as a single linear instruction stream. Multiple logic operations happen concurrently, often on the same clock edge.</p>
-          <p>HDLs are used across the design flow: behavioral modeling, RTL design, verification and simulation, synthesis, FPGA implementation, and ASIC implementation. TL-Verilog belongs in this family because it still describes real hardware, but with a timing-oriented abstraction that reduces repetitive RTL bookkeeping.</p>
+        <div class="basics-points">
+          <h3>1. What is a Hardware Description Language ?</h3>
+          <div class="basics-visual" aria-label="Flow diagram showing HDL from design intent to simulation and hardware implementation">
+            <svg viewBox="0 0 760 280" role="img" aria-hidden="true">
+              <defs>
+                <linearGradient id="hdlBox" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#133251"></stop>
+                  <stop offset="100%" stop-color="#0b1f34"></stop>
+                </linearGradient>
+                <linearGradient id="hdlAccent" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#6feffd"></stop>
+                  <stop offset="100%" stop-color="#ffc86b"></stop>
+                </linearGradient>
+              </defs>
+              <rect x="20" y="78" width="150" height="96" rx="18" fill="url(#hdlBox)" stroke="#6feffd" stroke-opacity="0.45"></rect>
+              <text x="95" y="112" text-anchor="middle" fill="#e8f1ff" font-size="22" font-weight="700">Design</text>
+              <text x="95" y="140" text-anchor="middle" fill="#9ab0cf" font-size="16">Intent</text>
+              <text x="95" y="162" text-anchor="middle" fill="#9ab0cf" font-size="16">Behavior + structure</text>
+
+              <rect x="300" y="52" width="160" height="150" rx="22" fill="url(#hdlBox)" stroke="#6feffd" stroke-opacity="0.55"></rect>
+              <text x="380" y="93" text-anchor="middle" fill="#6feffd" font-size="20" font-weight="700">HDL</text>
+              <text x="380" y="122" text-anchor="middle" fill="#e8f1ff" font-size="18">Model</text>
+              <text x="380" y="149" text-anchor="middle" fill="#9ab0cf" font-size="15">Describe</text>
+              <text x="380" y="171" text-anchor="middle" fill="#9ab0cf" font-size="15">Simulate</text>
+              <text x="380" y="193" text-anchor="middle" fill="#9ab0cf" font-size="15">Synthesize</text>
+
+              <rect x="590" y="36" width="150" height="70" rx="18" fill="url(#hdlBox)" stroke="#ffc86b" stroke-opacity="0.5"></rect>
+              <text x="665" y="66" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">Simulation</text>
+              <text x="665" y="89" text-anchor="middle" fill="#d6e4f8" font-size="15">Check behavior</text>
+
+              <rect x="590" y="132" width="150" height="90" rx="18" fill="url(#hdlBox)" stroke="#6ff7b3" stroke-opacity="0.48"></rect>
+              <text x="665" y="164" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">Hardware</text>
+              <text x="665" y="188" text-anchor="middle" fill="#d6e4f8" font-size="15">FPGA / ASIC</text>
+              <text x="665" y="208" text-anchor="middle" fill="#d6e4f8" font-size="15">implementation</text>
+
+              <path d="M170 126 L300 126" stroke="url(#hdlAccent)" stroke-width="5" stroke-linecap="round"></path>
+              <path d="M460 92 L590 70" stroke="#ffc86b" stroke-width="5" stroke-linecap="round"></path>
+              <path d="M460 160 L590 176" stroke="#6ff7b3" stroke-width="5" stroke-linecap="round"></path>
+
+              <polygon points="290,118 308,126 290,134" fill="#6feffd"></polygon>
+              <polygon points="580,61 598,69 582,82" fill="#ffc86b"></polygon>
+              <polygon points="580,169 598,177 580,187" fill="#6ff7b3"></polygon>
+            </svg>
+            <p class="visual-caption">Think of an HDL as the bridge between circuit intent and tool-driven realization. The same description can be simulated for correctness and, when written in a synthesizable style, pushed toward real digital hardware.</p>
+          </div>
+          <p>-> A Hardware Description Language, or HDL, is a formal language used to model, describe, simulate, and synthesize digital electronic systems. It lets a designer express both hardware structure, meaning the interconnection of logic blocks, and hardware behavior, meaning how signals evolve over time.</p>
+          <p>-> HDLs are used to create models of digital circuits that can be simulated to verify functionality and synthesized to generate gate-level implementations for FPGAs or ASICs. They are essential tools in the design and development of modern electronic systems.</p>
+          <p>-> HDLs are not general-purpose programming languages. They are domain-specific languages tailored for hardware design. They have constructs that directly map to hardware concepts like wires, registers, clocks, and combinational logic. They also have semantics that reflect the concurrent and time-sensitive nature of hardware.</p>
+          <p>-> Unlike conventional programming languages, an HDL describes inherent parallelism, timing relationships, signal interaction, and register transfer behavior. That matters because real hardware does not execute as a single linear instruction stream. Multiple logic operations happen concurrently, often on the same clock edge.</p>
+          <p>-> HDLs are used across the design flow: behavioral modeling, RTL design, verification and simulation, synthesis, FPGA implementation, and ASIC implementation. TL-Verilog belongs in this family because it still describes real hardware, but with a timing-oriented abstraction that reduces repetitive RTL bookkeeping.</p>
         </div>
 
         <div class="basics-note">
-          <strong>Practical distinction</strong>
+          <strong>🤖 Practical distinction</strong>
           In digital design, the useful first distinction is not that every general-purpose language is useless for hardware work, but that HDLs are written to directly describe hardware behavior and hardware structure in a form that design tools can simulate and, for synthesizable subsets, turn into logic.
         </div>
       </article>
 
       <article class="basics-card basics-copy">
-        <div>
-          <h3>Synthesizable vs non-synthesizable context</h3>
-          <p>For a beginner, a clean working distinction is this: some code can be synthesized into hardware, and some code cannot. In the strict RTL design sense, synthesizable code is the subset of a hardware language that a synthesis tool can translate into a circuit made of combinational logic, sequential storage elements, and the interconnect that binds them together.</p>
-          <p>That is the context of the word synthesizable. It does not just mean executable. It means a tool can derive a corresponding hardware implementation from the description. In practice, that means gates, multiplexers, adders, registers, memories, clocked elements, and the required connectivity. Passive and active device details appear more directly at lower abstraction levels, while RTL normally focuses on logic structure and clocked behavior.</p>
-          <p>So when you write Verilog, VHDL, SystemVerilog, or TL-Verilog in a synthesizable style, you are not merely instructing a processor. You are describing hardware that can be built onto an FPGA or carried forward into an ASIC flow.</p>
+        <div class="basics-points">
+          <h3>2. Synthesizable vs non-synthesizable context</h3>
+          <div class="basics-visual" aria-label="Diagram showing synthesizable code flowing through synthesis into logic hardware while non-synthesizable code stays for modeling and verification only">
+            <svg viewBox="0 0 760 300" role="img" aria-hidden="true">
+              <defs>
+                <linearGradient id="synBox" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#143252"></stop>
+                  <stop offset="100%" stop-color="#0a1d31"></stop>
+                </linearGradient>
+              </defs>
+              <rect x="36" y="54" width="176" height="78" rx="18" fill="url(#synBox)" stroke="#6feffd" stroke-opacity="0.48"></rect>
+              <text x="124" y="84" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL source</text>
+              <text x="124" y="108" text-anchor="middle" fill="#d6e4f8" font-size="15">Design description</text>
+
+              <rect x="288" y="38" width="180" height="110" rx="20" fill="url(#synBox)" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+              <text x="378" y="73" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">Synthesizable subset</text>
+              <text x="378" y="98" text-anchor="middle" fill="#d6e4f8" font-size="15">Combinational logic</text>
+              <text x="378" y="118" text-anchor="middle" fill="#d6e4f8" font-size="15">Registers, memories</text>
+
+              <rect x="288" y="176" width="180" height="88" rx="20" fill="url(#synBox)" stroke="#ffc86b" stroke-opacity="0.52"></rect>
+              <text x="378" y="208" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">Non-synthesizable</text>
+              <text x="378" y="232" text-anchor="middle" fill="#d6e4f8" font-size="15">Testbench, delays,</text>
+              <text x="378" y="252" text-anchor="middle" fill="#d6e4f8" font-size="15">modeling-only constructs</text>
+
+              <rect x="548" y="54" width="174" height="78" rx="18" fill="url(#synBox)" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+              <text x="635" y="84" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">Synthesis tool</text>
+              <text x="635" y="108" text-anchor="middle" fill="#d6e4f8" font-size="15">Derives logic network</text>
+
+              <rect x="548" y="180" width="174" height="60" rx="18" fill="url(#synBox)" stroke="#ff8a8a" stroke-opacity="0.44"></rect>
+              <text x="635" y="205" text-anchor="middle" fill="#ffb1b1" font-size="17" font-weight="700">Simulation / learning</text>
+              <text x="635" y="225" text-anchor="middle" fill="#d6e4f8" font-size="14">No direct hardware netlist</text>
+
+              <path d="M212 92 L288 92" stroke="#6feffd" stroke-width="5" stroke-linecap="round"></path>
+              <path d="M212 108 C248 122,255 204,288 220" stroke="#ffc86b" stroke-width="5" fill="none" stroke-linecap="round"></path>
+              <path d="M468 92 L548 92" stroke="#6ff7b3" stroke-width="5" stroke-linecap="round"></path>
+              <path d="M468 220 L548 210" stroke="#ff8a8a" stroke-width="5" stroke-linecap="round"></path>
+
+              <polygon points="278,84 296,92 278,100" fill="#6feffd"></polygon>
+              <polygon points="278,212 296,220 278,228" fill="#ffc86b"></polygon>
+              <polygon points="538,84 556,92 538,100" fill="#6ff7b3"></polygon>
+              <polygon points="538,202 556,210 538,218" fill="#ff8a8a"></polygon>
+            </svg>
+            <p>.</p>
+            <p class="visual-caption">## The key idea is not that every line of HDL becomes hardware. Only the synthesizable subset can be translated by synthesis tools into a realizable digital circuit. Other constructs still matter for verification, experimentation, and modeling.</p>
+          </div>
+          <p>-> For a beginner, a clean working distinction is this: some code can be synthesized into hardware, and some code cannot. In the strict RTL design sense, synthesizable code is the subset of a hardware language that a synthesis tool can translate into a circuit made of combinational logic, sequential storage elements, and the interconnect that binds them together.</p>
+          <p>-> That is the context of the word synthesizable. It does not just mean executable. It means a tool can derive a corresponding hardware implementation from the description. In practice, that means gates, multiplexers, adders, registers, memories, clocked elements, and the required connectivity. Passive and active device details appear more directly at lower abstraction levels, while RTL normally focuses on logic structure and clocked behavior.</p>
+          <p>-> So when you write Verilog, VHDL, SystemVerilog, or TL-Verilog in a synthesizable style, you are not merely instructing a processor. You are describing hardware that can be built onto an FPGA or carried forward into an ASIC flow.</p>
         </div>
       </article>
     </div>
 
     <div class="language-group-grid" style="margin-top: 1rem;">
       <article class="basics-card">
-        <h3>Two broad categories learners should know first</h3>
+        <h3>3. Two broad categories learners should know first</h3>
+        <div class="basics-visual" aria-label="Side by side diagram showing general-purpose software languages on one side and synthesizable HDL families on the other">
+          <svg viewBox="0 0 760 280" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="langCol" x1="0" x2="1">
+                <stop offset="0%" stop-color="#133151"></stop>
+                <stop offset="100%" stop-color="#0b1e31"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="36" y="34" width="308" height="212" rx="24" fill="url(#langCol)" stroke="#ffc86b" stroke-opacity="0.45"></rect>
+            <rect x="416" y="34" width="308" height="212" rx="24" fill="url(#langCol)" stroke="#6feffd" stroke-opacity="0.48"></rect>
+
+            <text x="190" y="70" text-anchor="middle" fill="#ffc86b" font-size="20" font-weight="700">General-purpose software</text>
+            <text x="190" y="98" text-anchor="middle" fill="#d6e4f8" font-size="15">C, C++, C#, Python, Java</text>
+            <text x="190" y="130" text-anchor="middle" fill="#d6e4f8" font-size="15">Algorithms</text>
+            <text x="190" y="154" text-anchor="middle" fill="#d6e4f8" font-size="15">Applications</text>
+            <text x="190" y="178" text-anchor="middle" fill="#d6e4f8" font-size="15">Runs on existing CPU</text>
+
+            <text x="570" y="70" text-anchor="middle" fill="#6feffd" font-size="20" font-weight="700">HDL / synthesizable design</text>
+            <text x="570" y="98" text-anchor="middle" fill="#d6e4f8" font-size="15">Verilog, VHDL, SystemVerilog</text>
+            <text x="570" y="122" text-anchor="middle" fill="#d6e4f8" font-size="15">TL-Verilog</text>
+            <text x="570" y="154" text-anchor="middle" fill="#d6e4f8" font-size="15">Describes logic + timing</text>
+            <text x="570" y="178" text-anchor="middle" fill="#d6e4f8" font-size="15">Targets FPGA / ASIC flow</text>
+
+            <line x1="344" y1="140" x2="416" y2="140" stroke="#e8f1ff" stroke-width="4" stroke-dasharray="10 10"></line>
+            <text x="380" y="128" text-anchor="middle" fill="#e8f1ff" font-size="14">Different</text>
+            <text x="385" y="159" text-anchor="middle" fill="#e8f1ff" font-size="14">design intent</text>
+
+            <circle cx="112" cy="214" r="18" fill="#ffc86b" fill-opacity="0.14" stroke="#ffc86b"></circle>
+            <text x="112" y="220" text-anchor="middle" fill="#ffc86b" font-size="18">SW</text>
+            <circle cx="646" cy="214" r="18" fill="#6feffd" fill-opacity="0.14" stroke="#6feffd"></circle>
+            <text x="646" y="220" text-anchor="middle" fill="#6feffd" font-size="18">HW</text>
+          </svg>
+          <p class="visual-caption">Both families use text-based code, but they serve different engineering targets. One family tells an existing machine what to do; the other family describes a machine that can be implemented.</p>
+        </div>
         <div class="language-group-grid">
           <div class="language-group">
             <strong>i. Non-synthesizable / general-purpose software languages</strong>
@@ -649,21 +1110,61 @@
       </article>
 
       <article class="basics-card">
-        <h3>Why the same statement means different things</h3>
-        <p>In Verilog, if you write <code>assign y = A &amp; B;</code>, you are not just asking a CPU to evaluate a temporary expression. You are describing a continuous combinational relationship. The synthesis tool can infer AND logic that produces <code>y</code> from <code>A</code> and <code>B</code>. If the signals are vectors, the operation becomes a bitwise hardware operation across those signal widths.</p>
-        <p>Similarly in VHDL, a statement like <code>y &lt;= A and B;</code> describes an AND operation in hardware. For multi-bit signals, corresponding bits are ANDed in parallel. That is why HDLs naturally express concurrency and structure. In ordinary software languages such as C, C++, Java, or Python, the same-looking expression is just an operation executed by an already existing processor. It does not, by itself, define a new circuit implementation for synthesis.</p>
+        <h3>4. Why the same statement means different things ?</h3>
+        <div class="basics-visual" aria-label="Diagram comparing HDL expressions that infer hardware with software expressions that run on a processor">
+          <svg viewBox="0 0 760 290" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="stmtBox" x1="0" x2="1">
+                <stop offset="0%" stop-color="#12304d"></stop>
+                <stop offset="100%" stop-color="#0b1f34"></stop>
+              </linearGradient>
+            </defs>
+            <rect x="30" y="32" width="310" height="92" rx="20" fill="url(#stmtBox)" stroke="#6feffd" stroke-opacity="0.5"></rect>
+            <text x="185" y="67" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL statement</text>
+            <text x="185" y="96" text-anchor="middle" fill="#e8f1ff" font-size="17" font-family="IBM Plex Mono, monospace">assign y = A &amp; B;</text>
+
+            <rect x="30" y="164" width="310" height="94" rx="20" fill="url(#stmtBox)" stroke="#ffc86b" stroke-opacity="0.5"></rect>
+            <text x="185" y="198" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">Software statement</text>
+            <text x="185" y="227" text-anchor="middle" fill="#e8f1ff" font-size="17" font-family="IBM Plex Mono, monospace">y = A & B;</text>
+
+            <rect x="438" y="44" width="292" height="70" rx="18" fill="url(#stmtBox)" stroke="#6ff7b3" stroke-opacity="0.48"></rect>
+            <text x="584" y="71" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">Infers hardware logic</text>
+            <text x="584" y="95" text-anchor="middle" fill="#d6e4f8" font-size="15">Parallel AND gates / combinational path</text>
+
+            <rect x="438" y="170" width="292" height="70" rx="18" fill="url(#stmtBox)" stroke="#ffb1b1" stroke-opacity="0.45"></rect>
+            <text x="584" y="198" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">Runs on existing processor</text>
+            <text x="584" y="220" text-anchor="middle" fill="#d6e4f8" font-size="13">Computes a result, does not define new logic fabric</text>
+
+            <path d="M340 78 L438 78" stroke="#6ff7b3" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M340 210 L438 206" stroke="#ffb1b1" stroke-width="5" stroke-linecap="round"></path>
+            <polygon points="428,70 446,78 428,86" fill="#6ff7b3"></polygon>
+            <polygon points="428,198 446,206 428,214" fill="#ffb1b1"></polygon>
+
+            <rect x="520" y="110" width="44" height="44" rx="8" fill="#6feffd" fill-opacity="0.16" stroke="#6feffd"></rect>
+            <rect x="574" y="110" width="44" height="44" rx="8" fill="#6feffd" fill-opacity="0.16" stroke="#6feffd"></rect>
+            <rect x="628" y="110" width="44" height="44" rx="8" fill="#6feffd" fill-opacity="0.16" stroke="#6feffd"></rect>
+            <text x="542" y="138" text-anchor="middle" fill="#6feffd" font-size="20">&amp;</text>
+            <text x="596" y="138" text-anchor="middle" fill="#6feffd" font-size="20">&amp;</text>
+            <text x="650" y="138" text-anchor="middle" fill="#6feffd" font-size="20">&amp;</text>
+          </svg>
+          <p class="visual-caption">This is the beginner's mental split to keep: in an HDL, the expression helps define hardware structure and signal behavior; in software, the expression is simply one operation executed by a processor that already exists.</p>
+        </div>
+        <div class="comparison-points">
+          <p>-> In Verilog, if you write <code>assign y = A &amp; B;</code>, you are not just asking a CPU to evaluate a temporary expression. You are describing a continuous combinational relationship. The synthesis tool can infer AND logic that produces <code>y</code> from <code>A</code> and <code>B</code>. If the signals are vectors, the operation becomes a bitwise hardware operation across those signal widths.</p>
+          <p>-> Similarly in VHDL, a statement like <code>y &lt;= A and B;</code> describes an AND operation in hardware. For multi-bit signals, corresponding bits are ANDed in parallel. That is why HDLs naturally express concurrency and structure. In ordinary software languages such as C, C++, Java, or Python, the same-looking expression is just an operation executed by an already existing processor. It does not, by itself, define a new circuit implementation for synthesis.</p>
+        </div>
       </article>
     </div>
 
     <article class="difference-card" style="margin-top: 1rem;">
-      <h3>10-point difference: HDL vs non-HDL</h3>
+      <h3>5. 10-point difference: HDL vs non-HDL</h3>
       <p>This comparison is intentionally beginner-focused. It is framed around how these languages behave in a digital design flow, not around every possible research or tool-assisted exception.</p>
 
       <div class="difference-table-wrap">
         <table class="difference-table" aria-label="Ten point difference between HDL and non-HDL languages">
           <thead>
             <tr>
-              <th>Point</th>
+              <th>Points</th>
               <th>HDL / Synthesizable language</th>
               <th>Non-HDL / general-purpose language</th>
             </tr>
@@ -723,6 +1224,305 @@
         </table>
       </div>
     </article>
+
+    <div class="difference-breakdown">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Point-by-Point Understanding . . .</span>
+          <h2>Understand all 10 differences visually . . . (for better understanding !)</h2>
+          <p>Each point below takes one line from the table and turns it into a short visual mental model so a learner can understand what the difference means in practice.</p>
+        </div>
+      </div>
+
+      <div class="difference-breakdown-grid">
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 1</span>
+          <h3>Hardware description vs software procedure</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Hardware description branching to simulation and synthesis while software procedure runs on a processor">
+              <defs>
+                <marker id="pointOneArrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#6ff7b3"></polygon>
+                </marker>
+                <marker id="pointOneArrowAmber" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                  <polygon points="0 0, 10 5, 0 10" fill="#ffc86b"></polygon>
+                </marker>
+              </defs>
+              <rect class="float-node" x="28" y="74" width="152" height="72" rx="18" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+              <text x="104" y="101" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL description</text>
+              <text x="104" y="124" text-anchor="middle" fill="#d6e4f8" font-size="14">behavior + structure</text>
+              <path class="flow-line" d="M180 110 L322 76" stroke="#6ff7b3" stroke-width="4" fill="none" marker-end="url(#pointOneArrowGreen)"></path>
+              <path class="flow-line" d="M180 110 L322 144" stroke="#ffc86b" stroke-width="4" fill="none" marker-end="url(#pointOneArrowAmber)"></path>
+              <rect class="pulse-node" x="332" y="40" width="126" height="54" rx="16" fill="#132f49" stroke="#6ff7b3" stroke-opacity="0.5"></rect>
+              <rect class="pulse-node" x="332" y="126" width="126" height="54" rx="16" fill="#132f49" stroke="#ffc86b" stroke-opacity="0.5"></rect>
+              <text x="395" y="69" text-anchor="middle" fill="#6ff7b3" font-size="15">Simulation</text>
+              <text x="395" y="155" text-anchor="middle" fill="#ffc86b" font-size="15">Synthesis</text>
+              <rect class="float-node" x="492" y="74" width="120" height="72" rx="18" fill="#12304d" stroke="#ffb1b1" stroke-opacity="0.46"></rect>
+              <text x="552" y="101" text-anchor="middle" fill="#ffb1b1" font-size="17" font-weight="700">Software</text>
+              <text x="552" y="124" text-anchor="middle" fill="#d6e4f8" font-size="14">runs on CPU</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> You write a hardware description that tools can analyze as a circuit model.</div>
+            <div class="difference-side-note"><strong>Software side</strong> You write procedures for a processor to execute one instruction stream at a time.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> HDL is about describing the machine. Software is about instructing a machine that already exists.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 2</span>
+          <h3>Parallel hardware vs sequential software flow</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Parallel HDL signal paths compared with sequential software steps">
+              <rect x="30" y="36" width="250" height="148" rx="20" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+              <text x="155" y="62" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL concurrency</text>
+              <circle class="pulse-node" cx="96" cy="104" r="18" fill="#6ff7b3"></circle>
+              <circle class="pulse-node" cx="156" cy="84" r="18" fill="#ffc86b"></circle>
+              <circle class="pulse-node" cx="216" cy="124" r="18" fill="#6feffd"></circle>
+              <path class="flow-line" d="M96 104 L156 84 L216 124" stroke="#e8f1ff" stroke-width="4" fill="none"></path>
+              <text x="155" y="160" text-anchor="middle" fill="#d6e4f8" font-size="14">many operations can co-exist</text>
+              <rect x="360" y="36" width="250" height="148" rx="20" fill="#12304d" stroke="#ffb1b1" stroke-opacity="0.46"></rect>
+              <text x="485" y="62" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">Software sequence</text>
+              <rect class="float-node" x="392" y="84" width="48" height="34" rx="10" fill="#142f4b" stroke="#ffb1b1"></rect>
+              <rect class="float-node" x="462" y="84" width="48" height="34" rx="10" fill="#142f4b" stroke="#ffb1b1" style="animation-delay:0.2s"></rect>
+              <rect class="float-node" x="532" y="84" width="48" height="34" rx="10" fill="#142f4b" stroke="#ffb1b1" style="animation-delay:0.4s"></rect>
+              <text x="416" y="106" text-anchor="middle" fill="#ffb1b1" font-size="14">1</text>
+              <text x="486" y="106" text-anchor="middle" fill="#ffb1b1" font-size="14">2</text>
+              <text x="556" y="106" text-anchor="middle" fill="#ffb1b1" font-size="14">3</text>
+              <path d="M440 101 L462 101" stroke="#ffb1b1" stroke-width="4"></path>
+              <path d="M510 101 L532 101" stroke="#ffb1b1" stroke-width="4"></path>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> Separate logic paths are active together because the circuit exists all at once.</div>
+            <div class="difference-side-note"><strong>Software side</strong> Statements are usually stepped through in a defined execution order.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> The default mental model for hardware is parallel activity, not a single-file line-by-line script.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 3</span>
+          <h3>Time is native in HDL</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Clocked HDL timeline compared with software time being external">
+              <rect x="28" y="42" width="276" height="134" rx="20" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+              <text x="166" y="68" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL timeline</text>
+              <path d="M68 124 H116 V92 H164 V124 H212 V92 H260" stroke="#6ff7b3" stroke-width="4" fill="none"></path>
+              <text x="166" y="152" text-anchor="middle" fill="#d6e4f8" font-size="14">clock edges and cycle boundaries matter</text>
+              <rect x="340" y="42" width="272" height="134" rx="20" fill="#12304d" stroke="#ffc86b" stroke-opacity="0.48"></rect>
+              <text x="476" y="68" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">Software timeline</text>
+              <rect class="float-node" x="384" y="96" width="58" height="34" rx="10" fill="#142f4b" stroke="#ffc86b"></rect>
+              <rect class="float-node" x="458" y="96" width="58" height="34" rx="10" fill="#142f4b" stroke="#ffc86b" style="animation-delay:0.2s"></rect>
+              <rect class="float-node" x="532" y="96" width="58" height="34" rx="10" fill="#142f4b" stroke="#ffc86b" style="animation-delay:0.4s"></rect>
+              <text x="476" y="152" text-anchor="middle" fill="#d6e4f8" font-size="14">time must usually be modeled explicitly</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> Edges, cycles, delays, and signal events are core to how the design is interpreted.</div>
+            <div class="difference-side-note"><strong>Software side</strong> A program can care about time, but time is not inherently the structural language backbone.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> In digital design, asking when something happens is as important as asking what happens.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 4</span>
+          <h3>Synthesis creates logic, compilation creates software</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Synthesis path to gates compared with compilation path to binary">
+              <rect x="36" y="82" width="116" height="56" rx="16" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="94" y="114" text-anchor="middle" fill="#6feffd" font-size="16">RTL code</text>
+              <path class="flow-line" d="M152 110 L266 110" stroke="#6ff7b3" stroke-width="4"></path>
+              <rect x="266" y="82" width="116" height="56" rx="16" fill="#12304d" stroke="#6ff7b3"></rect>
+              <text x="324" y="114" text-anchor="middle" fill="#6ff7b3" font-size="16">Synthesis</text>
+              <path class="flow-line" d="M382 110 L496 110" stroke="#ffc86b" stroke-width="4"></path>
+              <rect x="496" y="82" width="108" height="56" rx="16" fill="#12304d" stroke="#ffc86b"></rect>
+              <text x="550" y="114" text-anchor="middle" fill="#ffc86b" font-size="16">Gate logic</text>
+              <text x="324" y="168" text-anchor="middle" fill="#d6e4f8" font-size="14">software compilation ends in executable code, not a new circuit netlist</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> Synthesis transforms valid RTL into hardware structures such as logic cells and registers.</div>
+            <div class="difference-side-note"><strong>Software side</strong> Compilation produces code for a processor to run, not a fabricated digital datapath.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> Similar tool words exist in both worlds, but the end products are fundamentally different.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 5</span>
+          <h3>An HDL assignment can mean real hardware wiring</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="HDL assignment mapping to logic connection compared with software assignment mapping to stored value">
+              <rect x="30" y="44" width="252" height="132" rx="20" fill="#12304d" stroke="#6feffd" stroke-opacity="0.5"></rect>
+              <text x="156" y="72" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL assignment</text>
+              <text x="156" y="102" text-anchor="middle" fill="#e8f1ff" font-size="16" font-family="IBM Plex Mono, monospace">assign y = A &amp; B;</text>
+              <circle cx="108" cy="136" r="16" fill="#6ff7b3"></circle>
+              <circle cx="156" cy="136" r="16" fill="#ffc86b"></circle>
+              <rect x="198" y="120" width="40" height="32" rx="8" fill="#142f4b" stroke="#6feffd"></rect>
+              <text x="218" y="141" text-anchor="middle" fill="#6feffd" font-size="16">&amp;</text>
+              <rect x="360" y="44" width="252" height="132" rx="20" fill="#12304d" stroke="#ffb1b1" stroke-opacity="0.46"></rect>
+              <text x="486" y="72" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">Software assignment</text>
+              <text x="486" y="102" text-anchor="middle" fill="#e8f1ff" font-size="16" font-family="IBM Plex Mono, monospace">y = A & B;</text>
+              <rect class="pulse-node" x="398" y="122" width="176" height="34" rx="8" fill="#142f4b" stroke="#ffb1b1"></rect>
+              <text x="486" y="143" text-anchor="middle" fill="#ffb1b1" font-size="13">value in memory / register</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> An assignment can establish a persistent hardware relationship between signals.</div>
+            <div class="difference-side-note"><strong>Software side</strong> An assignment usually places a computed value into storage during execution.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> Similar syntax does not imply the same engineering meaning.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 6</span>
+          <h3>Bit width and buses are first-class hardware concerns</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Multi-bit signal bus in hardware compared with ordinary software values">
+              <rect x="34" y="44" width="272" height="132" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="170" y="72" text-anchor="middle" fill="#6feffd" font-size="18">Hardware bus</text>
+              <rect x="86" y="96" width="170" height="20" rx="8" fill="#142f4b" stroke="#6ff7b3"></rect>
+              <line x1="118" y1="96" x2="118" y2="116" stroke="#6ff7b3"></line>
+              <line x1="150" y1="96" x2="150" y2="116" stroke="#6ff7b3"></line>
+              <line x1="182" y1="96" x2="182" y2="116" stroke="#6ff7b3"></line>
+              <line x1="214" y1="96" x2="214" y2="116" stroke="#6ff7b3"></line>
+              <text x="170" y="148" text-anchor="middle" fill="#d6e4f8" font-size="12">width, slices, and bit positions matter directly</text>
+              <rect x="336" y="44" width="272" height="132" rx="20" fill="#12304d" stroke="#ffc86b"></rect>
+              <text x="472" y="72" text-anchor="middle" fill="#ffc86b" font-size="18">Software value</text>
+              <rect class="float-node" x="418" y="96" width="108" height="30" rx="10" fill="#142f4b" stroke="#ffc86b"></rect>
+              <text x="472" y="116" text-anchor="middle" fill="#ffc86b" font-size="14">integer / object</text>
+              <text x="472" y="148" text-anchor="middle" fill="#d6e4f8" font-size="10">bit control exists, but not as the default structural model</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> Designers constantly reason about widths, slices, concatenation, sign, and bus structure.</div>
+            <div class="difference-side-note"><strong>Software side</strong> Bit operations exist, but they are usually not the primary way complete systems are architected.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> In HDL, bit-level shape is part of the design itself, not just a low-level optimization detail.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 7</span>
+          <h3>Hardware verification checks behavior over cycles</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Waveform-style hardware verification compared with software output checking">
+              <rect x="30" y="38" width="278" height="144" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="169" y="66" text-anchor="middle" fill="#6feffd" font-size="18">Hardware verification</text>
+              <text x="64" y="101" fill="#6ff7b3" font-size="12">clk</text>
+              <text x="56" y="141" fill="#ffc86b" font-size="12">valid</text>
+              <line x1="86" y1="84" x2="258" y2="84" stroke="#37516e" stroke-width="1"></line>
+              <line x1="86" y1="124" x2="258" y2="124" stroke="#37516e" stroke-width="1"></line>
+              <line x1="108" y1="82" x2="108" y2="148" stroke="#29445f" stroke-width="1"></line>
+              <line x1="142" y1="82" x2="142" y2="148" stroke="#29445f" stroke-width="1"></line>
+              <line x1="176" y1="82" x2="176" y2="148" stroke="#29445f" stroke-width="1"></line>
+              <line x1="210" y1="82" x2="210" y2="148" stroke="#29445f" stroke-width="1"></line>
+              <line x1="244" y1="82" x2="244" y2="148" stroke="#29445f" stroke-width="1"></line>
+              <path d="M86 104 H108 V88 H142 V104 H176 V88 H210 V104 H244 V88 H258" stroke="#6ff7b3" stroke-width="4" fill="none"></path>
+              <path d="M86 144 H142 V144 H176 V108 H210 V108 H244 V144 H258" stroke="#ffc86b" stroke-width="4" fill="none"></path>
+              <rect x="90" y="152" width="168" height="20" rx="8" fill="#142f4b" stroke="#6feffd" stroke-opacity="0.35"></rect>
+              <text x="174" y="166" text-anchor="middle" fill="#d6e4f8" font-size="10">watch signals change correctly over time</text>
+              <rect x="336" y="38" width="274" height="144" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+              <text x="473" y="66" text-anchor="middle" fill="#ffb1b1" font-size="18">Software verification</text>
+              <rect class="pulse-node" x="390" y="96" width="166" height="54" rx="12" fill="#142f4b" stroke="#ffb1b1"></rect>
+              <text x="473" y="120" text-anchor="middle" fill="#ffb1b1" font-size="15">input</text>
+              <text x="473" y="140" text-anchor="middle" fill="#ffb1b1" font-size="15">output / expected result</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> You often verify sequences, protocol timing, hazards, resets, and waveform evolution.</div>
+            <div class="difference-side-note"><strong>Software side</strong> You more often verify returned values, state transitions, and algorithmic correctness.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> Hardware verification is deeply temporal. The timeline is part of the correctness proof.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 8</span>
+          <h3>Target hardware artifact vs target program artifact</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="FPGA and ASIC target compared with software binary target">
+              <rect x="34" y="44" width="274" height="132" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="171" y="72" text-anchor="middle" fill="#6feffd" font-size="18">Hardware target</text>
+              <rect class="float-node" x="82" y="94" width="72" height="52" rx="12" fill="#142f4b" stroke="#6ff7b3"></rect>
+              <rect class="float-node" x="188" y="94" width="72" height="52" rx="12" fill="#142f4b" stroke="#ffc86b" style="animation-delay:0.3s"></rect>
+              <text x="118" y="122" text-anchor="middle" fill="#6ff7b3" font-size="15">FPGA</text>
+              <text x="224" y="122" text-anchor="middle" fill="#ffc86b" font-size="15">ASIC</text>
+              <rect x="338" y="44" width="268" height="132" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+              <text x="472" y="72" text-anchor="middle" fill="#ffb1b1" font-size="18">Software target</text>
+              <rect class="pulse-node" x="414" y="96" width="118" height="48" rx="12" fill="#142f4b" stroke="#ffb1b1"></rect>
+              <text x="473" y="126" text-anchor="middle" fill="#ffb1b1" font-size="15">binary/bytecode</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> The output of the design flow can become configurable logic or silicon implementation data.</div>
+            <div class="difference-side-note"><strong>Software side</strong> The output is typically an executable artifact interpreted or run by a processor environment.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> The destination of the flow changes how you must think about correctness, constraints, and optimization.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 9</span>
+          <h3>Area, timing, power, and throughput are design-native</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Hardware tradeoff radar compared with software performance emphasis">
+              <rect x="30" y="38" width="286" height="155" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="173" y="66" text-anchor="middle" fill="#6feffd" font-size="18">Hardware tradeoffs</text>
+              <rect class="pulse-node" x="128" y="92" width="90" height="36" rx="12" fill="#142f4b" stroke="#e8f1ff" stroke-opacity="0.45"></rect>
+              <text x="173" y="114" text-anchor="middle" fill="#e8f1ff" font-size="14">Design core</text>
+              <rect class="float-node" x="72" y="88" width="44" height="28" rx="8" fill="#153249" stroke="#6ff7b3"></rect>
+              <text x="94" y="106" text-anchor="middle" fill="#6ff7b3" font-size="12">Area</text>
+              <rect class="float-node" x="230" y="88" width="54" height="28" rx="8" fill="#153249" stroke="#ff9d9d" style="animation-delay:0.2s"></rect>
+              <text x="257" y="106" text-anchor="middle" fill="#ffb1b1" font-size="12">Timing</text>
+              <rect class="float-node" x="72" y="132" width="50" height="28" rx="8" fill="#153249" stroke="#ffc86b" style="animation-delay:0.35s"></rect>
+              <text x="97" y="150" text-anchor="middle" fill="#ffc86b" font-size="12">Power</text>
+              <rect class="float-node" x="210" y="132" width="78" height="28" rx="8" fill="#153249" stroke="#6feffd" style="animation-delay:0.5s"></rect>
+              <text x="249" y="150" text-anchor="middle" fill="#6feffd" font-size="9">Throughput/latency</text>
+              <line x1="116" y1="102" x2="128" y2="106" stroke="#6ff7b3" stroke-width="3"></line>
+              <line x1="218" y1="106" x2="230" y2="102" stroke="#ff9d9d" stroke-width="3"></line>
+              <line x1="122" y1="142" x2="128" y2="126" stroke="#ffc86b" stroke-width="3"></line>
+              <line x1="210" y1="142" x2="218" y2="126" stroke="#6feffd" stroke-width="3"></line>
+              <text x="173" y="180" text-anchor="middle" fill="#d6e4f8" font-size="12">hardware code directly drives physical   tradeoffs</text>
+              <rect x="338" y="38" width="278" height="171" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+              <text x="474" y="66" text-anchor="middle" fill="#ffb1b1" font-size="18">Software emphasis</text>
+              <rect x="382" y="80" width="148" height="32" rx="10" fill="#1a2d43" stroke="#ffb1b1"></rect>
+              <rect x="382" y="116" width="148" height="32" rx="10" fill="#1a2d43" stroke="#ffc86b"></rect>
+              <rect x="382" y="152" width="148" height="32" rx="10" fill="#1a2d43" stroke="#6feffd"></rect>
+              <text x="456" y="100" text-anchor="middle" fill="#ffb1b1" font-size="13">Runtime</text>
+              <text x="456" y="136" text-anchor="middle" fill="#ffc86b" font-size="13">Memory</text>
+              <text x="456" y="172" text-anchor="middle" fill="#6feffd" font-size="13">UX / response</text>
+              <text x="474" y="202" text-anchor="middle" fill="#d6e4f8" font-size="11">important, but not gate-level design constraints</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> Resource use and timing closure are direct consequences of what you describe.</div>
+            <div class="difference-side-note"><strong>Software side</strong> Performance still matters, but gate-level area and clock path closure are not the default code outcome.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> Hardware languages force physical tradeoffs into the design conversation much earlier.</div>
+          </div>
+        </article>
+
+        <article class="difference-explainer-card">
+          <span class="difference-point-label">Point 10</span>
+          <h3>Same expression, different engineering meaning</h3>
+          <div class="difference-visual">
+            <svg viewBox="0 0 640 220" role="img" aria-label="Same-looking AND expression producing hardware in HDL and computation in software">
+              <rect x="32" y="44" width="266" height="132" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+              <text x="165" y="72" text-anchor="middle" fill="#6feffd" font-size="18">HDL expression</text>
+              <text x="165" y="100" text-anchor="middle" fill="#e8f1ff" font-size="16" font-family="IBM Plex Mono, monospace">assign y = A &amp; B;</text>
+              <rect class="pulse-node" x="132" y="122" width="66" height="30" rx="8" fill="#142f4b" stroke="#6ff7b3"></rect>
+              <text x="165" y="142" text-anchor="middle" fill="#6ff7b3" font-size="13">AND logic</text>
+              <rect x="342" y="44" width="266" height="132" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+              <text x="475" y="72" text-anchor="middle" fill="#ffb1b1" font-size="18">Software expression</text>
+              <text x="475" y="100" text-anchor="middle" fill="#e8f1ff" font-size="16" font-family="IBM Plex Mono, monospace">y = A & B;</text>
+              <rect class="pulse-node" x="422" y="122" width="106" height="30" rx="8" fill="#142f4b" stroke="#ffb1b1"></rect>
+              <text x="475" y="142" text-anchor="middle" fill="#ffb1b1" font-size="13">computed result</text>
+            </svg>
+          </div>
+          <div class="difference-copy">
+            <div class="difference-side-note"><strong>HDL side</strong> The expression can become literal combinational circuitry.</div>
+            <div class="difference-side-note"><strong>Software side</strong> The expression is a calculation performed by the processor during execution.</div>
+            <div class="takeaway-note"><strong># NOTE # : </strong> Reading HDL requires asking what hardware this statement implies, not just what value it computes.</div>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
   <section class="section" id="roadmap">
@@ -741,7 +1541,7 @@
         <p>Learn how stage notation groups work by time. In a CPU, fetch, decode, execute, memory, and writeback are the natural first anchors.</p>
         <pre><code>|cpu
   @0
-    $pc = /reset  ? 0 : >>1$next_pc;
+    $pc = /reset   ? 0 : >>1$next_pc;
   @1
     $instr = /imem[$pc];</code></pre>
       </article>
@@ -785,11 +1585,11 @@ When does it become architecturally visible ?</code></pre>
         <p>Use stage markers like <code>@0</code>, <code>@1</code>, and <code>@2</code> to show where work logically happens in time.</p>
         <div class="example-list">
           <div class="example-item">
-            <strong>Why it matters</strong>
+            <strong>Why it matters ?</strong>
             A pipelined CPU stops feeling like five disconnected code islands and starts reading like one timed flow.
           </div>
           <div class="example-item">
-            <strong>What to watch for</strong>
+            <strong>What to watch for ?</strong>
             If a signal appears in the wrong stage, your mental timing model is already drifting.
           </div>
         </div>
@@ -800,11 +1600,11 @@ When does it become architecturally visible ?</code></pre>
         <p>References like <code>&gt;&gt;1</code> or values reused from earlier stages let you express pipeline movement directly rather than instantiating every register transfer by hand.</p>
         <div class="example-list">
           <div class="example-item">
-            <strong>Why it matters</strong>
+            <strong>Why it matters ?</strong>
             You can trace dependencies cleanly across the pipeline.
           </div>
           <div class="example-item">
-            <strong>What to watch for</strong>
+            <strong>What to watch for ?</strong>
             Be explicit about where data becomes valid so hazards do not get hidden by nicer syntax.
           </div>
         </div>
@@ -826,7 +1626,7 @@ When does it become architecturally visible ?</code></pre>
         <h3>Instruction fetch path</h3>
         <p>The fetch stage is usually the easiest place to get comfortable because it has obvious time ordering: current PC, memory access, next PC selection.</p>
         <pre><code>@0
-  $pc = /reset  ? 32'b0 : >>1$next_pc;
+  $pc = /reset   ? 32'b0 : >>1$next_pc;
   $imem_addr = $pc;
 @1
   $instr = /imem[$imem_addr];</code></pre>
@@ -837,7 +1637,7 @@ When does it become architecturally visible ?</code></pre>
         <p>Decode prepares operands, execute combines them, and later stages commit the result. TL-Verilog makes that separation visible with much less boilerplate.</p>
         <pre><code>@2
   $op_a = /rf[$rs1];
-  $op_b = $is_imm  ? $imm : /rf[$rs2];
+  $op_b = $is_imm   ? $imm : /rf[$rs2];
 @3
   $alu_out = $op_a + $op_b;
 @4
@@ -864,7 +1664,7 @@ When does it become architecturally visible ?</code></pre>
             Pick one instruction and label exactly where fetch, decode, execute, memory, and writeback occur.
           </div>
           <div class="practice-item">
-            <strong>What you should learn</strong>
+            <strong>What you should learn ?</strong>
             You will stop reading the code as plain text and start reading it as timed hardware behavior.
           </div>
         </div>
@@ -878,7 +1678,7 @@ When does it become architecturally visible ?</code></pre>
             Take a load-use sequence and mark the cycle when the loaded data becomes safe for the dependent instruction.
           </div>
           <div class="practice-item">
-            <strong>What you should learn</strong>
+            <strong>What you should learn ?</strong>
             Better syntax does not remove hazards. It only makes the timing story easier to inspect.
           </div>
         </div>
@@ -890,7 +1690,7 @@ When does it become architecturally visible ?</code></pre>
     <div class="closing-grid">
       <article class="closing-card">
         <span class="section-kicker">Study Loop</span>
-        <h3>How to use this with the CPU page</h3>
+        <h3>How to use this with the CPU page ?</h3>
         <p>Read this course page once, then return to the RISC-V dossier and compare its pipeline, execution trace, and code views against the stage concepts introduced here.</p>
       </article>
       <article class="closing-card">
