@@ -475,6 +475,163 @@
       color: #ffffff;
     }
 
+    .concept-search-inline-tip {
+      display: block;
+      margin-top: 0.45rem;
+      color: rgba(255, 241, 241, 0.82);
+      font-size: 0.84rem;
+    }
+
+    .concept-search-demo {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08rem 0.42rem;
+      margin: 0 0.12rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .concept-search-demo.is-guided {
+      animation: concept-search-demo-pulse 1.25s ease-in-out 3;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-search-action {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: min(320px, calc(100vw - 1.5rem));
+      padding: 0.8rem 0.95rem;
+      border: 1px solid rgba(126, 24, 36, 0.2);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(90, 16, 24, 0.96), rgba(152, 43, 58, 0.92));
+      color: #fff9f9;
+      box-shadow: 0 18px 34px rgba(78, 11, 19, 0.26);
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transform: translate3d(-9999px, -9999px, 0);
+    }
+
+    .concept-search-action[hidden] {
+      display: none;
+    }
+
+    .concept-search-action:hover {
+      transform: translateY(-1px);
+    }
+
+    .concept-search-action i {
+      font-size: 0.88rem;
+    }
+
+    .concept-search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(24, 6, 10, 0.56);
+      backdrop-filter: blur(10px);
+    }
+
+    .concept-search-modal[hidden] {
+      display: none;
+    }
+
+    .concept-search-dialog {
+      width: min(520px, 100%);
+      padding: 1.2rem 1.2rem 1.1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(126, 24, 36, 0.16);
+      background: linear-gradient(180deg, rgba(255, 252, 251, 0.98), rgba(255, 244, 242, 0.95));
+      color: var(--paper-ink);
+      box-shadow: 0 26px 60px rgba(53, 6, 12, 0.22);
+    }
+
+    .concept-search-dialog-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .concept-search-dialog-title {
+      font-size: 1.08rem;
+      line-height: 1.3;
+      color: var(--paper-ink);
+    }
+
+    .concept-search-dialog p {
+      color: var(--paper-muted);
+      font-size: 0.95rem;
+      line-height: 1.68;
+    }
+
+    .concept-search-dialog-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .concept-search-dialog-btn {
+      border: 1px solid rgba(126, 24, 36, 0.14);
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--paper-ink);
+      min-height: 42px;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .concept-search-dialog-btn--primary {
+      background: linear-gradient(135deg, rgba(107, 18, 29, 0.96), rgba(162, 47, 63, 0.92));
+      color: #fff9f9;
+      box-shadow: 0 14px 28px rgba(89, 13, 21, 0.18);
+    }
+
+    .concept-search-dialog-close {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(126, 24, 36, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.72);
+      color: #7d1927;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    @keyframes concept-search-demo-pulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.12);
+      }
+
+      50% {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06);
+      }
+    }
+
     .hero-summary {
       padding: 1.4rem;
       display: grid;
@@ -754,6 +911,200 @@
       margin-bottom: 0.3rem;
     }
 
+    .cheat-sheet-wrap {
+      margin-top: 1.25rem;
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 245, 243, 0.72));
+      border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .cheat-sheet-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .cheat-sheet-title h3 {
+      margin-bottom: 0.35rem;
+      color: var(--paper-ink);
+      font-size: 1.18rem;
+    }
+
+    .cheat-sheet-title p {
+      color: var(--paper-muted);
+    }
+
+    .cheat-sheet-root {
+      max-width: 360px;
+      margin: 0 auto 1rem;
+      text-align: center;
+      padding: 1rem 1.1rem;
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(113, 22, 33, 0.96), rgba(177, 58, 76, 0.84));
+      color: #fff8f8;
+      box-shadow: 0 18px 34px rgba(88, 12, 23, 0.16);
+    }
+
+    .cheat-sheet-root strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+    }
+
+    .cheat-sheet-root span {
+      display: block;
+      color: rgba(255, 242, 242, 0.9);
+      font-size: 0.92rem;
+    }
+
+    .cheat-sheet-branches {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem;
+      padding-top: 1.4rem;
+    }
+
+    .cheat-sheet-branches::before {
+      content: "";
+      position: absolute;
+      top: 0.2rem;
+      left: 50%;
+      width: 2px;
+      height: 1rem;
+      background: rgba(126, 24, 36, 0.25);
+      transform: translateX(-50%);
+    }
+
+    .cheat-sheet-branches::after {
+      content: "";
+      position: absolute;
+      top: 1.15rem;
+      left: calc(25% + 0.55rem);
+      right: calc(25% + 0.55rem);
+      height: 2px;
+      background: rgba(126, 24, 36, 0.25);
+    }
+
+    .cheat-sheet-branch {
+      position: relative;
+      display: grid;
+      gap: 0.75rem;
+      padding-top: 1.15rem;
+    }
+
+    .cheat-sheet-branch::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 1rem;
+      background: rgba(126, 24, 36, 0.25);
+      transform: translateX(-50%);
+    }
+
+    .cheat-sheet-branch-title {
+      padding: 0.95rem 1rem;
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(126, 24, 36, 0.08);
+      border: 1px solid rgba(126, 24, 36, 0.12);
+    }
+
+    .cheat-sheet-branch-title strong {
+      display: block;
+      color: var(--paper-ink);
+      font-size: 0.98rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .cheat-sheet-branch-title span {
+      display: block;
+      margin-top: 0.2rem;
+      color: var(--paper-muted);
+      font-size: 0.82rem;
+    }
+
+    .cheat-sheet-list {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .cheat-sheet-node {
+      position: relative;
+      padding: 0.95rem 1rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(126, 24, 36, 0.12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .cheat-sheet-node + .cheat-sheet-node::before {
+      content: "▼";
+      position: absolute;
+      top: -0.78rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #8a2432;
+      font-size: 0.88rem;
+      line-height: 1;
+    }
+
+    .cheat-sheet-node strong {
+      display: block;
+      margin-bottom: 0.22rem;
+      color: var(--paper-ink);
+      font-size: 0.96rem;
+    }
+
+    .cheat-sheet-node p {
+      color: var(--paper-muted);
+      font-size: 0.86rem;
+      line-height: 1.52;
+    }
+
+    .cheat-sheet-node em {
+      font-style: normal;
+      color: #8a2432;
+      font-weight: 700;
+    }
+
+    .cheat-sheet-legend {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(126, 24, 36, 0.12);
+    }
+
+    .cheat-sheet-legend h4 {
+      margin-bottom: 0.6rem;
+      color: var(--paper-ink);
+      font-size: 0.95rem;
+    }
+
+    .cheat-sheet-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+    }
+
+    .cheat-sheet-legend-item {
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(126, 24, 36, 0.1);
+      color: var(--paper-muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .cheat-sheet-legend-item strong {
+      color: var(--paper-ink);
+    }
+
     .example-table-wrap {
       margin-top: 1.2rem;
       overflow: hidden;
@@ -761,6 +1112,15 @@
       border-radius: var(--radius-md);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 245, 243, 0.72));
       border: 1px solid rgba(126, 24, 36, 0.1);
+    }
+
+    .power-map-visual {
+      margin-bottom: 1rem;
+    }
+
+    .power-map-visual img {
+      height: 240px;
+      object-position: center;
     }
 
     .power-flow-app {
@@ -1092,6 +1452,53 @@
       gap: 0.95rem;
     }
 
+      .paper-lead {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(200px, 0.8fr);
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .paper-copy {
+        min-width: 0;
+      }
+
+      .paper-visual {
+        overflow: hidden;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 245, 243, 0.8));
+        border: 1px solid rgba(126, 24, 36, 0.12);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      .paper-visual img {
+        display: block;
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .paper-visual figcaption {
+        padding: 0.75rem 0.85rem 0.85rem;
+        border-top: 1px solid rgba(126, 24, 36, 0.1);
+      }
+
+      .paper-visual strong {
+        display: block;
+        margin-bottom: 0.22rem;
+        color: var(--paper-ink);
+        font-size: 0.86rem;
+        line-height: 1.35;
+      }
+
+      .paper-visual span {
+        display: block;
+        color: var(--paper-muted);
+        font-size: 0.8rem;
+        line-height: 1.45;
+      }
+
     .paper-card[hidden] {
       display: none;
     }
@@ -1369,6 +1776,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .cheat-sheet-legend-grid {
+        grid-template-columns: 1fr;
+      }
+
       .filter-search {
         min-width: 100%;
         max-width: none;
@@ -1376,6 +1787,10 @@
 
       .taxonomy-flow::before {
         display: none;
+      }
+
+      .paper-lead {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -1401,8 +1816,47 @@
         grid-template-columns: 1fr;
       }
 
+      .cheat-sheet-wrap {
+        padding: 1rem;
+      }
+
+      .cheat-sheet-branches {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+        padding-top: 0.8rem;
+      }
+
+      .cheat-sheet-branches::before,
+      .cheat-sheet-branches::after,
+      .cheat-sheet-branch::before {
+        display: none;
+      }
+
       .example-table-wrap {
         padding: 0.8rem;
+      }
+
+      .power-map-visual img {
+        height: 190px;
+      }
+
+      .concept-search-action {
+        max-width: calc(100vw - 1rem);
+        padding: 0.72rem 0.85rem;
+        font-size: 0.8rem;
+      }
+
+      .concept-search-dialog {
+        padding: 1rem;
+        border-radius: 18px;
+      }
+
+      .concept-search-dialog-actions {
+        justify-content: stretch;
+      }
+
+      .concept-search-dialog-btn {
+        width: 100%;
       }
 
       .filter-toolbar,
@@ -1522,6 +1976,7 @@
         
         <div class="hero-note">
           <strong>Reading frame:</strong> read this collection as a stacked power-reduction workflow, starting at architecture, then activity control, then block specialization, and finally layout-aware closure.
+          <span class="concept-search-inline-tip">Tip: double-click any keyword to search it on Google, or try selecting <span class="concept-search-demo" id="conceptSearchDemoPhrase">clock gating</span> and use the search pill.</span>
         </div>
       </div>
 
@@ -1546,7 +2001,7 @@
         </div>
 
         <div class="summary-box">
-          <h2>What does this collection show?</h2>
+          <h2>What does this collection show ?</h2>
           <p>
             The strongest low-power designs are usually built in stages: architecture first, then voltage and activity
             control, then circuit-level optimization, then layout-aware closure. Several papers also reinforce that
@@ -1627,7 +2082,7 @@
           <p>VLSI means Very Large Scale Integration, where millions or billions of transistors are integrated on a single chip. A chip can be viewed like a miniature city: transistors act as buildings, wires act as roads, and blocks such as ALUs, caches, and I/O act as neighborhoods.</p>
         </div>
         <div class="focus-item">
-          <h3>2. Why Low Power Matters?</h3>
+          <h3>2. Why Low Power Matters ?</h3>
           <p>Low power matters because battery-operated systems must last longer, hot chips are harder to cool, and large compute deployments become expensive when every watt multiplies across millions of devices.</p>
         </div>
         <div class="focus-item">
@@ -1654,6 +2109,79 @@
         <div class="basics-list-item">
           <strong>Design principle</strong>
           If switching is unnecessary, stop it. If voltage can be reduced safely, scale it. If leakage dominates, isolate or gate the idle block.
+        </div>
+      </div>
+
+      <div class="cheat-sheet-wrap">
+        <div class="cheat-sheet-title">
+          <span class="section-kicker">Cheat Sheet</span>
+          <h3>Low Power VLSI Design Cheat Sheet</h3>
+          <p>A compact visual summary of how common low-power techniques target either dynamic power, static power, or both.</p>
+        </div>
+
+        <div class="cheat-sheet-root">
+          <strong>Total Power</strong>
+          <span>Dynamic Power + Static Power</span>
+        </div>
+
+        <div class="cheat-sheet-branches">
+          <div class="cheat-sheet-branch">
+            <div class="cheat-sheet-branch-title">
+              <strong>Dynamic Power Down</strong>
+              <span>Reduce switching, voltage, and unnecessary activity</span>
+            </div>
+            <div class="cheat-sheet-list">
+              <div class="cheat-sheet-node">
+                <strong>DVFS</strong>
+                <p><em>Vdd / f down:</em> Dynamic Voltage &amp; Frequency Scaling lowers supply voltage and operating frequency when the workload is lighter.</p>
+              </div>
+              <div class="cheat-sheet-node">
+                <strong>Clock Gating</strong>
+                <p><em>Stop clocks:</em> Disable clocks to idle sequential blocks so useless toggles do not burn dynamic power.</p>
+              </div>
+              <div class="cheat-sheet-node">
+                <strong>Resource Sharing</strong>
+                <p><em>Share hardware:</em> Reuse ALUs, multipliers, and other heavy units instead of switching duplicated hardware.</p>
+              </div>
+              <div class="cheat-sheet-node">
+                <strong>Approximate Computing</strong>
+                <p><em>Reduce bit-width:</em> Use lower precision where the application can tolerate bounded error.</p>
+              </div>
+              <div class="cheat-sheet-node">
+                <strong>Near-Threshold Computing (NTC)</strong>
+                <p><em>Vdd near Vth:</em> Operate circuits close to transistor threshold for large energy reduction per operation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cheat-sheet-branch">
+            <div class="cheat-sheet-branch-title">
+              <strong>Static Power Down</strong>
+              <span>Reduce leakage in idle blocks and memory structures</span>
+            </div>
+            <div class="cheat-sheet-list">
+              <div class="cheat-sheet-node">
+                <strong>Power Gating</strong>
+                <p><em>Cut power:</em> Disconnect the supply to idle blocks so standby leakage drops sharply.</p>
+              </div>
+              <div class="cheat-sheet-node">
+                <strong>Low-Leakage SRAM / Memory</strong>
+                <p><em>Memory static down:</em> Use lower-leakage cache and memory design so standby losses do not dominate the chip budget.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cheat-sheet-legend">
+          <h4>In a Nutshell . . . </h4>
+          <div class="cheat-sheet-legend-grid">
+            <div class="cheat-sheet-legend-item"><strong>DVFS</strong> = Dynamic Voltage &amp; Frequency Scaling for dynamic-power reduction.</div>
+            <div class="cheat-sheet-legend-item"><strong>Clock Gating</strong> = Stop clocks to idle units to cut dynamic power.</div>
+            <div class="cheat-sheet-legend-item"><strong>Power Gating</strong> = Cut off supply to idle blocks to reduce static power.</div>
+            <div class="cheat-sheet-legend-item"><strong>Resource Sharing</strong> = Share hardware to reduce switching overhead.</div>
+            <div class="cheat-sheet-legend-item"><strong>Low-Leakage SRAM</strong> = Reduce static power in memory and caches.</div>
+            <div class="cheat-sheet-legend-item"><strong>Approximate / Near-Threshold</strong> = Reduce energy per computation by lowering precision or operating near threshold.</div>
+          </div>
         </div>
       </div>
 
@@ -1746,7 +2274,7 @@
       <div class="section-head" style="margin-top: 1.6rem;">
         <div>
           <span class="section-kicker">Core Techniques</span>
-          <h2>What engineers actually use?</h2>
+          <h2>What engineers actually use ?</h2>
           <p>The practical toolbox is a mix of voltage control, activity suppression, leakage reduction, and workload-aware specialization.</p>
         </div>
       </div>
@@ -1847,7 +2375,7 @@
       <div class="section-head" style="margin-top: 1.6rem;">
         <div>
           <span class="section-kicker">Design Flow</span>
-          <h2>How low-power design is executed?</h2>
+          <h2>How low-power design is executed ?</h2>
           <p>Successful low-power chips are built through a staged flow rather than a late-stage optimization pass.</p>
         </div>
       </div>
@@ -1940,6 +2468,18 @@
       </div>
 
       <div class="example-table-wrap">
+        <figure class="visual-card power-map-visual">
+          <img
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMCortexA57A53.jpg"
+            alt="ARM Cortex A57 and A53 mobile processor chip used as a mobile SoC example"
+            loading="lazy"
+            referrerpolicy="no-referrer">
+          <figcaption>
+            <strong>Mobile SoC reference image</strong>
+            <span>A mobile processor combines CPU clusters, graphics, cache, interconnect, and accelerators under one shared power budget, which is exactly why it works well as a low-power flow-map example.</span>
+          </figcaption>
+        </figure>
+
         <div class="power-flow-app">
           <div class="power-flow-chain" aria-label="Interactive mobile SoC power flow map">
             <div class="power-flow-step is-active is-trail">
@@ -1955,7 +2495,7 @@
                     <h3>Power Supply</h3>
                   </div>
                 </div>
-                <p>Vdd / Vcc enters the SoC and becomes the rail every downstream technique reshapes.</p>
+                <p>VDD / Vcc enters the SoC and becomes the rail every downstream technique reshapes.</p>
                 <span class="power-flow-saved">Feeds all blocks</span>
               </button>
             </div>
@@ -2090,11 +2630,11 @@
 
             <div class="power-flow-detail is-active" id="flow-supply">
               <h3>Power Supply</h3>
-              <p class="power-flow-detail-copy">The incoming Vdd / Vcc rail is the electrical starting point. Every later technique in the SoC either reduces the required voltage, suppresses activity on that rail, or disconnects blocks from it when they are idle.</p>
+              <p class="power-flow-detail-copy">The incoming VDD / Vcc rail is the electrical starting point. Every later technique in the SoC either reduces the required voltage, suppresses activity on that rail, or disconnects blocks from it when they are idle.</p>
               <h4>What this stage means</h4>
               <ul class="power-flow-techniques">
                 <li>DVFS changes the effective operating point seen by CPU, GPU, and peripheral domains.</li>
-                <li>Near-threshold operation lowers Vdd further in specialized accelerators when timing permits.</li>
+                <li>Near-threshold operation lowers VDD further in specialized accelerators when timing permits.</li>
                 <li>Power gating cuts the rail completely for idle blocks.</li>
               </ul>
               <div class="power-flow-metrics">
@@ -2168,7 +2708,7 @@
               <h4>Techniques applied</h4>
               <ul class="power-flow-techniques">
                 <li>Approximate computing with lower bit-width where the algorithm tolerates it.</li>
-                <li>Near-threshold computing for ultra-low Vdd operation.</li>
+                <li>Near-threshold computing for ultra-low VDD operation.</li>
                 <li>Clock gating on unused compute lanes or functional units.</li>
               </ul>
               <div class="power-flow-metrics">
@@ -2318,16 +2858,29 @@
 
       <div class="papers-grid">
         <article class="paper-card" data-category="survey" data-search="survey cryptographic hardware dvfs low-power review security architecture">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P01</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P01</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Survey</span>
+                <span class="pill">Cryptographic Hardware</span>
+              </div>
+              <h3>Comprehensive Review of Low-Power VLSI Design Techniques</h3>
+              <p>This review frames low-power VLSI as a security-aware design problem, especially for cryptographic hardware where efficiency cannot compromise robustness.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Survey</span>
-              <span class="pill">Cryptographic Hardware</span>
-            </div>
-            <h3>Comprehensive Review of Low-Power VLSI Design Techniques</h3>
-            <p>This review frames low-power VLSI as a security-aware design problem, especially for cryptographic hardware where efficiency cannot compromise robustness.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Diopsis.jpg"
+                alt="Integrated circuit die used as a visual for low-power cryptographic hardware"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Secure low-power hardware starts at the silicon platform.</strong>
+                <span>This die-level visual suits a review paper that surveys power strategy across full-chip cryptographic implementations.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Reviews DVFS, activity management, and broader low-power strategies in secure silicon.</li>
@@ -2340,16 +2893,29 @@
         </article>
 
         <article class="paper-card" data-category="memory" data-search="memory sram finfet tfet cnfet ultra-low-power 6t subthreshold device technology">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P02</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P02</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Memory</span>
+                <span class="pill">Emerging Devices</span>
+              </div>
+              <h3>32 nm Ultra-Low-Power 6T SRAM Cell Using FinFET, TFET, and CNFET</h3>
+              <p>This paper compares advanced device technologies for a 6T SRAM cell operating in the low-voltage regime.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Memory</span>
-              <span class="pill">Emerging Devices</span>
-            </div>
-            <h3>32 nm Ultra-Low-Power 6T SRAM Cell Using FinFET, TFET, and CNFET</h3>
-            <p>This paper compares advanced device technologies for a 6T SRAM cell operating in the low-voltage regime.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/SRAM_Cell_(6_Transistors).svg"
+                alt="6-transistor SRAM cell schematic"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>6T SRAM is the right anchor for this device-comparison study.</strong>
+                <span>The paper is about ultra-low-power memory behavior, so the cell-level SRAM view is the most direct fit.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Evaluates FinFET, TFET, CNFET, and hybrid combinations under subthreshold supply levels.</li>
@@ -2362,16 +2928,29 @@
         </article>
 
         <article class="paper-card" data-category="digital" data-search="digital sequential logic clock gating johnson counter activity switching dynamic power">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P03</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P03</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Sequential Logic</span>
+                <span class="pill">Clock Gating</span>
+              </div>
+              <h3>Optimized Clock-Gated Johnson Counter for Sequential Circuits</h3>
+              <p>The work targets switching reduction in sequential logic by inserting clock gating into a Johnson counter architecture.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Sequential Logic</span>
-              <span class="pill">Clock Gating</span>
-            </div>
-            <h3>Optimized Clock-Gated Johnson Counter for Sequential Circuits</h3>
-            <p>The work targets switching reduction in sequential logic by inserting clock gating into a Johnson counter architecture.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Clock_gating_waveform.png"
+                alt="Clock gating waveform illustrating reduced switching"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Clock gating directly matches the Johnson-counter optimization story.</strong>
+                <span>This waveform makes the paper's main win visible: idle sequential logic stops toggling.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Positions low-power sequential logic as a first-order requirement in modern scaled VLSI.</li>
@@ -2384,16 +2963,29 @@
         </article>
 
         <article class="paper-card" data-category="survey" data-search="system level industrial methodology architecture design space exploration high-level optimization">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P04</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P04</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">System Level</span>
+                <span class="pill">Industrial Methodology</span>
+              </div>
+              <h3>High-Level Low-Power System Design Optimization</h3>
+              <p>This industrial paper argues that the biggest power savings are decided before detailed implementation even begins.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">System Level</span>
-              <span class="pill">Industrial Methodology</span>
-            </div>
-            <h3>High-Level Low-Power System Design Optimization</h3>
-            <p>This industrial paper argues that the biggest power savings are decided before detailed implementation even begins.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+                alt="System on chip block diagram for high-level architecture planning"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Architecture and block partitioning determine the power ceiling early.</strong>
+                <span>A system-block view fits this methodology paper because it is centered on design-space choices before RTL.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>States that architectural choices can reduce power by 80% or more, while weak choices can cost roughly 5x.</li>
@@ -2406,16 +2998,29 @@
         </article>
 
         <article class="paper-card" data-category="digital" data-search="communication ldpc decoder dvfs awgn workload adaptation voltage scaling frequency scaling">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P05</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P05</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Communication</span>
+                <span class="pill">DVFS</span>
+              </div>
+              <h3>Low-Power LDPC Decoder Using DVFS for AWGN Channels</h3>
+              <p>The decoder architecture adapts operating conditions after estimating the iteration budget needed for frame convergence.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Communication</span>
-              <span class="pill">DVFS</span>
-            </div>
-            <h3>Low-Power LDPC Decoder Using DVFS for AWGN Channels</h3>
-            <p>The decoder architecture adapts operating conditions after estimating the iteration budget needed for frame convergence.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Global_Task_Scheduling.jpg"
+                alt="Workload scheduling diagram used as a visual for adaptive DVFS control"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Adaptive scheduling is a strong visual proxy for DVFS-aware decoding.</strong>
+                <span>The decoder saves energy by reacting to workload demand, which is the same control idea shown here.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Applies DVFS to an LDPC decoder so voltage and frequency follow workload demand.</li>
@@ -2428,16 +3033,29 @@
         </article>
 
         <article class="paper-card" data-category="survey" data-search="survey low power techniques implementation strategies leakage mobile medical portable electronics">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P06</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P06</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Survey</span>
+                <span class="pill">Implementation Strategies</span>
+              </div>
+              <h3>Low Power Design Techniques and Implementation Strategies in VLSI Circuits</h3>
+              <p>This survey emphasizes the market push from portable, wireless, and medical electronics toward stricter power budgets.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Survey</span>
-              <span class="pill">Implementation Strategies</span>
-            </div>
-            <h3>Low Power Design Techniques and Implementation Strategies in VLSI Circuits</h3>
-            <p>This survey emphasizes the market push from portable, wireless, and medical electronics toward stricter power budgets.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/MOS_Capacitor.svg"
+                alt="MOS capacitor structure used as a general low-power VLSI implementation visual"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Implementation strategy ultimately depends on the MOS fabric underneath.</strong>
+                <span>This is a suitable broad visual for a survey paper that spans multiple low-power circuit techniques.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Frames leakage current, power management, and optimization as central design concerns.</li>
@@ -2450,16 +3068,29 @@
         </article>
 
         <article class="paper-card" data-category="survey" data-search="literature review sub-100 nm leakage dynamic power soc battery life scaling methodologies">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P07</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P07</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Literature Review</span>
+                <span class="pill">Sub-100 nm</span>
+              </div>
+              <h3>Low Power VLSI Circuit Design Strategies and Methodologies</h3>
+              <p>This literature review focuses on leakage and dynamic power as dominant concerns in dense, deeply scaled technologies.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Literature Review</span>
-              <span class="pill">Sub-100 nm</span>
-            </div>
-            <h3>Low Power VLSI Circuit Design Strategies and Methodologies</h3>
-            <p>This literature review focuses on leakage and dynamic power as dominant concerns in dense, deeply scaled technologies.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+                alt="Double-gate FinFET structure representing deeply scaled low-power technologies"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Scaled-node leakage pressure is best illustrated at device level.</strong>
+                <span>A FinFET view fits a review centered on sub-100 nm power behavior and scaling-era methodology.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Highlights battery life and SoC complexity as the driving context for low-power design.</li>
@@ -2472,16 +3103,29 @@
         </article>
 
         <article class="paper-card" data-category="memory" data-search="memory block hdl implementation clock gating power gating subthreshold adiabatic voltage scaling">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P08</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P08</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Memory Block</span>
+                <span class="pill">HDL Implementation</span>
+              </div>
+              <h3>Power-Efficient VLSI Design and HDL Implementation of a Low-Power Memory Block</h3>
+              <p>This paper combines low-power theory with a practical memory-block case study and implementation methodology.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Memory Block</span>
-              <span class="pill">HDL Implementation</span>
-            </div>
-            <h3>Power-Efficient VLSI Design and HDL Implementation of a Low-Power Memory Block</h3>
-            <p>This paper combines low-power theory with a practical memory-block case study and implementation methodology.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/Register_transfer_level_-_example_toggler.svg"
+                alt="Register transfer level diagram representing HDL implementation of a low-power memory block"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>This paper lives at the bridge between memory design and synthesizable HDL.</strong>
+                <span>An RTL view works well because the contribution is not just theory, but actual implementation structure.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Discusses voltage scaling, power gating, clock gating, adiabatic ideas, and subthreshold operation.</li>
@@ -2494,16 +3138,29 @@
         </article>
 
         <article class="paper-card" data-category="analog" data-search="analog mixed signal sar adc wireless sensing comparator split capacitor dac ultra low power">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P09</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P09</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Mixed Signal</span>
+                <span class="pill">SAR ADC</span>
+              </div>
+              <h3>Ultra-Low-Power 12-Bit SAR ADC for Wireless Sensing</h3>
+              <p>This ADC paper shows how low-power design extends beyond digital logic into sensing front ends that dominate energy in edge devices.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Mixed Signal</span>
-              <span class="pill">SAR ADC</span>
-            </div>
-            <h3>Ultra-Low-Power 12-Bit SAR ADC for Wireless Sensing</h3>
-            <p>This ADC paper shows how low-power design extends beyond digital logic into sensing front ends that dominate energy in edge devices.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/ADC_voltage_resolution.svg"
+                alt="ADC voltage resolution graphic"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>The converter resolution view fits the SAR ADC story directly.</strong>
+                <span>It reinforces that low-power VLSI also includes mixed-signal interfaces, not only digital datapaths.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Uses a split-capacitor DAC and dynamic comparator for low-power conversion.</li>
@@ -2516,16 +3173,29 @@
         </article>
 
         <article class="paper-card" data-category="physical" data-search="physical design power challenges routing placement timing area closure asic node scaling">
-          <div>
-            <div class="paper-topline">
-              <span class="paper-index">P10</span>
+          <div class="paper-lead">
+            <div class="paper-copy">
+              <div class="paper-topline">
+                <span class="paper-index">P10</span>
+              </div>
+              <div class="paper-meta">
+                <span class="pill">Physical Design</span>
+                <span class="pill">Implementation Pressure</span>
+              </div>
+              <h3>VLSI Physical Design and Power Challenges</h3>
+              <p>The paper situates low-power design inside real physical implementation pressure, especially as device dimensions continue to shrink.</p>
             </div>
-            <div class="paper-meta">
-              <span class="pill">Physical Design</span>
-              <span class="pill">Implementation Pressure</span>
-            </div>
-            <h3>VLSI Physical Design and Power Challenges</h3>
-            <p>The paper situates low-power design inside real physical implementation pressure, especially as device dimensions continue to shrink.</p>
+            <figure class="paper-visual">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/b/b9/PD_Flow.gif"
+                alt="ASIC physical design flow diagram"
+                loading="lazy"
+                referrerpolicy="no-referrer">
+              <figcaption>
+                <strong>Backend flow is the correct visual for a power-closure paper.</strong>
+                <span>This keeps placement, routing, signoff, and implementation pressure tied to the paper's theme.</span>
+              </figcaption>
+            </figure>
           </div>
           <ul>
             <li>Connects power dissipation with placement, routing, node scaling, and ASIC implementation constraints.</li>
@@ -2794,7 +3464,7 @@
     <div class="closing-card section-card">
       <div>
         <span class="section-kicker">Final Reading</span>
-        <h3>Why this research cluster is useful?</h3>
+        <h3>Why this research cluster is useful ?</h3>
         <p>
           The set does more than define low-power VLSI. It shows how the discipline scales from equations and surveys to real blocks such as SRAMs,
           decoders, counters, memory systems, and SAR ADCs. That makes it a strong foundation for both academic study and engineering interviews.
@@ -2816,6 +3486,28 @@
     </div>
   </footer>
 
+  <div class="concept-search-modal" id="conceptSearchModal" hidden>
+    <div class="concept-search-dialog" role="dialog" aria-modal="true" aria-labelledby="conceptSearchModalTitle">
+      <div class="concept-search-dialog-head">
+        <div>
+          <span class="section-kicker">Quick Help</span>
+          <h2 class="concept-search-dialog-title" id="conceptSearchModalTitle">Need help with a term ?</h2>
+        </div>
+        <button class="concept-search-dialog-close" id="conceptSearchModalClose" type="button" aria-label="Close help popup">×</button>
+      </div>
+      <p>If any keyword or concept feels unfamiliar, just double-click it and Google will open a search to help you explore it quickly. You can also select a longer phrase and use the floating search button.</p>
+      <div class="concept-search-dialog-actions">
+        <button class="concept-search-dialog-btn" id="conceptSearchModalDismiss" type="button">Got it</button>
+        <button class="concept-search-dialog-btn concept-search-dialog-btn--primary" id="conceptSearchModalPrimary" type="button">Show me how</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="concept-search-action" id="conceptSearchAction" type="button" hidden aria-label="Search selected concept on Google">
+    <i class="fas fa-magnifying-glass"></i>
+    <span>Search Google</span>
+  </button>
+
   <script>
     const filterButtons = document.querySelectorAll('.filter-btn');
     const paperCards = document.querySelectorAll('.paper-card');
@@ -2826,8 +3518,154 @@
     const downloadBibliography = document.getElementById('downloadBibliography');
     const powerFlowNodes = document.querySelectorAll('.power-flow-node');
     const powerFlowDetails = document.querySelectorAll('.power-flow-detail');
+    const conceptSearchModal = document.getElementById('conceptSearchModal');
+    const conceptSearchModalClose = document.getElementById('conceptSearchModalClose');
+    const conceptSearchModalDismiss = document.getElementById('conceptSearchModalDismiss');
+    const conceptSearchModalPrimary = document.getElementById('conceptSearchModalPrimary');
+    const conceptSearchDemoPhrase = document.getElementById('conceptSearchDemoPhrase');
+    const conceptSearchAction = document.getElementById('conceptSearchAction');
 
     let activeFilter = 'all';
+    let conceptSearchQuery = '';
+
+    function normalizeConceptText(text) {
+      return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function isValidConcept(text) {
+      return text.length >= 2 && text.length <= 120 && /[a-z]/i.test(text);
+    }
+
+    function isSearchableSelection(selection) {
+      if (!selection || !selection.rangeCount) {
+        return false;
+      }
+
+      const anchorNode = selection.anchorNode;
+      const element = anchorNode && (anchorNode.nodeType === Node.ELEMENT_NODE  ? anchorNode : anchorNode.parentElement);
+
+      return !!element && !element.closest('.topbar, .nav-links, .filter-toolbar, .bibliography-actions, .paper-actions, .power-flow-node, .concept-search-action, button, a, input, textarea');
+    }
+
+    function hideConceptSearchAction() {
+      conceptSearchQuery = '';
+      if (conceptSearchAction) {
+        conceptSearchAction.hidden = true;
+      }
+    }
+
+    function closeConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = true;
+      }
+    }
+
+    function openConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = false;
+      }
+    }
+
+    function openGoogleSearch(query) {
+      if (!isValidConcept(query)) {
+        return;
+      }
+
+      window.open(`https://www.google.com/search ?q=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function positionConceptSearchAction(rect) {
+      if (!conceptSearchAction || !rect) {
+        return;
+      }
+
+      const actionRect = conceptSearchAction.getBoundingClientRect();
+      const left = Math.min(
+        Math.max(12, rect.left),
+        Math.max(12, window.innerWidth - actionRect.width - 12)
+      );
+      const top = Math.min(
+        Math.max(12, rect.bottom + 10),
+        Math.max(12, window.innerHeight - actionRect.height - 12)
+      );
+
+      conceptSearchAction.style.left = `${left}px`;
+      conceptSearchAction.style.top = `${top}px`;
+      conceptSearchAction.style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    function showConceptSearchAction(text, rect) {
+      if (!conceptSearchAction || !isValidConcept(text) || !rect) {
+        hideConceptSearchAction();
+        return;
+      }
+
+      conceptSearchQuery = text;
+      conceptSearchAction.querySelector('span').textContent = `Search Google: "${text.length > 42  ? `${text.slice(0, 39)}...` : text}"`;
+      conceptSearchAction.hidden = false;
+
+      requestAnimationFrame(() => {
+        positionConceptSearchAction(rect);
+      });
+    }
+
+    function selectElementText(element) {
+      if (!element) {
+        return null;
+      }
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      const text = normalizeConceptText(selection.toString());
+      const rect = range.getBoundingClientRect();
+
+      if (!isValidConcept(text) || !rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
+
+    function runConceptSearchDemo() {
+      if (!conceptSearchDemoPhrase) {
+        return;
+      }
+
+      hideConceptSearchAction();
+      conceptSearchDemoPhrase.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      window.setTimeout(() => {
+        const conceptData = selectElementText(conceptSearchDemoPhrase);
+
+        conceptSearchDemoPhrase.classList.remove('is-guided');
+        void conceptSearchDemoPhrase.offsetWidth;
+        conceptSearchDemoPhrase.classList.add('is-guided');
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        }
+      }, 520);
+    }
+
+    function selectedConceptData() {
+      const selection = window.getSelection();
+      const text = normalizeConceptText(selection  ? selection.toString() : '');
+
+      if (!selection || !selection.rangeCount || !isSearchableSelection(selection) || !isValidConcept(text)) {
+        return null;
+      }
+
+      const rect = selection.getRangeAt(0).getBoundingClientRect();
+      if (!rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
 
     function updatePaperView() {
       const query = (paperSearch.value || '').trim().toLowerCase();
@@ -2882,6 +3720,79 @@
       URL.revokeObjectURL(url);
     });
 
+    if (conceptSearchAction) {
+      conceptSearchAction.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        openGoogleSearch(conceptSearchQuery);
+      });
+    }
+
+    if (conceptSearchModalClose) {
+      conceptSearchModalClose.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalDismiss) {
+      conceptSearchModalDismiss.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalPrimary) {
+      conceptSearchModalPrimary.addEventListener('click', () => {
+        closeConceptSearchModal();
+        runConceptSearchDemo();
+      });
+    }
+
+    if (conceptSearchModal) {
+      conceptSearchModal.addEventListener('click', (event) => {
+        if (event.target === conceptSearchModal) {
+          closeConceptSearchModal();
+        }
+      });
+    }
+
+    document.addEventListener('mouseup', () => {
+      const conceptData = selectedConceptData();
+
+      if (conceptData) {
+        showConceptSearchAction(conceptData.text, conceptData.rect);
+      } else {
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('touchend', () => {
+      window.setTimeout(() => {
+        const conceptData = selectedConceptData();
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        } else {
+          hideConceptSearchAction();
+        }
+      }, 0);
+    });
+
+    document.addEventListener('dblclick', (event) => {
+      if (event.target.closest('.topbar, .nav-links, .filter-toolbar, .bibliography-actions, .paper-actions, .concept-search-action, button, a, input, textarea')) {
+        return;
+      }
+
+      const conceptData = selectedConceptData();
+      if (conceptData) {
+        openGoogleSearch(conceptData.text);
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('scroll', hideConceptSearchAction, { passive: true });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hideConceptSearchAction();
+        closeConceptSearchModal();
+      }
+    });
+
     if (powerFlowNodes.length && powerFlowDetails.length) {
       powerFlowNodes.forEach((node) => {
         node.addEventListener('click', () => {
@@ -2891,7 +3802,7 @@
           powerFlowNodes.forEach((item, index) => {
             const isActive = item === node;
             item.classList.toggle('is-active', isActive);
-            item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            item.setAttribute('aria-pressed', isActive  ? 'true' : 'false');
 
             const step = item.closest('.power-flow-step');
             if (step) {
@@ -2908,6 +3819,10 @@
     }
 
     updatePaperView();
+
+    window.setTimeout(() => {
+      openConceptSearchModal();
+    }, 700);
   </script>
 </body>
 </html>

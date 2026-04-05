@@ -376,6 +376,174 @@
       color: #ffffff;
     }
 
+    .concept-search-inline-tip {
+      display: block;
+      margin-top: 0.45rem;
+      color: rgba(255, 241, 239, 0.82);
+      font-size: 0.84rem;
+    }
+
+    .concept-search-demo {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08rem 0.42rem;
+      margin: 0 0.12rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .concept-search-demo.is-guided {
+      animation: concept-search-demo-pulse 1.25s ease-in-out 3;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-search-action {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: min(320px, calc(100vw - 1.5rem));
+      padding: 0.8rem 0.95rem;
+      border: 1px solid rgba(118, 27, 37, 0.22);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(82, 16, 23, 0.97), rgba(147, 39, 53, 0.94));
+      color: #fff9f8;
+      box-shadow: 0 18px 34px rgba(55, 9, 16, 0.28);
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transform: translate3d(-9999px, -9999px, 0);
+    }
+
+    .concept-search-action[hidden] {
+      display: none;
+    }
+
+    .concept-search-action:hover {
+      transform: translateY(-1px);
+    }
+
+    .concept-search-action-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .concept-search-action-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .concept-search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(20, 7, 10, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .concept-search-modal[hidden] {
+      display: none;
+    }
+
+    .concept-search-dialog {
+      width: min(520px, 100%);
+      padding: 1.2rem 1.2rem 1.1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(118, 27, 37, 0.16);
+      background: linear-gradient(180deg, rgba(255, 253, 252, 0.98), rgba(255, 245, 243, 0.95));
+      color: var(--paper-ink);
+      box-shadow: 0 26px 60px rgba(44, 7, 12, 0.24);
+    }
+
+    .concept-search-dialog-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .concept-search-dialog-title {
+      font-size: 1.08rem;
+      line-height: 1.3;
+      color: var(--paper-ink);
+    }
+
+    .concept-search-dialog p {
+      color: var(--paper-muted);
+      font-size: 0.95rem;
+      line-height: 1.68;
+    }
+
+    .concept-search-dialog-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .concept-search-dialog-btn {
+      border: 1px solid rgba(118, 27, 37, 0.14);
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--paper-ink);
+      min-height: 42px;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .concept-search-dialog-btn--primary {
+      background: linear-gradient(135deg, rgba(107, 18, 29, 0.96), rgba(162, 47, 63, 0.92));
+      color: #fff9f9;
+      box-shadow: 0 14px 28px rgba(89, 13, 21, 0.18);
+    }
+
+    .concept-search-dialog-close {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.72);
+      color: #7d1927;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    @keyframes concept-search-demo-pulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.12);
+      }
+
+      50% {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06);
+      }
+    }
+
     .compute-map {
       margin-top: 1.4rem;
       display: grid;
@@ -496,6 +664,7 @@
     }
 
     .stat-grid,
+    .basics-grid,
     .stack-grid,
     .papers-grid,
     .insight-grid,
@@ -589,12 +758,169 @@
       letter-spacing: 0.12em;
     }
 
+    .section-intro {
+      margin-bottom: 1.15rem;
+      padding: 1.15rem 1.2rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .section-intro strong {
+      color: var(--paper-ink);
+    }
+
+    .basics-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 1.2rem;
+    }
+
+    .basic-item {
+      padding: 1.15rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .basic-item h3 {
+      color: var(--paper-ink);
+      font-size: 1.04rem;
+      line-height: 1.28;
+      margin-bottom: 0.5rem;
+    }
+
+    .basic-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .basic-visual svg {
+      display: block;
+      width: 100%;
+      height: 168px;
+      background: radial-gradient(circle at 18% 14%, rgba(255, 106, 95, 0.08), transparent 22%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .basic-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .basic-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .basic-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .basics-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .basics-list-item {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .basics-list-visual {
+      margin: 0.1rem 0 0.85rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .basics-list-visual svg {
+      display: block;
+      width: 100%;
+      height: 160px;
+      background: radial-gradient(circle at 18% 14%, rgba(255, 106, 95, 0.08), transparent 22%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .basics-list-visual figcaption {
+      padding: 0.7rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .basics-list-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .basics-list-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .basics-list-item strong {
+      display: block;
+      margin-bottom: 0.28rem;
+      color: var(--paper-ink);
+    }
+
     .stack-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .stack-item {
       padding: 1.2rem;
+    }
+
+    .stack-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .stack-visual svg {
+      display: block;
+      width: 100%;
+      height: 170px;
+      background: radial-gradient(circle at 20% 16%, rgba(255, 106, 95, 0.08), transparent 24%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .stack-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .stack-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .stack-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
     }
 
     .stack-item h3,
@@ -636,6 +962,40 @@
       display: flex;
       flex-direction: column;
       gap: 0.95rem;
+    }
+
+    .paper-visual {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .paper-visual svg {
+      display: block;
+      width: 100%;
+      height: 182px;
+      background: radial-gradient(circle at 18% 14%, rgba(255, 106, 95, 0.08), transparent 22%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .paper-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .paper-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .paper-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
     }
 
     .paper-topline,
@@ -726,9 +1086,53 @@
       padding: 1.3rem;
     }
 
+    .playbook-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .playbook-visual svg {
+      display: block;
+      width: 100%;
+      height: 166px;
+      background: radial-gradient(circle at 18% 14%, rgba(255, 106, 95, 0.08), transparent 22%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .playbook-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .playbook-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .playbook-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
     .matrix {
       margin-top: 1.1rem;
       overflow-x: auto;
+    }
+
+    .matrix table {
+      border-collapse: collapse;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid #000000;
     }
 
     table {
@@ -803,6 +1207,7 @@
       .hero,
       .closing-card,
       .ai-schematic,
+      .basics-grid,
       .stack-grid,
       .papers-grid,
       .insight-grid,
@@ -846,6 +1251,25 @@
         grid-template-columns: 1fr;
       }
 
+      .concept-search-action {
+        max-width: calc(100vw - 1rem);
+        padding: 0.72rem 0.85rem;
+        font-size: 0.8rem;
+      }
+
+      .concept-search-dialog {
+        padding: 1rem;
+        border-radius: 18px;
+      }
+
+      .concept-search-dialog-actions {
+        justify-content: stretch;
+      }
+
+      .concept-search-dialog-btn {
+        width: 100%;
+      }
+
       h1 {
         max-width: none;
       }
@@ -861,6 +1285,7 @@
       </div>
       <nav class="nav-links">
         <a href="index.html">Portfolio</a>
+        <a href="#basics">Basics</a>
         <a href="#papers">Paper Library</a>
         <a href="#insights">Insights</a>
         <a href="#playbook">Design Playbook</a>
@@ -968,6 +1393,7 @@
         
         <div class="hero-note">
           <strong>Reading frame:</strong> follow the story from model demand to accelerator design to package integration. That order makes the bandwidth, thermal, and silicon-efficiency tradeoffs much clearer.
+          <span class="concept-search-inline-tip">Tip: double-click any keyword to search it on Google, or try selecting <span class="concept-search-demo" id="conceptSearchDemoPhrase">precision scaling</span> and use the search pill.</span>
         </div>
       </div>
 
@@ -992,7 +1418,7 @@
         </div>
 
         <div class="summary-box">
-          <h2>What this collection shows</h2>
+          <h2>What does this collection show ?</h2>
           <p>
             AI acceleration is now a full-stack VLSI problem. Training scale, arithmetic precision, accelerator organization, memory movement,
             packaging density, and thermal feasibility all interact. The papers make it clear that no single block can solve AI efficiency alone.
@@ -1010,6 +1436,188 @@
     </section>
   </div>
 
+  <section class="section" id="basics">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Foundation First</span>
+          <h2>Let us understand from the beginning . . .</h2>
+          <p>A beginner-first bridge into AI hardware, using the actual paper themes: model growth, accelerator design, and package-level scaling.</p>
+        </div>
+      </div>
+
+      <div class="section-intro">
+        <p><strong>VLSI in AI/ML</strong> means building silicon systems that can train and run modern neural networks efficiently. In this paper set, that story begins with very large foundation models, moves into arithmetic and accelerator design, and ends in advanced packaging where memory bandwidth and thermal limits decide whether the chip can actually deliver useful AI performance.</p>
+      </div>
+
+      <div class="basics-grid">
+        <article class="basic-item">
+          <h3>1. What is AI hardware?</h3>
+          <figure class="basic-visual">
+            <svg viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI hardware visual linking model, accelerator and package">
+              <rect x="24" y="52" width="74" height="54" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="124" y="34" width="74" height="90" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="224" y="52" width="72" height="54" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M98 79H124M198 79H224" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M43 75L54 64L65 75L76 64" fill="none" stroke="#ff8f82" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="144" y="58" width="34" height="34" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M238 70H272M238 84H279M238 98H267" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <text x="38" y="126" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">model</text>
+              <text x="134" y="144" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">accelerator</text>
+              <text x="232" y="126" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">package</text>
+            </svg>
+            <figcaption>
+              <strong>AI hardware is a full stack, not a single chip block.</strong>
+              <span>The papers collectively connect model requirements, compute architecture, and package integration.</span>
+            </figcaption>
+          </figure>
+          <p>It is the hardware side of AI deployment: compute engines, memory movement, software enablement, and packaging all working together so neural networks can run at usable speed and power.</p>
+        </article>
+
+        <article class="basic-item">
+          <h3>2. Why did AI compute explode?</h3>
+          <figure class="basic-visual">
+            <svg viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI compute growth visual with parameter scaling curve">
+              <path d="M34 132H286" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+              <rect x="48" y="96" width="32" height="36" rx="10" fill="rgba(255,255,255,0.9)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="102" y="84" width="32" height="48" rx="10" fill="rgba(255,255,255,0.93)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="156" y="62" width="32" height="70" rx="10" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="210" y="28" width="32" height="104" rx="10" fill="rgba(255,255,255,0.99)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M64 150C104 132 148 104 188 76C214 58 238 38 262 18" fill="none" stroke="#7ef7e7" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="64" cy="150" r="6" fill="#ff8f82"/>
+              <circle cx="188" cy="76" r="6" fill="#ffd6d0"/>
+              <circle cx="262" cy="18" r="6" fill="#7ef7e7"/>
+              <text x="36" y="156" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">millions</text>
+              <text x="224" y="156" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">pre-trillion</text>
+            </svg>
+            <figcaption>
+              <strong>Model parameters and training cost are growing much faster than ordinary chip scaling.</strong>
+              <span>The first paper explicitly ties pre-trillion-scale models to exa-scale training demand.</span>
+            </figcaption>
+          </figure>
+          <p>The AI-computing paper shows that neural network parameters rose from millions to hundreds of billions, and that training demand increased far faster than Moore's Law. That is why AI hardware moved from normal servers to supercomputer-scale infrastructure.</p>
+        </article>
+
+        <article class="basic-item">
+          <h3>3. Where are the real bottlenecks?</h3>
+          <figure class="basic-visual">
+            <svg viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bottleneck visual showing arithmetic, memory bandwidth and thermals">
+              <rect x="38" y="58" width="62" height="52" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="128" y="44" width="62" height="66" rx="16" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="220" y="58" width="62" height="52" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M100 84H128M190 84H220" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <text x="50" y="88" fill="#7c2530" font-size="15" font-family="Segoe UI, sans-serif">INT8</text>
+              <path d="M149 60H171" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <rect x="142" y="68" width="34" height="28" rx="6" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.2"/>
+              <path d="M235 50C229 40 229 32 235 24M257 50C251 40 251 32 257 24" fill="none" stroke="#ff8f82" stroke-width="4" stroke-linecap="round"/>
+              <text x="42" y="128" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">precision</text>
+              <text x="132" y="128" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">memory path</text>
+              <text x="228" y="128" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">thermals</text>
+            </svg>
+            <figcaption>
+              <strong>Arithmetic cost, memory movement, bandwidth, and heat dominate practical AI systems.</strong>
+              <span>The second and third papers make clear that chip architecture alone is not enough.</span>
+            </figcaption>
+          </figure>
+          <p>The papers repeatedly point to the same limits: precision and arithmetic cost inside the accelerator, software and memory organization around it, and package-level bandwidth and thermal closure above it.</p>
+        </article>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">AI demand rises with model size, training tokens, and compute intensity.</div>
+        <div class="equation-chip">Useful AI efficiency = delivered throughput / power budget.</div>
+        <div class="equation-chip">Package scaling = logic + memory + interconnect + thermal closure.</div>
+      </div>
+
+      <div class="basics-list">
+        <div class="basics-list-item">
+          <figure class="basics-list-visual">
+            <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foundation model pressure visual with growing model blocks and training expansion">
+              <rect x="34" y="86" width="46" height="38" rx="10" fill="rgba(255,255,255,0.9)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="100" y="70" width="52" height="54" rx="12" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="172" y="48" width="58" height="76" rx="14" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="250" y="24" width="38" height="100" rx="12" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M56 142C98 124 144 108 190 78C222 58 246 40 270 20" fill="none" stroke="#7ef7e7" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="56" cy="142" r="6" fill="#ff8f82"/>
+              <circle cx="190" cy="78" r="6" fill="#ffd6d0"/>
+              <circle cx="270" cy="20" r="6" fill="#7ef7e7"/>
+              <text x="26" y="150" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">bigger models</text>
+              <text x="194" y="150" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">training pressure</text>
+            </svg>
+            <figcaption>
+              <strong>Foundation-model growth keeps pushing compute and infrastructure upward.</strong>
+              <span>This visual captures the jump from model scaling to datacenter-class training demand.</span>
+            </figcaption>
+          </figure>
+          <strong>Foundation-model pressure</strong>
+          The large-scale AI paper shows that modern foundation models are driving the move toward pre-trillion parameters and exa-scale training systems, so hardware efficiency becomes a strategic requirement rather than a nice-to-have feature.
+        </div>
+        <div class="basics-list-item">
+          <figure class="basics-list-visual">
+            <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Accelerator design response visual with precision formats feeding a compute core">
+              <rect x="34" y="52" width="70" height="56" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="128" y="36" width="72" height="88" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="224" y="52" width="60" height="56" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M104 80H128M200 80H224" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <text x="47" y="74" fill="#7c2530" font-size="16" font-family="Segoe UI, sans-serif">INT8</text>
+              <text x="46" y="94" fill="#7c2530" font-size="16" font-family="Segoe UI, sans-serif">BF16</text>
+              <rect x="147" y="61" width="34" height="34" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M238 68H262M238 80H270M238 92H258" stroke="#ff8f82" stroke-width="4" stroke-linecap="round"/>
+              <text x="126" y="144" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">new accelerator path</text>
+            </svg>
+            <figcaption>
+              <strong>The hardware answer combines new arithmetic choices with new compute structures.</strong>
+              <span>Precision scaling, accelerator design, and memory strategy move together here.</span>
+            </figcaption>
+          </figure>
+          <strong>Accelerator design response</strong>
+          The IBM hardware paper answers that pressure with precision scaling, new digital accelerator structures, analog in-memory ideas, heterogeneous integration, and software support to improve latency, throughput, and energy efficiency.
+        </div>
+        <div class="basics-list-item">
+          <figure class="basics-list-visual">
+            <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Packaging as architecture visual with interposer, logic die, and memory stacks">
+              <rect x="30" y="96" width="260" height="26" rx="13" fill="rgba(255,224,220,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="96" y="56" width="68" height="38" rx="12" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="46" y="50" width="28" height="44" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="246" y="50" width="28" height="44" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M74 96C92 76 104 74 120 74" fill="none" stroke="#8a2432" stroke-width="4.4" stroke-linecap="round"/>
+              <path d="M176 74C198 74 210 76 246 96" fill="none" stroke="#8a2432" stroke-width="4.4" stroke-linecap="round"/>
+              <path d="M60 110H260" stroke="#7ef7e7" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/>
+              <text x="100" y="144" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">package = architecture</text>
+            </svg>
+            <figcaption>
+              <strong>The package is no longer just a wrapper around the die.</strong>
+              <span>Memory proximity, interposer wiring, and thermal solutions now shape system performance directly.</span>
+            </figcaption>
+          </figure>
+          <strong>Packaging as architecture</strong>
+          The 2.5D packaging paper extends the story beyond the chip: larger interposers, richer interconnect layers, passives, memory proximity, and thermal solutions now directly shape whether an AI platform is deployable.
+        </div>
+        <div class="basics-list-item">
+          <figure class="basics-list-visual">
+            <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Design principle visual showing workload, accelerator, and package in sequence">
+              <rect x="26" y="58" width="74" height="46" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="122" y="44" width="76" height="74" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="222" y="58" width="72" height="46" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M100 81H122M198 81H222" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M52 118C78 130 102 134 126 134C152 134 176 128 198 118" fill="none" stroke="#ff8f82" stroke-width="4" stroke-linecap="round"/>
+              <path d="M149 60H171" stroke="#7ef7e7" stroke-width="4" stroke-linecap="round"/>
+              <text x="34" y="82" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">workload</text>
+              <text x="136" y="146" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">architecture</text>
+              <text x="234" y="82" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">package</text>
+            </svg>
+            <figcaption>
+              <strong>The clean design flow is workload first, then accelerator, then package closure.</strong>
+              <span>This picture summarizes the sequence the three papers collectively recommend.</span>
+            </figcaption>
+          </figure>
+          <strong>Design principle</strong>
+          Start by asking what workload the system must serve, then choose the arithmetic and accelerator organization, and finally make sure the package can supply enough bandwidth and remove enough heat for the design to remain useful in practice.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="section-card">
       <div class="section-head">
@@ -1023,14 +1631,84 @@
       <div class="stack-grid">
         <article class="stack-item">
           <h3>Compute Demand Explosion</h3>
+          <figure class="stack-visual">
+            <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compute demand scaling visual with model growth and datacenter racks">
+              <defs>
+                <linearGradient id="computeGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#7ef7e7" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#ff8d80" stop-opacity="0.92"/>
+                </linearGradient>
+              </defs>
+              <rect x="20" y="28" width="84" height="100" rx="16" fill="rgba(255,255,255,0.86)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="118" y="18" width="84" height="110" rx="16" fill="rgba(255,255,255,0.9)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="216" y="8" width="84" height="120" rx="16" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M52 109H73M52 95H88M52 81H76M52 67H84" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.78"/>
+              <path d="M150 108H170M150 92H180M150 76H172M150 60H182" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.82"/>
+              <path d="M248 105H272M248 89H282M248 73H274M248 57H286" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.86"/>
+              <path d="M56 144C104 126 142 118 182 96C218 76 244 58 278 38" fill="none" stroke="url(#computeGlow)" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="56" cy="144" r="7" fill="#ff8d80"/>
+              <circle cx="182" cy="96" r="7" fill="#ffd2cc"/>
+              <circle cx="278" cy="38" r="7" fill="#7ef7e7"/>
+              <text x="26" y="154" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">smaller models</text>
+              <text x="212" y="150" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">exa-scale infrastructure</text>
+            </svg>
+            <figcaption>
+              <strong>Model growth drives the jump from single accelerators to datacenter-scale compute.</strong>
+              <span>This visual frames AI demand as a scaling curve that quickly outgrows isolated hardware improvements.</span>
+            </figcaption>
+          </figure>
           <p>Large language and foundation models are driving parameter counts and training demands toward exa-scale infrastructure.</p>
         </article>
         <article class="stack-item">
           <h3>Hardware Co-Design</h3>
+          <figure class="stack-visual">
+            <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hardware co-design visual linking model, accelerator, and software">
+              <rect x="26" y="54" width="72" height="58" rx="16" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="124" y="34" width="72" height="98" rx="18" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="222" y="54" width="72" height="58" rx="16" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M98 83H124" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M196 83H222" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M160 34V18" stroke="#7ef7e7" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="160" cy="18" r="9" fill="#7ef7e7"/>
+              <path d="M52 76L62 66L72 76L82 66" fill="none" stroke="#ff8d80" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="140" y="56" width="40" height="40" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M148 42H172" stroke="#8a2432" stroke-width="3.8" stroke-linecap="round"/>
+              <path d="M245 70H271M245 82H283M245 94H275" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <text x="42" y="128" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">algorithm</text>
+              <text x="136" y="146" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">accelerator</text>
+              <text x="240" y="128" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">software stack</text>
+            </svg>
+            <figcaption>
+              <strong>Useful AI silicon appears when algorithm, chip, and software move together.</strong>
+              <span>The middle accelerator block is only effective when both model assumptions and software mapping support it.</span>
+            </figcaption>
+          </figure>
           <p>AI chips increasingly depend on precision-aware algorithms, specialized datapaths, and software support to maintain throughput-per-watt.</p>
         </article>
         <article class="stack-item">
           <h3>System Integration</h3>
+          <figure class="stack-visual">
+            <svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="System integration visual with logic die, HBM stacks, and interposer links">
+              <rect x="26" y="92" width="268" height="32" rx="14" fill="rgba(255,224,220,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="96" y="52" width="68" height="42" rx="12" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="44" y="48" width="28" height="46" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="248" y="48" width="28" height="46" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="52" y="40" width="28" height="8" rx="4" fill="#7ef7e7"/>
+              <rect x="256" y="40" width="28" height="8" rx="4" fill="#7ef7e7"/>
+              <path d="M72 92C92 72 100 70 118 70" fill="none" stroke="#8a2432" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M202 70C220 70 228 72 248 92" fill="none" stroke="#8a2432" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M58 108H264" stroke="#ff8d80" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/>
+              <circle cx="130" cy="70" r="5" fill="#7ef7e7"/>
+              <circle cx="190" cy="70" r="5" fill="#7ef7e7"/>
+              <text x="106" y="146" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">logic die</text>
+              <text x="38" y="136" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">HBM</text>
+              <text x="244" y="136" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">HBM</text>
+            </svg>
+            <figcaption>
+              <strong>Package-level integration ties logic, memory, and bandwidth into one deployable AI system.</strong>
+              <span>The interposer-style layout highlights why packaging is now part of compute architecture rather than a final wrapper.</span>
+            </figcaption>
+          </figure>
           <p>2.5D packaging and heterogeneous integration now decide whether memory, logic, thermals, and bandwidth can scale together.</p>
         </article>
       </div>
@@ -1066,6 +1744,32 @@
             <h3>AI Computing in Large-Scale Era</h3>
             <p>This paper frames the AI landscape around pre-trillion-scale models, exa-scale training demand, and the centrality of compute efficiency.</p>
           </div>
+          <figure class="paper-visual">
+            <svg viewBox="0 0 320 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Large scale AI computing visual showing model growth and compute racks">
+              <defs>
+                <linearGradient id="paperScaleGlow" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ff8f82" stop-opacity="0.95"/>
+                  <stop offset="100%" stop-color="#7ef7e7" stop-opacity="0.92"/>
+                </linearGradient>
+              </defs>
+              <rect x="26" y="34" width="64" height="100" rx="14" fill="rgba(255,255,255,0.9)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="108" y="24" width="74" height="110" rx="16" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="200" y="12" width="94" height="122" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M44 56H70M44 72H74M44 88H68M44 104H76" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.76"/>
+              <path d="M128 48H158M128 64H162M128 80H154M128 96H164" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+              <path d="M224 42H266M224 58H274M224 74H262M224 90H278" stroke="#8a2432" stroke-width="4.4" stroke-linecap="round" opacity="0.86"/>
+              <path d="M54 150C104 132 148 114 188 86C222 62 246 42 278 28" fill="none" stroke="url(#paperScaleGlow)" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="54" cy="150" r="7" fill="#ff8f82"/>
+              <circle cx="188" cy="86" r="7" fill="#ffd6d0"/>
+              <circle cx="278" cy="28" r="7" fill="#7ef7e7"/>
+              <text x="22" y="168" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">model growth</text>
+              <text x="184" y="164" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">exa-scale compute</text>
+            </svg>
+            <figcaption>
+              <strong>This paper is about scaling pressure, so the visual emphasizes growing models and larger compute systems.</strong>
+              <span>It reinforces the shift from isolated training nodes to infrastructure-scale AI computation.</span>
+            </figcaption>
+          </figure>
           <ul>
             <li>Connects transformer-driven model growth to a major rise in infrastructure requirements.</li>
             <li>Highlights computing power, algorithm design, and application correctness as linked forces.</li>
@@ -1093,6 +1797,28 @@
             <h3>Challenges and Opportunities in AI Hardware Design</h3>
             <p>This paper argues for an end-to-end AI hardware strategy covering arithmetic, architecture, integration, and software enablement.</p>
           </div>
+          <figure class="paper-visual">
+            <svg viewBox="0 0 320 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI hardware co-design visual with model, compute fabric, and software layers">
+              <rect x="24" y="60" width="70" height="56" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="124" y="38" width="72" height="100" rx="18" fill="rgba(255,255,255,0.97)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="226" y="60" width="70" height="56" rx="15" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M94 88H124" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M196 88H226" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M160 38V18" stroke="#7ef7e7" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="160" cy="18" r="9" fill="#7ef7e7"/>
+              <rect x="141" y="68" width="38" height="38" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M40 82L50 72L60 82L70 72L80 82" fill="none" stroke="#ff8f82" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M242 76H278M242 88H286M242 100H274" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <path d="M146 52H174" stroke="#8a2432" stroke-width="3.8" stroke-linecap="round"/>
+              <text x="37" y="132" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">algorithm</text>
+              <text x="132" y="154" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">accelerator</text>
+              <text x="236" y="132" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">software</text>
+            </svg>
+            <figcaption>
+              <strong>The center of this paper is co-design across model assumptions, hardware structure, and deployment software.</strong>
+              <span>The three connected blocks make that end-to-end dependency visually explicit.</span>
+            </figcaption>
+          </figure>
           <ul>
             <li>Discusses precision scaling to maintain iso-accuracy while reducing cost.</li>
             <li>Explores digital accelerators, analog in-memory hardware, and heterogeneous integration.</li>
@@ -1120,6 +1846,29 @@
             <h3>2.5D Packaging in the AI Data Center Era</h3>
             <p>This paper shifts the discussion from chips to packages, showing that bandwidth, thermals, and interconnect density are now performance drivers.</p>
           </div>
+          <figure class="paper-visual">
+            <svg viewBox="0 0 320 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2.5D packaging visual with logic die, memory stacks, and interposer">
+              <rect x="28" y="100" width="264" height="30" rx="14" fill="rgba(255,224,220,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="100" y="56" width="68" height="42" rx="12" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="48" y="50" width="30" height="48" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="242" y="50" width="30" height="48" rx="8" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="54" y="40" width="30" height="8" rx="4" fill="#7ef7e7"/>
+              <rect x="248" y="40" width="30" height="8" rx="4" fill="#7ef7e7"/>
+              <path d="M78 100C96 78 106 74 122 74" fill="none" stroke="#8a2432" stroke-width="4.4" stroke-linecap="round"/>
+              <path d="M178 74C198 74 210 78 242 100" fill="none" stroke="#8a2432" stroke-width="4.4" stroke-linecap="round"/>
+              <path d="M62 114H258" stroke="#ff8f82" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/>
+              <circle cx="132" cy="74" r="5" fill="#7ef7e7"/>
+              <circle cx="182" cy="74" r="5" fill="#7ef7e7"/>
+              <path d="M112 146H206" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+              <text x="107" y="160" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">logic die + interposer</text>
+              <text x="40" y="146" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">HBM</text>
+              <text x="238" y="146" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">HBM</text>
+            </svg>
+            <figcaption>
+              <strong>This picture matches the paper's focus on package-level bandwidth and memory proximity.</strong>
+              <span>The interposer-style layout makes 2.5D integration the main story rather than conventional chip-only scaling.</span>
+            </figcaption>
+          </figure>
           <ul>
             <li>Explains why 2.5D packaging became standard in the fastest HPC and AI systems.</li>
             <li>Identifies larger interposers, richer interconnect layers, passives, and thermal solutions as key scaling levers.</li>
@@ -1212,26 +1961,135 @@
       <div class="playbook-grid">
         <article class="playbook-card">
           <h3>1. Start from workload scale</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workload scaling visual with increasing demand bars and target markers">
+              <path d="M36 130H286" stroke="#8a2432" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+              <rect x="48" y="88" width="34" height="42" rx="10" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="106" y="70" width="34" height="60" rx="10" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="164" y="48" width="34" height="82" rx="10" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="222" y="24" width="34" height="106" rx="10" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M65 28V12M123 28V18M181 28V8M239 28V16" stroke="#7ef7e7" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="65" cy="12" r="5" fill="#7ef7e7"/>
+              <circle cx="123" cy="18" r="5" fill="#7ef7e7"/>
+              <circle cx="181" cy="8" r="5" fill="#7ef7e7"/>
+              <circle cx="239" cy="16" r="5" fill="#7ef7e7"/>
+              <text x="40" y="150" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">growing workload</text>
+              <text x="186" y="150" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">target envelope</text>
+            </svg>
+            <figcaption>
+              <strong>Start with the demand curve before choosing the silicon response.</strong>
+              <span>Workload size, latency, and memory pressure should define the hardware target early.</span>
+            </figcaption>
+          </figure>
           <p>Quantify parameter growth, training demand, memory traffic, and latency targets before architectural decisions are locked.</p>
         </article>
         <article class="playbook-card">
           <h3>2. Co-design arithmetic and architecture</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arithmetic and architecture co-design visual with precision blocks feeding a compute core">
+              <rect x="36" y="48" width="54" height="68" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="132" y="34" width="70" height="96" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="230" y="54" width="54" height="56" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M90 82H132" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M202 82H230" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <text x="47" y="74" fill="#7c2530" font-size="16" font-family="Segoe UI, sans-serif">INT8</text>
+              <text x="46" y="94" fill="#7c2530" font-size="16" font-family="Segoe UI, sans-serif">BF16</text>
+              <rect x="149" y="57" width="36" height="36" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M147 48H187" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <path d="M242 72H271M242 86H276M242 100H266" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <text x="137" y="148" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">datapath + memory</text>
+            </svg>
+            <figcaption>
+              <strong>Precision format and hardware structure have to be chosen together.</strong>
+              <span>The arithmetic choice only pays off when the architecture around it is aligned.</span>
+            </figcaption>
+          </figure>
           <p>Precision scaling, datapath design, and memory organization should be shaped by AI tolerance and target accuracy.</p>
         </article>
         <article class="playbook-card">
           <h3>3. Treat software as part of the hardware plan</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Software and hardware planning visual with compiler and accelerator connection">
+              <rect x="36" y="54" width="78" height="60" rx="16" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="142" y="40" width="70" height="88" rx="18" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="236" y="54" width="48" height="60" rx="14" fill="rgba(255,255,255,0.92)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M114 84H142" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M212 84H236" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <path d="M57 72H91M57 84H99M57 96H83" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <rect x="160" y="61" width="34" height="34" rx="8" fill="rgba(126,247,231,0.12)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M246 72H268M246 84H272M246 96H262" stroke="#ff8f82" stroke-width="4" stroke-linecap="round"/>
+              <text x="47" y="132" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">compiler / runtime</text>
+              <text x="150" y="148" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">accelerator</text>
+            </svg>
+            <figcaption>
+              <strong>A fast accelerator is only valuable if the software stack can actually drive it.</strong>
+              <span>Compiler mapping, runtime support, and model compatibility belong in the plan from day one.</span>
+            </figcaption>
+          </figure>
           <p>Compiler, runtime, mapping, and model support decide whether a nominal accelerator advantage is actually usable.</p>
         </article>
         <article class="playbook-card">
           <h3>4. Plan heterogeneous integration early</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heterogeneous integration visual with logic, memory, and analog chiplets on one package">
+              <rect x="30" y="96" width="260" height="28" rx="14" fill="rgba(255,224,220,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="50" y="52" width="58" height="40" rx="12" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="132" y="44" width="56" height="48" rx="12" fill="rgba(255,255,255,0.98)" stroke="rgba(118,27,37,0.14)"/>
+              <rect x="214" y="52" width="58" height="40" rx="12" fill="rgba(255,255,255,0.94)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M79 96V92M160 96V92M243 96V92" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="79" cy="70" r="8" fill="#ff8f82"/>
+              <rect x="147" y="59" width="26" height="18" rx="4" fill="rgba(126,247,231,0.16)" stroke="#7ef7e7" stroke-width="2"/>
+              <path d="M227 63H257M227 75H249" stroke="#8a2432" stroke-width="4" stroke-linecap="round"/>
+              <text x="55" y="140" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">analog</text>
+              <text x="142" y="140" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">logic</text>
+              <text x="222" y="140" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">memory</text>
+            </svg>
+            <figcaption>
+              <strong>Different compute, memory, and analog pieces should be planned as one integrated system.</strong>
+              <span>Heterogeneous integration works best when the partition is deliberate rather than retrofitted later.</span>
+            </figcaption>
+          </figure>
           <p>AI hardware increasingly spans logic, memory, analog elements, and packaging technologies, so integration strategy cannot be delayed.</p>
         </article>
         <article class="playbook-card">
           <h3>5. Design for bandwidth and thermals together</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bandwidth and thermal design visual with links and heat waves over a package">
+              <rect x="60" y="54" width="200" height="58" rx="18" fill="rgba(255,255,255,0.96)" stroke="rgba(118,27,37,0.14)"/>
+              <path d="M82 84H146M174 84H238" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="160" cy="84" r="12" fill="rgba(126,247,231,0.14)" stroke="#7ef7e7" stroke-width="2.4"/>
+              <path d="M116 38C110 28 110 20 116 12M160 38C154 28 154 20 160 12M204 38C198 28 198 20 204 12" fill="none" stroke="#ff8f82" stroke-width="4" stroke-linecap="round"/>
+              <path d="M94 128C118 118 136 116 160 116C184 116 204 118 226 128" fill="none" stroke="#7ef7e7" stroke-width="4" stroke-linecap="round"/>
+              <text x="77" y="148" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">high bandwidth</text>
+              <text x="210" y="148" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">thermal closure</text>
+            </svg>
+            <figcaption>
+              <strong>Data movement and cooling need to close as one problem, not two separate checks.</strong>
+              <span>High-bandwidth designs fail in practice if the thermal path is treated as an afterthought.</span>
+            </figcaption>
+          </figure>
           <p>2.5D and related approaches help only if interconnect density, passives, and cooling architecture close simultaneously.</p>
         </article>
         <article class="playbook-card">
           <h3>6. Measure value in performance-per-watt</h3>
+          <figure class="playbook-visual">
+            <svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Performance per watt visual with efficiency gauge and output bars">
+              <path d="M72 116A88 88 0 0 1 248 116" fill="none" stroke="rgba(118,27,37,0.16)" stroke-width="12" stroke-linecap="round"/>
+              <path d="M72 116A88 88 0 0 1 222 52" fill="none" stroke="#7ef7e7" stroke-width="12" stroke-linecap="round"/>
+              <path d="M160 116L218 62" stroke="#8a2432" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="160" cy="116" r="10" fill="#ff8f82"/>
+              <rect x="80" y="128" width="26" height="18" rx="6" fill="rgba(255,255,255,0.9)"/>
+              <rect x="118" y="118" width="26" height="28" rx="6" fill="rgba(255,255,255,0.93)"/>
+              <rect x="156" y="106" width="26" height="40" rx="6" fill="rgba(255,255,255,0.96)"/>
+              <rect x="194" y="92" width="26" height="54" rx="6" fill="rgba(255,255,255,0.99)"/>
+              <text x="88" y="158" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">ops</text>
+              <text x="198" y="158" fill="#7c2530" font-size="12" font-family="Segoe UI, sans-serif">watts</text>
+            </svg>
+            <figcaption>
+              <strong>Raw speed is incomplete unless it is normalized by the power budget.</strong>
+              <span>The real business metric is useful AI throughput delivered under realistic watt limits.</span>
+            </figcaption>
+          </figure>
           <p>The core commercial metric across all three papers is not raw compute alone, but useful AI throughput under realistic power limits.</p>
         </article>
       </div>
@@ -1249,7 +2107,7 @@
       </div>
 
       <div class="bibliography-actions">
-        <div class="filter-meta">3 source papers compiled for this analysis page</div>
+        <div class="filter-meta">3 source papers compiled for this analysis page.</div>
       </div>
 
       <ol class="bibliography-list">
@@ -1264,7 +2122,7 @@
     <div class="closing-card section-card">
       <div>
         <span class="section-kicker">Final Reading</span>
-        <h3>Why this paper set matters</h3>
+        <h3>Why does this paper set matter ?</h3>
         <p>
           These papers compress the AI hardware problem into a useful engineering arc: larger models create demand, accelerator innovation responds,
           and advanced packaging makes that response physically deployable at system scale. That makes the set highly relevant for anyone working
@@ -1286,5 +2144,259 @@
       <p>Research Paper Analysis Series • Er. Sailesh Mishra • VLSI in AI/ML</p>
     </div>
   </footer>
+
+  <div class="concept-search-modal" id="conceptSearchModal" hidden>
+    <div class="concept-search-dialog" role="dialog" aria-modal="true" aria-labelledby="conceptSearchModalTitle">
+      <div class="concept-search-dialog-head">
+        <div>
+          <span class="section-kicker">Quick Help</span>
+          <h2 class="concept-search-dialog-title" id="conceptSearchModalTitle">Need help with an AI hardware term ?</h2>
+        </div>
+        <button class="concept-search-dialog-close" id="conceptSearchModalClose" type="button" aria-label="Close help popup">×</button>
+      </div>
+      <p>If any keyword or concept feels unfamiliar, just double-click it and Google will open a search to help you explore it quickly. You can also select a longer phrase and use the floating search button.</p>
+      <div class="concept-search-dialog-actions">
+        <button class="concept-search-dialog-btn" id="conceptSearchModalDismiss" type="button">Got it</button>
+        <button class="concept-search-dialog-btn concept-search-dialog-btn--primary" id="conceptSearchModalPrimary" type="button">Show me how</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="concept-search-action" id="conceptSearchAction" type="button" hidden aria-label="Search selected concept on Google">
+    <span class="concept-search-action-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span>Search Google</span>
+  </button>
+
+  <script>
+    const conceptSearchModal = document.getElementById('conceptSearchModal');
+    const conceptSearchModalClose = document.getElementById('conceptSearchModalClose');
+    const conceptSearchModalDismiss = document.getElementById('conceptSearchModalDismiss');
+    const conceptSearchModalPrimary = document.getElementById('conceptSearchModalPrimary');
+    const conceptSearchDemoPhrase = document.getElementById('conceptSearchDemoPhrase');
+    const conceptSearchAction = document.getElementById('conceptSearchAction');
+
+    let conceptSearchQuery = '';
+
+    function normalizeConceptText(text) {
+      return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function isValidConcept(text) {
+      return text.length >= 2 && text.length <= 120 && /[a-z]/i.test(text);
+    }
+
+    function isSearchableSelection(selection) {
+      if (!selection || !selection.rangeCount) {
+        return false;
+      }
+
+      const anchorNode = selection.anchorNode;
+      const element = anchorNode && (anchorNode.nodeType === Node.ELEMENT_NODE  ? anchorNode : anchorNode.parentElement);
+
+      return !!element && !element.closest('.topbar, .nav-links, .paper-actions, .bibliography-actions, .concept-search-action, button, a, input, textarea');
+    }
+
+    function hideConceptSearchAction() {
+      conceptSearchQuery = '';
+      if (conceptSearchAction) {
+        conceptSearchAction.hidden = true;
+      }
+    }
+
+    function closeConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = true;
+      }
+    }
+
+    function openConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = false;
+      }
+    }
+
+    function openGoogleSearch(query) {
+      if (!isValidConcept(query)) {
+        return;
+      }
+
+      window.open(`https://www.google.com/search ?q=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function positionConceptSearchAction(rect) {
+      if (!conceptSearchAction || !rect) {
+        return;
+      }
+
+      const actionRect = conceptSearchAction.getBoundingClientRect();
+      const left = Math.min(
+        Math.max(12, rect.left),
+        Math.max(12, window.innerWidth - actionRect.width - 12)
+      );
+      const top = Math.min(
+        Math.max(12, rect.bottom + 10),
+        Math.max(12, window.innerHeight - actionRect.height - 12)
+      );
+
+      conceptSearchAction.style.left = `${left}px`;
+      conceptSearchAction.style.top = `${top}px`;
+      conceptSearchAction.style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    function showConceptSearchAction(text, rect) {
+      if (!conceptSearchAction || !isValidConcept(text) || !rect) {
+        hideConceptSearchAction();
+        return;
+      }
+
+      conceptSearchQuery = text;
+      conceptSearchAction.querySelector('span:last-child').textContent = `Search Google: "${text.length > 42  ? `${text.slice(0, 39)}...` : text}"`;
+      conceptSearchAction.hidden = false;
+
+      requestAnimationFrame(() => {
+        positionConceptSearchAction(rect);
+      });
+    }
+
+    function selectElementText(element) {
+      if (!element) {
+        return null;
+      }
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      const text = normalizeConceptText(selection.toString());
+      const rect = range.getBoundingClientRect();
+
+      if (!isValidConcept(text) || !rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
+
+    function runConceptSearchDemo() {
+      if (!conceptSearchDemoPhrase) {
+        return;
+      }
+
+      hideConceptSearchAction();
+      conceptSearchDemoPhrase.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      window.setTimeout(() => {
+        const conceptData = selectElementText(conceptSearchDemoPhrase);
+
+        conceptSearchDemoPhrase.classList.remove('is-guided');
+        void conceptSearchDemoPhrase.offsetWidth;
+        conceptSearchDemoPhrase.classList.add('is-guided');
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        }
+      }, 520);
+    }
+
+    function selectedConceptData() {
+      const selection = window.getSelection();
+      const text = normalizeConceptText(selection  ? selection.toString() : '');
+
+      if (!selection || !selection.rangeCount || !isSearchableSelection(selection) || !isValidConcept(text)) {
+        return null;
+      }
+
+      const rect = selection.getRangeAt(0).getBoundingClientRect();
+      if (!rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
+
+    if (conceptSearchAction) {
+      conceptSearchAction.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        openGoogleSearch(conceptSearchQuery);
+      });
+    }
+
+    if (conceptSearchModalClose) {
+      conceptSearchModalClose.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalDismiss) {
+      conceptSearchModalDismiss.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalPrimary) {
+      conceptSearchModalPrimary.addEventListener('click', () => {
+        closeConceptSearchModal();
+        runConceptSearchDemo();
+      });
+    }
+
+    if (conceptSearchModal) {
+      conceptSearchModal.addEventListener('click', (event) => {
+        if (event.target === conceptSearchModal) {
+          closeConceptSearchModal();
+        }
+      });
+    }
+
+    document.addEventListener('mouseup', () => {
+      const conceptData = selectedConceptData();
+
+      if (conceptData) {
+        showConceptSearchAction(conceptData.text, conceptData.rect);
+      } else {
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('touchend', () => {
+      window.setTimeout(() => {
+        const conceptData = selectedConceptData();
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        } else {
+          hideConceptSearchAction();
+        }
+      }, 0);
+    });
+
+    document.addEventListener('dblclick', (event) => {
+      if (event.target.closest('.topbar, .nav-links, .paper-actions, .bibliography-actions, .concept-search-action, button, a, input, textarea')) {
+        return;
+      }
+
+      const conceptData = selectedConceptData();
+      if (conceptData) {
+        openGoogleSearch(conceptData.text);
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('scroll', hideConceptSearchAction, { passive: true });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hideConceptSearchAction();
+        closeConceptSearchModal();
+      }
+    });
+
+    window.setTimeout(() => {
+      openConceptSearchModal();
+    }, 700);
+  </script>
 </body>
 </html>

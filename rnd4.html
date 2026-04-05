@@ -385,6 +385,174 @@
       color: #ffffff;
     }
 
+    .concept-search-inline-tip {
+      display: block;
+      margin-top: 0.45rem;
+      color: rgba(255, 241, 239, 0.82);
+      font-size: 0.84rem;
+    }
+
+    .concept-search-demo {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.08rem 0.42rem;
+      margin: 0 0.12rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .concept-search-demo.is-guided {
+      animation: concept-search-demo-pulse 1.25s ease-in-out 3;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+    }
+
+    .concept-search-action {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: min(320px, calc(100vw - 1.5rem));
+      padding: 0.8rem 0.95rem;
+      border: 1px solid rgba(118, 27, 37, 0.22);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(82, 16, 23, 0.97), rgba(147, 39, 53, 0.94));
+      color: #fff9f8;
+      box-shadow: 0 18px 34px rgba(55, 9, 16, 0.28);
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transform: translate3d(-9999px, -9999px, 0);
+    }
+
+    .concept-search-action[hidden] {
+      display: none;
+    }
+
+    .concept-search-action:hover {
+      transform: translateY(-1px);
+    }
+
+    .concept-search-action-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .concept-search-action-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .concept-search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 45;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(20, 7, 10, 0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .concept-search-modal[hidden] {
+      display: none;
+    }
+
+    .concept-search-dialog {
+      width: min(520px, 100%);
+      padding: 1.2rem 1.2rem 1.1rem;
+      border-radius: 20px;
+      border: 1px solid rgba(118, 27, 37, 0.16);
+      background: linear-gradient(180deg, rgba(255, 253, 252, 0.98), rgba(255, 245, 243, 0.95));
+      color: var(--paper-ink);
+      box-shadow: 0 26px 60px rgba(44, 7, 12, 0.24);
+    }
+
+    .concept-search-dialog-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .concept-search-dialog-title {
+      font-size: 1.08rem;
+      line-height: 1.3;
+      color: var(--paper-ink);
+    }
+
+    .concept-search-dialog p {
+      color: var(--paper-muted);
+      font-size: 0.95rem;
+      line-height: 1.68;
+    }
+
+    .concept-search-dialog-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+    }
+
+    .concept-search-dialog-btn {
+      border: 1px solid rgba(118, 27, 37, 0.14);
+      background: rgba(255, 255, 255, 0.62);
+      color: var(--paper-ink);
+      min-height: 42px;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .concept-search-dialog-btn--primary {
+      background: linear-gradient(135deg, rgba(107, 18, 29, 0.96), rgba(162, 47, 63, 0.92));
+      color: #fff9f9;
+      box-shadow: 0 14px 28px rgba(89, 13, 21, 0.18);
+    }
+
+    .concept-search-dialog-close {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.72);
+      color: #7d1927;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    @keyframes concept-search-demo-pulse {
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.12);
+      }
+
+      50% {
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06);
+      }
+    }
+
     .hero-summary,
     .section-card,
     .analysis-card,
@@ -451,6 +619,7 @@
     }
 
     .stat-grid,
+    .basics-grid,
     .metric-grid,
     .insight-grid,
     .playbook-grid {
@@ -514,6 +683,279 @@
     .summary-box h2,
     .analysis-card h3 {
       margin-bottom: 0.7rem;
+    }
+
+    .section-intro {
+      margin-bottom: 1.15rem;
+      padding: 1.15rem 1.2rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .section-intro strong {
+      color: var(--paper-ink);
+    }
+
+    .basics-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 1.2rem;
+    }
+
+    .basic-item {
+      padding: 1.15rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .basic-item h3 {
+      color: var(--paper-ink);
+      font-size: 1.04rem;
+      line-height: 1.28;
+      margin-bottom: 0.5rem;
+    }
+
+    .source-callout {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      margin-bottom: 0.7rem;
+      padding: 0.34rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(122, 26, 37, 0.09);
+      border: 1px solid rgba(122, 26, 37, 0.16);
+      color: #7a1a25;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .basic-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .basic-visual img {
+      display: block;
+      width: 100%;
+      height: 168px;
+      object-fit: contain;
+      background: linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+      padding: 0.65rem;
+    }
+
+    .basic-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .basic-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .basic-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .basics-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+
+    .basics-explainer {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 1rem;
+      margin: 1.3rem 0 0;
+      padding: 1.1rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 247, 245, 0.72));
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .basics-explainer-copy h3 {
+      margin-bottom: 0.35rem;
+      color: var(--paper-ink);
+      font-size: 1.08rem;
+    }
+
+    .basics-explainer-copy p {
+      color: var(--paper-muted);
+    }
+
+    .explainer-steps {
+      display: grid;
+      gap: 0.75rem;
+      align-content: start;
+    }
+
+    .explainer-step {
+      width: 100%;
+      text-align: left;
+      padding: 0.95rem 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--paper-ink);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      cursor: pointer;
+    }
+
+    .explainer-step:hover,
+    .explainer-step:focus-visible {
+      transform: translateY(-2px);
+      border-color: rgba(122, 26, 37, 0.28);
+      box-shadow: 0 14px 26px rgba(122, 26, 37, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.84);
+      outline: none;
+    }
+
+    .explainer-step.active {
+      background: linear-gradient(135deg, rgba(122, 26, 37, 0.96), rgba(162, 43, 57, 0.92));
+      border-color: rgba(122, 26, 37, 0.45);
+      color: #fff6f5;
+      box-shadow: 0 18px 34px rgba(122, 26, 37, 0.18);
+    }
+
+    .explainer-step strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      font-size: 0.95rem;
+    }
+
+    .explainer-step span {
+      display: block;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: inherit;
+      opacity: 0.9;
+    }
+
+    .explainer-panel {
+      position: relative;
+      min-height: 100%;
+      padding: 1.05rem;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(62, 13, 22, 0.98), rgba(103, 24, 34, 0.94));
+      color: #fff7f6;
+      overflow: hidden;
+    }
+
+    .explainer-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.16) 0 14px, transparent 15px),
+        radial-gradient(circle at 82% 16%, rgba(147, 255, 240, 0.2) 0 18px, transparent 19px),
+        linear-gradient(90deg, transparent 0 90%, rgba(255, 255, 255, 0.08) 90% 100%);
+      pointer-events: none;
+    }
+
+    .explainer-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .explainer-panel-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .explainer-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0.32rem 0.66rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff9f8;
+    }
+
+    .explainer-panel h4 {
+      margin-bottom: 0.42rem;
+      font-size: 1.1rem;
+      color: #ffffff;
+    }
+
+    .explainer-panel p {
+      color: rgba(255, 242, 240, 0.88);
+    }
+
+    .explainer-diagram {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.7rem;
+      margin: 1rem 0 0.85rem;
+    }
+
+    .explainer-node {
+      padding: 0.82rem 0.8rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      min-height: 92px;
+    }
+
+    .explainer-node strong {
+      display: block;
+      margin-bottom: 0.24rem;
+      font-size: 0.83rem;
+      color: #ffffff;
+    }
+
+    .explainer-node span {
+      display: block;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: rgba(255, 242, 240, 0.8);
+    }
+
+    .explainer-note {
+      padding: 0.85rem 0.92rem;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.83rem;
+      line-height: 1.55;
+      color: rgba(255, 242, 240, 0.86);
+    }
+
+    .basics-list-item {
+      padding: 1rem 1.1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(118, 27, 37, 0.1);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    .basics-list-item strong {
+      display: block;
+      margin-bottom: 0.28rem;
+      color: var(--paper-ink);
     }
 
     .section {
@@ -583,6 +1025,50 @@
       margin-top: 0.32rem;
     }
 
+    .card-visual {
+      margin: 0.15rem 0 0.9rem;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid rgba(118, 27, 37, 0.12);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 246, 244, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .card-visual svg {
+      display: block;
+      width: 100%;
+      height: 162px;
+      background: radial-gradient(circle at 18% 14%, rgba(255, 106, 95, 0.08), transparent 22%), linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+    }
+
+    .card-visual img {
+      display: block;
+      width: 100%;
+      height: 162px;
+      object-fit: contain;
+      background: linear-gradient(180deg, rgba(255, 251, 250, 0.98), rgba(255, 244, 242, 0.92));
+      padding: 0.65rem;
+    }
+
+    .card-visual figcaption {
+      padding: 0.72rem 0.85rem 0.82rem;
+      border-top: 1px solid rgba(118, 27, 37, 0.1);
+    }
+
+    .card-visual strong {
+      display: block;
+      margin-bottom: 0.18rem;
+      color: var(--paper-ink);
+      font-size: 0.84rem;
+    }
+
+    .card-visual span {
+      display: block;
+      color: var(--paper-muted);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
     .metric-grid {
       margin-top: 1rem;
     }
@@ -595,6 +1081,15 @@
     .matrix {
       margin-top: 1.1rem;
       overflow-x: auto;
+    }
+
+    .matrix table {
+      border-collapse: collapse;
+    }
+
+    .matrix th,
+    .matrix td {
+      border: 1px solid #000000;
     }
 
     table {
@@ -668,6 +1163,8 @@
     @media (max-width: 1100px) {
       .hero,
       .rtl-schematic,
+      .basics-grid,
+      .basics-explainer,
       .analysis-layout,
       .closing-card,
       .insight-grid,
@@ -704,7 +1201,8 @@
 
       .equation-strip,
       .stat-grid,
-      .metric-grid {
+      .metric-grid,
+      .explainer-diagram {
         grid-template-columns: 1fr;
       }
 
@@ -723,6 +1221,7 @@
       </div>
       <nav class="nav-links">
         <a href="index.html">Portfolio</a>
+        <a href="#basics">Basics</a>
         <a href="#analysis">Analysis</a>
         <a href="#insights">Insights</a>
         <a href="#bibliography">Bibliography</a>
@@ -800,6 +1299,7 @@
 
         <div class="hero-note">
           <strong>Reading frame:</strong> treat this as a fabric-level architecture paper, not only a device paper. The real contribution is how security, memory behavior, and power efficiency collapse into one CLB-level design decision.
+          <span class="concept-search-inline-tip">Tip: double-click any keyword to search it on Google, or try selecting <span class="concept-search-demo" id="conceptSearchDemoPhrase">CPA resistance</span> and use the search pill.</span>
         </div>
       </div>
 
@@ -824,7 +1324,7 @@
         </div>
 
         <div class="summary-box">
-          <h2>What this paper shows</h2>
+          <h2>What does this paper show ?</h2>
           <p>
             RTL-oriented programmable logic research can simultaneously target power, security, and nonvolatility when the CLB itself is redesigned.
             This paper shows that the configurable-logic abstraction is rich enough to absorb emerging-device benefits and side-channel resistance at the block level.
@@ -841,6 +1341,194 @@
       </aside>
     </section>
   </div>
+
+  <section class="section" id="basics">
+    <div class="section-card">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker">Foundation First</span>
+          <h2>Let us understand from the beginning . . .</h2>
+          <p>A beginner-first walkthrough of what this paper assumes: FPGA basics, CLBs, MTJ-based nonvolatility, and why CPA resistance matters.</p>
+        </div>
+      </div>
+
+      <div class="section-intro">
+        <p><strong>This RTL paper is really about the programmable fabric itself.</strong> It starts from a familiar FPGA idea, then asks whether the configurable logic block can be rebuilt so that low power, nonvolatility, and side-channel resistance are all present at the primitive level rather than bolted on later.</p>
+      </div>
+
+      <div class="basics-grid">
+        <article class="basic-item">
+          <div class="source-callout">Paper source: abstract and motivation</div>
+          <h3>1. What is an FPGA in this context ?</h3>
+          <figure class="basic-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="Block diagram used as a visual introduction to programmable digital systems"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>An FPGA is a configurable digital fabric built from repeating programmable blocks.</strong>
+              <span>The paper is concerned with one of those repeated building blocks: the configurable logic block, or CLB.</span>
+            </figcaption>
+          </figure>
+          <p>FPGAs are attractive in IoT, AI, medical, and automotive systems because they are flexible, quickly deployable, and reconfigurable. The paper treats that flexibility as valuable, but argues that the underlying logic block still needs better power and security behavior.</p>
+        </article>
+
+        <article class="basic-item">
+          <div class="source-callout">Paper source: CLB framing and proposed block focus</div>
+          <h3>2. Why does the CLB matter so much ?</h3>
+          <figure class="basic-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Multiplexer_4-to-1.svg"
+              alt="Multiplexer diagram used as a visual proxy for configurable logic selection inside a CLB"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The CLB is the primitive that many higher-level RTL mappings ultimately land on.</strong>
+              <span>If the primitive is inefficient or insecure, those weaknesses repeat throughout the whole fabric.</span>
+            </figcaption>
+          </figure>
+          <p>A standard FPGA CLB is built around configurable logic and memory elements. This paper focuses on redesigning that primitive, because improving the block once can improve every mapped workload that uses it.</p>
+        </article>
+
+        <article class="basic-item">
+          <div class="source-callout">Paper source: SRAM versus MTJ background</div>
+          <h3>3. What changes when MTJ replaces SRAM ?</h3>
+          <figure class="basic-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/SRAM_Cell_(6_Transistors).svg"
+              alt="SRAM cell diagram used as a reference point for conventional FPGA configuration storage"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Conventional CLBs rely on volatile SRAM, but the paper moves toward MTJ-based nonvolatile behavior.</strong>
+              <span>That shift changes retention, power usage, and the overall logic-memory relationship inside the block.</span>
+            </figcaption>
+          </figure>
+          <p>The paper explains that SRAM loses state when power is removed, while MTJ-based storage is nonvolatile. That matters because configuration can persist without external reload, and logic-in-memory organization can reduce power in constrained systems.</p>
+        </article>
+      </div>
+
+      <div class="basics-explainer" aria-label="Interactive CLB and CPA explainer">
+        <div class="basics-explainer-copy">
+          <div class="source-callout">Paper source: motivation, background, proposed CLBs</div>
+          <h3>Interactive flow: why this paper starts at the CLB</h3>
+          <p>Click each step to see how the paper moves from a normal FPGA assumption to a secure nonvolatile CLB proposal. This keeps the Basics section tied to the actual paper logic instead of only giving definitions.</p>
+          <div class="explainer-steps" role="tablist" aria-label="CLB redesign flow">
+            <button class="explainer-step active" type="button" role="tab" aria-selected="true"
+              data-badge="Step 1"
+              data-title="Start from the usual FPGA assumption"
+              data-body="The paper begins with the familiar FPGA value proposition: reconfigurable logic is useful in IoT, AI, automotive, and other systems. But that value depends on the repeated logic primitive underneath it."
+              data-node-a-title="Fabric"
+              data-node-a-text="Many workloads map into the same repeated block."
+              data-node-b-title="Conventional CLB"
+              data-node-b-text="Configuration is usually stored with volatile SRAM."
+              data-node-c-title="Consequence"
+              data-node-c-text="Power and security limits repeat across the whole fabric."
+              data-note="Paper cue: the motivation frames FPGA adoption first, then narrows the problem to what the CLB primitive is doing.">
+              <strong>Conventional fabric</strong>
+              <span>Flexible FPGA use still inherits the strengths and weaknesses of the CLB.</span>
+            </button>
+            <button class="explainer-step" type="button" role="tab" aria-selected="false"
+              data-badge="Step 2"
+              data-title="Then the threat model enters: CPA"
+              data-body="The paper treats power behavior as part of security. Even if the cryptographic algorithm is correct, correlation power analysis can exploit hardware-level switching signatures to recover useful information."
+              data-node-a-title="Secret workload"
+              data-node-a-text="PRESENT and AES-style logic perform data-dependent switching."
+              data-node-b-title="Observed power"
+              data-node-b-text="An attacker compares traces against guessed internal activity."
+              data-node-c-title="Leakage risk"
+              data-node-c-text="Security failure can come from the implementation, not the algorithm alone."
+              data-note="Paper cue: CPA resistance is not a side topic here; it is one of the reasons the CLB has to be redesigned.">
+              <strong>Security pressure</strong>
+              <span>Power traces turn the CLB into a security problem, not only an efficiency problem.</span>
+            </button>
+            <button class="explainer-step" type="button" role="tab" aria-selected="false"
+              data-badge="Step 3"
+              data-title="MTJ changes the storage assumption"
+              data-body="The background discussion contrasts SRAM with MTJ behavior. Because MTJ is nonvolatile, the storage element can retain state without the same volatility penalty, which changes how logic and memory interact inside the programmable block."
+              data-node-a-title="SRAM CLB"
+              data-node-a-text="Needs volatile configuration storage and reload behavior."
+              data-node-b-title="MTJ-based storage"
+              data-node-b-text="Adds nonvolatile retention and a different power trade space."
+              data-node-c-title="Architectural effect"
+              data-node-c-text="Logic-in-memory becomes a practical CLB-level design move."
+              data-note="Paper cue: this is why the paper is not just a security paper. It is also a memory-architecture paper at the CLB level.">
+              <strong>Nonvolatile shift</strong>
+              <span>Replacing SRAM with MTJ changes retention, power, and the structure of the primitive itself.</span>
+            </button>
+            <button class="explainer-step" type="button" role="tab" aria-selected="false"
+              data-badge="Step 4"
+              data-title="The paper answer: redesign the primitive"
+              data-body="The authors propose single-output and multioutput hybrid CMOS/MTJ logic-in-memory CLBs, then evaluate them on PRESENT, AES SBOX, and BNN convolution mapping. That makes the claim architectural: redesigning the primitive improves real mapped workloads."
+              data-node-a-title="Proposed CLBs"
+              data-node-a-text="Single-output and multioutput secure hybrid blocks."
+              data-node-b-title="Evaluation"
+              data-node-b-text="Delay, power, transistor cost, and resilience are all compared."
+              data-node-c-title="Takeaway"
+              data-node-c-text="Power, security, and nonvolatility can be designed together."
+              data-note="Paper cue: the paper earns credibility by moving from device idea to block design to workload-level evidence.">
+              <strong>Architectural answer</strong>
+              <span>The contribution is a new CLB definition, not a small patch around an old one.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="explainer-panel" id="basicsExplainerPanel" role="tabpanel" aria-live="polite">
+          <div class="explainer-panel-head">
+            <span class="explainer-badge" id="explainerBadge">Step 1</span>
+            <div class="source-callout" style="margin-bottom: 0; background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.16); color: #fff8f7;">Paper-guided reading path</div>
+          </div>
+          <h4 id="explainerTitle">Start from the usual FPGA assumption</h4>
+          <p id="explainerBody">The paper begins with the familiar FPGA value proposition: reconfigurable logic is useful in IoT, AI, automotive, and other systems. But that value depends on the repeated logic primitive underneath it.</p>
+          <div class="explainer-diagram">
+            <div class="explainer-node">
+              <strong id="explainerNodeATitle">Fabric</strong>
+              <span id="explainerNodeAText">Many workloads map into the same repeated block.</span>
+            </div>
+            <div class="explainer-node">
+              <strong id="explainerNodeBTitle">Conventional CLB</strong>
+              <span id="explainerNodeBText">Configuration is usually stored with volatile SRAM.</span>
+            </div>
+            <div class="explainer-node">
+              <strong id="explainerNodeCTitle">Consequence</strong>
+              <span id="explainerNodeCText">Power and security limits repeat across the whole fabric.</span>
+            </div>
+          </div>
+          <div class="explainer-note" id="explainerNote">Paper cue: the motivation frames FPGA adoption first, then narrows the problem to what the CLB primitive is doing.</div>
+        </div>
+      </div>
+
+      <div class="equation-strip">
+        <div class="equation-chip">FPGA value = reconfigurability + usable power budget + secure execution</div>
+        <div class="equation-chip">CLB redesign affects delay, power, equivalent transistor cost, and resilience</div>
+        <div class="equation-chip">Paper targets = PRESENT + AES SBOX + BNN convolution mapping</div>
+      </div>
+
+      <div class="basics-list">
+        <div class="basics-list-item">
+          <div class="source-callout">Paper source: CPA threat motivation</div>
+          <strong>Why security is part of the basics</strong>
+          The paper is motivated by correlation-based power analysis, or CPA, a side-channel method that correlates power traces with secret information. That means a design can be mathematically secure at the algorithm level and still leak useful information through hardware behavior.
+        </div>
+        <div class="basics-list-item">
+          <div class="source-callout">Paper source: related-work critique</div>
+          <strong>Why existing secure logic is not enough</strong>
+          The literature review in the paper points out drawbacks in earlier secure CLB approaches. Some are more expensive, some remain vulnerable during evaluation, and some do not flatten power behavior as cleanly as needed.
+        </div>
+        <div class="basics-list-item">
+          <div class="source-callout">Paper source: proposed single-output and multioutput CLBs</div>
+          <strong>What this paper actually proposes</strong>
+          The authors propose two CPA-resistant hybrid CMOS/MTJ logic-in-memory CLBs: one single-output and one multioutput. The key idea is not only to add a device, but to redesign the CLB around that device so power, security, and nonvolatility are evaluated together.
+        </div>
+        <div class="basics-list-item">
+          <div class="source-callout">Paper source: workload-based evaluation framing</div>
+          <strong>Design principle</strong>
+          If a programmable fabric is meant for low-power secure systems, the primitive must be secure and efficient by design. The paper’s core lesson is that architecture-level CLB choices can be as important as the RTL mapped on top of them.
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="section" id="analysis">
     <div class="section-card">
@@ -861,6 +1549,17 @@
       <div class="analysis-layout">
         <article class="analysis-card">
           <h3>Architecture focus</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="System-style block diagram used as a direct web visual for secure CLB architecture"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The architectural contribution is the CLB itself, not just an isolated memory device.</strong>
+              <span>The paper redesigns the programmable primitive so security, nonvolatility, and power live inside the same block.</span>
+            </figcaption>
+          </figure>
           <p>
             The core idea is to redesign the FPGA configurable logic block using a hybrid CMOS and magnetic tunnel junction framework.
             Instead of treating nonvolatile behavior or security as separate enhancements, the proposed CLBs integrate those goals into the basic block structure.
@@ -873,7 +1572,18 @@
         </article>
 
         <article class="analysis-card">
-          <h3>Why it matters for RTL design</h3>
+          <h3>Why does it matter for RTL design ?</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Register_transfer_level_-_example_toggler.svg"
+              alt="Register transfer level diagram used as a direct web visual for RTL design relevance"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The work matters because changing the CLB changes the assumptions above it.</strong>
+              <span>RTL, synthesis, and mapping all depend on what the underlying programmable primitive can do.</span>
+            </figcaption>
+          </figure>
           <p>
             Although the paper is device-aware, its architectural relevance is very strong for RTL and reconfigurable design thinking. It asks what happens when the programmable primitive itself changes.
           </p>
@@ -888,18 +1598,62 @@
       <div class="metric-grid">
         <article class="metric-card">
           <h3>Single-output CLB</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Multiplexer_4-to-1.svg"
+              alt="Multiplexer diagram used as a direct web visual for a single-output configurable block"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The single-output CLB is presented as the strongest reduction point versus the secure baseline.</strong>
+              <span>The figure highlights simultaneous movement in delay, power, and implementation cost.</span>
+            </figcaption>
+          </figure>
           <p>Reported gains include 42% lower delay, 85% lower power, and 86% fewer equivalent transistors versus the referenced secure counterpart.</p>
         </article>
         <article class="metric-card">
-          <h3>Multioutput CLB</h3>
+          <h3>Multi-output CLB</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Enable_flipflps.drawio.png"
+              alt="Enabled flip-flops diagram used as a direct web visual for multi-output configurable logic behavior"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The multi-output variant emphasizes fabric efficiency under more realistic CLB fanout behavior.</strong>
+              <span>It shows that the secure primitive can stay compact even when one block serves several logic outputs.</span>
+            </figcaption>
+          </figure>
           <p>Reported gains include 33% lower delay, 18% lower power, and 63% fewer equivalent transistors versus the same baseline.</p>
         </article>
         <article class="metric-card">
           <h3>PRESENT implementation</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Baops.gif"
+              alt="Boolean operations graphic used as a direct web visual for cryptographic mapping"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>PRESENT gives the paper a real cryptographic mapping target.</strong>
+              <span>This matters because it tests the CLB design on a recognizably security-sensitive workload rather than a toy primitive.</span>
+            </figcaption>
+          </figure>
           <p>For one round of PRESENT, the paper reports strong savings in transistor count, delay, and power for both proposed CLB options.</p>
         </article>
         <article class="metric-card">
           <h3>BNN convolution mapping</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Colored_neural_network.svg"
+              alt="Neural network diagram used as a direct web visual for BNN convolution mapping"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The BNN result shows the CLB idea is not limited to classical cryptography.</strong>
+              <span>It extends the architectural value into AI-style binary convolution mappings.</span>
+            </figcaption>
+          </figure>
           <p>The paper extends the comparison beyond cryptography by showing strong benefits on binarized neural-network convolution layers as well.</p>
         </article>
       </div>
@@ -911,7 +1665,7 @@
       <div class="section-head">
         <div>
           <span class="section-kicker">Key Findings</span>
-          <h2>What stands out technically</h2>
+          <h2>What stands out technically ?</h2>
           <p>The value of the paper is not just in the reported percentages, but in the way it reframes secure FPGA fabric design.</p>
         </div>
       </div>
@@ -919,14 +1673,47 @@
       <div class="insight-grid">
         <article class="insight-card">
           <h3>Security is embedded at the CLB level</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Enable_flipflps.drawio.png"
+              alt="Secure control-style logic image used as a direct web visual for CLB-level embedded security"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The protection concept is built into the logic block itself.</strong>
+              <span>That is stronger than adding only higher-level masking or external countermeasures later.</span>
+            </figcaption>
+          </figure>
           <p>The proposed approach resists CPA attacks by design rather than relying entirely on post-design countermeasures.</p>
         </article>
         <article class="insight-card">
           <h3>Emerging memory alters programmable logic economics</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+              alt="Device-structure image used as a direct web visual for emerging-device impact on logic economics"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>MTJ integration changes the cost balance of secure programmable logic.</strong>
+              <span>The benefit is framed as lower power and lower equivalent implementation cost, not novelty alone.</span>
+            </figcaption>
+          </figure>
           <p>MTJ integration changes the power and area tradeoff enough to make nonvolatile secure fabrics substantially more attractive.</p>
         </article>
         <article class="insight-card">
           <h3>Evaluation spans real workloads</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Global_Task_Scheduling.jpg"
+              alt="Workload mapping image used as a direct web visual for evaluation across real workloads"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The paper earns credibility by testing more than one kind of mapped logic workload.</strong>
+              <span>That makes the results easier to interpret as an architectural claim rather than a one-off benchmark result.</span>
+            </figcaption>
+          </figure>
           <p>The inclusion of PRESENT, AES SBOX, and BNN layers gives the reported improvements better architectural credibility than abstract toy examples alone.</p>
         </article>
       </div>
@@ -945,25 +1732,25 @@
           <tbody>
             <tr>
               <td>Power</td>
-              <td>Can secure FPGA logic remain power-efficient?</td>
+              <td>Can secure FPGA logic remain power-efficient ?</td>
               <td>Shows large power reductions relative to the secure CLB reference.</td>
               <td>Critical for IoT, AI edge, and automotive deployments with tight budgets.</td>
             </tr>
             <tr>
               <td>Delay</td>
-              <td>Does added security create timing penalties?</td>
+              <td>Does added security create timing penalties ?</td>
               <td>Reports lower delay despite the security focus.</td>
               <td>Improves the practicality of secure reconfigurable logic.</td>
             </tr>
             <tr>
               <td>Area-equivalent cost</td>
-              <td>Is the secure primitive too expensive to scale?</td>
+              <td>Is the secure primitive too expensive to scale ?</td>
               <td>Reports major equivalent-transistor reductions.</td>
               <td>Helps determine whether the idea can scale into larger programmable fabrics.</td>
             </tr>
             <tr>
               <td>Attack resilience</td>
-              <td>Do the designs hold up under CPA-style analysis?</td>
+              <td>Do the designs hold up under CPA-style analysis ?</td>
               <td>Studies resiliency under CPA and across different TMR ratios and voltages.</td>
               <td>Moves the work from efficiency-only into genuine secure-hardware relevance.</td>
             </tr>
@@ -986,26 +1773,92 @@
       <div class="playbook-grid">
         <article class="playbook-card">
           <h3>1. Do not isolate security from architecture</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Enable_flipflps.drawio.png"
+              alt="Logic control image used as a direct web visual for integrating security into architecture"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Security becomes cheaper and stronger when it is architectural.</strong>
+              <span>The paper argues against treating it as a late overlay on a vulnerable primitive.</span>
+            </figcaption>
+          </figure>
           <p>If the block primitive is vulnerable, higher-level countermeasures may be too expensive or too fragile. Build resistance into the block definition.</p>
         </article>
         <article class="playbook-card">
           <h3>2. Evaluate configurable logic with real mappings</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Baops.gif"
+              alt="Boolean operations image used as a direct web visual for real logic mappings"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Mapped workloads expose useful strengths and weak spots better than toy logic snippets.</strong>
+              <span>That is why the paper’s PRESENT, AES SBOX, and BNN coverage matters.</span>
+            </figcaption>
+          </figure>
           <p>Cryptographic rounds and BNN layers expose practical strengths and weaknesses better than tiny synthetic examples.</p>
         </article>
         <article class="playbook-card">
           <h3>3. Treat memory behavior as part of logic architecture</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/SRAM_Cell_(6_Transistors).svg"
+              alt="Memory-cell image used as a direct web visual for logic and memory co-location"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>Nonvolatile behavior changes more than retention; it changes the logic trade space.</strong>
+              <span>Logic-in-memory pushes memory behavior into the heart of the architecture decision.</span>
+            </figcaption>
+          </figure>
           <p>Logic-in-memory and nonvolatility change the optimization space for power, state retention, and side-channel visibility.</p>
         </article>
         <article class="playbook-card">
           <h3>4. Compare across multiple operating assumptions</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Threshold_formation_nowatermark.gif"
+              alt="Voltage behavior image used as a direct web visual for evaluating across operating assumptions"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>One operating point is not enough for a security or robustness claim.</strong>
+              <span>The paper improves credibility by checking resilience under different TMR ratios and voltages.</span>
+            </figcaption>
+          </figure>
           <p>Resilience under different TMR ratios and voltages gives a more realistic picture of robustness than single-point evaluation.</p>
         </article>
         <article class="playbook-card">
           <h3>5. Think beyond fixed FPGA fabrics</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/ARMSoCBlockDiagram.svg"
+              alt="Block-diagram image used as a direct web visual for changing the fabric primitive assumption"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The CLB itself can be a design variable.</strong>
+              <span>This is the broader architectural lesson the paper offers to RTL and reconfigurable-system thinking.</span>
+            </figcaption>
+          </figure>
           <p>This work is useful because it reframes the CLB itself as a design variable rather than an immutable implementation target.</p>
         </article>
         <article class="playbook-card">
           <h3>6. Link emerging devices to architecture-level value</h3>
+          <figure class="card-visual">
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/Doublegate_FinFET-en.svg"
+              alt="Device-structure image used as a direct web visual for linking emerging devices to architecture value"
+              loading="lazy"
+              referrerpolicy="no-referrer">
+            <figcaption>
+              <strong>The important question is what the device changes at architecture level.</strong>
+              <span>The paper’s case for MTJ/CMOS is grounded in measurable programmable-logic value, not device novelty alone.</span>
+            </figcaption>
+          </figure>
           <p>The strongest argument for MTJ integration is not novelty by itself, but measurable gains in secure programmable logic efficiency.</p>
         </article>
       </div>
@@ -1032,7 +1885,7 @@
     <div class="closing-card section-card">
       <div>
         <span class="section-kicker">Final Reading</span>
-        <h3>Why this paper matters</h3>
+        <h3>Why does this paper matter ?</h3>
         <p>
           This paper is valuable because it turns secure FPGA logic into a block-level architecture problem rather than a narrow implementation tweak.
           It connects programmable logic, low-power design, side-channel resistance, and emerging memory technologies in a way that is directly relevant to future secure reconfigurable platforms.
@@ -1053,5 +1906,302 @@
       <p>Research Paper Analysis Series • Er. Sailesh Mishra • RTL Design</p>
     </div>
   </footer>
+
+  <div class="concept-search-modal" id="conceptSearchModal" hidden>
+    <div class="concept-search-dialog" role="dialog" aria-modal="true" aria-labelledby="conceptSearchModalTitle">
+      <div class="concept-search-dialog-head">
+        <div>
+          <span class="section-kicker">Quick Help</span>
+          <h2 class="concept-search-dialog-title" id="conceptSearchModalTitle">Need help with an RTL or FPGA term ?</h2>
+        </div>
+        <button class="concept-search-dialog-close" id="conceptSearchModalClose" type="button" aria-label="Close help popup">×</button>
+      </div>
+      <p>If any keyword or concept feels unfamiliar, just double-click it and Google will open a search to help you explore it quickly. You can also select a longer phrase and use the floating search button.</p>
+      <div class="concept-search-dialog-actions">
+        <button class="concept-search-dialog-btn" id="conceptSearchModalDismiss" type="button">Got it</button>
+        <button class="concept-search-dialog-btn concept-search-dialog-btn--primary" id="conceptSearchModalPrimary" type="button">Show me how</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="concept-search-action" id="conceptSearchAction" type="button" hidden aria-label="Search selected concept on Google">
+    <span class="concept-search-action-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 16L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span>Search Google</span>
+  </button>
+
+  <script>
+    (() => {
+      const steps = Array.from(document.querySelectorAll('.explainer-step'));
+      if (!steps.length) {
+        return;
+      }
+
+      const panelFields = {
+        badge: document.getElementById('explainerBadge'),
+        title: document.getElementById('explainerTitle'),
+        body: document.getElementById('explainerBody'),
+        nodeATitle: document.getElementById('explainerNodeATitle'),
+        nodeAText: document.getElementById('explainerNodeAText'),
+        nodeBTitle: document.getElementById('explainerNodeBTitle'),
+        nodeBText: document.getElementById('explainerNodeBText'),
+        nodeCTitle: document.getElementById('explainerNodeCTitle'),
+        nodeCText: document.getElementById('explainerNodeCText'),
+        note: document.getElementById('explainerNote')
+      };
+
+      const activateStep = (step) => {
+        steps.forEach((button) => {
+          const isActive = button === step;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-selected', isActive  ? 'true' : 'false');
+        });
+
+        panelFields.badge.textContent = step.dataset.badge;
+        panelFields.title.textContent = step.dataset.title;
+        panelFields.body.textContent = step.dataset.body;
+        panelFields.nodeATitle.textContent = step.dataset.nodeATitle;
+        panelFields.nodeAText.textContent = step.dataset.nodeAText;
+        panelFields.nodeBTitle.textContent = step.dataset.nodeBTitle;
+        panelFields.nodeBText.textContent = step.dataset.nodeBText;
+        panelFields.nodeCTitle.textContent = step.dataset.nodeCTitle;
+        panelFields.nodeCText.textContent = step.dataset.nodeCText;
+        panelFields.note.textContent = step.dataset.note;
+      };
+
+      steps.forEach((step) => {
+        step.addEventListener('click', () => activateStep(step));
+      });
+    })();
+
+    const conceptSearchModal = document.getElementById('conceptSearchModal');
+    const conceptSearchModalClose = document.getElementById('conceptSearchModalClose');
+    const conceptSearchModalDismiss = document.getElementById('conceptSearchModalDismiss');
+    const conceptSearchModalPrimary = document.getElementById('conceptSearchModalPrimary');
+    const conceptSearchDemoPhrase = document.getElementById('conceptSearchDemoPhrase');
+    const conceptSearchAction = document.getElementById('conceptSearchAction');
+
+    let conceptSearchQuery = '';
+
+    function normalizeConceptText(text) {
+      return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function isValidConcept(text) {
+      return text.length >= 2 && text.length <= 120 && /[a-z]/i.test(text);
+    }
+
+    function isSearchableSelection(selection) {
+      if (!selection || !selection.rangeCount) {
+        return false;
+      }
+
+      const anchorNode = selection.anchorNode;
+      const element = anchorNode && (anchorNode.nodeType === Node.ELEMENT_NODE  ? anchorNode : anchorNode.parentElement);
+
+      return !!element && !element.closest('.topbar, .nav-links, .concept-search-action, .explainer-step, .concept-search-modal, button, a, input, textarea');
+    }
+
+    function hideConceptSearchAction() {
+      conceptSearchQuery = '';
+      if (conceptSearchAction) {
+        conceptSearchAction.hidden = true;
+      }
+    }
+
+    function closeConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = true;
+      }
+    }
+
+    function openConceptSearchModal() {
+      if (conceptSearchModal) {
+        conceptSearchModal.hidden = false;
+      }
+    }
+
+    function openGoogleSearch(query) {
+      if (!isValidConcept(query)) {
+        return;
+      }
+
+      window.open(`https://www.google.com/search ?q=${encodeURIComponent(query)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function positionConceptSearchAction(rect) {
+      if (!conceptSearchAction || !rect) {
+        return;
+      }
+
+      const actionRect = conceptSearchAction.getBoundingClientRect();
+      const left = Math.min(
+        Math.max(12, rect.left),
+        Math.max(12, window.innerWidth - actionRect.width - 12)
+      );
+      const top = Math.min(
+        Math.max(12, rect.bottom + 10),
+        Math.max(12, window.innerHeight - actionRect.height - 12)
+      );
+
+      conceptSearchAction.style.left = `${left}px`;
+      conceptSearchAction.style.top = `${top}px`;
+      conceptSearchAction.style.transform = 'translate3d(0, 0, 0)';
+    }
+
+    function showConceptSearchAction(text, rect) {
+      if (!conceptSearchAction || !isValidConcept(text) || !rect) {
+        hideConceptSearchAction();
+        return;
+      }
+
+      conceptSearchQuery = text;
+      conceptSearchAction.querySelector('span:last-child').textContent = `Search Google: "${text.length > 42  ? `${text.slice(0, 39)}...` : text}"`;
+      conceptSearchAction.hidden = false;
+
+      requestAnimationFrame(() => {
+        positionConceptSearchAction(rect);
+      });
+    }
+
+    function selectElementText(element) {
+      if (!element) {
+        return null;
+      }
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      const text = normalizeConceptText(selection.toString());
+      const rect = range.getBoundingClientRect();
+
+      if (!isValidConcept(text) || !rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
+
+    function runConceptSearchDemo() {
+      if (!conceptSearchDemoPhrase) {
+        return;
+      }
+
+      hideConceptSearchAction();
+      conceptSearchDemoPhrase.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      window.setTimeout(() => {
+        const conceptData = selectElementText(conceptSearchDemoPhrase);
+
+        conceptSearchDemoPhrase.classList.remove('is-guided');
+        void conceptSearchDemoPhrase.offsetWidth;
+        conceptSearchDemoPhrase.classList.add('is-guided');
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        }
+      }, 520);
+    }
+
+    function selectedConceptData() {
+      const selection = window.getSelection();
+      const text = normalizeConceptText(selection  ? selection.toString() : '');
+
+      if (!selection || !selection.rangeCount || !isSearchableSelection(selection) || !isValidConcept(text)) {
+        return null;
+      }
+
+      const rect = selection.getRangeAt(0).getBoundingClientRect();
+      if (!rect || (!rect.width && !rect.height)) {
+        return null;
+      }
+
+      return { text, rect };
+    }
+
+    if (conceptSearchAction) {
+      conceptSearchAction.addEventListener('pointerdown', (event) => {
+        event.preventDefault();
+        openGoogleSearch(conceptSearchQuery);
+      });
+    }
+
+    if (conceptSearchModalClose) {
+      conceptSearchModalClose.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalDismiss) {
+      conceptSearchModalDismiss.addEventListener('click', closeConceptSearchModal);
+    }
+
+    if (conceptSearchModalPrimary) {
+      conceptSearchModalPrimary.addEventListener('click', () => {
+        closeConceptSearchModal();
+        runConceptSearchDemo();
+      });
+    }
+
+    if (conceptSearchModal) {
+      conceptSearchModal.addEventListener('click', (event) => {
+        if (event.target === conceptSearchModal) {
+          closeConceptSearchModal();
+        }
+      });
+    }
+
+    document.addEventListener('mouseup', () => {
+      const conceptData = selectedConceptData();
+
+      if (conceptData) {
+        showConceptSearchAction(conceptData.text, conceptData.rect);
+      } else {
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('touchend', () => {
+      window.setTimeout(() => {
+        const conceptData = selectedConceptData();
+
+        if (conceptData) {
+          showConceptSearchAction(conceptData.text, conceptData.rect);
+        } else {
+          hideConceptSearchAction();
+        }
+      }, 0);
+    });
+
+    document.addEventListener('dblclick', (event) => {
+      if (event.target.closest('.topbar, .nav-links, .concept-search-action, .explainer-step, .concept-search-modal, button, a, input, textarea')) {
+        return;
+      }
+
+      const conceptData = selectedConceptData();
+      if (conceptData) {
+        openGoogleSearch(conceptData.text);
+        hideConceptSearchAction();
+      }
+    });
+
+    document.addEventListener('scroll', hideConceptSearchAction, { passive: true });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hideConceptSearchAction();
+        closeConceptSearchModal();
+      }
+    });
+
+    window.setTimeout(() => {
+      openConceptSearchModal();
+    }, 700);
+  </script>
 </body>
 </html>
