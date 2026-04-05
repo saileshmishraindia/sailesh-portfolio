@@ -257,12 +257,94 @@
     }
     
     .chip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
       background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       color: white;
       padding: 0.5rem 1.2rem;
       border-radius: 50px;
       font-size: 0.9rem;
       font-weight: 500;
+      cursor: default;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .chip:hover,
+    .chip:focus-visible {
+      transform: translateY(-2px);
+      background: rgba(111, 239, 253, 0.12);
+      border-color: rgba(111, 239, 253, 0.7);
+      color: #6FEFFD;
+      box-shadow: 0 0 0 1px rgba(111, 239, 253, 0.28), 0 0 18px rgba(111, 239, 253, 0.26), 0 0 34px rgba(111, 239, 253, 0.18);
+      outline: none;
+    }
+
+    .chip-tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 0.9rem);
+      width: min(280px, 72vw);
+      padding: 0.8rem 0.9rem;
+      border-radius: 14px;
+      background: rgba(7, 18, 31, 0.94);
+      border: 1px solid rgba(111, 239, 253, 0.28);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28), 0 0 24px rgba(111, 239, 253, 0.12);
+      color: #eef6ff;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 8px);
+      transition: opacity 0.24s ease, transform 0.24s ease, visibility 0.24s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .chip-tooltip::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 12px;
+      height: 12px;
+      background: rgba(7, 18, 31, 0.94);
+      border-right: 1px solid rgba(111, 239, 253, 0.28);
+      border-bottom: 1px solid rgba(111, 239, 253, 0.28);
+      transform: translate(-50%, -6px) rotate(45deg);
+    }
+
+    .chip:hover .chip-tooltip,
+    .chip:focus-visible .chip-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    .chip-tooltip strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: #ffffff;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .chip-tooltip span {
+      display: block;
+      font-size: 0.76rem;
+      line-height: 1.55;
+      color: rgba(238, 246, 255, 0.86);
+    }
+
+    .chip-tooltip em {
+      color: #7ee6ff;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .chip-tooltip {
+        display: none;
+      }
     }
     
     /* About Section */
@@ -1704,6 +1786,35 @@
       opacity: 1;
     }
 
+    .project-image-risc {
+      background:
+        radial-gradient(circle at 18% 18%, rgba(111, 239, 253, 0.22), transparent 24%),
+        radial-gradient(circle at 82% 20%, rgba(255, 196, 107, 0.16), transparent 20%),
+        linear-gradient(135deg, #08101d 0%, #0f2440 52%, #0a1626 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image-risc::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .project-image-risc svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
 
     
     body.dark-mode .project-content h3 {
@@ -2746,18 +2857,42 @@
       </div>
       
       <div class="chip-grid">
-        <span class="chip">VLSI Design</span>
-        <span class="chip">Semiconductor Scaling</span>
-        <span class="chip">Nanotechnology</span>
-        <span class="chip">Verilog HDL</span>
-        <span class="chip">SystemVerilog</span>
-        <span class="chip">Cadence Virtuoso</span>
-        <span class="chip">CMOS Characterization</span>
-        <span class="chip">UVM</span>
-        <span class="chip">TL-Verilog</span>
-        <span class="chip">DRC Development - PDK</span>
-        <span class="chip">Protocols & Communication</span>
-        <span class="chip">RISC-V</span>
+        <span class="chip" tabindex="0">VLSI Design
+          <span class="chip-tooltip"><strong>Designing complex integrated circuits at scale.</strong><span><em>Keywords:</em> low power, timing, layout, verification.</span></span>
+        </span>
+        <span class="chip" tabindex="0">Semiconductor Scaling
+          <span class="chip-tooltip"><strong>Shrinking devices while preserving performance, power, and reliability.</strong><span><em>Keywords:</em> Moore's law, nodes, leakage, variability.</span></span>
+        </span>
+        <span class="chip" tabindex="0">Nanotechnology
+          <span class="chip-tooltip"><strong>Engineering materials and devices at nanometer dimensions.</strong><span><em>Keywords:</em> nanoscale devices, materials, fabrication, quantum effects.</span></span>
+        </span>
+        <span class="chip" tabindex="0">Verilog HDL
+          <span class="chip-tooltip"><strong>A hardware description language for modeling and implementing digital logic.</strong><span><em>Keywords:</em> RTL, modules, synthesis, simulation.</span></span>
+        </span>
+        <span class="chip" tabindex="0">SystemVerilog
+          <span class="chip-tooltip"><strong>Extends Verilog for advanced design and verification workflows.</strong><span><em>Keywords:</em> assertions, interfaces, testbenches, constrained random.</span></span>
+        </span>
+        <span class="chip" tabindex="0">Cadence Virtuoso
+          <span class="chip-tooltip"><strong>An industry-standard environment for custom IC schematic and layout work.</strong><span><em>Keywords:</em> analog design, layout, simulation, PDK.</span></span>
+        </span>
+        <span class="chip" tabindex="0">CMOS Characterization
+          <span class="chip-tooltip"><strong>Measuring and modeling transistor and circuit behavior across conditions.</strong><span><em>Keywords:</em> delay, leakage, corners, process variation.</span></span>
+        </span>
+        <span class="chip" tabindex="0">UVM
+          <span class="chip-tooltip"><strong>A reusable methodology for building scalable verification environments.</strong><span><em>Keywords:</em> verification, sequences, agents, scoreboards.</span></span>
+        </span>
+        <span class="chip" tabindex="0">TL-Verilog
+          <span class="chip-tooltip"><strong>A timing-abstract hardware language for cleaner pipeline-oriented design.</strong><span><em>Keywords:</em> pipelines, abstraction, generators, RTL productivity.</span></span>
+        </span>
+        <span class="chip" tabindex="0">DRC Development - PDK
+          <span class="chip-tooltip"><strong>Creating and maintaining physical-rule checks tied to process technology kits.</strong><span><em>Keywords:</em> layout rules, foundry checks, signoff, automation.</span></span>
+        </span>
+        <span class="chip" tabindex="0">Protocols &amp; Communication
+          <span class="chip-tooltip"><strong>Digital interfaces that move data reliably between blocks and systems.</strong><span><em>Keywords:</em> UART, SPI, I2C, handshaking.</span></span>
+        </span>
+        <span class="chip" tabindex="0">RISC-V
+          <span class="chip-tooltip"><strong>An open instruction set architecture for customizable processor design.</strong><span><em>Keywords:</em> ISA, cores, open hardware, embedded systems.</span></span>
+        </span>
       </div>
     </div>
   </section>
@@ -3201,21 +3336,38 @@
 
 
       <a href="risc.html" class="project-card">
-        <div class="project-image-carousel">
-          <img src="risc-image1.jpg" alt="Project 1" class="carousel-img active">
-          <img src="risc-image2.jpg" alt="Project 2" class="carousel-img">
-          <img src="risc-image3.jpg" alt="Project 3" class="carousel-img">
-          <img src="risc-image4.jpg" alt="Project 4" class="carousel-img">
-          <img src="risc-image5.jpg" alt="Project 5" class="carousel-img">
+        <div class="project-image project-image-risc" aria-label="RISC-V pipeline visual">
+          <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five stage RISC-V pipeline overview">
+            <defs>
+              <linearGradient id="indexRiscFlow" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#6feffd"/>
+                <stop offset="100%" stop-color="#9ea7ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="24" y="54" width="72" height="54" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(111,239,253,0.36)"/>
+            <rect x="112" y="54" width="72" height="54" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(111,239,253,0.24)"/>
+            <rect x="200" y="54" width="72" height="54" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(111,239,253,0.24)"/>
+            <rect x="288" y="54" width="72" height="54" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(111,239,253,0.24)"/>
+            <rect x="376" y="54" width="72" height="54" rx="12" fill="rgba(255,255,255,0.08)" stroke="rgba(111,239,253,0.24)"/>
+            <path d="M96 81H112M184 81H200M272 81H288M360 81H376" fill="none" stroke="url(#indexRiscFlow)" stroke-width="4" stroke-linecap="round"/>
+            <path d="M78 134C150 176, 325 176, 396 134" fill="none" stroke="rgba(255,200,107,0.76)" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+            <text x="46" y="86" fill="#ffffff" font-size="14" font-family="IBM Plex Mono, monospace">IF</text>
+            <text x="133" y="86" fill="#ffffff" font-size="14" font-family="IBM Plex Mono, monospace">ID</text>
+            <text x="222" y="86" fill="#ffffff" font-size="14" font-family="IBM Plex Mono, monospace">EX</text>
+            <text x="305" y="86" fill="#ffffff" font-size="14" font-family="IBM Plex Mono, monospace">MEM</text>
+            <text x="401" y="86" fill="#ffffff" font-size="14" font-family="IBM Plex Mono, monospace">WB</text>
+            <text x="27" y="30" fill="rgba(232,241,255,0.78)" font-size="13" font-family="Space Grotesk, sans-serif">TL-Verilog timing abstraction + pipeline review</text>
+            <text x="128" y="162" fill="rgba(255,200,107,0.9)" font-size="12" font-family="IBM Plex Mono, monospace">execution trace • hazards • control correction</text>
+          </svg>
         </div>
         <div class="project-content">
           <h3>5 Stage 32-Bit RISC-V CPU</h3>
-          <p>Designed a 32 bit 5-stage pipelined RISC-V processor using TL-Verilog.</p>
+          <p>Presented a 32-bit 5-stage pipelined RISC-V CPU as a review-ready TL-Verilog dossier with pipeline anatomy, execution-trace walkthroughs, and Makerchip-inspired workspace views.</p>
           <div class="project-tags">
             <span class="project-tag">System Architecture</span>
             <span class="project-tag">TL Verilog</span>
-            <span class="project-tag">Pipelining</span>
-            <span class="project-tag">Advance RTL Design</span>
+            <span class="project-tag">Execution Trace</span>
+            <span class="project-tag">Pipeline Review</span>
           </div>
         </div>
       </a>

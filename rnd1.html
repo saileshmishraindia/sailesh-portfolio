@@ -1755,6 +1755,35 @@
       font-size: 0.92rem;
     }
 
+    @media (min-width: 1400px) and (orientation: landscape) {
+      .topbar-inner,
+      .hero,
+      .section,
+      .footer-inner {
+        width: calc(100% - 2rem);
+      }
+
+      .hero-wrap {
+        padding: 1.4rem 0 1.2rem;
+      }
+
+      .hero {
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 1.4rem;
+      }
+
+      .hero-panel,
+      .hero-summary,
+      .section-card,
+      .closing-card {
+        padding: 1.9rem;
+      }
+
+      .section {
+        padding: 0.9rem 0 1.5rem;
+      }
+    }
+
     @media (max-width: 1080px) {
       .hero,
       .closing-card,

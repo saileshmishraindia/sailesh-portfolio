@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>5 Stage 32-Bit RISC-V CPU | Project Dossier</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bg: #07111f;
+			--bg-deep: #040b14;
+			--panel: rgba(10, 21, 37, 0.9);
+			--panel-strong: rgba(15, 28, 48, 0.96);
+			--panel-soft: rgba(17, 31, 51, 0.74);
+			--line: rgba(118, 152, 191, 0.18);
+			--text: #e8f1ff;
+			--muted: #9ab0cf;
+			--cyan: #6feffd;
+			--cyan-solid: #6feffd;
+			--cyan-soft: rgba(111, 239, 253, 0.16);
+			--amber: #ffc86b;
+			--violet: #9ea7ff;
+			--success: #6ff7b3;
+			--danger: #ff8a8a;
+			--shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+			--radius-xl: 28px;
+			--radius-lg: 22px;
+			--radius-md: 16px;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			min-height: 100vh;
+			overflow-x: hidden;
+			color: var(--text);
+			font-family: "Space Grotesk", "Segoe UI", sans-serif;
+			background:
+				radial-gradient(circle at 10% 12%, rgba(111, 239, 253, 0.08), transparent 20%),
+				radial-gradient(circle at 88% 16%, rgba(158, 167, 255, 0.12), transparent 22%),
+				radial-gradient(circle at 58% 100%, rgba(255, 200, 107, 0.08), transparent 24%),
+				linear-gradient(180deg, #08101d 0%, #06111f 48%, #040a12 100%);
+		}
+
+		body::before,
+		body::after {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: -1;
+		}
+
+		body::before {
+			background-image:
+				linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+			background-size: 56px 56px;
+			opacity: 0.2;
+			mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35));
+		}
+
+		body::after {
+			background:
+				linear-gradient(120deg, transparent 0 46%, rgba(255, 255, 255, 0.06) 46% 48%, transparent 48% 100%),
+				radial-gradient(circle at 24% 24%, rgba(111, 239, 253, 0.14) 0 2px, transparent 3px),
+				radial-gradient(circle at 82% 34%, rgba(255, 200, 107, 0.12) 0 2px, transparent 3px);
+			background-size: 220px 260px, 240px 240px, 300px 300px;
+			background-repeat: no-repeat;
+			opacity: 0.18;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			backdrop-filter: blur(18px);
+			background: rgba(4, 12, 22, 0.7);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.topbar-inner,
+		.hero,
+		.section,
+		.footer-inner {
+			width: min(1240px, calc(100% - 2rem));
+			margin: 0 auto;
+		}
+
+		.topbar-inner {
+			min-height: 72px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+		}
+
+		.brand {
+			display: grid;
+			gap: 0.12rem;
+		}
+
+		.brand-kicker {
+			color: var(--cyan-solid);
+			font-size: 0.72rem;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			font-weight: 700;
+		}
+
+		.brand-title {
+			font-size: 1rem;
+			font-weight: 700;
+			color: #ffffff;
+		}
+
+		.nav-links {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			gap: 0.9rem;
+		}
+
+		.nav-links a {
+			color: rgba(232, 241, 255, 0.78);
+			font-size: 0.92rem;
+			font-weight: 500;
+		}
+
+		.nav-links a:hover {
+			color: var(--cyan-solid);
+		}
+
+		.hero-wrap {
+			padding: 2.2rem 0 1.4rem;
+		}
+
+		.hero {
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: 1.2rem;
+			align-items: stretch;
+		}
+
+		.hero-card,
+		.section-card,
+		.detail-card,
+		.metric-card,
+		.code-pane,
+		.log-card,
+		.closing-card {
+			border-radius: var(--radius-xl);
+			border: 1px solid var(--line);
+			background: linear-gradient(180deg, rgba(16, 28, 46, 0.96), rgba(9, 18, 31, 0.94));
+			box-shadow: var(--shadow);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.hero-card::before,
+		.section-card::before,
+		.closing-card::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 20%),
+				linear-gradient(90deg, transparent 0 92%, rgba(111, 239, 253, 0.04) 92% 100%);
+			pointer-events: none;
+		}
+
+		.hero-card > *,
+		.section-card > *,
+		.closing-card > * {
+			position: relative;
+			z-index: 1;
+		}
+
+		.hero-main,
+		.hero-side,
+		.section-card,
+		.closing-card {
+			padding: 1.6rem;
+		}
+
+		.hero-kicker,
+		.section-kicker,
+		.code-badge,
+		.stat-badge {
+			display: inline-flex;
+			align-items: center;
+			min-height: 30px;
+			padding: 0.34rem 0.72rem;
+			border-radius: 999px;
+			border: 1px solid rgba(111, 239, 253, 0.18);
+			background: rgba(111, 239, 253, 0.08);
+			color: var(--cyan-solid);
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		h1 {
+			margin-top: 1rem;
+			font-size: clamp(2.5rem, 4vw, 4.4rem);
+			line-height: 1.02;
+			max-width: 10ch;
+		}
+
+		.hero-main p,
+		.section-head p,
+		.detail-copy p,
+		.code-copy p,
+		.closing-card p {
+			color: var(--muted);
+			line-height: 1.7;
+		}
+
+		.hero-main p {
+			margin-top: 1rem;
+			max-width: 62ch;
+			font-size: 1.04rem;
+		}
+
+		.hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.8rem;
+			margin-top: 1.4rem;
+		}
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 46px;
+			padding: 0.85rem 1.15rem;
+			border-radius: 999px;
+			font-weight: 700;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+		}
+
+		.btn:hover {
+			transform: translateY(-2px);
+		}
+
+		.btn-primary {
+			background: linear-gradient(135deg, rgba(111, 239, 253, 0.94), rgba(157, 246, 255, 0.92));
+			color: #03111b;
+			box-shadow: 0 14px 30px rgba(111, 239, 253, 0.18);
+		}
+
+		.btn-secondary {
+			border: 1px solid rgba(255, 255, 255, 0.14);
+			background: rgba(255, 255, 255, 0.06);
+			color: #ffffff;
+		}
+
+		.hero-chip-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.55rem;
+			margin-top: 1.2rem;
+		}
+
+		.hero-chip {
+			display: inline-flex;
+			align-items: center;
+			min-height: 32px;
+			padding: 0.38rem 0.74rem;
+			border-radius: 999px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.06);
+			color: rgba(232, 241, 255, 0.9);
+			font-size: 0.78rem;
+			font-weight: 600;
+		}
+
+		.hero-chip.highlight {
+			color: var(--cyan-solid);
+			border-color: rgba(111, 239, 253, 0.28);
+			box-shadow: 0 0 0 1px rgba(111, 239, 253, 0.12);
+		}
+
+		.ide-shell {
+			margin-top: 1.35rem;
+			border-radius: 22px;
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: linear-gradient(180deg, rgba(7, 14, 24, 0.96), rgba(9, 16, 27, 0.94));
+		}
+
+		.ide-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding: 0.8rem 1rem;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.ide-dots {
+			display: flex;
+			gap: 0.4rem;
+		}
+
+		.ide-dots span {
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.24);
+		}
+
+		.ide-dots span:nth-child(1) { background: #ff7a7a; }
+		.ide-dots span:nth-child(2) { background: #ffd36f; }
+		.ide-dots span:nth-child(3) { background: #71ffbd; }
+
+		.ide-tabs {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.ide-tab {
+			border: 1px solid transparent;
+			padding: 0.36rem 0.68rem;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.06);
+			color: rgba(232, 241, 255, 0.78);
+			font-size: 0.78rem;
+			font-family: "IBM Plex Mono", monospace;
+			cursor: pointer;
+			transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+		}
+
+		.ide-tab.active {
+			background: rgba(111, 239, 253, 0.12);
+			color: var(--cyan-solid);
+			border-color: rgba(111, 239, 253, 0.22);
+		}
+
+		.ide-body {
+			position: relative;
+			min-height: 360px;
+		}
+
+		.ide-panel {
+			display: none;
+			min-height: 360px;
+		}
+
+		.ide-panel.active {
+			display: block;
+		}
+
+		.ide-panel.ide-panel-split {
+			display: none;
+			grid-template-columns: 1.02fr 0.98fr;
+		}
+
+		.ide-panel.ide-panel-split.active {
+			display: grid;
+		}
+
+		.editor-pane,
+		.diagram-pane {
+			padding: 1rem;
+		}
+
+		.editor-pane {
+			border-right: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(4, 12, 22, 0.92), rgba(6, 12, 21, 0.94));
+		}
+
+		.editor-header,
+		.diagram-header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			margin-bottom: 0.9rem;
+		}
+
+		.editor-header strong,
+		.diagram-header strong {
+			font-size: 0.94rem;
+			color: #ffffff;
+		}
+
+		.editor-status,
+		.diagram-status {
+			color: var(--success);
+			font-size: 0.74rem;
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		pre {
+			margin: 0;
+			overflow-x: auto;
+			white-space: pre;
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 0.84rem;
+			line-height: 1.7;
+			color: #d9e7ff;
+		}
+
+		.code-window {
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: #06111f;
+			padding: 1rem;
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		}
+
+		.code-comment { color: #6a88aa; }
+		.code-key { color: #92faff; }
+		.code-signal { color: #ffc86b; }
+		.code-stage { color: #9ea7ff; }
+
+		.diagram-pane {
+			background: linear-gradient(180deg, rgba(9, 17, 31, 0.96), rgba(8, 15, 26, 0.96));
+		}
+
+		.pipeline-visual {
+			min-height: 280px;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: radial-gradient(circle at 18% 18%, rgba(111, 239, 253, 0.1), transparent 20%), #07111d;
+			overflow: hidden;
+		}
+
+		.pipeline-visual svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+		}
+
+		.waveform-pane,
+		.log-pane-hero {
+			padding: 1rem;
+			background: linear-gradient(180deg, rgba(7, 14, 24, 0.96), rgba(8, 15, 26, 0.96));
+		}
+
+		.waveform-board {
+			margin-top: 0.9rem;
+			padding: 1rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: #06111d;
+		}
+
+		.hero-wave-grid {
+			display: grid;
+			grid-template-columns: 110px repeat(6, minmax(0, 1fr));
+			gap: 0.45rem;
+		}
+
+		.hero-wave-head,
+		.hero-wave-label,
+		.hero-wave-cell {
+			min-height: 42px;
+			padding: 0.5rem 0.45rem;
+			border-radius: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-size: 0.76rem;
+			line-height: 1.35;
+		}
+
+		.hero-wave-head,
+		.hero-wave-label {
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: #d9e7ff;
+			font-weight: 700;
+		}
+
+		.hero-wave-cell {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: rgba(232, 241, 255, 0.64);
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		.hero-wave-cell.active {
+			background: rgba(111, 239, 253, 0.14);
+			border-color: rgba(111, 239, 253, 0.28);
+			color: #efffff;
+		}
+
+		.hero-log-list {
+			display: grid;
+			gap: 0.75rem;
+			margin-top: 0.9rem;
+		}
+
+		.hero-log-item {
+			padding: 0.9rem 1rem;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.04);
+			color: var(--muted);
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 0.82rem;
+			line-height: 1.6;
+		}
+
+		.hero-log-item strong {
+			color: var(--success);
+		}
+
+		.hero-side {
+			display: grid;
+			gap: 1rem;
+			align-content: start;
+		}
+
+		.summary-copy h2,
+		.section-head h2,
+		.detail-copy h3,
+		.code-copy h3,
+		.closing-card h3 {
+			color: #ffffff;
+		}
+
+		.summary-copy h2 {
+			font-size: 1.45rem;
+			margin: 0.8rem 0 0.55rem;
+		}
+
+		.metric-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.9rem;
+		}
+
+		.metric-card {
+			padding: 1rem;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+		}
+
+		.metric-card strong {
+			display: block;
+			margin-bottom: 0.28rem;
+			font-size: 1.65rem;
+			color: var(--cyan-solid);
+		}
+
+		.metric-card span {
+			color: var(--muted);
+			font-size: 0.88rem;
+			line-height: 1.5;
+		}
+
+		.section {
+			padding: 1rem 0 1.6rem;
+		}
+
+		.section-card {
+			padding: 1.6rem;
+		}
+
+		.section-head {
+			display: flex;
+			justify-content: space-between;
+			gap: 1rem;
+			align-items: end;
+			margin-bottom: 1.2rem;
+		}
+
+		.section-head h2 {
+			margin: 0.65rem 0 0.45rem;
+			font-size: clamp(1.8rem, 3vw, 2.6rem);
+			line-height: 1.1;
+		}
+
+		.section-meta {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.45rem;
+			justify-content: flex-end;
+		}
+
+		.meta-chip {
+			display: inline-flex;
+			align-items: center;
+			min-height: 30px;
+			padding: 0.34rem 0.68rem;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: rgba(232, 241, 255, 0.8);
+			font-size: 0.76rem;
+			font-weight: 600;
+		}
+
+		.pipeline-layout {
+			display: grid;
+			grid-template-columns: 0.98fr 1.02fr;
+			gap: 1rem;
+			align-items: start;
+		}
+
+		.stage-list {
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.stage-button {
+			width: 100%;
+			text-align: left;
+			padding: 1rem 1.05rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+			color: var(--text);
+			cursor: pointer;
+			transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+			font-family: inherit;
+		}
+
+		.stage-button:hover,
+		.stage-button:focus-visible {
+			transform: translateY(-2px);
+			border-color: rgba(111, 239, 253, 0.24);
+			outline: none;
+		}
+
+		.stage-button.active {
+			background: linear-gradient(135deg, rgba(111, 239, 253, 0.14), rgba(158, 167, 255, 0.14));
+			border-color: rgba(111, 239, 253, 0.28);
+			box-shadow: 0 0 0 1px rgba(111, 239, 253, 0.08), 0 16px 26px rgba(0, 0, 0, 0.16);
+		}
+
+		.stage-button strong {
+			display: block;
+			margin-bottom: 0.18rem;
+			font-size: 0.98rem;
+			color: #ffffff;
+		}
+
+		.stage-button span {
+			color: var(--muted);
+			font-size: 0.84rem;
+			line-height: 1.55;
+		}
+
+		.detail-card {
+			padding: 1.15rem;
+			background: linear-gradient(180deg, rgba(7, 17, 30, 0.94), rgba(11, 22, 37, 0.96));
+		}
+
+		.detail-topline {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			align-items: center;
+			margin-bottom: 0.7rem;
+		}
+
+		.detail-badge {
+			display: inline-flex;
+			align-items: center;
+			min-height: 28px;
+			padding: 0.3rem 0.66rem;
+			border-radius: 999px;
+			background: rgba(111, 239, 253, 0.1);
+			color: var(--cyan-solid);
+			font-size: 0.74rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		.detail-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 0.7rem;
+			margin-top: 1rem;
+		}
+
+		.detail-node {
+			padding: 0.8rem;
+			border-radius: 16px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.detail-node strong {
+			display: block;
+			margin-bottom: 0.18rem;
+			color: #ffffff;
+			font-size: 0.82rem;
+		}
+
+		.detail-node span {
+			display: block;
+			color: var(--muted);
+			font-size: 0.76rem;
+			line-height: 1.5;
+		}
+
+		.signal-strip {
+			display: grid;
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			gap: 0.65rem;
+			margin-top: 1rem;
+		}
+
+		.signal-chip {
+			padding: 0.72rem 0.76rem;
+			border-radius: 14px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.signal-chip strong {
+			display: block;
+			margin-bottom: 0.16rem;
+			font-size: 0.76rem;
+			color: var(--amber);
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+
+		.signal-chip span {
+			display: block;
+			color: var(--muted);
+			font-size: 0.76rem;
+			line-height: 1.45;
+		}
+
+		.execution-layout {
+			display: grid;
+			grid-template-columns: 0.86fr 1.14fr;
+			gap: 1rem;
+			align-items: start;
+		}
+
+		.execution-scenarios {
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.execution-scenario {
+			width: 100%;
+			text-align: left;
+			padding: 1rem 1.05rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+			color: var(--text);
+			cursor: pointer;
+			font-family: inherit;
+			transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+		}
+
+		.execution-scenario:hover,
+		.execution-scenario:focus-visible {
+			transform: translateY(-2px);
+			border-color: rgba(111, 239, 253, 0.24);
+			outline: none;
+		}
+
+		.execution-scenario.active {
+			background: linear-gradient(135deg, rgba(111, 239, 253, 0.14), rgba(255, 200, 107, 0.12));
+			border-color: rgba(111, 239, 253, 0.28);
+			box-shadow: 0 0 0 1px rgba(111, 239, 253, 0.08), 0 16px 26px rgba(0, 0, 0, 0.16);
+		}
+
+		.execution-scenario strong {
+			display: block;
+			margin-bottom: 0.2rem;
+			font-size: 0.96rem;
+			color: #ffffff;
+		}
+
+		.execution-scenario span {
+			display: block;
+			color: var(--muted);
+			font-size: 0.83rem;
+			line-height: 1.55;
+		}
+
+		.execution-card {
+			padding: 1.15rem;
+			border-radius: var(--radius-lg);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(7, 17, 30, 0.94), rgba(11, 22, 37, 0.96));
+		}
+
+		.execution-card h3 {
+			margin: 0.7rem 0 0.45rem;
+			font-size: 1.2rem;
+			color: #ffffff;
+		}
+
+		.execution-card p {
+			color: var(--muted);
+			line-height: 1.7;
+		}
+
+		.register-strip {
+			display: grid;
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			gap: 0.7rem;
+			margin-top: 1rem;
+		}
+
+		.register-card {
+			padding: 0.82rem;
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.register-card strong {
+			display: block;
+			margin-bottom: 0.16rem;
+			font-size: 0.76rem;
+			color: var(--amber);
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+		}
+
+		.register-card span {
+			display: block;
+			color: #ffffff;
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 0.84rem;
+		}
+
+		.wave-trace {
+			margin-top: 1rem;
+			padding: 1rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: #06111d;
+		}
+
+		.wave-grid {
+			display: grid;
+			grid-template-columns: 96px repeat(8, minmax(0, 1fr));
+			gap: 0.45rem;
+			align-items: stretch;
+		}
+
+		.wave-head,
+		.wave-label,
+		.wave-cell {
+			border-radius: 12px;
+			padding: 0.58rem 0.48rem;
+			min-height: 44px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			font-size: 0.76rem;
+			line-height: 1.35;
+		}
+
+		.wave-head,
+		.wave-label {
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: #d9e7ff;
+			font-weight: 700;
+		}
+
+		.wave-cell {
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.03);
+			color: rgba(232, 241, 255, 0.62);
+			font-family: "IBM Plex Mono", monospace;
+		}
+
+		.wave-cell.active {
+			background: rgba(111, 239, 253, 0.14);
+			border-color: rgba(111, 239, 253, 0.28);
+			color: #eefdff;
+			box-shadow: inset 0 0 0 1px rgba(111, 239, 253, 0.08);
+		}
+
+		.exec-log {
+			display: grid;
+			gap: 0.6rem;
+			margin-top: 1rem;
+		}
+
+		.exec-log-item {
+			padding: 0.82rem 0.9rem;
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: var(--muted);
+			font-size: 0.84rem;
+			line-height: 1.6;
+		}
+
+		.exec-log-item strong {
+			color: var(--success);
+		}
+
+		.architecture-grid,
+		.deliverable-grid,
+		.outcome-grid {
+			display: grid;
+			gap: 1rem;
+		}
+
+		.architecture-grid {
+			grid-template-columns: 1.08fr 0.92fr;
+		}
+
+		.deliverable-grid,
+		.outcome-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.card-block {
+			padding: 1.15rem;
+			border-radius: var(--radius-lg);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.03));
+		}
+
+		.card-block h3 {
+			margin-bottom: 0.52rem;
+			font-size: 1rem;
+			color: #ffffff;
+		}
+
+		.card-block p,
+		.card-block li {
+			color: var(--muted);
+			line-height: 1.68;
+		}
+
+		.card-block ul {
+			padding-left: 1rem;
+			margin-top: 0.65rem;
+		}
+
+		.card-block li + li {
+			margin-top: 0.28rem;
+		}
+
+		.flow-board {
+			min-height: 100%;
+			border-radius: 22px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: linear-gradient(180deg, rgba(7, 16, 28, 0.96), rgba(8, 15, 24, 0.94));
+			padding: 1rem;
+		}
+
+		.flow-svg {
+			width: 100%;
+			height: 100%;
+			min-height: 320px;
+			display: block;
+		}
+
+		.workspace-grid {
+			display: grid;
+			grid-template-columns: 1.02fr 0.98fr;
+			gap: 1rem;
+			align-items: start;
+		}
+
+		.code-panel-stack {
+			display: grid;
+			gap: 0.95rem;
+		}
+
+		.code-tabs {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.55rem;
+			margin: 1rem 0 0.9rem;
+		}
+
+		.code-tab-btn {
+			padding: 0.5rem 0.84rem;
+			border-radius: 999px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.04);
+			color: rgba(232, 241, 255, 0.78);
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 0.8rem;
+			cursor: pointer;
+			transition: 0.2s ease;
+		}
+
+		.code-tab-btn.active {
+			background: rgba(111, 239, 253, 0.12);
+			color: var(--cyan-solid);
+			border-color: rgba(111, 239, 253, 0.22);
+		}
+
+		.code-pane {
+			padding: 1rem;
+			display: none;
+		}
+
+		.code-pane.active {
+			display: block;
+		}
+
+		.code-pane pre {
+			padding: 0.95rem;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: #05101c;
+			min-height: 250px;
+		}
+
+		.log-card {
+			padding: 1rem;
+			background: linear-gradient(180deg, rgba(8, 15, 24, 0.98), rgba(6, 12, 19, 0.96));
+		}
+
+		.log-rows {
+			display: grid;
+			gap: 0.65rem;
+			margin-top: 0.95rem;
+			font-family: "IBM Plex Mono", monospace;
+			font-size: 0.83rem;
+		}
+
+		.log-row {
+			padding: 0.82rem 0.9rem;
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+			color: var(--muted);
+		}
+
+		.log-row strong {
+			color: var(--success);
+		}
+
+		.mini-metrics {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.7rem;
+			margin-top: 1rem;
+		}
+
+		.mini-metric {
+			padding: 0.85rem;
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.mini-metric strong {
+			display: block;
+			margin-bottom: 0.18rem;
+			color: var(--amber);
+			font-size: 1rem;
+		}
+
+		.mini-metric span {
+			display: block;
+			color: var(--muted);
+			font-size: 0.8rem;
+			line-height: 1.45;
+		}
+
+		.closing-card {
+			display: grid;
+			grid-template-columns: 1.05fr 0.95fr;
+			gap: 1rem;
+			align-items: start;
+		}
+
+		.footer {
+			padding: 0 0 2.4rem;
+		}
+
+		.footer-inner {
+			color: rgba(232, 241, 255, 0.6);
+			font-size: 0.92rem;
+			text-align: center;
+		}
+
+		@media (min-width: 1400px) and (orientation: landscape) {
+			.topbar-inner,
+			.hero,
+			.section,
+			.footer-inner {
+				width: calc(100% - 2rem);
+			}
+
+			.hero-wrap {
+				padding: 1.4rem 0 1.2rem;
+			}
+
+			.hero {
+				grid-template-columns: 1.14fr 0.86fr;
+				gap: 1.4rem;
+			}
+
+			.hero-main,
+			.hero-side,
+			.section-card,
+			.closing-card {
+				padding: 1.9rem;
+			}
+
+			.ide-body,
+			.ide-panel,
+			.ide-panel.ide-panel-split {
+				min-height: 430px;
+			}
+
+			.section {
+				padding: 0.9rem 0 1.5rem;
+			}
+		}
+
+		@media (max-width: 1100px) {
+			.hero,
+			.pipeline-layout,
+			.execution-layout,
+			.architecture-grid,
+			.workspace-grid,
+			.closing-card,
+			.ide-body,
+			.deliverable-grid,
+			.outcome-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.detail-grid,
+			.signal-strip,
+			.metric-grid,
+			.register-strip {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+
+			.editor-pane {
+				border-right: 0;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+			}
+		}
+
+		@media (max-width: 720px) {
+			.topbar-inner,
+			.section-head {
+				flex-direction: column;
+				align-items: start;
+			}
+
+			.hero-main,
+			.hero-side,
+			.section-card,
+			.closing-card {
+				padding: 1.25rem;
+			}
+
+			.detail-grid,
+			.signal-strip,
+			.metric-grid,
+			.mini-metrics,
+			.register-strip,
+			.wave-grid {
+				grid-template-columns: 1fr;
+			}
+
+			h1 {
+				max-width: none;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="topbar-inner">
+			<div class="brand">
+				<span class="brand-kicker">Project Dossier</span>
+				<span class="brand-title">5 Stage 32-Bit RISC-V CPU</span>
+			</div>
+			<nav class="nav-links">
+				<a href="index.html">Portfolio</a>
+				<a href="#pipeline">Pipeline</a>
+				<a href="#architecture">Architecture</a>
+				<a href="#execution">Execution</a>
+				<a href="#workspace">Workspace</a>
+				<a href="#outcomes">Outcomes</a>
+			</nav>
+		</div>
+	</header>
+
+	<div class="hero-wrap">
+		<section class="hero">
+			<article class="hero-card hero-main">
+				<span class="hero-kicker">Makerchip-Inspired Learning Flow</span>
+				<h1>Designing a clean 5-stage RISC-V CPU in TL-Verilog</h1>
+				<p>
+					This page presents the processor the way an engineer would want to review it: architecture first, pipeline behavior second, and implementation flow third.
+					It borrows the visual rhythm of Makerchip's editor-diagram workflow, but translates it into a polished static project page focused on clarity, reviewability, and execution detail.
+				</p>
+
+				<div class="hero-actions">
+					<a class="btn btn-primary" href="#pipeline">Explore the pipeline</a>
+					<a class="btn btn-secondary" href="https://www.makerchip.com/v116/ide/~0ERfWhqK/p-0Z4h59" target="_blank" rel="noopener noreferrer">Open Makerchip reference</a>
+				</div>
+
+				<div class="hero-chip-row" aria-label="Project themes">
+					<span class="hero-chip highlight">TL-Verilog</span>
+					<span class="hero-chip">32-bit datapath</span>
+					<span class="hero-chip highlight">5-stage pipeline</span>
+					<span class="hero-chip">RISC-V ISA</span>
+					<span class="hero-chip">Hazard-aware control</span>
+				</div>
+
+				<div class="ide-shell" aria-label="Makerchip-inspired CPU workspace preview">
+					<div class="ide-bar">
+						<div class="ide-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+						<div class="ide-tabs" role="tablist" aria-label="Hero IDE views">
+							<button class="ide-tab active" type="button" role="tab" aria-selected="true" data-ide-pane="ide-editor">EDITOR</button>
+							<button class="ide-tab" type="button" role="tab" aria-selected="false" data-ide-pane="ide-diagram">DIAGRAM</button>
+							<button class="ide-tab" type="button" role="tab" aria-selected="false" data-ide-pane="ide-waveform">WAVEFORM</button>
+							<button class="ide-tab" type="button" role="tab" aria-selected="false" data-ide-pane="ide-log">LOG</button>
+						</div>
+					</div>
+					<div class="ide-body">
+						<div class="ide-panel active" id="ide-editor" role="tabpanel">
+							<div class="editor-pane" style="border-right: 0; min-height: 360px;">
+								<div class="editor-header">
+									<strong>cpu.tlv</strong>
+									<span class="editor-status">compiled cleanly</span>
+								</div>
+								<div class="code-window">
+<pre><span class="code-comment">// 5-stage timing-abstract pipeline</span>
+<span class="code-key">|cpu</span>
+	<span class="code-stage">@0</span>
+		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span> ? 32'h0 : <span class="code-signal">$next_pc</span>;
+		<span class="code-signal">$imem_addr</span> = <span class="code-signal">$pc</span>;
+
+	<span class="code-stage">@1</span>
+		<span class="code-signal">$instr</span> = <span class="code-signal">$imem_data</span>;
+		<span class="code-signal">$rs1</span> = <span class="code-signal">$instr</span>[19:15];
+		<span class="code-signal">$rs2</span> = <span class="code-signal">$instr</span>[24:20];
+
+	<span class="code-stage">@2</span>
+		<span class="code-signal">$alu_out</span> = <span class="code-signal">$src1_value</span> + <span class="code-signal">$src2_value</span>;
+
+	<span class="code-stage">@3</span>
+		<span class="code-signal">$wb_data</span> = <span class="code-signal">$is_load</span> ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;
+
+	<span class="code-stage">@4</span>
+		<span class="code-signal">$rf_wr_en</span> = <span class="code-signal">$rd_valid</span>;</pre>
+								</div>
+							</div>
+						</div>
+
+						<div class="ide-panel" id="ide-diagram" role="tabpanel">
+							<div class="diagram-pane" style="min-height: 360px;">
+								<div class="diagram-header">
+									<strong>Pipeline overview</strong>
+									<span class="diagram-status">5 active stages</span>
+								</div>
+								<div class="pipeline-visual">
+								<svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five stage RISC-V pipeline diagram">
+									<defs>
+										<linearGradient id="flowGlow" x1="0" y1="0" x2="1" y2="1">
+											<stop offset="0%" stop-color="#6feffd" stop-opacity="1"/>
+											<stop offset="100%" stop-color="#9ea7ff" stop-opacity="0.92"/>
+										</linearGradient>
+									</defs>
+									<rect x="24" y="56" width="98" height="84" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.38)"/>
+									<rect x="142" y="56" width="98" height="84" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.22)"/>
+									<rect x="260" y="56" width="98" height="84" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.22)"/>
+									<rect x="378" y="56" width="98" height="84" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.22)"/>
+									<rect x="496" y="56" width="98" height="84" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.22)"/>
+
+									<path d="M122 98H142M240 98H260M358 98H378M476 98H496" fill="none" stroke="url(#flowGlow)" stroke-width="4" stroke-linecap="round"/>
+									<path d="M90 174C170 230, 446 230, 526 174" fill="none" stroke="rgba(255,200,107,0.72)" stroke-width="3.2" stroke-dasharray="8 8" stroke-linecap="round"/>
+									<path d="M528 172L512 164L516 182Z" fill="#ffc86b"/>
+
+									<text x="55" y="90" fill="#ffffff" font-size="18" font-family="IBM Plex Mono, monospace">IF</text>
+									<text x="170" y="90" fill="#ffffff" font-size="18" font-family="IBM Plex Mono, monospace">ID</text>
+									<text x="290" y="90" fill="#ffffff" font-size="18" font-family="IBM Plex Mono, monospace">EX</text>
+									<text x="406" y="90" fill="#ffffff" font-size="18" font-family="IBM Plex Mono, monospace">MEM</text>
+									<text x="520" y="90" fill="#ffffff" font-size="18" font-family="IBM Plex Mono, monospace">WB</text>
+
+									<text x="44" y="115" fill="rgba(232,241,255,0.72)" font-size="11" font-family="Space Grotesk, sans-serif">PC + instruction fetch</text>
+									<text x="151" y="115" fill="rgba(232,241,255,0.72)" font-size="11" font-family="Space Grotesk, sans-serif">Decode + register read</text>
+									<text x="280" y="115" fill="rgba(232,241,255,0.72)" font-size="11" font-family="Space Grotesk, sans-serif">ALU + branch resolve</text>
+									<text x="389" y="115" fill="rgba(232,241,255,0.72)" font-size="11" font-family="Space Grotesk, sans-serif">Data memory access</text>
+									<text x="509" y="115" fill="rgba(232,241,255,0.72)" font-size="11" font-family="Space Grotesk, sans-serif">Register writeback</text>
+
+									<text x="228" y="252" fill="rgba(255,200,107,0.84)" font-size="12" font-family="IBM Plex Mono, monospace">forwarding / control feedback / next PC correction</text>
+								</svg>
+								</div>
+							</div>
+						</div>
+
+						<div class="ide-panel" id="ide-waveform" role="tabpanel">
+							<div class="waveform-pane">
+								<div class="diagram-header">
+									<strong>Waveform sketch</strong>
+									<span class="diagram-status">cycle-accurate view</span>
+								</div>
+								<div class="waveform-board">
+									<div class="hero-wave-grid">
+										<div class="hero-wave-head"></div>
+										<div class="hero-wave-head">C1</div>
+										<div class="hero-wave-head">C2</div>
+										<div class="hero-wave-head">C3</div>
+										<div class="hero-wave-head">C4</div>
+										<div class="hero-wave-head">C5</div>
+										<div class="hero-wave-head">C6</div>
+
+										<div class="hero-wave-label">addi x5,x1,9</div>
+										<div class="hero-wave-cell active">IF</div>
+										<div class="hero-wave-cell active">ID</div>
+										<div class="hero-wave-cell active">EX</div>
+										<div class="hero-wave-cell active">MEM</div>
+										<div class="hero-wave-cell active">WB</div>
+										<div class="hero-wave-cell">.</div>
+
+										<div class="hero-wave-label">add x6,x5,x2</div>
+										<div class="hero-wave-cell">.</div>
+										<div class="hero-wave-cell active">IF</div>
+										<div class="hero-wave-cell active">ID</div>
+										<div class="hero-wave-cell active">EX</div>
+										<div class="hero-wave-cell active">MEM</div>
+										<div class="hero-wave-cell active">WB</div>
+
+										<div class="hero-wave-label">beq x6,x0,L1</div>
+										<div class="hero-wave-cell">.</div>
+										<div class="hero-wave-cell">.</div>
+										<div class="hero-wave-cell active">IF</div>
+										<div class="hero-wave-cell active">ID</div>
+										<div class="hero-wave-cell active">EX</div>
+										<div class="hero-wave-cell active">flush</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="ide-panel" id="ide-log" role="tabpanel">
+							<div class="log-pane-hero">
+								<div class="diagram-header">
+									<strong>Build and review log</strong>
+									<span class="diagram-status">status notes</span>
+								</div>
+								<div class="hero-log-list">
+									<div class="hero-log-item"><strong>[PASS]</strong> Decode and execute responsibilities stay separated cleanly across stage boundaries.</div>
+									<div class="hero-log-item"><strong>[PASS]</strong> TL-Verilog keeps stage intent readable without excessive manual pipeline plumbing.</div>
+									<div class="hero-log-item"><strong>[CHECK]</strong> Load-use and branch-control scenarios should be the first cases reviewed during CPU bring-up.</div>
+									<div class="hero-log-item"><strong>[READY]</strong> The full page below expands these static snapshots into architecture, execution, and verification sections.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</article>
+
+			<aside class="hero-card hero-side">
+				<div class="summary-copy">
+					<span class="stat-badge">At a glance</span>
+					<h2>What this page is optimizing for</h2>
+					<p>
+						The goal is to present the CPU like a real engineering review: what the pipeline does, how timing abstraction helps, how the implementation is organized, and why the design is credible.
+					</p>
+				</div>
+
+				<div class="metric-grid">
+					<div class="metric-card"><strong>5</strong><span>core stages from fetch to writeback</span></div>
+					<div class="metric-card"><strong>32-bit</strong><span>datapath built around a compact RISC-V subset</span></div>
+					<div class="metric-card"><strong>TLV</strong><span>timing abstraction used to keep pipeline intent readable</span></div>
+					<div class="metric-card"><strong>IDE flow</strong><span>inspired by editor, diagram, waveform, and log review</span></div>
+				</div>
+
+				<div class="card-block">
+					<h3>Project framing</h3>
+					<p>
+						Instead of presenting only screenshots or code, this page is structured around the questions a reviewer actually asks: how instructions move, where the control sits, how hazards are handled conceptually, and how the implementation stays maintainable.
+					</p>
+				</div>
+			</aside>
+		</section>
+	</div>
+
+	<section class="section" id="pipeline">
+		<div class="section-card">
+			<div class="section-head">
+				<div>
+					<span class="section-kicker">Pipeline Anatomy</span>
+					<h2>Read the CPU one stage at a time</h2>
+					<p>Click a stage to inspect its responsibility, the main signals it owns, and how it hands work to the next stage in the machine.</p>
+				</div>
+				<div class="section-meta">
+					<span class="meta-chip">Instruction flow</span>
+					<span class="meta-chip">Control signals</span>
+					<span class="meta-chip">Pipeline timing</span>
+				</div>
+			</div>
+
+			<div class="pipeline-layout">
+				<div class="stage-list" role="tablist" aria-label="Pipeline stages">
+					<button class="stage-button active" type="button" role="tab" aria-selected="true"
+						data-badge="Stage 1"
+						data-title="Instruction Fetch"
+						data-copy="The fetch stage owns the program counter, the instruction memory address, and the first decision about where execution goes next. In a clean 5-stage design, this stage should stay narrow and predictable so the rest of the pipeline can stay fed."
+						data-node1-title="Primary job" data-node1-text="Read the next instruction using the current PC."
+						data-node2-title="Key signals" data-node2-text="pc, next_pc, imem_addr, imem_data."
+						data-node3-title="Design concern" data-node3-text="Handle sequential flow and branch redirects cleanly."
+						data-signal1-title="PC" data-signal1-text="Instruction address source"
+						data-signal2-title="IMEM" data-signal2-text="Instruction memory read"
+						data-signal3-title="NEXT PC" data-signal3-text="Sequential or redirected"
+						data-signal4-title="STALL" data-signal4-text="Hold if upstream requires it"
+						data-signal5-title="FLUSH" data-signal5-text="Correct after control changes">
+						<strong>IF • Instruction Fetch</strong>
+						<span>Program counter progression, instruction memory access, and next-PC preparation.</span>
+					</button>
+
+					<button class="stage-button" type="button" role="tab" aria-selected="false"
+						data-badge="Stage 2"
+						data-title="Instruction Decode"
+						data-copy="Decode translates instruction bits into architectural intent. This stage identifies the opcode, extracts source and destination fields, reads the register file, and generates the control signals that shape later stages."
+						data-node1-title="Primary job" data-node1-text="Interpret instruction fields and read operands."
+						data-node2-title="Key signals" data-node2-text="instr, rs1, rs2, rd, imm, control bundle."
+						data-node3-title="Design concern" data-node3-text="Generate clean control without bloating the critical path."
+						data-signal1-title="INSTR" data-signal1-text="Raw instruction bits"
+						data-signal2-title="REGFILE" data-signal2-text="Read rs1 and rs2 values"
+						data-signal3-title="IMM" data-signal3-text="Immediate formation"
+						data-signal4-title="CTRL" data-signal4-text="ALU, MEM, WB intent"
+						data-signal5-title="HAZARD" data-signal5-text="Detect dependencies early">
+						<strong>ID • Instruction Decode</strong>
+						<span>Decode, register-file reads, immediate generation, and control intent formation.</span>
+					</button>
+
+					<button class="stage-button" type="button" role="tab" aria-selected="false"
+						data-badge="Stage 3"
+						data-title="Execute"
+						data-copy="Execute is where arithmetic, address calculation, comparison, and branch resolution converge. This is usually the most behavior-dense stage, so the page highlights it as the point where datapath intent becomes concrete machine action."
+						data-node1-title="Primary job" data-node1-text="Run the ALU and resolve branches."
+						data-node2-title="Key signals" data-node2-text="src1, src2, alu_op, alu_out, branch_taken."
+						data-node3-title="Design concern" data-node3-text="Keep forwarding and branch control coherent."
+						data-signal1-title="ALU OP" data-signal1-text="Select operation type"
+						data-signal2-title="SRC MUX" data-signal2-text="Choose forwarded or decoded operands"
+						data-signal3-title="BRANCH" data-signal3-text="Compare and redirect if needed"
+						data-signal4-title="ADDR" data-signal4-text="Form memory address for load/store"
+						data-signal5-title="FORWARD" data-signal5-text="Avoid unnecessary stalls">
+						<strong>EX • Execute</strong>
+						<span>ALU operations, address generation, comparisons, and branch decisions.</span>
+					</button>
+
+					<button class="stage-button" type="button" role="tab" aria-selected="false"
+						data-badge="Stage 4"
+						data-title="Memory"
+						data-copy="The memory stage is deliberately narrow: if the instruction is a load or store, this is where the data memory is touched. Otherwise, the stage mostly carries results forward while preserving pipeline alignment."
+						data-node1-title="Primary job" data-node1-text="Perform load or store transactions."
+						data-node2-title="Key signals" data-node2-text="dmem_addr, dmem_wdata, dmem_rdata, mem_en."
+						data-node3-title="Design concern" data-node3-text="Separate memory-side effects from ALU-only instructions."
+						data-signal1-title="DMEM" data-signal1-text="Data memory interface"
+						data-signal2-title="WRITE DATA" data-signal2-text="Store payload"
+						data-signal3-title="READ DATA" data-signal3-text="Load response"
+						data-signal4-title="MEM EN" data-signal4-text="Gate access only when needed"
+						data-signal5-title="ALIGN" data-signal5-text="Preserve stage timing">
+						<strong>MEM • Memory Access</strong>
+						<span>Load/store handling and disciplined separation between datapath result and memory side effect.</span>
+					</button>
+
+					<button class="stage-button" type="button" role="tab" aria-selected="false"
+						data-badge="Stage 5"
+						data-title="Writeback"
+						data-copy="Writeback closes the loop by committing the final result into the register file. Its correctness is simple to state but critical to system integrity, because this stage decides what architectural state becomes visible to the next instructions."
+						data-node1-title="Primary job" data-node1-text="Commit the selected result to rd."
+						data-node2-title="Key signals" data-node2-text="wb_data, rd, rf_wr_en, wb_sel."
+						data-node3-title="Design concern" data-node3-text="Ensure only valid destination updates reach the register file."
+						data-signal1-title="WB SEL" data-signal1-text="ALU or memory return"
+						data-signal2-title="RD" data-signal2-text="Destination register index"
+						data-signal3-title="WR EN" data-signal3-text="Commit only valid writes"
+						data-signal4-title="RF PORT" data-signal4-text="Register file update path"
+						data-signal5-title="STATE" data-signal5-text="Architectural visibility point">
+						<strong>WB • Writeback</strong>
+						<span>Final result selection and safe architectural state update.</span>
+					</button>
+				</div>
+
+				<div class="detail-card">
+					<div class="detail-copy">
+						<div class="detail-topline">
+							<span class="detail-badge" id="detailBadge">Stage 1</span>
+							<span class="meta-chip">interactive review panel</span>
+						</div>
+						<h3 id="detailTitle">Instruction Fetch</h3>
+						<p id="detailCopy">The fetch stage owns the program counter, the instruction memory address, and the first decision about where execution goes next. In a clean 5-stage design, this stage should stay narrow and predictable so the rest of the pipeline can stay fed.</p>
+					</div>
+
+					<div class="detail-grid">
+						<div class="detail-node"><strong id="node1Title">Primary job</strong><span id="node1Text">Read the next instruction using the current PC.</span></div>
+						<div class="detail-node"><strong id="node2Title">Key signals</strong><span id="node2Text">pc, next_pc, imem_addr, imem_data.</span></div>
+						<div class="detail-node"><strong id="node3Title">Design concern</strong><span id="node3Text">Handle sequential flow and branch redirects cleanly.</span></div>
+					</div>
+
+					<div class="signal-strip">
+						<div class="signal-chip"><strong id="signal1Title">PC</strong><span id="signal1Text">Instruction address source</span></div>
+						<div class="signal-chip"><strong id="signal2Title">IMEM</strong><span id="signal2Text">Instruction memory read</span></div>
+						<div class="signal-chip"><strong id="signal3Title">NEXT PC</strong><span id="signal3Text">Sequential or redirected</span></div>
+						<div class="signal-chip"><strong id="signal4Title">STALL</strong><span id="signal4Text">Hold if upstream requires it</span></div>
+						<div class="signal-chip"><strong id="signal5Title">FLUSH</strong><span id="signal5Text">Correct after control changes</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="architecture">
+		<div class="section-card">
+			<div class="section-head">
+				<div>
+					<span class="section-kicker">Architecture Review</span>
+					<h2>What makes the design disciplined</h2>
+					<p>The page is organized around design intent, not screenshots alone. Each block below explains the reasoning that turns a student CPU into a professionally presented project artifact.</p>
+				</div>
+			</div>
+
+			<div class="architecture-grid">
+				<div class="card-block">
+					<h3>Datapath structure</h3>
+					<p>The CPU is framed as a classic instruction path with clearly partitioned responsibility across fetch, decode, execute, memory, and writeback. That structure is useful because it exposes where timing belongs and where control decisions should be made.</p>
+					<ul>
+						<li>Program counter and next-PC logic are treated as first-class control objects.</li>
+						<li>Decode is separated from execute so control formation does not get entangled with ALU behavior.</li>
+						<li>Memory behavior is isolated to its own stage rather than scattered across the datapath.</li>
+					</ul>
+				</div>
+
+				<div class="flow-board">
+					<svg class="flow-svg" viewBox="0 0 620 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RISC-V datapath flow summary">
+						<defs>
+							<linearGradient id="archFlow" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0%" stop-color="#6feffd"/>
+								<stop offset="100%" stop-color="#ffc86b"/>
+							</linearGradient>
+						</defs>
+						<rect x="34" y="42" width="120" height="82" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.3)"/>
+						<rect x="186" y="42" width="120" height="82" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.24)"/>
+						<rect x="338" y="42" width="120" height="82" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(111,239,253,0.24)"/>
+						<rect x="186" y="196" width="120" height="82" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,200,107,0.32)"/>
+						<rect x="338" y="196" width="120" height="82" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(158,167,255,0.26)"/>
+
+						<path d="M154 83H186M306 83H338" fill="none" stroke="url(#archFlow)" stroke-width="4" stroke-linecap="round"/>
+						<path d="M246 124V196M398 124V196" fill="none" stroke="rgba(255,255,255,0.24)" stroke-width="3" stroke-dasharray="8 8"/>
+						<path d="M306 237H338" fill="none" stroke="rgba(158,167,255,0.78)" stroke-width="4" stroke-linecap="round"/>
+						<path d="M398 238C398 315, 130 315, 130 124" fill="none" stroke="rgba(255,200,107,0.72)" stroke-width="3.2" stroke-dasharray="8 8"/>
+
+						<text x="58" y="78" fill="#ffffff" font-size="17" font-family="IBM Plex Mono, monospace">Instruction</text>
+						<text x="76" y="102" fill="rgba(232,241,255,0.7)" font-size="12" font-family="Space Grotesk, sans-serif">memory / PC</text>
+
+						<text x="215" y="78" fill="#ffffff" font-size="17" font-family="IBM Plex Mono, monospace">Decode</text>
+						<text x="210" y="102" fill="rgba(232,241,255,0.7)" font-size="12" font-family="Space Grotesk, sans-serif">fields + control</text>
+
+						<text x="370" y="78" fill="#ffffff" font-size="17" font-family="IBM Plex Mono, monospace">ALU</text>
+						<text x="356" y="102" fill="rgba(232,241,255,0.7)" font-size="12" font-family="Space Grotesk, sans-serif">ops / compare</text>
+
+						<text x="213" y="232" fill="#ffffff" font-size="17" font-family="IBM Plex Mono, monospace">Regfile</text>
+						<text x="200" y="256" fill="rgba(232,241,255,0.7)" font-size="12" font-family="Space Grotesk, sans-serif">read + write ports</text>
+
+						<text x="360" y="232" fill="#ffffff" font-size="17" font-family="IBM Plex Mono, monospace">Data Mem</text>
+						<text x="352" y="256" fill="rgba(232,241,255,0.7)" font-size="12" font-family="Space Grotesk, sans-serif">load / store</text>
+
+						<text x="52" y="333" fill="rgba(255,200,107,0.82)" font-size="12" font-family="IBM Plex Mono, monospace">branch feedback and writeback loops define architectural correctness</text>
+					</svg>
+				</div>
+			</div>
+
+			<div class="deliverable-grid" style="margin-top: 1rem;">
+				<div class="card-block">
+					<h3>Why TL-Verilog helps here</h3>
+					<p>Timing abstraction reduces the bookkeeping burden that usually appears when a pipeline deepens. That keeps the design focused on architectural intent instead of being dominated by manual register staging.</p>
+				</div>
+				<div class="card-block">
+					<h3>Professional review angle</h3>
+					<p>The page emphasizes readable partitioning, clean signal ownership, and a credible development flow. That makes the project easier to judge than a raw code dump or screenshot collage.</p>
+				</div>
+				<div class="card-block">
+					<h3>Expected discussion points</h3>
+					<p>Reviewers can immediately ask about forwarding, branch handling, supported instruction subset, and testing strategy because the page exposes those axes directly.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="workspace">
+		<div class="section-card">
+			<div class="section-head">
+				<div>
+					<span class="section-kicker">Workspace View</span>
+					<h2>Implementation, logs, and review evidence</h2>
+					<p>This section mimics the useful parts of the Makerchip experience: code, stage-level reasoning, and the kind of run-status notes that make a CPU project feel engineered rather than merely assembled.</p>
+				</div>
+			</div>
+
+			<div class="workspace-grid">
+				<div class="code-panel-stack">
+					<div class="code-copy">
+						<span class="code-badge">Code surfaces</span>
+						<h3>Split the project into understandable views</h3>
+						<p>Use one pane for timing-abstract CPU intent, one for a more classical RTL mental model, and one for verification scaffolding. This is the same broad review workflow the reference environment encourages.</p>
+					</div>
+
+					<div class="code-tabs" role="tablist" aria-label="Code views">
+						<button class="code-tab-btn active" type="button" role="tab" aria-selected="true" data-pane="pane-tlv">TL-Verilog view</button>
+						<button class="code-tab-btn" type="button" role="tab" aria-selected="false" data-pane="pane-rtl">RTL-oriented view</button>
+						<button class="code-tab-btn" type="button" role="tab" aria-selected="false" data-pane="pane-checks">Verification checks</button>
+					</div>
+
+					<section class="code-pane active" id="pane-tlv" role="tabpanel">
+<pre><span class="code-comment">// timing-abstract CPU structure</span>
+<span class="code-key">|cpu</span>
+	<span class="code-stage">@0</span>
+		<span class="code-signal">$pc</span> = <span class="code-signal">$reset</span> ? 32'h0 : <span class="code-signal">$pc_next</span>;
+		<span class="code-signal">$instr</span> = <span class="code-signal">$imem</span>[<span class="code-signal">$pc</span>[9:2]];
+
+	<span class="code-stage">@1</span>
+		<span class="code-signal">$dec_valid</span> = <span class="code-signal">$instr</span>[6:0] != 7'b0;
+		<span class="code-signal">$src1_val</span> = <span class="code-signal">$rf_rd_data1</span>;
+		<span class="code-signal">$src2_val</span> = <span class="code-signal">$rf_rd_data2</span>;
+
+	<span class="code-stage">@2</span>
+		<span class="code-signal">$alu_out</span> = <span class="code-signal">$is_add</span> ? <span class="code-signal">$src1_val</span> + <span class="code-signal">$src2_val</span> :
+							 <span class="code-signal">$is_and</span> ? <span class="code-signal">$src1_val</span> & <span class="code-signal">$src2_val</span> : 32'b0;
+
+	<span class="code-stage">@4</span>
+		<span class="code-signal">$rf_wr_data</span> = <span class="code-signal">$wb_sel_mem</span> ? <span class="code-signal">$dmem_rdata</span> : <span class="code-signal">$alu_out</span>;</pre>
+					</section>
+
+					<section class="code-pane" id="pane-rtl" role="tabpanel">
+<pre><span class="code-comment">// conceptual RTL partitioning</span>
+always_ff @(posedge clk) begin
+	if (reset) begin
+		if_id_pc    &lt;= 32'b0;
+		if_id_instr &lt;= 32'b0;
+	end else if (!stall_if) begin
+		if_id_pc    &lt;= pc;
+		if_id_instr &lt;= instr_f;
+	end
+end
+
+always_comb begin
+	alu_in1   = forward_a_sel ? ex_mem_result : id_ex_rs1;
+	alu_in2   = forward_b_sel ? mem_wb_result : id_ex_rs2;
+	alu_out   = run_alu(id_ex_alu_op, alu_in1, alu_in2);
+	take_br   = branch_check(id_ex_branch, alu_in1, alu_in2);
+end
+
+assign wb_data = mem_wb_is_load ? mem_wb_rdata : mem_wb_alu_out;</pre>
+					</section>
+
+					<section class="code-pane" id="pane-checks" role="tabpanel">
+<pre><span class="code-comment">// lightweight review checklist</span>
+assert(pc[1:0] == 2'b00);
+assert(!(rf_wr_en && (rd == 5'b0)));
+
+cover(fetch_valid && decode_valid && execute_valid);
+cover(branch_taken && !pipeline_flush_error);
+
+// practical test cases
+// 1. ADD / SUB arithmetic flow
+// 2. BEQ redirect correctness
+// 3. LW/SW memory behavior
+// 4. hazard path sanity with dependent ALU ops</pre>
+					</section>
+				</div>
+
+				<div class="log-card">
+					<div class="code-copy">
+						<span class="code-badge">Review log</span>
+						<h3>Execution and verification narrative</h3>
+						<p>A good CPU project page should show not only what was built, but how it was reasoned about and validated during development.</p>
+					</div>
+
+					<div class="log-rows">
+						<div class="log-row"><strong>[PASS]</strong> Pipeline stage ownership stays readable because timing abstraction removes most manual stage-plumbing clutter.</div>
+						<div class="log-row"><strong>[CHECK]</strong> Branch and next-PC logic should be reviewed as a control loop, not as isolated combinational equations.</div>
+						<div class="log-row"><strong>[CHECK]</strong> Forwarding or stall behavior must be explained explicitly whenever dependent instructions are showcased.</div>
+						<div class="log-row"><strong>[PASS]</strong> Memory stage remains narrow, which helps keep load/store behavior localized and reviewable.</div>
+					</div>
+
+					<div class="mini-metrics">
+						<div class="mini-metric"><strong>Pipeline-first</strong><span>Structure presented from execution flow instead of screenshot order.</span></div>
+						<div class="mini-metric"><strong>Review-ready</strong><span>Separates architecture, code, and validation evidence for clarity.</span></div>
+						<div class="mini-metric"><strong>Tool-aligned</strong><span>Visual rhythm intentionally nods to Makerchip's editor and diagram workflow.</span></div>
+						<div class="mini-metric"><strong>Portfolio-fit</strong><span>Page reads like a professional project dossier, not a lab submission.</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="execution">
+		<div class="section-card">
+			<div class="section-head">
+				<div>
+					<span class="section-kicker">Execution Trace</span>
+					<h2>Walk through actual instruction behavior</h2>
+					<p>This section replaces missing external screenshots with authored execution evidence: scenario-driven instruction flow, cycle occupancy, and quick architectural state snapshots.</p>
+				</div>
+				<div class="section-meta">
+					<span class="meta-chip">instruction sequence</span>
+					<span class="meta-chip">cycle trace</span>
+					<span class="meta-chip">architectural state</span>
+				</div>
+			</div>
+
+			<div class="execution-layout">
+				<div class="execution-scenarios" role="tablist" aria-label="Execution scenarios">
+					<button class="execution-scenario active" type="button" role="tab" aria-selected="true" data-scenario="arith">
+						<strong>Arithmetic dependency chain</strong>
+						<span>Shows a dependent add sequence moving through the full 5-stage machine with clean writeback visibility.</span>
+					</button>
+					<button class="execution-scenario" type="button" role="tab" aria-selected="false" data-scenario="loaduse">
+						<strong>Load-use hazard review</strong>
+						<span>Highlights why decode and execute coordination matters when memory data is consumed immediately.</span>
+					</button>
+					<button class="execution-scenario" type="button" role="tab" aria-selected="false" data-scenario="branch">
+						<strong>Branch redirect correction</strong>
+						<span>Illustrates how next-PC correction and pipeline cleanup protect control-flow correctness.</span>
+					</button>
+					<div class="card-block">
+						<h3>Why this matters</h3>
+						<p>One of the easiest ways to weaken a CPU page is to stop at a static pipeline drawing. A real review usually asks, “What happens instruction by instruction?” This workbench answers that question directly.</p>
+					</div>
+				</div>
+
+				<div class="execution-card" role="tabpanel" aria-live="polite">
+					<div class="detail-topline">
+						<span class="detail-badge" id="execBadge">Scenario A</span>
+						<span class="meta-chip">instruction-level evidence</span>
+					</div>
+					<h3 id="execTitle">Arithmetic dependency chain</h3>
+					<p id="execCopy">Two arithmetic operations depend on each other, so the point of review is not only arithmetic correctness but also whether the pipeline preserves the value flow cleanly from execute to writeback.</p>
+
+					<div class="register-strip">
+						<div class="register-card"><strong id="reg1Label">x1</strong><span id="reg1Value">0x00000004</span></div>
+						<div class="register-card"><strong id="reg2Label">x2</strong><span id="reg2Value">0x00000009</span></div>
+						<div class="register-card"><strong id="reg3Label">x5</strong><span id="reg3Value">0x0000000D</span></div>
+						<div class="register-card"><strong id="reg4Label">x6</strong><span id="reg4Value">0x00000011</span></div>
+					</div>
+
+					<div class="wave-trace">
+						<div class="wave-grid" id="waveGrid">
+							<div class="wave-head"></div>
+							<div class="wave-head">C1</div>
+							<div class="wave-head">C2</div>
+							<div class="wave-head">C3</div>
+							<div class="wave-head">C4</div>
+							<div class="wave-head">C5</div>
+							<div class="wave-head">C6</div>
+							<div class="wave-head">C7</div>
+							<div class="wave-head">C8</div>
+						</div>
+					</div>
+
+					<div class="exec-log" id="execLog"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="outcomes">
+		<div class="section-card">
+			<div class="section-head">
+				<div>
+					<span class="section-kicker">Outcomes</span>
+					<h2>What this project demonstrates</h2>
+					<p>The strongest story here is not only that a CPU was built, but that it was presented in a way that shows architectural maturity, implementation awareness, and a reviewable engineering process.</p>
+				</div>
+			</div>
+
+			<div class="outcome-grid">
+				<div class="card-block">
+					<h3>Architecture thinking</h3>
+					<p>The design communicates a strong grasp of instruction flow, stage decomposition, and the practical separation of datapath and control concerns.</p>
+				</div>
+				<div class="card-block">
+					<h3>Readable implementation</h3>
+					<p>Using TL-Verilog as the implementation lens helps keep the page and the underlying project readable, which is exactly the kind of efficiency the reference environment encourages.</p>
+				</div>
+				<div class="card-block">
+					<h3>Professional presentation</h3>
+					<p>This page translates a technical student project into a portfolio artifact that feels review-ready for academic, research, or industry audiences.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="closing-card section-card">
+			<div>
+				<span class="section-kicker">Final Read</span>
+				<h3>Why this page works</h3>
+				<p>
+					The reference Makerchip project is powerful because it ties code, visualization, and execution context together. This page keeps that spirit, but converts it into a static presentation that is easier to scan, easier to review, and better suited for a portfolio.
+				</p>
+			</div>
+			<div>
+				<h3>Recommended next additions</h3>
+				<p>
+					This version now covers the instruction walkthrough and authored execution evidence directly. The next genuinely useful upgrade would be importing your own real testbench screenshots or measured results once those assets are available.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<div class="footer-inner">
+			<p>5 Stage 32-Bit RISC-V CPU • TL-Verilog • Portfolio project page for Er. Sailesh Mishra</p>
+		</div>
+	</footer>
+
+	<script>
+		(() => {
+			const ideTabs = Array.from(document.querySelectorAll('.ide-tab'));
+			const idePanels = Array.from(document.querySelectorAll('.ide-panel'));
+			const stageButtons = Array.from(document.querySelectorAll('.stage-button'));
+			const fields = {
+				badge: document.getElementById('detailBadge'),
+				title: document.getElementById('detailTitle'),
+				copy: document.getElementById('detailCopy'),
+				node1Title: document.getElementById('node1Title'),
+				node1Text: document.getElementById('node1Text'),
+				node2Title: document.getElementById('node2Title'),
+				node2Text: document.getElementById('node2Text'),
+				node3Title: document.getElementById('node3Title'),
+				node3Text: document.getElementById('node3Text'),
+				signal1Title: document.getElementById('signal1Title'),
+				signal1Text: document.getElementById('signal1Text'),
+				signal2Title: document.getElementById('signal2Title'),
+				signal2Text: document.getElementById('signal2Text'),
+				signal3Title: document.getElementById('signal3Title'),
+				signal3Text: document.getElementById('signal3Text'),
+				signal4Title: document.getElementById('signal4Title'),
+				signal4Text: document.getElementById('signal4Text'),
+				signal5Title: document.getElementById('signal5Title'),
+				signal5Text: document.getElementById('signal5Text')
+			};
+
+			const activateStage = (button) => {
+				stageButtons.forEach((item) => {
+					const isActive = item === button;
+					item.classList.toggle('active', isActive);
+					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				});
+
+				fields.badge.textContent = button.dataset.badge;
+				fields.title.textContent = button.dataset.title;
+				fields.copy.textContent = button.dataset.copy;
+				fields.node1Title.textContent = button.dataset.node1Title;
+				fields.node1Text.textContent = button.dataset.node1Text;
+				fields.node2Title.textContent = button.dataset.node2Title;
+				fields.node2Text.textContent = button.dataset.node2Text;
+				fields.node3Title.textContent = button.dataset.node3Title;
+				fields.node3Text.textContent = button.dataset.node3Text;
+				fields.signal1Title.textContent = button.dataset.signal1Title;
+				fields.signal1Text.textContent = button.dataset.signal1Text;
+				fields.signal2Title.textContent = button.dataset.signal2Title;
+				fields.signal2Text.textContent = button.dataset.signal2Text;
+				fields.signal3Title.textContent = button.dataset.signal3Title;
+				fields.signal3Text.textContent = button.dataset.signal3Text;
+				fields.signal4Title.textContent = button.dataset.signal4Title;
+				fields.signal4Text.textContent = button.dataset.signal4Text;
+				fields.signal5Title.textContent = button.dataset.signal5Title;
+				fields.signal5Text.textContent = button.dataset.signal5Text;
+			};
+
+			const activateIdePane = (button) => {
+				ideTabs.forEach((item) => {
+					const isActive = item === button;
+					item.classList.toggle('active', isActive);
+					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				});
+
+				idePanels.forEach((panel) => {
+					panel.classList.toggle('active', panel.id === button.dataset.idePane);
+				});
+			};
+
+			stageButtons.forEach((button) => {
+				button.addEventListener('click', () => activateStage(button));
+			});
+
+			ideTabs.forEach((button) => {
+				button.addEventListener('click', () => activateIdePane(button));
+			});
+
+			const tabButtons = Array.from(document.querySelectorAll('.code-tab-btn'));
+			const panes = Array.from(document.querySelectorAll('.code-pane'));
+			const executionButtons = Array.from(document.querySelectorAll('.execution-scenario'));
+			const executionFields = {
+				badge: document.getElementById('execBadge'),
+				title: document.getElementById('execTitle'),
+				copy: document.getElementById('execCopy'),
+				reg1Label: document.getElementById('reg1Label'),
+				reg1Value: document.getElementById('reg1Value'),
+				reg2Label: document.getElementById('reg2Label'),
+				reg2Value: document.getElementById('reg2Value'),
+				reg3Label: document.getElementById('reg3Label'),
+				reg3Value: document.getElementById('reg3Value'),
+				reg4Label: document.getElementById('reg4Label'),
+				reg4Value: document.getElementById('reg4Value'),
+				waveGrid: document.getElementById('waveGrid'),
+				log: document.getElementById('execLog')
+			};
+
+			const executionScenarios = {
+				arith: {
+					badge: 'Scenario A',
+					title: 'Arithmetic dependency chain',
+					copy: 'Two arithmetic operations depend on each other, so the point of review is not only arithmetic correctness but also whether the pipeline preserves the value flow cleanly from execute to writeback.',
+					registers: [
+						['x1', '0x00000004'],
+						['x2', '0x00000009'],
+						['x5', '0x0000000D'],
+						['x6', '0x00000011']
+					],
+					rows: [
+						['addi x5,x1,9', 'IF', 'ID', 'EX', 'MEM', 'WB', '', '', ''],
+						['add x6,x5,x2', '', 'IF', 'ID', 'EX', 'MEM', 'WB', '', ''],
+						['or x7,x6,x1', '', '', 'IF', 'ID', 'EX', 'MEM', 'WB', '']
+					],
+					logs: [
+						'[PASS] First ALU result is available before the dependent writeback completes.',
+						'[CHECK] Forwarding path or carefully managed stage timing is the key review point here.',
+						'[PASS] Architectural state stabilizes cleanly by the final writeback cycle.'
+					]
+				},
+				loaduse: {
+					badge: 'Scenario B',
+					title: 'Load-use hazard review',
+					copy: 'This pattern stresses the boundary between memory availability and decode expectations. The immediate consumer of a loaded value is the classic place where a pipeline must either forward correctly or stall deliberately.',
+					registers: [
+						['x3', '0x00000020'],
+						['x8', '0x0000002A'],
+						['x9', '0x0000002B'],
+						['mem[x3]', '0x0000002A']
+					],
+					rows: [
+						['lw x8,0(x3)', 'IF', 'ID', 'EX', 'MEM', 'WB', '', '', ''],
+						['add x9,x8,x1', '', 'IF', 'ID', 'STALL', 'EX', 'MEM', 'WB', ''],
+						['and x10,x9,x2', '', '', 'IF', '', 'ID', 'EX', 'MEM', 'WB']
+					],
+					logs: [
+						'[CHECK] Load data becomes trustworthy only after the memory stage completes.',
+						'[PASS] A visible stall makes the hazard story explicit rather than hiding it.',
+						'[PASS] Dependent arithmetic resumes once the loaded value can be consumed safely.'
+					]
+				},
+				branch: {
+					badge: 'Scenario C',
+					title: 'Branch redirect correction',
+					copy: 'Control-flow correctness is best understood as a feedback loop. The branch decision in execute forces the front end to correct the PC and invalidate instructions that should not commit.',
+					registers: [
+						['x11', '0x00000003'],
+						['x12', '0x00000003'],
+						['pc', '0x00000040'],
+						['target', '0x00000058']
+					],
+					rows: [
+						['beq x11,x12,L1', 'IF', 'ID', 'EX', 'MEM', 'WB', '', '', ''],
+						['addi x13,x0,1', '', 'IF', 'ID', 'FLUSH', '', '', '', ''],
+						['L1: add x14,x14,x1', '', '', 'IF', 'ID', 'EX', 'MEM', 'WB', '']
+					],
+					logs: [
+						'[CHECK] The wrong-path instruction is visible briefly but never allowed to retire.',
+						'[PASS] Branch resolution updates the next PC and clears stale front-end work.',
+						'[PASS] The target instruction enters cleanly after control correction.'
+					]
+				}
+			};
+
+			const activatePane = (button) => {
+				tabButtons.forEach((item) => {
+					const isActive = item === button;
+					item.classList.toggle('active', isActive);
+					item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				});
+
+				panes.forEach((pane) => {
+					pane.classList.toggle('active', pane.id === button.dataset.pane);
+				});
+			};
+
+			tabButtons.forEach((button) => {
+				button.addEventListener('click', () => activatePane(button));
+			});
+
+			const renderExecution = (scenarioKey) => {
+				const scenario = executionScenarios[scenarioKey];
+				if (!scenario) {
+					return;
+				}
+
+				executionFields.badge.textContent = scenario.badge;
+				executionFields.title.textContent = scenario.title;
+				executionFields.copy.textContent = scenario.copy;
+
+				[executionFields.reg1Label, executionFields.reg2Label, executionFields.reg3Label, executionFields.reg4Label].forEach((label, index) => {
+					label.textContent = scenario.registers[index][0];
+				});
+
+				[executionFields.reg1Value, executionFields.reg2Value, executionFields.reg3Value, executionFields.reg4Value].forEach((value, index) => {
+					value.textContent = scenario.registers[index][1];
+				});
+
+				executionFields.waveGrid.querySelectorAll('.wave-label, .wave-cell').forEach((node) => node.remove());
+
+				scenario.rows.forEach((row) => {
+					const label = document.createElement('div');
+					label.className = 'wave-label';
+					label.textContent = row[0];
+					executionFields.waveGrid.appendChild(label);
+
+					row.slice(1).forEach((cellText) => {
+						const cell = document.createElement('div');
+						cell.className = `wave-cell${cellText ? ' active' : ''}`;
+						cell.textContent = cellText || '·';
+						executionFields.waveGrid.appendChild(cell);
+					});
+				});
+
+				executionFields.log.innerHTML = '';
+				scenario.logs.forEach((entry) => {
+					const item = document.createElement('div');
+					item.className = 'exec-log-item';
+					item.innerHTML = entry.replace('[PASS]', '<strong>[PASS]</strong>').replace('[CHECK]', '<strong>[CHECK]</strong>');
+					executionFields.log.appendChild(item);
+				});
+			};
+
+			executionButtons.forEach((button) => {
+				button.addEventListener('click', () => {
+					executionButtons.forEach((item) => {
+						const isActive = item === button;
+						item.classList.toggle('active', isActive);
+						item.setAttribute('aria-selected', isActive ? 'true' : 'false');
+					});
+					renderExecution(button.dataset.scenario);
+				});
+			});
+
+			renderExecution('arith');
+		})();
+	</script>
+</body>
+</html>
