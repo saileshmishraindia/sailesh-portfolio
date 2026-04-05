@@ -350,6 +350,31 @@
         text-decoration: none;
     }
 
+    @media (min-width: 1400px) and (orientation: landscape) {
+        .subtitle {
+            width: min(1320px, calc(100% - 48px));
+        }
+
+        .container {
+            width: min(1620px, calc(100% - 3rem));
+        }
+
+        .top-grid,
+        .bottom-grid,
+        .waveform-grid,
+        .memory-grid {
+            gap: 24px;
+        }
+
+        .card {
+            padding: 24px;
+        }
+
+        pre {
+            height: 430px;
+        }
+    }
+
     @media (max-width: 920px) {
         .top-grid,
         .bottom-grid,

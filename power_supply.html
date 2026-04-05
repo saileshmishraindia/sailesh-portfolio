@@ -826,6 +826,43 @@
       transform: translateY(0);
     }
 
+    @media (min-width: 1400px) and (orientation: landscape) {
+      .page-shell,
+      .topbar-inner,
+      .footer-bar {
+        width: min(1680px, calc(100% - 3rem));
+      }
+
+      .hero {
+        padding-top: 5rem;
+      }
+
+      .hero-grid,
+      .overview-grid,
+      .spec-grid,
+      .figures-grid,
+      .analysis-hero-band,
+      .analysis-deep-grid,
+      .analysis-summary-grid,
+      .process-grid,
+      .highlights-grid,
+      .use-grid {
+        gap: 1.8rem;
+      }
+
+      .hero-panel,
+      .hero-stats,
+      .summary-card,
+      .glass-card,
+      .stage-card,
+      .spec-card,
+      .highlight-card,
+      .use-card,
+      .cta-card {
+        padding: 2.2rem;
+      }
+    }
+
     @media (max-width: 1100px) {
       .hero-grid,
       .overview-grid,

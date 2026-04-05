@@ -453,6 +453,31 @@
       color: var(--muted);
     }
 
+    @media (min-width: 1400px) and (orientation: landscape) {
+      .shell,
+      .topbar-inner,
+      .footer-bar {
+        width: min(1680px, calc(100% - 3rem));
+      }
+
+      .hero {
+        padding-top: 4.2rem;
+      }
+
+      .hero-grid,
+      .project-grid,
+      .pillars-grid,
+      .bullet-grid {
+        gap: 1.8rem;
+      }
+
+      .hero-card,
+      .project-copy,
+      .pillars-card {
+        padding: 2rem;
+      }
+    }
+
     @media (max-width: 1100px) {
       .hero-grid,
       .project-card,
