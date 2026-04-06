@@ -6,9 +6,10 @@
   <title>Learn TL-Verilog | RISC-V Course Companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2  ?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
+
       --bg: #07111f;
       --bg-deep: #040b14;
       --panel: rgba(10, 21, 37, 0.9);
@@ -316,6 +317,7 @@
 
     .roadmap-grid,
     .basics-grid,
+    .tlx-grid,
     .language-group-grid,
     .syntax-grid,
     .example-grid,
@@ -330,6 +332,7 @@
     }
 
     .basics-grid,
+    .tlx-grid,
     .language-group-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -363,6 +366,7 @@
     }
 
     .basics-card,
+    .tlx-card,
     .difference-card {
       border-radius: var(--radius-xl);
       border: 1px solid var(--line);
@@ -420,6 +424,151 @@
       display: block;
       color: #ffffff;
       margin-bottom: 0.45rem;
+    }
+
+    .tlx-card {
+      padding: 1.6rem;
+    }
+
+    .tlx-copy {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .tlx-copy p {
+      margin: 0;
+      text-align: justify;
+    }
+
+    .tlx-pill-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 0.25rem;
+    }
+
+    .tlx-pill-list div {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tlx-pill-list strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
+
+    .tlx-version-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .tlx-version-intro {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tlx-version-lenses {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+
+    .tlx-version-lens {
+      padding: 0.9rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tlx-version-lens strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
+
+    .tlx-version-card {
+      padding: 1rem 1.05rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .tlx-version-card strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.55rem;
+    }
+
+    .tlx-version-summary {
+      margin: 0 0 0.8rem;
+      color: #c7d8ef;
+      line-height: 1.6;
+    }
+
+    .tlx-change-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .tlx-change-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 239, 253, 0.18);
+      background: rgba(111, 239, 253, 0.08);
+      color: #dff8ff;
+      font-size: 0.84rem;
+      line-height: 1.3;
+    }
+
+    .tlx-change-chip.is-amber {
+      border-color: rgba(255, 200, 107, 0.22);
+      background: rgba(255, 200, 107, 0.1);
+      color: #ffe1ab;
+    }
+
+    .tlx-change-chip.is-green {
+      border-color: rgba(111, 247, 179, 0.22);
+      background: rgba(111, 247, 179, 0.1);
+      color: #cffff0;
+    }
+
+    .tlx-change-arrow {
+      color: #9ab0cf;
+      font-weight: 700;
+    }
+
+    .tlx-version-card ul {
+      margin: 0;
+      padding-left: 1.15rem;
+      color: #d6e4f8;
+      line-height: 1.65;
+    }
+
+    .tlx-version-card li + li {
+      margin-top: 0.45rem;
+    }
+
+    .tlx-timeline {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tlx-timeline svg {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .basics-visual {
@@ -573,6 +722,16 @@
       height: auto;
     }
 
+    .snippet-flow-visual {
+      padding: 1.2rem 1.1rem;
+    }
+
+    .snippet-flow-visual svg {
+      width: 112%;
+      max-width: none;
+      margin-left: -6%;
+    }
+
     .difference-copy {
       display: grid;
       gap: 0.75rem;
@@ -663,6 +822,178 @@
       font-family: "IBM Plex Mono", monospace;
     }
 
+    .code-comment-cyan {
+      color: #b9c2d0;
+    }
+
+    .code-comment-amber {
+      color: #b9c2d0;
+    }
+
+    .code-comment-green {
+      color: #b9c2d0;
+    }
+
+    .code-comment-rose {
+      color: #b9c2d0;
+    }
+
+    .code-comment-muted {
+      color: #b9c2d0;
+    }
+
+    .code-highlight-cyan,
+    .code-highlight-amber,
+    .code-highlight-blue,
+    .code-highlight-green,
+    .code-highlight-rose {
+      display: inline-block;
+      padding: 0 0.22rem;
+      border-radius: 0.32rem;
+      font-weight: 600;
+    }
+
+    .code-highlight-cyan {
+      color: #6feffd;
+      background: rgba(111, 239, 253, 0.08);
+    }
+
+    .code-highlight-amber {
+      color: #ffc86b;
+      background: rgba(255, 200, 107, 0.08);
+    }
+
+    .code-highlight-blue {
+      color: #4B4BFF;
+      background: rgba(0, 0, 255, 0.12);
+    }
+
+    .code-highlight-green {
+      color: #6ff7b3;
+      background: rgba(111, 247, 179, 0.08);
+    }
+
+    .code-highlight-rose {
+      color: #ffb1b1;
+      background: rgba(255, 177, 177, 0.08);
+    }
+
+    .ide-overview-grid,
+    .ide-pane-grid,
+    .ide-deep-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .ide-overview-grid,
+    .ide-deep-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ide-pane-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ide-screenshot-frame {
+      margin-top: 1rem;
+      padding: 0.9rem;
+      border-radius: 22px;
+      border: 1px solid rgba(111, 239, 253, 0.14);
+      background: linear-gradient(180deg, rgba(8, 18, 31, 0.92), rgba(7, 15, 27, 0.88));
+      overflow: hidden;
+    }
+
+    .ide-screenshot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ide-pane-card,
+    .ide-detail-card {
+      padding: 1rem 1.05rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .ide-pane-card strong,
+    .ide-detail-card strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+    }
+
+    .line-reading-list strong,
+    .line-reading-list strong code {
+      color: #FE9098;
+    }
+
+    .code-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .copy-btn {
+      background: linear-gradient(180deg,#1b2b3a,#102028);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #dff8ff;
+      padding: 0.45rem 0.7rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .copy-btn:active { transform: translateY(1px); }
+
+    .line-reading-accent,
+    .line-reading-accent code {
+      color: #FE9098;
+    }
+
+    .ide-mini-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0.28rem 0.62rem;
+      border-radius: 999px;
+      border: 1px solid rgba(111, 239, 253, 0.18);
+      background: rgba(111, 239, 253, 0.08);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .ide-accent-green {
+      color: #6FF7B3;
+    }
+
+    .ide-accent-blue {
+      color: #4B4BFF;
+    }
+
+    .log-panel {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 177, 177, 0.16);
+      background: rgba(6, 14, 24, 0.88);
+      color: #dff8ff;
+      overflow-x: auto;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.85rem;
+      line-height: 1.62;
+      white-space: pre-wrap;
+    }
+
     .checkpoint-list {
       margin-top: 0;
     }
@@ -710,6 +1041,12 @@
     @media (max-width: 1100px) {
       .hero,
       .basics-grid,
+      .tlx-grid,
+      .ide-overview-grid,
+      .ide-pane-grid,
+      .ide-deep-grid,
+      .tlx-version-lenses,
+      .tlx-version-grid,
       .language-group-grid,
       .difference-breakdown-grid,
       .roadmap-grid,
@@ -731,6 +1068,7 @@
       .hero-main,
       .hero-side,
       .basics-card,
+      .tlx-card,
       .difference-card,
       .difference-explainer-card,
       .lesson-card,
@@ -742,6 +1080,11 @@
 
       h1 {
         max-width: none;
+      }
+
+      .snippet-flow-visual svg {
+        width: 100%;
+        margin-left: 0;
       }
     }
   </style>
@@ -755,6 +1098,7 @@
       </div>
       <nav class="nav-links">
         <a href="#basics">Basics</a>
+        <a href="#tlx-intro">About TL-X</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#syntax">Syntax</a>
         <a href="#examples">Examples</a>
@@ -942,15 +1286,15 @@
     <div class="section-head">
       <div>
         <span class="section-kicker">Basics</span>
-        <h2>What makes an HDL different from software languages ?</h2>
-        <p>This section is meant to give a new microelectronics, engineering, or VLSI learner the right mental model before jumping into TL-Verilog syntax.</p>
+        <h2>What makes an HDL different from software languages  ?</h2>
+        <p>This section is here to build the right mental model before you jump into TL-Verilog syntax. If you are new to microelectronics, digital design, or VLSI, think of this as the foundation that makes the rest of the page easier to understand.</p>
       </div>
     </div>
 
     <div class="basics-grid">
       <article class="basics-card basics-copy">
         <div class="basics-points">
-          <h3>1. What is a Hardware Description Language ?</h3>
+          <h3>1. What is a Hardware Description Language  ?</h3>
           <div class="basics-visual" aria-label="Flow diagram showing HDL from design intent to simulation and hardware implementation">
             <svg viewBox="0 0 760 280" role="img" aria-hidden="true">
               <defs>
@@ -992,18 +1336,18 @@
               <polygon points="580,61 598,69 582,82" fill="#ffc86b"></polygon>
               <polygon points="580,169 598,177 580,187" fill="#6ff7b3"></polygon>
             </svg>
-            <p class="visual-caption">Think of an HDL as the bridge between circuit intent and tool-driven realization. The same description can be simulated for correctness and, when written in a synthesizable style, pushed toward real digital hardware.</p>
+            <p class="visual-caption">A helpful way to think about an HDL is to see it as the bridge between your circuit idea and the tools that help realize it. The same description can be simulated to check behavior and, if it is written in a synthesizable style, pushed toward real digital hardware.</p>
           </div>
-          <p>-> A Hardware Description Language, or HDL, is a formal language used to model, describe, simulate, and synthesize digital electronic systems. It lets a designer express both hardware structure, meaning the interconnection of logic blocks, and hardware behavior, meaning how signals evolve over time.</p>
-          <p>-> HDLs are used to create models of digital circuits that can be simulated to verify functionality and synthesized to generate gate-level implementations for FPGAs or ASICs. They are essential tools in the design and development of modern electronic systems.</p>
-          <p>-> HDLs are not general-purpose programming languages. They are domain-specific languages tailored for hardware design. They have constructs that directly map to hardware concepts like wires, registers, clocks, and combinational logic. They also have semantics that reflect the concurrent and time-sensitive nature of hardware.</p>
-          <p>-> Unlike conventional programming languages, an HDL describes inherent parallelism, timing relationships, signal interaction, and register transfer behavior. That matters because real hardware does not execute as a single linear instruction stream. Multiple logic operations happen concurrently, often on the same clock edge.</p>
-          <p>-> HDLs are used across the design flow: behavioral modeling, RTL design, verification and simulation, synthesis, FPGA implementation, and ASIC implementation. TL-Verilog belongs in this family because it still describes real hardware, but with a timing-oriented abstraction that reduces repetitive RTL bookkeeping.</p>
+            <p>-> A Hardware Description Language, or HDL, is a language used to model, describe, simulate, and synthesize digital electronic systems. In simple terms, it lets you describe both the structure of hardware, meaning how logic blocks connect together, and the behavior of hardware, meaning how signals change over time.</p>
+            <p>-> That makes HDLs central to modern digital design. You can use them to build a model of a circuit, simulate it to check whether it behaves correctly, and then, if the description is written in the right style, synthesize it into an implementation that can target an FPGA or an ASIC flow.</p>
+            <p>-> It also helps to remember that an HDL is not a general-purpose programming language wearing different clothes. It is a language designed specifically for hardware work, so its constructs map naturally to things like wires, registers, clocks, and combinational logic.</p>
+            <p>-> This is why HDL code feels different from ordinary software code. Hardware is naturally parallel and timing-sensitive, so the language has to reflect concurrency, signal interaction, and register-transfer behavior. Real hardware does not execute as one long single-file instruction stream. Many things can happen at the same time, often around the same clock edge.</p>
+            <p>-> HDLs are used across the whole digital design flow, from behavioral modeling and RTL design to simulation, synthesis, FPGA implementation, and ASIC implementation. TL-Verilog belongs to this family because it still describes real hardware, but it does so with a timing-oriented abstraction that removes a lot of repetitive RTL bookkeeping.</p>
         </div>
 
         <div class="basics-note">
-          <strong>🤖 Practical distinction</strong>
-          In digital design, the useful first distinction is not that every general-purpose language is useless for hardware work, but that HDLs are written to directly describe hardware behavior and hardware structure in a form that design tools can simulate and, for synthesizable subsets, turn into logic.
+            <strong>Practical distinction</strong>
+            The simplest useful distinction is this: general-purpose languages can support hardware-related work, but HDLs are written specifically to describe hardware behavior and hardware structure in a form that design tools can simulate and, for synthesizable subsets, turn into logic.
         </div>
       </article>
 
@@ -1050,12 +1394,11 @@
               <polygon points="538,84 556,92 538,100" fill="#6ff7b3"></polygon>
               <polygon points="538,202 556,210 538,218" fill="#ff8a8a"></polygon>
             </svg>
-            <p>.</p>
-            <p class="visual-caption">## The key idea is not that every line of HDL becomes hardware. Only the synthesizable subset can be translated by synthesis tools into a realizable digital circuit. Other constructs still matter for verification, experimentation, and modeling.</p>
+            <p class="visual-caption">The key idea here is that not every line of HDL becomes hardware. Only the synthesizable subset can be translated by synthesis tools into a realizable digital circuit. Other constructs still matter because they help with verification, experimentation, and modeling.</p>
           </div>
-          <p>-> For a beginner, a clean working distinction is this: some code can be synthesized into hardware, and some code cannot. In the strict RTL design sense, synthesizable code is the subset of a hardware language that a synthesis tool can translate into a circuit made of combinational logic, sequential storage elements, and the interconnect that binds them together.</p>
-          <p>-> That is the context of the word synthesizable. It does not just mean executable. It means a tool can derive a corresponding hardware implementation from the description. In practice, that means gates, multiplexers, adders, registers, memories, clocked elements, and the required connectivity. Passive and active device details appear more directly at lower abstraction levels, while RTL normally focuses on logic structure and clocked behavior.</p>
-          <p>-> So when you write Verilog, VHDL, SystemVerilog, or TL-Verilog in a synthesizable style, you are not merely instructing a processor. You are describing hardware that can be built onto an FPGA or carried forward into an ASIC flow.</p>
+          <p>-> A very useful beginner distinction is this: some HDL code can be synthesized into hardware, and some HDL code cannot. In the RTL design sense, synthesizable code is the part of the language that a synthesis tool can translate into a circuit made of combinational logic, sequential storage elements, and the interconnect between them.</p>
+          <p>-> That is what the word <em>synthesizable</em> really means here. It does not just mean that the code can run or be interpreted. It means a tool can derive a corresponding hardware implementation from the description. In practice, that means things like gates, multiplexers, adders, registers, memories, clocked elements, and the wiring needed to connect them.</p>
+          <p>-> So when you write Verilog, VHDL, SystemVerilog, or TL-Verilog in a synthesizable style, you are not simply telling a processor what to do. You are describing hardware that can be built on an FPGA or carried forward into an ASIC flow.</p>
         </div>
       </article>
     </div>
@@ -1095,22 +1438,22 @@
             <circle cx="646" cy="214" r="18" fill="#6feffd" fill-opacity="0.14" stroke="#6feffd"></circle>
             <text x="646" y="220" text-anchor="middle" fill="#6feffd" font-size="18">HW</text>
           </svg>
-          <p class="visual-caption">Both families use text-based code, but they serve different engineering targets. One family tells an existing machine what to do; the other family describes a machine that can be implemented.</p>
+          <p class="visual-caption">Both families use text-based code, but they aim at different engineering targets. One family tells an existing machine what to do, while the other describes a machine that can actually be implemented.</p>
         </div>
         <div class="language-group-grid">
           <div class="language-group">
             <strong>i. Non-synthesizable / general-purpose software languages</strong>
-            <p>C, C#, C++, Python, Java, and JavaScript are usually used to write software algorithms, applications, drivers, automation, and analysis code. They are not the normal direct language for describing gate-level or RTL hardware structure.</p>
+            <p>C, C#, C++, Python, Java, and JavaScript are usually used to write software algorithms, applications, drivers, automation, and analysis code. They are powerful and useful, but they are not the normal direct language for describing gate-level or RTL hardware structure.</p>
           </div>
           <div class="language-group">
             <strong>ii. Synthesizable HDL families and synthesizable subsets</strong>
-            <p>Verilog, VHDL, SystemVerilog, and TL-Verilog are used to describe hardware that can be simulated and, within synthesizable subsets, turned into real digital logic. Analog-oriented dialects exist too, but the key beginner focus here is digital hardware description.</p>
+            <p>Verilog, VHDL, SystemVerilog, and TL-Verilog are used to describe hardware that can be simulated and, within synthesizable subsets, turned into real digital logic. Analog-oriented dialects exist too, but for a beginner the main focus here is digital hardware description.</p>
           </div>
         </div>
       </article>
 
       <article class="basics-card">
-        <h3>4. Why the same statement means different things ?</h3>
+        <h3>4. Why the same statement means different things  ?</h3>
         <div class="basics-visual" aria-label="Diagram comparing HDL expressions that infer hardware with software expressions that run on a processor">
           <svg viewBox="0 0 760 290" role="img" aria-hidden="true">
             <defs>
@@ -1147,11 +1490,11 @@
             <text x="596" y="138" text-anchor="middle" fill="#6feffd" font-size="20">&amp;</text>
             <text x="650" y="138" text-anchor="middle" fill="#6feffd" font-size="20">&amp;</text>
           </svg>
-          <p class="visual-caption">This is the beginner's mental split to keep: in an HDL, the expression helps define hardware structure and signal behavior; in software, the expression is simply one operation executed by a processor that already exists.</p>
+          <p class="visual-caption">This is one of the most useful beginner mental splits to keep in mind: in an HDL, the expression helps define hardware structure and signal behavior; in software, the expression is simply one operation executed by a processor that already exists.</p>
         </div>
         <div class="comparison-points">
-          <p>-> In Verilog, if you write <code>assign y = A &amp; B;</code>, you are not just asking a CPU to evaluate a temporary expression. You are describing a continuous combinational relationship. The synthesis tool can infer AND logic that produces <code>y</code> from <code>A</code> and <code>B</code>. If the signals are vectors, the operation becomes a bitwise hardware operation across those signal widths.</p>
-          <p>-> Similarly in VHDL, a statement like <code>y &lt;= A and B;</code> describes an AND operation in hardware. For multi-bit signals, corresponding bits are ANDed in parallel. That is why HDLs naturally express concurrency and structure. In ordinary software languages such as C, C++, Java, or Python, the same-looking expression is just an operation executed by an already existing processor. It does not, by itself, define a new circuit implementation for synthesis.</p>
+          <p>In Verilog, if you write <code>assign y = A &amp; B;</code>, you are not just asking a CPU to evaluate a temporary expression. You are describing a continuous combinational relationship. A synthesis tool can infer AND logic that produces <code>y</code> from <code>A</code> and <code>B</code>. If the signals are vectors, the operation becomes a bitwise hardware operation across those widths.</p>
+          <p>Similarly, in VHDL, a statement like <code>y &lt;= A and B;</code> describes an AND operation in hardware. For multi-bit signals, corresponding bits are ANDed in parallel. That is why HDLs naturally express concurrency and structure. In ordinary software languages such as C, C++, Java, or Python, the same-looking expression is just an operation executed by a processor that already exists. By itself, it does not define a new circuit implementation for synthesis.</p>
         </div>
       </article>
     </div>
@@ -1525,6 +1868,1195 @@
     </div>
   </section>
 
+  <section class="section" id="tlx-intro">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">About TL-X</span>
+        <h2>Where TL-X fits after the basics</h2>
+        <p>Once you are comfortable with what an HDL is, the next step is to understand where TL-X fits. The important idea is that TL-X is not one single replacement language. It is a higher-level extension framework that can sit on top of multiple target languages.</p>
+      </div>
+    </div>
+
+    <div class="tlx-grid">
+      <article class="tlx-card">
+        <h3>1. What TL-X means</h3>
+        <div class="basics-visual" aria-label="Diagram showing TL-X as a common extension framework targeting TL-Verilog, TL-VHDL, and TL-C">
+          <svg viewBox="0 0 760 290" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="tlxCenter" x1="0" x2="1">
+                <stop offset="0%" stop-color="#143554"></stop>
+                <stop offset="100%" stop-color="#0d2339"></stop>
+              </linearGradient>
+            </defs>
+
+            <rect x="278" y="90" width="204" height="98" rx="24" fill="url(#tlxCenter)" stroke="#6feffd" stroke-width="2"></rect>
+            <text x="380" y="126" text-anchor="middle" fill="#6feffd" font-size="26" font-weight="700">TL-X</text>
+            <text x="380" y="154" text-anchor="middle" fill="#d6e4f8" font-size="15">common transaction-level constructs</text>
+            <text x="380" y="176" text-anchor="middle" fill="#d6e4f8" font-size="15">X = wildcard for target language</text>
+
+            <rect x="38" y="40" width="172" height="74" rx="20" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="124" y="69" text-anchor="middle" fill="#ffc86b" font-size="20" font-weight="700">TL-Verilog</text>
+            <text x="124" y="95" text-anchor="middle" fill="#d6e4f8" font-size="14">target: Verilog family</text>
+
+            <rect x="38" y="176" width="172" height="74" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+            <text x="124" y="205" text-anchor="middle" fill="#ffb1b1" font-size="20" font-weight="700">TL-VHDL</text>
+            <text x="124" y="231" text-anchor="middle" fill="#d6e4f8" font-size="14">target: VHDL family</text>
+
+            <rect x="550" y="108" width="172" height="74" rx="20" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="636" y="137" text-anchor="middle" fill="#6ff7b3" font-size="20" font-weight="700">TL-C</text>
+            <text x="636" y="163" text-anchor="middle" fill="#d6e4f8" font-size="12">target: C-style output flow</text>
+
+            <path d="M278 118 L210 84" stroke="#ffc86b" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M278 162 L210 214" stroke="#ffb1b1" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M482 138 L550 145" stroke="#6ff7b3" stroke-width="4" stroke-linecap="round"></path>
+
+            <circle cx="252" cy="106" r="7" fill="#ffc86b"></circle>
+            <circle cx="252" cy="174" r="7" fill="#ffb1b1"></circle>
+            <circle cx="510" cy="141" r="7" fill="#6ff7b3"></circle>
+          </svg>
+          <p class="visual-caption">A good way to think about this is to treat TL-X as the shared higher-level layer. The exact letter after <code>TL-</code> tells you which base language family the processor will eventually target.</p>
+        </div>
+        <div class="tlx-copy">
+          <p>TL-X extends existing languages instead of trying to throw them away and start over. That is why the <code>X</code> matters: you can think of it as a placeholder for whichever target language family sits underneath.</p>
+          <p>So when you see <code>TL-Verilog</code>, read it as <em>TL-X ideas expressed in a Verilog-oriented flow</em>. The same transaction-level way of thinking can also be mapped to other target languages.</p>
+          <div class="basics-note">
+            <strong>Why TL-Verilog is the one we care about here</strong>
+            This course page stays centered on <code>TL-Verilog</code> because the RISC-V CPU work on the companion page is being understood through a Verilog-style digital design flow. For this learning journey, TL-Verilog is the branch of TL-X that connects most directly to the pipeline, signals, and implementation mindset you are building.
+          </div>
+        </div>
+      </article>
+
+      <article class="tlx-card">
+        <h3>2. How to think about it in practice</h3>
+        <div class="basics-visual" aria-label="Flow diagram showing TL-X source processed into native target HDL before standard tools continue">
+          <svg viewBox="0 0 760 290" role="img" aria-hidden="true">
+            <rect x="34" y="92" width="186" height="92" rx="22" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="127" y="124" text-anchor="middle" fill="#6feffd" font-size="21" font-weight="700">Write TL-X style code</text>
+            <text x="127" y="149" text-anchor="middle" fill="#d6e4f8" font-size="14">timing intent + flow intent</text>
+            <text x="127" y="171" text-anchor="middle" fill="#d6e4f8" font-size="14">less repetitive low-level RTL</text>
+
+            <rect x="286" y="84" width="190" height="108" rx="22" fill="#142f4b" stroke="#ffc86b"></rect>
+            <text x="381" y="118" text-anchor="middle" fill="#ffc86b" font-size="22" font-weight="700">TL-X processor</text>
+            <text x="381" y="145" text-anchor="middle" fill="#d6e4f8" font-size="14">interprets TL-X constructs</text>
+            <text x="381" y="167" text-anchor="middle" fill="#d6e4f8" font-size="14">generates native target code</text>
+
+            <rect x="542" y="56" width="184" height="72" rx="20" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="634" y="84" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">Native HDL / output</text>
+            <text x="634" y="108" text-anchor="middle" fill="#d6e4f8" font-size="14">Verilog, VHDL, or other target</text>
+
+            <rect x="542" y="156" width="184" height="72" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+            <text x="634" y="184" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">Normal downstream tools</text>
+            <text x="634" y="208" text-anchor="middle" fill="#d6e4f8" font-size="14">simulate, lint, synthesize, debug</text>
+
+            <path d="M220 138 L286 138" stroke="#e8f1ff" stroke-width="5" stroke-dasharray="10 10"></path>
+            <path d="M476 108 L542 92" stroke="#6ff7b3" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M476 162 L542 192" stroke="#ffb1b1" stroke-width="5" stroke-linecap="round"></path>
+            <polygon points="276,130 294,138 276,146" fill="#e8f1ff"></polygon>
+            <polygon points="532,84 550,92 532,100" fill="#6ff7b3"></polygon>
+            <polygon points="532,184 550,192 532,200" fill="#ffb1b1"></polygon>
+          </svg>
+          <p class="visual-caption">The key thing to notice here is that you do not lose the normal implementation flow. TL-X simply sits earlier in the path, and a processor lowers that description into native code that existing tools can continue to use.</p>
+        </div>
+        <div class="tlx-pill-list line-reading-list">
+          <div>
+            <strong>Best mental model</strong>
+            Think of TL-X as a higher-level place where you can express timing, staging, and transaction intent before the design is lowered into a more native target language.
+          </div>
+          <div>
+            <strong>Why this matters for learners</strong>
+            This helps explain why TL-Verilog can feel shorter and cleaner than hand-written RTL while still mapping back to real hardware implementation.
+          </div>
+          <div>
+            <strong>Important expectation</strong>
+            The TL-X specification is mainly a reference manual. It tells you the constructs precisely, but it assumes you already understand the beginner ideas introduced on this page.
+          </div>
+        </div>
+      </article>
+
+      <article class="tlx-card" style="grid-column: 1 / -1;">
+        <h3>3. Major TL-X version milestones</h3>
+        <div class="tlx-copy">
+          <p>Let us read the early TL-X versions as a learning story, not just as a release list. As you move from one version to the next, you can see the language getting better at expressing pipelines, stage-relative movement, and cleaner notation.</p>
+        </div>
+
+        <div class="tlx-version-intro">
+          <div class="basics-note">
+            <strong>How to read this section</strong>
+            First, scan the timeline to get the big picture. Then look at the change chips in each card to quickly spot what was added or renamed. After that, read the short summary line to understand why that version matters to someone learning TL-Verilog today.
+          </div>
+
+          <div class="tlx-version-lenses">
+            <div class="tlx-version-lens">
+              <strong>What kept improving</strong>
+              The pipeline-centered way of thinking stayed important across all versions.
+            </div>
+            <div class="tlx-version-lens">
+              <strong>What changed most</strong>
+              Alignment and hierarchy notation kept getting cleaned up so the language became easier to read and more consistent.
+            </div>
+            <div class="tlx-version-lens">
+              <strong>Why you should care</strong>
+              If you ever read older examples, do not get discouraged by unfamiliar symbols. In many cases, the core timing idea is still the same.
+            </div>
+          </div>
+        </div>
+
+        <div class="basics-visual tlx-timeline" aria-label="Timeline showing TL-X version evolution from 1a to 1d">
+          <svg viewBox="0 0 1120 240" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="tlxTimelineLine" x1="0" x2="1">
+                <stop offset="0%" stop-color="#6feffd"></stop>
+                <stop offset="100%" stop-color="#ffc86b"></stop>
+              </linearGradient>
+            </defs>
+
+            <path d="M120 122 L1000 122" stroke="url(#tlxTimelineLine)" stroke-width="6" stroke-linecap="round"></path>
+
+            <circle cx="140" cy="122" r="16" fill="#12304d" stroke="#6feffd" stroke-width="4"></circle>
+            <circle cx="430" cy="122" r="16" fill="#12304d" stroke="#6ff7b3" stroke-width="4"></circle>
+            <circle cx="720" cy="122" r="16" fill="#12304d" stroke="#ffc86b" stroke-width="4"></circle>
+            <circle cx="980" cy="122" r="16" fill="#12304d" stroke="#ffb1b1" stroke-width="4"></circle>
+
+            <rect x="44" y="24" width="196" height="72" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="142" y="53" text-anchor="middle" fill="#6feffd" font-size="22" font-weight="700">TL-X 1a</text>
+            <text x="142" y="77" text-anchor="middle" fill="#d6e4f8" font-size="14">baseline language</text>
+            <text x="142" y="98" text-anchor="middle" fill="#d6e4f8" font-size="14">pipeline-first focus</text>
+            <path d="M140 96 L140 106" stroke="#6feffd" stroke-width="4" stroke-linecap="round"></path>
+
+            <rect x="334" y="144" width="196" height="72" rx="20" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="432" y="173" text-anchor="middle" fill="#6ff7b3" font-size="22" font-weight="700">TL-X 1b</text>
+            <text x="432" y="197" text-anchor="middle" fill="#d6e4f8" font-size="14">state signals</text>
+            <text x="432" y="218" text-anchor="middle" fill="#d6e4f8" font-size="14">$StateSigName</text>
+            <path d="M430 138 L430 144" stroke="#6ff7b3" stroke-width="4" stroke-linecap="round"></path>
+
+            <rect x="622" y="24" width="206" height="78" rx="20" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="725" y="53" text-anchor="middle" fill="#ffc86b" font-size="22" font-weight="700">TL-X 1c</text>
+            <text x="725" y="76" text-anchor="middle" fill="#d6e4f8" font-size="14">#+3 to %+3</text>
+            <text x="725" y="97" text-anchor="middle" fill="#d6e4f8" font-size="14">@++ and @+= added</text>
+            <path d="M720 102 L720 106" stroke="#ffc86b" stroke-width="4" stroke-linecap="round"></path>
+
+            <rect x="876" y="144" width="196" height="72" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+            <text x="974" y="173" text-anchor="middle" fill="#ffb1b1" font-size="22" font-weight="700">TL-X 1d</text>
+            <text x="974" y="197" text-anchor="middle" fill="#d6e4f8" font-size="14">%+3 to &gt;&gt;3</text>
+            <text x="974" y="218" text-anchor="middle" fill="#d6e4f8" font-size="14">&gt; to / hierarchy</text>
+            <path d="M980 138 L980 144" stroke="#ffb1b1" stroke-width="4" stroke-linecap="round"></path>
+          </svg>
+          <p class="visual-caption">The best way to read this timeline is as language evolution, not as four unrelated dialects. The central transaction-level and pipeline-aware idea stays in place, while the notation becomes more polished from one version to the next.</p>
+        </div>
+
+        <div class="tlx-version-grid">
+          <div class="tlx-version-card">
+            <strong>TL-X 1a</strong>
+            <p class="tlx-version-summary">This is the starting point. TL-X 1a laid down the baseline language extensions and put pipelines at the center of the way you think about the design.</p>
+            <div class="tlx-change-flow">
+              <span class="tlx-change-chip">Baseline extensions</span>
+              <span class="tlx-change-chip is-amber">Pipeline-first focus</span>
+            </div>
+            <ul>
+              <li>This version introduced the baseline language extensions.</li>
+              <li>Its main focus was pipeline-oriented constructs.</li>
+              <li>So if you want to understand where the timing-aware TL-Verilog mindset begins, this is the right starting point.</li>
+            </ul>
+          </div>
+
+          <div class="tlx-version-card">
+            <strong>TL-X 1b</strong>
+            <p class="tlx-version-summary">This version made state easier to talk about directly, which is a big help when you want the code to reflect persistent hardware behavior more clearly.</p>
+            <div class="tlx-change-flow">
+              <span class="tlx-change-chip is-green">Added</span>
+              <span class="tlx-change-chip"><code>$StateSigName</code></span>
+            </div>
+            <ul>
+              <li>State signals were added using the form <code>$StateSigName</code>.</li>
+              <li>That gave designers a clearer way to describe values that must persist as part of the design state.</li>
+            </ul>
+          </div>
+
+          <div class="tlx-version-card">
+            <strong>TL-X 1c</strong>
+            <p class="tlx-version-summary">This is where the language starts feeling more expressive about movement across stages. Alignment syntax changed, and relative pipestage scope became part of the story.</p>
+            <div class="tlx-change-flow">
+              <span class="tlx-change-chip"><code>#+3</code></span>
+              <span class="tlx-change-arrow">-&gt;</span>
+              <span class="tlx-change-chip is-amber"><code>%+3</code></span>
+              <span class="tlx-change-chip is-green"><code>@++</code> / <code>@+=</code></span>
+            </div>
+            <ul>
+              <li>Alignment syntax changed from <code>#+3</code> after a pipesignal to <code>%+3</code> before the pipesignal.</li>
+              <li>Relative pipestage scope was added with <code>@++</code> and <code>@+=</code>.</li>
+              <li>In simple terms, this version gave designers more natural ways to describe where things move and how stages relate to one another.</li>
+            </ul>
+          </div>
+
+          <div class="tlx-version-card">
+            <strong>TL-X 1d</strong>
+            <p class="tlx-version-summary">This version cleaned up the notation again, so what learners see here starts to look closer to the TL-Verilog style they are more likely to meet in practice.</p>
+            <div class="tlx-change-flow">
+              <span class="tlx-change-chip"><code>%+3</code></span>
+              <span class="tlx-change-arrow">-&gt;</span>
+              <span class="tlx-change-chip is-amber"><code>&gt;&gt;3</code></span>
+              <span class="tlx-change-chip"><code>&gt;</code></span>
+              <span class="tlx-change-arrow">-&gt;</span>
+              <span class="tlx-change-chip is-green"><code>/</code></span>
+            </div>
+            <ul>
+              <li>Alignment syntax changed again, from <code>%+3</code> to <code>&gt;&gt;3</code>.</li>
+              <li>Behavioral hierarchy syntax changed from <code>&gt;</code> to <code>/</code>.</li>
+              <li>So if you compare older and newer examples, this is one of the key points where the notation begins to look more familiar to modern learners.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="basics-note" style="margin-top: 1rem;">
+          <strong>What a beginner should take from this</strong>
+          The main lesson is simple: TL-X kept evolving to make pipeline thinking and timing relationships easier to express. So if an older example looks different at first glance, try to look past the symbols and ask what timing or hierarchy idea it is really expressing.
+        </div>
+      </article>
+
+      <article class="tlx-card" style="grid-column: 1 / -1;">
+        <h3>4. TL-X source code structure</h3>
+        <div class="tlx-copy">
+          <p>Now let us look at how a TL-X file is organized. This matters because a TL-X source file is not just one flat block of code. It has a recognizable structure, and once you understand that structure, real TL-X examples become much easier to read.</p>
+        </div>
+
+        <div class="basics-visual" aria-label="Diagram showing a TL-X file beginning with a file format line and then moving through HDL, TL-X, HDL plus, and HDL regions">
+          <svg viewBox="0 0 980 320" role="img" aria-hidden="true">
+            <rect x="54" y="34" width="872" height="242" rx="26" fill="#0d1f32" stroke="#6feffd" stroke-opacity="0.22"></rect>
+
+            <rect x="92" y="58" width="796" height="40" rx="14" fill="#142f4b" stroke="#ffc86b"></rect>
+            <text x="490" y="84" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">File format line</text>
+
+            <rect x="92" y="116" width="174" height="112" rx="20" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="179" y="145" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">HDL region</text>
+            <text x="179" y="169" text-anchor="middle" fill="#d6e4f8" font-size="14">module interface</text>
+            <text x="179" y="191" text-anchor="middle" fill="#d6e4f8" font-size="14">ports / declarations</text>
+
+            <rect x="306" y="116" width="174" height="112" rx="20" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="393" y="145" text-anchor="middle" fill="#6ff7b3" font-size="18" font-weight="700">TL-X region</text>
+            <text x="393" y="169" text-anchor="middle" fill="#d6e4f8" font-size="14">hierarchy</text>
+            <text x="393" y="191" text-anchor="middle" fill="#d6e4f8" font-size="14">pipelines / pipestages</text>
+
+            <rect x="520" y="116" width="174" height="112" rx="20" fill="#12304d" stroke="#ffb1b1"></rect>
+            <text x="607" y="145" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">HDL_plus region</text>
+            <text x="607" y="169" text-anchor="middle" fill="#d6e4f8" font-size="14">native HDL syntax</text>
+            <text x="607" y="191" text-anchor="middle" fill="#d6e4f8" font-size="14">can reference TL-X signals</text>
+
+            <rect x="734" y="116" width="154" height="112" rx="20" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="811" y="145" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">HDL region</text>
+            <text x="811" y="169" text-anchor="middle" fill="#d6e4f8" font-size="14">endmodule</text>
+            <text x="811" y="191" text-anchor="middle" fill="#d6e4f8" font-size="14">termination</text>
+
+            <path d="M266 172 L306 172" stroke="#e8f1ff" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M480 172 L520 172" stroke="#e8f1ff" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M694 172 L734 172" stroke="#e8f1ff" stroke-width="4" stroke-linecap="round"></path>
+            <polygon points="296,164 314,172 296,180" fill="#e8f1ff"></polygon>
+            <polygon points="510,164 528,172 510,180" fill="#e8f1ff"></polygon>
+            <polygon points="724,164 742,172 724,180" fill="#e8f1ff"></polygon>
+
+            <text x="490" y="254" text-anchor="middle" fill="#9ab0cf" font-size="14">A TL-X file usually opens with HDL, does most of the design work in TL-X, and closes back in HDL</text>
+          </svg>
+          <p class="visual-caption">The pattern to remember is simple !! -> A TL-X file begins with a file format line, usually opens in native HDL to define the module boundary, uses TL-X where the hierarchy and pipeline logic live, and then returns to HDL to finish the module definition.</p>
+        </div>
+
+        <div class="tlx-pill-list line-reading-list">
+          <div>
+            <strong>File format line</strong>
+            A TL-X file begins with a file format line. You can think of this as a small header that tells tools which TL-X language version is being used and which target HDL the file is meant for.
+          </div>
+          <div>
+            <strong>HDL regions</strong>
+            HDL regions contain native target HDL code. In practice, a TL-X file is expected to define a module in the target HDL, so it commonly begins with an HDL region that declares the module interface and ends with an HDL region that terminates the module definition.
+          </div>
+          <div>
+            <strong>TL-X regions</strong>
+            TL-X regions are where the TL-X language extension is active. This is where you describe assignment logic in the context of hierarchy, pipelines, and pipestages.
+          </div>
+          <div>
+            <strong>HDL_plus regions</strong>
+            HDL_plus regions let you use the target HDL syntax while still referencing TL-X signals. These regions are useful when manually converting HDL into TL-X, when you need native HDL features not available in TL-X context, or when you need a practical workaround for limitations and tool bugs.
+          </div>
+        </div>
+
+        <div class="basics-visual" aria-label="Flowchart showing a TL-X file moving from file header to HDL regions, TL-X regions, HDL plus regions, and back to HDL">
+          <svg viewBox="0 0 980 300" role="img" aria-hidden="true">
+            <rect x="64" y="42" width="180" height="58" rx="16" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="154" y="66" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">File format line</text>
+            <text x="154" y="88" text-anchor="middle" fill="#d6e4f8" font-size="13">version + target HDL</text>
+
+            <rect class="pulse-node" x="64" y="146" width="180" height="78" rx="18" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="154" y="174" text-anchor="middle" fill="#6feffd" font-size="18" font-weight="700">Opening HDL region</text>
+            <text x="154" y="198" text-anchor="middle" fill="#d6e4f8" font-size="13">module header</text>
+            <text x="154" y="218" text-anchor="middle" fill="#d6e4f8" font-size="13">ports and declarations</text>
+
+            <rect class="pulse-node" x="390" y="118" width="204" height="106" rx="22" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="492" y="152" text-anchor="middle" fill="#6ff7b3" font-size="20" font-weight="700">Main TL-X region</text>
+            <text x="492" y="179" text-anchor="middle" fill="#d6e4f8" font-size="14">hierarchy</text>
+            <text x="492" y="199" text-anchor="middle" fill="#d6e4f8" font-size="14">pipelines / pipestages</text>
+
+            <rect class="float-node" x="672" y="60" width="224" height="78" rx="18" fill="#12304d" stroke="#ffb1b1"></rect>
+            <text x="784" y="88" text-anchor="middle" fill="#ffb1b1" font-size="18" font-weight="700">HDL_plus side door</text>
+            <text x="784" y="111" text-anchor="middle" fill="#d6e4f8" font-size="13">native HDL syntax</text>
+            <text x="784" y="131" text-anchor="middle" fill="#d6e4f8" font-size="13">still references TL-X signals</text>
+
+            <rect x="672" y="172" width="224" height="66" rx="18" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="784" y="198" text-anchor="middle" fill="#ffc86b" font-size="18" font-weight="700">Closing HDL region</text>
+            <text x="784" y="220" text-anchor="middle" fill="#d6e4f8" font-size="13">endmodule / finish module</text>
+
+            <path class="flow-line" d="M154 100 L154 146" stroke="#e8f1ff" stroke-width="4" fill="none"></path>
+            <path class="flow-line" d="M244 184 L390 171" stroke="#6ff7b3" stroke-width="4" fill="none"></path>
+            <path class="flow-line" d="M594 146 C638 132,646 114,672 102" stroke="#ffb1b1" stroke-width="4" fill="none"></path>
+            <path class="flow-line" d="M594 194 C634 202,646 204,672 205" stroke="#ffc86b" stroke-width="4" fill="none"></path>
+
+            <polygon points="146,136 154,154 162,136" fill="#e8f1ff"></polygon>
+            <polygon points="378,164 396,171 379,179" fill="#6ff7b3"></polygon>
+            <polygon points="661,98 677,100 666,111" fill="#ffb1b1"></polygon>
+            <polygon points="661,200 679,205 662,211" fill="#ffc86b"></polygon>
+
+            <text x="492" y="262" text-anchor="middle" fill="#9ab0cf" font-size="14">Imagine the TL-X region as the design center, with HDL opening and closing the module, and HDL_plus available when you need native HDL access along the way.</text>
+          </svg>
+          <p class="visual-caption">If you are seeing this for the first time, picture a TL-X file as a guided path: a small header tells the tools what kind of file this is, HDL opens the module, TL-X carries most of the design intent, HDL_plus is available when you need a native HDL escape hatch, and HDL closes the module cleanly.</p>
+        </div>
+
+          <div class="basics-note" style="margin-top: 1rem;">
+           <strong>Example you can imagine</strong>
+           Here is a small mental-picture example of how one TL-X file might be laid out. The comments are there only to help you see where each region begins and what role it plays.
+          </div>
+
+          <pre><code><span class="code-comment-amber">// File format line</span>
+    \\TLV_version 1d: tl-x.org
+
+    <span class="code-comment-cyan">// Opening HDL region</span>
+    module cpu_top(input logic clk, reset,
+              output logic [31:0] instr_out);
+
+      logic [31:0] debug_value;
+
+      <span class="code-comment-green">// Main TL-X region</span>
+      |cpu
+        @0
+          $pc = /reset  ? 0 : &gt;&gt;1$next_pc;
+        @1
+          $instr = /imem[$pc];
+
+      <span class="code-comment-rose">// Optional HDL_plus / HDL region area</span>
+      <span class="code-comment-rose">// Use this when native HDL features or legacy HDL content are needed.</span>
+      assign debug_value = instr_out;
+
+      <span class="code-comment-amber">// Closing HDL region</span>
+    endmodule</code></pre>
+
+        <div class="basics-note">
+          <strong>One structural habit to remember</strong>
+          "Inside a TL-X region, context comes from scope lines such as hierarchy, pipelines, and pipestages. Each new scope level introduces an indentation of three spaces. So in TL-X, indentation is not just style, it helps show the design context in which assignment statements are being written."
+        </div>
+      </article>
+
+      <article class="tlx-card" style="grid-column: 1 / -1;">
+        <h3>5. How to read a TL-X snippet line by line</h3>
+        <div class="tlx-copy">
+          <p>Once you know the file structure, the next useful skill is learning how to read a small TL-X snippet without getting lost. The easiest way is to move from the outer context inward: first identify the hierarchy, then the pipestage, and only then read the assignment itself.</p>
+        </div>
+
+        <div class="basics-visual" aria-label="Annotated diagram showing how to read a TL-X snippet from hierarchy to stage to assignment">
+          <svg viewBox="0 0 980 300" role="img" aria-hidden="true">
+            <rect x="54" y="38" width="408" height="212" rx="24" fill="#0d1f32" stroke="#6feffd" stroke-opacity="0.2"></rect>
+            <text x="258" y="72" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">Read in this order !</text>
+
+            <rect x="92" y="92" width="108" height="38" rx="12" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="146" y="117" text-anchor="middle" fill="#6feffd" font-size="16" font-weight="700">1. |cpu</text>
+
+            <rect x="236" y="92" width="92" height="38" rx="12" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="282" y="117" text-anchor="middle" fill="#ffc86b" font-size="16" font-weight="700">2. @0</text>
+
+            <rect x="92" y="156" width="298" height="46" rx="14" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="241" y="184" text-anchor="middle" fill="#6ff7b3" font-size="15" font-weight="700">3. $pc = /reset  ? 0 : &gt;&gt;1$next_pc;</text>
+
+            <path d="M200 110 L236 110" stroke="#e8f1ff" stroke-width="4" stroke-linecap="round"></path>
+            <path d="M282 130 L282 156" stroke="#e8f1ff" stroke-width="4" stroke-linecap="round"></path>
+            <polygon points="226,102 244,110 226,118" fill="#e8f1ff"></polygon>
+            <polygon points="274,146 282,164 290,146" fill="#e8f1ff"></polygon>
+
+            <rect x="530" y="52" width="384" height="184" rx="24" fill="#0d1f32" stroke="#ffc86b" stroke-opacity="0.22"></rect>
+            <text x="722" y="82" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">What each step tells you  ?</text>
+
+            <rect x="566" y="102" width="314" height="34" rx="12" fill="#12304d" stroke="#6feffd"></rect>
+            <text x="723" y="124" text-anchor="middle" fill="#6FF7B3" font-size="14"><tspan font-weight="700">1. Hierarchy:</tspan><tspan> which design block am I inside ?</tspan></text>
+
+            <rect x="566" y="148" width="314" height="34" rx="12" fill="#12304d" stroke="#ffc86b"></rect>
+            <text x="723" y="170" text-anchor="middle" fill="#6FF7B3" font-size="14"><tspan font-weight="700">2. Stage:</tspan><tspan> when does this work happen ?</tspan></text>
+
+            <rect x="566" y="194" width="314" height="34" rx="12" fill="#12304d" stroke="#6ff7b3"></rect>
+            <text x="723" y="216" text-anchor="middle" fill="#6FF7B3" font-size="14"><tspan font-weight="700">3. Assignment:</tspan><tspan> what signal is being defined ?</tspan></text>
+          </svg>
+          <p class="visual-caption">The reading trick is to go from outer context to inner meaning. First find the hierarchy, then the stage, and only then interpret the assignment line.</p>
+        </div>
+
+        <pre><code>|cpu
+   @0
+      $pc = /reset  ? 0 : &gt;&gt;1$next_pc;
+   @1
+      $instr = /imem[$pc];</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>Line 1: <code>|cpu</code></strong>
+            Start by asking, “What block of the design am I inside ?” Here, <code>|cpu</code> tells you that the following logic is being described in the CPU pipeline context.
+          </div>
+          <div>
+            <strong>Line 2: <code>@0</code></strong>
+            Next, ask, “At what stage is this work happening ?” The <code>@0</code> line tells you that the statements indented under it belong to pipestage 0.
+          </div>
+          <div>
+            <strong>Line 3: <code>$pc = /reset  ? 0 : &gt;&gt;1$next_pc;</code></strong>
+            Now read the assignment itself. This says that in stage 0, <code>$pc</code> is set to <code>0</code> during reset; otherwise, it takes the value of <code>$next_pc</code> aligned from an earlier stage context using <code>&gt;&gt;1</code>.
+          </div>
+          <div>
+            <strong>Line 4: <code>@1</code></strong>
+            The context now shifts to the next pipestage. So before reading the next line, update your mental model: you are no longer in stage 0, you are now in stage 1.
+          </div>
+          <div>
+            <strong>Line 5: <code>$instr = /imem[$pc];</code></strong>
+            This tells you that in stage 1, the instruction value is taken from instruction memory using the program counter. In other words, once the stage context is clear, the assignment becomes much easier to interpret.
+          </div>
+        </div>
+
+        <div class="basics-note">
+          <strong>Reading habit that helps</strong>
+          When you read TL-X, do not start with the right-hand side expression. First ask: What hierarchy am I in ? What stage am I in ? Then ask: What signal is being defined here ? That order usually makes TL-X code feel much more natural.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="makerchip-ide">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Makerchip IDE</span>
+        <h2>The first screen a TL-V learner should understand . . . </h2>
+        <p>Once the learner reaches Makerchip IDE, the page stops being only about reading TL-Verilog and starts becoming a place to write it, compile it, inspect it, and see what the design is doing.</p>
+      </div>
+    </div>
+
+    <article class="tlx-card">
+      <div class="tlx-copy">
+        <p>If you search for Makerchip IDE on the web and open it, the first page looks like a split workspace. That split is important because the left side is where you write and inspect text, while the right side is where you see the design respond visually.</p>
+      </div>
+
+      <div class="ide-screenshot-frame">
+        <img src="first_page.png" alt="First page of Makerchip IDE showing the editor on the left and diagram, viz, and waveform panes on the right">
+        <p class="visual-caption">A useful first impression is this: the left side helps you write and debug the code, and the right side helps you see what that code turns into.</p>
+      </div>
+
+      <div class="ide-overview-grid" style="margin-top: 1rem;">
+        <div class="ide-pane-card">
+          <span class="ide-mini-label">LHS</span>
+          <strong>Text and debug side</strong>
+          <div class="tlx-pill-list">
+            <div>
+              <strong class="ide-accent-green">EDITOR</strong>
+              This is where the learner writes TLV code.
+            </div>
+            <div>
+              <strong class="ide-accent-green">NAV-TLV</strong>
+              Expanded TLV view.
+            </div>
+            <div>
+              <strong class="ide-accent-green">LOG</strong>
+              This is where compile messages, warnings, and errors appear.
+            </div>
+          </div>
+        </div>
+
+        <div class="ide-pane-card">
+          <span class="ide-mini-label">RHS</span>
+          <strong>Visual and output side</strong>
+          <div class="tlx-pill-list">
+            <div>
+              <strong class="ide-accent-green">DIAGRAM</strong>
+              A block-level representation of the corresponding HDL-coded structure.
+            </div>
+            <div>
+              <strong class="ide-accent-green">VIZ</strong>
+              A visualization pane used to inspect behavior more intuitively.
+            </div>
+            <div>
+              <strong class="ide-accent-green">WAVEFORM</strong>
+              The waveform view, where the learner can see the graphical output of the synthesized and simulated HDL.
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="ide-deep-grid" style="margin-top: 1rem;">
+      <article class="tlx-card">
+        <h3><span class="ide-accent-green">1. EDITOR</span></h3>
+        <div class="tlx-copy">
+          <p>The Editor is the learner's primary working area. This is where TLV code is written, sections such as <code>\SV</code> and <code>\TLV</code> are organized, and the first interaction with Makerchip really begins.</p>
+          <p>The most important beginner realization is that the Editor is not just a plain text box. It is the source of everything else on the page. What appears in the Diagram, VIZ, Waveform, and Log panes begins with what is written here.</p>
+        </div>
+
+          <pre><code><span class="code-highlight-cyan">\m5_TLV_version 1d: tl-x.org</span>
+    <span class="code-highlight-amber">\m5</span>
+
+  <span class="code-comment-muted">// ============================================</span>
+  <span class="code-comment-muted">// Welcome, new visitors! Try the "Learn" menu.</span>
+  <span class="code-comment-muted">// ============================================</span>
+
+  <span class="code-comment-muted">//use(m5-1.0)   /// uncomment to use M5 macro library.</span>
+    <span class="code-highlight-rose">\SV</span>
+  <span class="code-comment-muted">// Macro providing required top-level module definition, random</span>
+  <span class="code-comment-muted">// stimulus support, and Verilator config.</span>
+  m5_makerchip_module   <span class="code-comment-muted">// (Expanded in Nav-TLV pane.)</span>
+    <span class="code-highlight-green">\TLV</span>
+  <span class="code-comment-muted">// Connect SV inputs to TLV pipesignals.</span>
+      <span class="code-highlight-cyan">$reset = *reset;</span>
+
+  <span class="code-comment-muted">//...</span>
+
+  <span class="code-comment-muted">// Assert these to end simulation (before the cycle limit).</span>
+      <span class="code-highlight-amber">*passed = *cyc_cnt &gt; 40;</span>
+      <span class="code-highlight-amber">*failed = 1'b0;</span>
+    <span class="code-highlight-rose">\SV</span>
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>What the learner should notice</strong>
+            The code is divided into language regions such as <code>\SV</code> and <code>\TLV</code>. This is one of the first practical examples of the source-structure idea explained earlier.
+          </div>
+          <div>
+            <strong>Why this matters</strong>
+            The Editor is where the learner writes intent. Everything else in Makerchip reacts to that intent.
+          </div>
+        </div>
+
+        <div class="tlx-copy" style="margin-top: 1rem;">
+          <h4 style="margin-bottom: 0.75rem;">Line-by-line reading of this starter file</h4>
+          <p>Read this file as a small conversation with Makerchip. The first few lines declare the dialect and tools being used, the middle lines describe the design intent, and the last line closes the surrounding SystemVerilog wrapper.</p>
+        </div>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong class="line-reading-accent"><code>\m5_TLV_version 1d: tl-x.org</code></strong>
+            This is the file-format line. It tells the toolchain which TL-X or TL-Verilog version the file follows. Here, the file says, "interpret me using M5 plus TLV version 1d rules from tl-x.org."
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>\m5</code></strong>
+            This opens an M5 region. M5 is the macro and preprocessing layer used by Makerchip. If a file needs Makerchip-specific macros or helpers, this region is where they live.
+          </div>
+          <div>
+            <strong>Blank lines and banner comments</strong>
+            The empty lines are only for readability. The welcome banner comments do not change behavior; they are just guidance for the learner using the template.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>//use(m5-1.0)</code></strong>
+            This is a commented-out directive. If you uncomment it, the M5 macro library is enabled. In other words, the file is saying, "I can pull in the M5 helper library if I need those macros."
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>\SV</code></strong>
+            This switches into a SystemVerilog region. From this point until the next region marker, the lines are interpreted as plain SystemVerilog rather than TLV.
+          </div>
+          <div>
+            <strong>The macro comment above <code>m5_makerchip_module</code></strong>
+            This comment explains why the next line exists. It tells the learner that the macro will create the top-level module shell, some simulation plumbing, and Makerchip-friendly configuration automatically.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>m5_makerchip_module</code></strong>
+            This macro expands into the required top-level module definition. Instead of writing the full Verilog module header by hand, the template uses a macro so the beginner can focus on the design logic first.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>\TLV</code></strong>
+            This switches into the TL-Verilog region. Now the file is no longer defining plain RTL syntax line by line; it is expressing timing and signal intent using TLV constructs.
+          </div>
+          <div>
+            <strong>The comment <code>// Connect SV inputs to TLV pipesignals.</code></strong>
+            This comment tells you the next assignment is a bridge from the SystemVerilog world into the TLV world.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>$reset = *reset;</code></strong>
+            This copies the incoming SystemVerilog signal <code>*reset</code> into the TLV pipesignal <code>$reset</code>. A simple way to read it is: "take the external reset pin and make it available as a TLV signal inside the design."
+          </div>
+          <div>
+            <strong><code>//...</code></strong>
+            This means more design logic normally appears here. The template hides the middle part so the learner can focus on the file structure first.
+          </div>
+          <div>
+            <strong>The pass/fail comment</strong>
+            This comment explains that the next two lines control when the simulation should stop early instead of waiting for a maximum cycle count.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>*passed = *cyc_cnt &gt; 40;</code></strong>
+            This drives the pass flag high once the cycle counter becomes greater than 40. In plain words: "after enough cycles have elapsed, declare success."
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>*failed = 1'b0;</code></strong>
+            This permanently keeps the fail flag low. The template is effectively saying, "this starter example has no failure condition yet."
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>\SV</code> before <code>endmodule</code></strong>
+            This switches back into SystemVerilog because <code>endmodule</code> is normal Verilog syntax, not TLV syntax.
+          </div>
+          <div>
+            <strong class="line-reading-accent"><code>endmodule</code></strong>
+            This closes the module created earlier by the Makerchip macro expansion. Conceptually, the file started by opening a top-level hardware wrapper and ends by closing it here.
+          </div>
+        </div>
+
+        <div class="basics-note" style="margin-top: 1rem;">
+          <strong>The simplest mental model</strong>
+          The file says: choose the TLV version, enter Makerchip macro mode, open a SystemVerilog wrapper, switch into TLV to describe behavior, set pass or fail conditions for simulation, then switch back to SystemVerilog and close the module.
+        </div>
+
+        <div class="tlx-copy" style="margin-top: 1rem;">
+          <h4 style="margin-bottom: 0.75rem;">Visual flow of the same snippet</h4>
+          <p>If the raw code feels dense, use this reading order. Each box answers one simple question: what mode am I in right now, and what is this part of the file trying to do?</p>
+        </div>
+
+        <div class="difference-visual snippet-flow-visual" style="margin-top: 0.9rem;">
+          <svg viewBox="0 0 1040 270" role="img" aria-label="Flow of a Makerchip starter file from version declaration to endmodule">
+            <defs>
+              <linearGradient id="makerchipSnippetFlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#6feffd"></stop>
+                <stop offset="100%" stop-color="#6ff7b3"></stop>
+              </linearGradient>
+              <marker id="makerchipSnippetArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#6ff7b3"></polygon>
+              </marker>
+            </defs>
+
+            <rect x="24" y="52" width="150" height="88" rx="20" fill="#10263d" stroke="#6feffd" stroke-opacity="0.55"></rect>
+            <text x="99" y="81" text-anchor="middle" fill="#6feffd" font-size="15" font-weight="700">Version line</text>
+            <text x="99" y="104" text-anchor="middle" fill="#dff8ff" font-size="13">\m5_TLV_version</text>
+            <text x="99" y="123" text-anchor="middle" fill="#dff8ff" font-size="13">1d: tl-x.org</text>
+
+            <rect class="float-node" x="196" y="52" width="140" height="88" rx="20" fill="#13293f" stroke="#ffc86b" stroke-opacity="0.55"></rect>
+            <text x="266" y="81" text-anchor="middle" fill="#ffc86b" font-size="15" font-weight="700">M5 region</text>
+            <text x="266" y="104" text-anchor="middle" fill="#dff8ff" font-size="13">\m5</text>
+            <text x="266" y="123" text-anchor="middle" fill="#dff8ff" font-size="12">macros and setup</text>
+
+            <rect class="pulse-node" x="358" y="40" width="176" height="112" rx="22" fill="#122c47" stroke="#ffb1b1" stroke-opacity="0.52"></rect>
+            <text x="446" y="71" text-anchor="middle" fill="#ffb1b1" font-size="15" font-weight="700">SystemVerilog wrapper</text>
+            <text x="446" y="96" text-anchor="middle" fill="#dff8ff" font-size="13">\SV</text>
+            <text x="446" y="116" text-anchor="middle" fill="#dff8ff" font-size="12">comments explain the macro</text>
+            <text x="446" y="135" text-anchor="middle" fill="#dff8ff" font-size="12">m5_makerchip_module opens</text>
+
+            <rect class="pulse-node" x="558" y="30" width="204" height="132" rx="22" fill="#102c3a" stroke="#6ff7b3" stroke-opacity="0.58"></rect>
+            <text x="660" y="63" text-anchor="middle" fill="#6ff7b3" font-size="16" font-weight="700">TL-Verilog behavior</text>
+            <text x="660" y="89" text-anchor="middle" fill="#dff8ff" font-size="13">\TLV</text>
+            <text x="660" y="110" text-anchor="middle" fill="#dff8ff" font-size="12">$reset = *reset;</text>
+            <text x="660" y="129" text-anchor="middle" fill="#dff8ff" font-size="12">design logic lives here</text>
+            <text x="660" y="148" text-anchor="middle" fill="#dff8ff" font-size="12">pass/fail signals are driven</text>
+
+            <rect class="float-node" x="786" y="52" width="160" height="88" rx="20" fill="#13293f" stroke="#6feffd" stroke-opacity="0.55"></rect>
+            <text x="866" y="81" text-anchor="middle" fill="#6feffd" font-size="15" font-weight="700">Back to \SV</text>
+            <text x="866" y="104" text-anchor="middle" fill="#dff8ff" font-size="13">normal Verilog mode</text>
+            <text x="866" y="123" text-anchor="middle" fill="#dff8ff" font-size="13">for endmodule</text>
+
+            <rect x="24" y="186" width="922" height="52" rx="16" fill="#0c1c2d" stroke="url(#makerchipSnippetFlow)" stroke-opacity="0.6"></rect>
+            <text x="485" y="207" text-anchor="middle" fill="#6feffd" font-size="14" font-weight="700">Reading rule</text>
+            <text x="485" y="226" text-anchor="middle" fill="#dff8ff" font-size="13">declare the dialect - enter M5 setup - open an SV wrapper - describe behavior in TLV - return to SV and close the module</text>
+
+            <path class="flow-line" d="M174 96 L196 96" stroke="#6ff7b3" stroke-width="4" fill="none" marker-end="url(#makerchipSnippetArrow)"></path>
+            <path class="flow-line" d="M336 96 L358 96" stroke="#6ff7b3" stroke-width="4" fill="none" marker-end="url(#makerchipSnippetArrow)"></path>
+            <path class="flow-line" d="M534 96 L558 96" stroke="#6ff7b3" stroke-width="4" fill="none" marker-end="url(#makerchipSnippetArrow)"></path>
+            <path class="flow-line" d="M762 96 L786 96" stroke="#6ff7b3" stroke-width="4" fill="none" marker-end="url(#makerchipSnippetArrow)"></path>
+          </svg>
+        </div>
+
+        <div class="tlx-copy" style="margin-top: 1.1rem;">
+          <h4 style="margin-bottom: 0.75rem;">Editor view versus NAV-TLV view</h4>
+          <p>This is the key teaching moment for Makerchip. In the Editor, you write the compact version meant for humans. In NAV-TLV, Makerchip shows a more explicit version so you can see what the tools are really working with.</p>
+        </div>
+
+        <div class="ide-deep-grid" style="margin-top: 0.9rem;">
+          <div class="ide-detail-card">
+            <span class="ide-mini-label ide-accent-green">EDITOR</span>
+            <p style="margin-top: 0;">This is the concise file the learner types.</p>
+            <pre><code><span class="code-highlight-cyan">\m5_TLV_version 1d: tl-x.org</span>
+    <span class="code-highlight-amber">\m5</span>
+  <span class="code-comment-muted">//use(m5-1.0)</span>
+    <span class="code-highlight-rose">\SV</span>
+   m5_makerchip_module
+    <span class="code-highlight-green">\TLV</span>
+      <span class="code-highlight-cyan">$reset = *reset;</span>
+      <span class="code-highlight-amber">*passed = *cyc_cnt &gt; 40;</span>
+      <span class="code-highlight-amber">*failed = 1'b0;</span>
+    <span class="code-highlight-rose">\SV</span>
+   endmodule</code></pre>
+          </div>
+
+          <div class="ide-detail-card">
+            <span class="ide-mini-label ide-accent-blue">NAV-TLV</span>
+            <p style="margin-top: 0;">This is the more explicit view after macro expansion and tool processing.</p>
+            <pre><code><span class="code-highlight-blue">\TLV_version 1d: tl-x.org</span>
+    <span class="code-highlight-blue">\source top.tlv 8</span>
+    <span class="code-highlight-blue">\SV</span>
+   module top(input wire clk, input wire reset,
+              input wire [31:0] cyc_cnt,
+              output wire passed, output wire failed);
+    <span class="code-highlight-blue">\TLV</span>
+   $reset = *reset;
+   *passed = *cyc_cnt &gt; 40;
+   *failed = 1'b0;
+    <span class="code-highlight-blue">\SV</span>
+   endmodule</code></pre>
+          </div>
+        </div>
+
+        <div class="tlx-pill-list" style="margin-top: 1rem;">
+          <div>
+            <strong>What stayed the same</strong>
+            The core design intent stayed the same: the file still moves from a Verilog wrapper into a TLV region, connects reset, and drives pass or fail outputs.
+          </div>
+          <div>
+            <strong>What changed</strong>
+            The compact macro-based shorthand became a more explicit module form. NAV-TLV exposes details that were hidden in the friendlier Editor view.
+          </div>
+          <div>
+            <strong>Why this is useful</strong>
+            When a beginner asks, "what did Makerchip actually generate here?" this side-by-side comparison answers that question immediately.
+          </div>
+          <div>
+            <strong>Best habit to build</strong>
+            Write in the Editor first, then glance at NAV-TLV whenever a macro, directive, or generated wrapper feels mysterious.
+          </div>
+        </div>
+
+        <div class="tlx-copy" style="margin-top: 1.1rem;">
+          <h4 style="margin-bottom: 0.75rem;">Callouts directly on the code</h4>
+          <p>Use this when you want to point to one line and say exactly what job it does. The arrows are there to slow the eye down and help the learner notice the role of each directive and signal.</p>
+        </div>
+
+        <div class="difference-visual" style="margin-top: 0.9rem;">
+          <svg viewBox="0 0 1080 430" role="img" aria-label="Annotated Makerchip starter code with arrows pointing to key directives and signals">
+            <defs>
+              <marker id="makerchipCodeCalloutArrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="0 0, 10 5, 0 10" fill="#6ff7b3"></polygon>
+              </marker>
+            </defs>
+
+            <rect x="34" y="28" width="566" height="372" rx="24" fill="#071321" stroke="#6feffd" stroke-opacity="0.24"></rect>
+            <text x="62" y="72" fill="#6feffd" font-size="18" font-weight="700" font-family="IBM Plex Mono, monospace">\m5_TLV_version 1d: tl-x.org</text>
+            <text x="62" y="104" fill="#ffc86b" font-size="18" font-weight="700" font-family="IBM Plex Mono, monospace">\m5</text>
+            <text x="62" y="136" fill="#b9c2d0" font-size="16" font-family="IBM Plex Mono, monospace">//use(m5-1.0)</text>
+            <text x="62" y="168" fill="#ffb1b1" font-size="18" font-weight="700" font-family="IBM Plex Mono, monospace">\SV</text>
+            <text x="86" y="200" fill="#dff8ff" font-size="17" font-family="IBM Plex Mono, monospace">m5_makerchip_module</text>
+            <text x="62" y="232" fill="#6ff7b3" font-size="18" font-weight="700" font-family="IBM Plex Mono, monospace">\TLV</text>
+            <text x="86" y="264" fill="#dff8ff" font-size="17" font-family="IBM Plex Mono, monospace">$reset = *reset;</text>
+            <text x="86" y="296" fill="#dff8ff" font-size="17" font-family="IBM Plex Mono, monospace">*passed = *cyc_cnt &gt; 40;</text>
+            <text x="86" y="328" fill="#dff8ff" font-size="17" font-family="IBM Plex Mono, monospace">*failed = 1'b0;</text>
+            <text x="62" y="360" fill="#ffb1b1" font-size="18" font-weight="700" font-family="IBM Plex Mono, monospace">\SV</text>
+            <text x="86" y="392" fill="#dff8ff" font-size="17" font-family="IBM Plex Mono, monospace">endmodule</text>
+
+            <rect class="ide-detail-card" x="694" y="40" width="320" height="44" rx="14" fill="#10263d" stroke="#6feffd" stroke-opacity="0.45"></rect>
+            <text x="714" y="67" fill="#6feffd" font-size="14" font-weight="700">File-format line: choose the TLV dialect</text>
+            <path class="flow-line" d="M694 62 L618 62" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+
+            <rect class="ide-detail-card" x="694" y="94" width="320" height="52" rx="14" fill="#13293f" stroke="#ffc86b" stroke-opacity="0.45"></rect>
+            <text x="714" y="120" fill="#ffc86b" font-size="14" font-weight="700">M5 region: enable macro and setup space</text>
+            <path class="flow-line" d="M694 122 L618 100" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+
+            <rect class="ide-detail-card" x="694" y="156" width="320" height="56" rx="14" fill="#122c47" stroke="#ffb1b1" stroke-opacity="0.42"></rect>
+            <text x="714" y="182" fill="#ffb1b1" font-size="14" font-weight="700">\SV region: ordinary SystemVerilog wrapper</text>
+            <text x="714" y="201" fill="#dff8ff" font-size="12">This is where the top-level module shell is opened.</text>
+            <path class="flow-line" d="M694 184 L618 184" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+
+            <rect class="ide-detail-card" x="694" y="224" width="320" height="56" rx="14" fill="#102c3a" stroke="#6ff7b3" stroke-opacity="0.48"></rect>
+            <text x="714" y="250" fill="#6ff7b3" font-size="14" font-weight="700">\TLV region: describe timing-aware behavior</text>
+            <text x="714" y="269" fill="#dff8ff" font-size="12">This is where the design intent becomes TL-Verilog.</text>
+            <path class="flow-line" d="M694 252 L618 232" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+
+            <rect class="ide-detail-card" x="694" y="292" width="320" height="52" rx="14" fill="#0f2638" stroke="#6feffd" stroke-opacity="0.42"></rect>
+            <text x="714" y="318" fill="#6feffd" font-size="14" font-weight="700">$reset = *reset; bridges SV into TLV</text>
+            <path class="flow-line" d="M694 318 L618 264" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+
+            <rect class="ide-detail-card" x="694" y="354" width="320" height="54" rx="14" fill="#0f2638" stroke="#ffc86b" stroke-opacity="0.42"></rect>
+            <text x="714" y="380" fill="#ffc86b" font-size="14" font-weight="700">*passed and *failed control simulation outcome</text>
+            <text x="714" y="399" fill="#dff8ff" font-size="12">One declares success; the other stays low here.</text>
+            <path class="flow-line" d="M694 378 L618 312" stroke="#6ff7b3" stroke-width="3" fill="none" marker-end="url(#makerchipCodeCalloutArrow)"></path>
+          </svg>
+        </div>
+
+        <div class="basics-note" style="margin-top: 1rem;">
+          <strong>How to use this visual</strong>
+          First read the code top to bottom. Then scan only the callout boxes on the right. Finally, come back to the code and try to say the purpose of each highlighted line in your own words.
+        </div>
+      </article>
+
+      <article class="tlx-card">
+        <h3><span class="ide-accent-green">2. NAV-TLV</span></h3>
+        <div class="tlx-copy">
+          <p>NAV-TLV is best understood as an expanded TLV view. It helps the learner see what macros and certain higher-level constructs look like after expansion, which is very useful when something in the Editor feels a little too abstract.</p>
+          <p>For a beginner, this pane is a bridge between what was typed and what the tool is actually working with internally.</p>
+        </div>
+
+        <pre><code><span class="code-highlight-blue">\TLV_version 1d: tl-x.org</span>
+      <span class="code-highlight-blue">\source top.tlv 8</span>
+      <span class="code-highlight-blue">\SV</span>
+  <span class="code-comment-muted">// Macro providing required top-level module definition, random</span>
+  <span class="code-comment-muted">// stimulus support, and Verilator config.</span>
+   module top(input wire clk, input wire reset, input wire [31:0] cyc_cnt, output wire passed, output wire failed); /* ... */
+      <span class="code-highlight-blue">\TLV</span>
+  <span class="code-comment-muted">// Connect SV inputs to TLV pipesignals.</span>
+   $reset = *reset;
+
+  <span class="code-comment-muted">//...</span>
+
+  <span class="code-comment-muted">// Assert these to end simulation (before the cycle limit).</span>
+   *passed = *cyc_cnt &gt; 40;
+   *failed = 1'b0;
+<span class="code-highlight-blue">\SV</span>
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>What NAV-TLV helps you see</strong>
+            It shows how some Makerchip and M5 conveniences expand into more explicit underlying code.
+          </div>
+          <div>
+            <strong>Why beginners should care</strong>
+            If something written in the Editor feels magical or hidden, NAV-TLV often helps remove that mystery.
+          </div>
+        </div>
+      </article>
+
+      <article class="tlx-card">
+        <h3><span class="ide-accent-green">3. LOG</span></h3>
+        <div class="tlx-copy">
+          <p>The Log pane is where the learner sees what the toolchain is telling them. This includes product information, file generation, warnings, statistics, compiler activity, and simulation status.</p>
+          <p>This is also where you learn an important engineering habit: do not look at errors only when something fails. The Log also tells you what was generated, what was ignored, and what the tools inferred.</p>
+        </div>
+
+        <div class="log-panel">INFORM(0) (PROD_INFO):
+  SandPiper(TM) 1.14-2022/10/10-beta-Pro from Redwood EDA, LLC
+
+INFORM(0) (FILES):
+  Reading "top.m4"
+  Translated HDL File: "top.sv"
+  Generated HDL File: "top_gen.sv"
+  HTML TLX File: "top.html"
+  Simulation Visualization File: "top_viz.json"
+
+WARNING(1) (UNUSED-SIG):
+  Signal $reset is assigned but never used.
+
+INFORM(0) (STATS):
+  SandPiper generated 15% of your HDL code.
+
+Simulating and tracing...
+Simulation PASSED!!!</div>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>What this pane teaches</strong>
+            The Log does not just report errors. It shows translation results, generated artifacts, warnings, statistics, and final pass/fail status.
+          </div>
+          <div>
+            <strong>What a beginner should notice first</strong>
+            Start by looking for warnings, generated files, and the final simulation result. Those three clues already tell you a lot about what happened.
+          </div>
+        </div>
+      </article>
+
+      <article class="tlx-card">
+        <h3><span class="ide-accent-green">4. DIAGRAM, VIZ, and WAVEFORM</span></h3>
+        <div class="tlx-copy">
+          <p>The right-hand side is where Makerchip becomes visually rewarding. This side helps the learner see what the code means rather than only reading lines of text.</p>
+        </div>
+
+        <div class="ide-pane-grid">
+          <div class="ide-detail-card">
+            <strong>DIAGRAM</strong>
+            This pane gives a block-level view of the design structure. It is especially useful when the learner wants to connect TLV code to modules, signals, and stage-level structure.
+          </div>
+          <div class="ide-detail-card">
+            <strong>VIZ</strong>
+            This pane gives a more learner-friendly visualization of the behavior or structure, helping the user move from abstract code to a more intuitive picture.
+          </div>
+          <div class="ide-detail-card">
+            <strong>WAVEFORM</strong>
+            This pane shows the waveform of the corresponding simulated HDL. In practice, this is where the learner can inspect graphical signal behavior over time.
+          </div>
+          <div class="ide-detail-card">
+            <strong>Why the RHS matters</strong>
+            The left side helps you write and debug. The right side helps you see and verify. Together, they make the learning loop much faster.
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <article class="tlx-card" style="margin-top: 1rem;">
+      <h3>5. What to click first in the LEARN menu</h3>
+      <div class="tlx-copy">
+        <p>For a first-time learner, the LEARN menu should not feel like a giant menu tree. Think of it as your guided entry point into the IDE. The goal is not to open everything. The goal is to click the first thing that reduces confusion and builds momentum.</p>
+      </div>
+
+      <div class="tlx-pill-list">
+        <div>
+          <strong>Start here: Tutorials</strong>
+          If the learner is completely new, <code>LEARN -&gt; Tutorials</code> is the best first click. It gives a structured path instead of expecting the learner to explore the whole IDE alone.
+        </div>
+        <div>
+          <strong>Then try: Examples</strong>
+          After a first guided walkthrough, <code>LEARN -&gt; Examples</code> becomes useful because the learner can see working code and connect it to the panes already explained on this page.
+        </div>
+        <div>
+          <strong>Use Courses when you want a bigger path</strong>
+          <code>LEARN -&gt; Courses</code> is helpful when the learner wants a more complete study flow instead of only a quick first experiment.
+        </div>
+        <div>
+          <strong>Use Specs later, not first</strong>
+          The specification links in the LEARN area are important, but they are usually not the best first click for a beginner. They are better used after the learner already knows how the IDE feels and what the panes are doing.
+        </div>
+      </div>
+
+      <div class="basics-note">
+        <strong>A practical first-click strategy</strong>
+        Open Makerchip IDE, look at the split panes, then go to <code>LEARN -&gt; Tutorials</code>. That gives the learner a guided starting point before they begin experimenting more freely with the Editor, Nav-TLV, Log, Diagram, VIZ, and Waveform panes.
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Examples</span>
+        <h2>Hands-on: simple TLV examples — Simple Logic Gates !</h2>
+        <p>Small, runnable snippets you can paste into Makerchip's Editor to see TLV in action.</p>
+      </div>
+    </div>
+
+    <div class="basics-grid">
+      <article class="tlx-card">
+        <h3>Inverter (NOT gate) — TLV starter</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (set the file dialect to TLV version 1d if asked), run the simulation, and open the Waveform pane to watch the input toggle and the output invert.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="inverter-snippet">Copy inverter code</button>
+           <button class="copy-btn" data-copy-target="inverter-snippet" data-open-makerchip="1">Copy & Open Makerchip IDE to run</button>
+           <button class="copy-btn" data-copy-target="inverter-snippet" data-download-filename="inverter.tlv">Download TLV</button>
+          </div>
+          <pre><code id="inverter-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+   
+   // ============================================
+   // Welcome, new visitors! Try the "Learn" menu.
+   // ============================================
+   
+   //use(m5-1.0)   /// uncomment to use M5 macro library.
+\SV
+   // Macro providing required top-level module definition, random
+   // stimulus support, and Verilator config.
+   m5_makerchip_module   // (Expanded in Nav-TLV pane.)
+\TLV
+   // Connect SV inputs to TLV pipesignals.
+   //$reset = *reset;
+   
+   $in = *cyc_cnt[0];   // toggling input
+   $NOT_out = !$in;
+   $out = $NOT_out;
+
+   // To avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   //...
+   
+   // Assert these to end simulation (before the cycle limit).
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>Visual: diagram</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="INVERTER_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Waveform</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="INVERTER_WAVEFORM.png" alt="Inverter waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog block defines a simple piece of logic and a basic simulation flow. The <code>\TLV</code> directive tells the compiler the following code is TL-Verilog. The commented <code>//$reset = *reset;</code> would normally connect a SystemVerilog reset signal, but here it is unused. <code>$in = *cyc_cnt[0];</code> samples the least-significant bit of Makerchip's built-in cycle counter, making <code>$in</code> toggle every clock. <code>$NOT_out = !$in;</code> inverts that value. <code>$out = $NOT_out;</code> drives an output. The backtick macro <code>`BOGUS_USE($out)</code> silences unused-signal warnings. Finally, <code>*passed = *cyc_cnt > 40;</code> ends the run as a pass after 40 cycles and <code>*failed = 1'b0;</code> keeps failure low.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code> (or select tl-x.org TLV 1d in the LEARN/Specs if needed).</li>
+              <li>Click <em>Simulate / Run</em> (or the play button). Wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+      <article class="tlx-card">
+        <h3>AND gate — TLV starter</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the ANDed output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="andgate-snippet">Copy AND code</button>
+           <button class="copy-btn" data-copy-target="andgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="andgate-snippet" data-download-filename="and_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="andgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // Simple AND gate example in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // AND operation
+   $AND_out = $in1 & $in2;
+
+   // Output assignment
+   $out = $AND_out;
+
+   // Avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>Visual: diagram</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="AND_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Waveform</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="AND_GATE_WAVEFORM.png" alt="AND gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog code begins with <code>\m5_TLV_version 1d: tl-x.org</code> and <code>\m5</code>, which specify the TL-Verilog dialect and enable Makerchip macros for easier simulation and top-level module generation. The <code>m5_makerchip_module</code> macro creates a top-level SystemVerilog module that includes support for random stimulus and simulation hooks, allowing the code to run in Makerchip or Verilator.</p>
+            <p>Inside the TL-Verilog section, two input signals are defined: <code>$in1 = *cyc_cnt[0]</code> and <code>$in2 = *cyc_cnt[1]</code>. These inputs use bits from the built-in cycle counter, so <code>$in1</code> toggles every cycle and <code>$in2</code> toggles every two cycles, producing all combinations of 0s and 1s for the AND gate.</p>
+            <p>The line <code>$AND_out = $in1 &amp; $in2</code> computes the logical AND of these two inputs, storing the result in <code>$AND_out</code>. This result is then assigned to the output signal <code>$out = $AND_out</code>, making <code>$out</code> the final output of the AND gate. Since <code>$out</code> is not connected to any further logic in this simple example, the line <code>`BOGUS_USE($out)</code> is included to suppress the compiler warning about an unused signal.</p>
+            <p>Finally, the simulation control lines <code>*passed = *cyc_cnt &gt; 40</code> and <code>*failed = 1'b0</code> specify that the simulation should end successfully after 40 cycles, and that it never fails, providing a simple fixed-duration test of the AND gate logic. Overall, the code produces a functional 2-input AND gate, drives it with toggling test signals, and safely completes a 40-cycle simulation without compiler warnings.</p>
+          </div>
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+      <article class="tlx-card">
+        <h3>OR gate — TLV starter</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the ORed output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="orgate-snippet">Copy OR code</button>
+           <button class="copy-btn" data-copy-target="orgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="orgate-snippet" data-download-filename="or_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="orgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // Simple 2-input OR gate example in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // OR operation
+   $OR_out = $in1 | $in2;
+
+   // Output assignment
+   $out = $OR_out;
+
+   // To avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>Visual: diagram</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="OR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Waveform</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="OR_GATE_WAVEFORM.png" alt="OR gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog code begins by specifying the TL-Verilog version and enabling Makerchip macros with <code>\m5_TLV_version 1d: tl-x.org</code> and <code>\m5</code>. The <code>m5_makerchip_module</code> macro generates a top-level SystemVerilog module that supports simulation and random stimulus.</p>
+            <p>Within the TL-Verilog section, two input signals, <code>$in1</code> and <code>$in2</code>, are assigned to bits 0 and 1 of the built-in cycle counter, so <code>$in1</code> toggles every cycle and <code>$in2</code> toggles every two cycles, producing all combinations of 0 and 1.</p>
+            <p>The OR operation is performed with <code>$OR_out = $in1 | $in2</code>, and the result is passed to the output signal <code>$out = $OR_out</code>. Because <code>$out</code> is not used elsewhere in this simple example, the <code>`BOGUS_USE($out)</code> line prevents the compiler from issuing an unused-signal warning.</p>
+            <p>Finally, the simulation is set to end successfully after 40 cycles with <code>*passed = *cyc_cnt &gt; 40</code> and to never fail with <code>*failed = 1'b0</code>, allowing a short, controlled simulation of the OR gate behavior.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="section" id="roadmap">
     <div class="section-head">
       <div>
@@ -1541,7 +3073,7 @@
         <p>Learn how stage notation groups work by time. In a CPU, fetch, decode, execute, memory, and writeback are the natural first anchors.</p>
         <pre><code>|cpu
   @0
-    $pc = /reset   ? 0 : >>1$next_pc;
+    $pc = /reset    ? 0 : >>1$next_pc;
   @1
     $instr = /imem[$pc];</code></pre>
       </article>
@@ -1563,9 +3095,9 @@
         <h3>Map abstraction back to RTL</h3>
         <p>Always ask which registers, muxes, and controls are implied. TL-Verilog is most valuable when you can still picture the resulting hardware structure.</p>
         <pre><code>Question to ask each time:
-Which stage owns this value ?
-Which earlier stage produced it ?
-When does it become architecturally visible ?</code></pre>
+Which stage owns this value  ?
+Which earlier stage produced it  ?
+When does it become architecturally visible  ?</code></pre>
       </article>
     </div>
   </section>
@@ -1585,11 +3117,11 @@ When does it become architecturally visible ?</code></pre>
         <p>Use stage markers like <code>@0</code>, <code>@1</code>, and <code>@2</code> to show where work logically happens in time.</p>
         <div class="example-list">
           <div class="example-item">
-            <strong>Why it matters ?</strong>
+            <strong>Why it matters  ?</strong>
             A pipelined CPU stops feeling like five disconnected code islands and starts reading like one timed flow.
           </div>
           <div class="example-item">
-            <strong>What to watch for ?</strong>
+            <strong>What to watch for  ?</strong>
             If a signal appears in the wrong stage, your mental timing model is already drifting.
           </div>
         </div>
@@ -1600,11 +3132,11 @@ When does it become architecturally visible ?</code></pre>
         <p>References like <code>&gt;&gt;1</code> or values reused from earlier stages let you express pipeline movement directly rather than instantiating every register transfer by hand.</p>
         <div class="example-list">
           <div class="example-item">
-            <strong>Why it matters ?</strong>
+            <strong>Why it matters  ?</strong>
             You can trace dependencies cleanly across the pipeline.
           </div>
           <div class="example-item">
-            <strong>What to watch for ?</strong>
+            <strong>What to watch for  ?</strong>
             Be explicit about where data becomes valid so hazards do not get hidden by nicer syntax.
           </div>
         </div>
@@ -1626,7 +3158,7 @@ When does it become architecturally visible ?</code></pre>
         <h3>Instruction fetch path</h3>
         <p>The fetch stage is usually the easiest place to get comfortable because it has obvious time ordering: current PC, memory access, next PC selection.</p>
         <pre><code>@0
-  $pc = /reset   ? 32'b0 : >>1$next_pc;
+  $pc = /reset    ? 32'b0 : >>1$next_pc;
   $imem_addr = $pc;
 @1
   $instr = /imem[$imem_addr];</code></pre>
@@ -1637,7 +3169,7 @@ When does it become architecturally visible ?</code></pre>
         <p>Decode prepares operands, execute combines them, and later stages commit the result. TL-Verilog makes that separation visible with much less boilerplate.</p>
         <pre><code>@2
   $op_a = /rf[$rs1];
-  $op_b = $is_imm   ? $imm : /rf[$rs2];
+  $op_b = $is_imm    ? $imm : /rf[$rs2];
 @3
   $alu_out = $op_a + $op_b;
 @4
@@ -1664,7 +3196,7 @@ When does it become architecturally visible ?</code></pre>
             Pick one instruction and label exactly where fetch, decode, execute, memory, and writeback occur.
           </div>
           <div class="practice-item">
-            <strong>What you should learn ?</strong>
+            <strong>What you should learn  ?</strong>
             You will stop reading the code as plain text and start reading it as timed hardware behavior.
           </div>
         </div>
@@ -1678,7 +3210,7 @@ When does it become architecturally visible ?</code></pre>
             Take a load-use sequence and mark the cycle when the loaded data becomes safe for the dependent instruction.
           </div>
           <div class="practice-item">
-            <strong>What you should learn ?</strong>
+            <strong>What you should learn  ?</strong>
             Better syntax does not remove hazards. It only makes the timing story easier to inspect.
           </div>
         </div>
@@ -1690,7 +3222,7 @@ When does it become architecturally visible ?</code></pre>
     <div class="closing-grid">
       <article class="closing-card">
         <span class="section-kicker">Study Loop</span>
-        <h3>How to use this with the CPU page ?</h3>
+        <h3>How to use this with the CPU page  ?</h3>
         <p>Read this course page once, then return to the RISC-V dossier and compare its pipeline, execution trace, and code views against the stage concepts introduced here.</p>
       </article>
       <article class="closing-card">
@@ -1709,5 +3241,116 @@ When does it become architecturally visible ?</code></pre>
       <p>TL-Verilog learning companion • linked from the 5 Stage 32-Bit RISC-V CPU project page</p>
     </div>
   </footer>
+  <script>
+    (function(){
+      function copyText(text){
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function(resolve,reject){
+          var ta=document.createElement('textarea');
+          ta.value=text; document.body.appendChild(ta);
+          ta.select(); try{ document.execCommand('copy'); resolve(); }catch(e){ reject(e);} finally{ document.body.removeChild(ta);} 
+        });
+      }
+
+      function downloadText(filename, text){
+        try{
+          var blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url; a.download = filename || 'snippet.tlv';
+          document.body.appendChild(a); a.click();
+          setTimeout(function(){ URL.revokeObjectURL(url); document.body.removeChild(a); }, 500);
+        }catch(e){ console.error('download failed', e); }
+      }
+
+      document.addEventListener('click', function(e){
+        var t = e.target;
+        while(t && !t.classList) t = t.parentNode;
+        if(!t || !t.classList.contains('copy-btn')) return;
+        var id = t.getAttribute('data-copy-target');
+        var el = id ? document.getElementById(id) : null;
+        if(!el) return;
+        var text = el.innerText || el.textContent || '';
+        var openMakerchip = t.getAttribute('data-open-makerchip');
+        var downloadFilename = t.getAttribute('data-download-filename');
+
+        copyText(text).then(function(){
+          var prev = t.innerText;
+          t.innerText = 'Copied';
+          setTimeout(function(){ t.innerText = prev; }, 1400);
+
+          if(downloadFilename){
+            // Trigger a download of the current snippet as a TLV file
+            downloadText(downloadFilename, text);
+          }
+
+          if(openMakerchip){
+            // Try to open Makerchip and navigate to common editor entry points to auto-launch the IDE.
+            try{
+              var editorCandidates = [
+                'https://makerchip.com/#!/editor',
+                'https://makerchip.com/#/editor',
+                'https://makerchip.com/editor',
+                'https://makerchip.com/makerchip',
+                'https://makerchip.com/'
+              ];
+              // Open the first candidate; then try navigating the opened window to other candidates to trigger launcher flows.
+              var newWin = window.open(editorCandidates[0], '_blank');
+              if(newWin){
+                newWin.focus();
+                // Attempt fallback navigations after short delays to handle sites that require a different entry URL to show the IDE.
+                setTimeout(function(){ try{ newWin.location.href = editorCandidates[1]; }catch(e){} }, 700);
+                setTimeout(function(){ try{ newWin.location.href = editorCandidates[2]; }catch(e){} }, 1300);
+                setTimeout(function(){ try{ newWin.location.href = editorCandidates[3]; }catch(e){} }, 1900);
+                setTimeout(function(){ try{ newWin.location.href = editorCandidates[4]; }catch(e){} }, 2500);
+              }else{
+                // Popup blocked; open base site in current tab as a fallback
+                window.open('https://makerchip.com/', '_blank');
+              }
+            }catch(e){ console.warn('Could not open Makerchip tab', e); }
+          }
+
+        }).catch(function(){
+          var prev = t.innerText;
+          t.innerText = 'Copy failed';
+          setTimeout(function(){ t.innerText = prev; }, 1400);
+        });
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      function escapeHtml(s){
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      function highlightCodeBlock(code){
+        if(code.dataset.tlvHighlighted) return;
+        var text = code.textContent || '';
+        var esc = escapeHtml(text);
+        // comments
+        esc = esc.replace(/(\/\/.*?$)/gm, '<span class="code-comment-muted">$1</span>');
+        // backtick macros
+        esc = esc.replace(/(`[A-Za-z_][A-Za-z0-9_]*)/g, '<span class="code-highlight-amber">$1</span>');
+        // directives starting with backslash
+        esc = esc.replace(/(\\[A-Za-z0-9_\-]+)/g, '<span class="code-highlight-blue">$1</span>');
+        // dollar or star signals
+        esc = esc.replace(/(\$[A-Za-z0-9_]+|\*[A-Za-z0-9_]+)/g, '<span class="code-highlight-cyan">$1</span>');
+        // keywords
+        esc = esc.replace(/\b(module|endmodule|assign|input|output|wire|logic)\b/g, '<span class="code-highlight-rose">$1</span>');
+        // numbers (simple)
+        esc = esc.replace(/\b(0b[01xXZ]+|\d+|\d+'b[01xXZ]+)\b/gi, '<span class="code-highlight-green">$1</span>');
+        code.innerHTML = esc;
+        code.dataset.tlvHighlighted = '1';
+      }
+
+      document.addEventListener('DOMContentLoaded', function(){
+        var codes = document.querySelectorAll('pre > code');
+        codes.forEach(function(code){ highlightCodeBlock(code); });
+      });
+    })();
+  </script>
 </body>
 </html>
