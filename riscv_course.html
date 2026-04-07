@@ -956,6 +956,11 @@
       color: #FE9098;
     }
 
+    /* Color example headings (warm-up gates) pink */
+    #examples .basics-grid .tlx-card > h3 {
+      color: #FE9098;
+    }
+
     .ide-mini-label {
       display: inline-flex;
       align-items: center;
@@ -1101,6 +1106,7 @@
         <a href="#tlx-intro">About TL-X</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#syntax">Syntax</a>
+        <a href="#comb-circuits">Basic Combinational</a>
         <a href="#examples">Examples</a>
         <a href="#practice">Practice</a>
         <a href="risc.html">Back to CPU page</a>
@@ -2325,6 +2331,8 @@
           When you read TL-X, do not start with the right-hand side expression. First ask: What hierarchy am I in ? What stage am I in ? Then ask: What signal is being defined here ? That order usually makes TL-X code feel much more natural.
         </div>
       </article>
+
+      
     </div>
   </section>
 
@@ -2828,8 +2836,10 @@ Simulation PASSED!!!</div>
     </div>
 
     <div class="basics-grid">
+
+      
       <article class="tlx-card">
-        <h3>Inverter (NOT gate) — TLV starter</h3>
+        <h3>Inverter (NOT gate) — TLV Warm Up !</h3>
         <div class="tlx-copy">
           <p>Paste this into Makerchip's Editor (set the file dialect to TLV version 1d if asked), run the simulation, and open the Waveform pane to watch the input toggle and the output invert.</p>
         </div>
@@ -2872,14 +2882,14 @@ Simulation PASSED!!!</div>
 
         <div class="tlx-pill-list">
           <div>
-            <strong>Visual: diagram</strong>
+            <strong>DIAGRAM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <video controls style="width:100%;height:auto;border-radius:12px;" src="INVERTER_DIAGRAM.mp4">Your browser does not support the video tag.</video>
             </div>
           </div>
 
           <div style="margin-top:0.8rem;">
-            <strong>Waveform</strong>
+            <strong>WAVEFORM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <img src="INVERTER_WAVEFORM.png" alt="Inverter waveform"/>
             </div>
@@ -2894,15 +2904,17 @@ Simulation PASSED!!!</div>
             <strong>How to run this in Makerchip (quick steps)</strong>
             <ol>
               <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
-              <li>Ensure the file dialect mentions <code>TLV 1d</code> (or select tl-x.org TLV 1d in the LEARN/Specs if needed).</li>
-              <li>Click <em>Simulate / Run</em> (or the play button). Wait for translation and simulation to finish.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
               <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
             </ol>
           </div>
         </div>
       </article>
+
+      
       <article class="tlx-card">
-        <h3>AND gate — TLV starter</h3>
+        <h3>AND gate — TLV Warm Up !</h3>
         <div class="tlx-copy">
           <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the ANDed output.</p>
         </div>
@@ -2946,14 +2958,14 @@ Simulation PASSED!!!</div>
 
         <div class="tlx-pill-list">
           <div>
-            <strong>Visual: diagram</strong>
+            <strong>DIAGRAM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <video controls style="width:100%;height:auto;border-radius:12px;" src="AND_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
             </div>
           </div>
 
           <div style="margin-top:0.8rem;">
-            <strong>Waveform</strong>
+            <strong>WAVEFORM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <img src="AND_GATE_WAVEFORM.png" alt="AND gate waveform"/>
             </div>
@@ -2978,7 +2990,7 @@ Simulation PASSED!!!</div>
         </div>
       </article>
       <article class="tlx-card">
-        <h3>OR gate — TLV starter</h3>
+        <h3>OR gate — TLV Warm Up !</h3>
         <div class="tlx-copy">
           <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the ORed output.</p>
         </div>
@@ -3022,14 +3034,14 @@ Simulation PASSED!!!</div>
 
         <div class="tlx-pill-list">
           <div>
-            <strong>Visual: diagram</strong>
+            <strong>DIAGRAM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <video controls style="width:100%;height:auto;border-radius:12px;" src="OR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
             </div>
           </div>
 
           <div style="margin-top:0.8rem;">
-            <strong>Waveform</strong>
+            <strong>WAVEFORM</strong>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <img src="OR_GATE_WAVEFORM.png" alt="OR gate waveform"/>
             </div>
@@ -3054,6 +3066,340 @@ Simulation PASSED!!!</div>
           </div>
         </div>
       </article>
+      <article class="tlx-card">
+        <h3>NAND gate — TLV Warm Up !</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the NAND output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="nandgate-snippet">Copy NAND code</button>
+           <button class="copy-btn" data-copy-target="nandgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="nandgate-snippet" data-download-filename="nand_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="nandgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 2-input NAND gate using NOT + AND in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // AND operation
+   $AND_out = $in1 & $in2;
+
+   // NOT operation to create NAND
+   $NAND_out = !$AND_out;
+
+   // Output 
+   $out = $NAND_out;
+
+   // To Avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="NAND_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="NAND_GATE_WAVEFORM.png" alt="NAND gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog code starts by specifying the version and enabling Makerchip macros using <code>\m5_TLV_version 1d: tl-x.org</code> and <code>\m5</code>. The <code>m5_makerchip_module</code> macro generates the top-level module, providing simulation support and hooks.</p>
+            <p>Two input signals, <code>$in1</code> and <code>$in2</code>, are assigned to bits 0 and 1 of the built-in cycle counter, causing <code>$in1</code> to toggle every cycle and <code>$in2</code> to toggle every two cycles, producing all combinations of 0 and 1.</p>
+            <p>The line <code>$AND_out = $in1 &amp; $in2</code> computes the AND of the two inputs. To create the NAND gate, the AND output is inverted with <code>$NAND_out = !$AND_out</code>. This result is assigned to the final output <code>$out = $NAND_out</code>. Since <code>$out</code> is not used elsewhere, the <code>`BOGUS_USE($out)</code> directive prevents an unused-signal warning.</p>
+            <p>Finally, the simulation is set to run for 40 cycles using <code>*passed = *cyc_cnt &gt; 40</code> and will never fail with <code>*failed = 1'b0</code>. This produces a functional 2-input NAND gate with a controlled testbench for simulation.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+      <article class="tlx-card">
+        <h3>NOR gate — TLV Warm Up !</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the NOR output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="norgate-snippet">Copy NOR code</button>
+           <button class="copy-btn" data-copy-target="norgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="norgate-snippet" data-download-filename="nor_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="norgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 2-input NOR gate using NOT + OR in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // OR operation
+   $OR_out = $in1 | $in2;
+
+   // NOT operation to create NOR
+   $NOR_out = !$OR_out;
+
+   // Output 
+   $out = $NOR_out;
+
+   // To Avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="NOR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="NOR_GATE_WAVEFORM.png" alt="NOR gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog code starts by specifying the version and enabling Makerchip macros with <code>\m5_TLV_version 1d: tl-x.org</code> and <code>\m5</code>. The <code>m5_makerchip_module</code> macro generates a top-level SystemVerilog module with simulation support.</p>
+            <p>Two input signals, <code>$in1</code> and <code>$in2</code>, are assigned to bits 0 and 1 of the built-in cycle counter, so <code>$in1</code> toggles every cycle and <code>$in2</code> toggles every two cycles, producing all possible input combinations.</p>
+            <p>The line <code>$OR_out = $in1 | $in2</code> computes the logical OR of the two inputs. To implement the NOR gate, the OR result is inverted with <code>$NOR_out = !$OR_out</code>. The final output is then assigned as <code>$out = $NOR_out</code>. Because <code>$out</code> is not connected to other logic in this simple example, the <code>`BOGUS_USE($out)</code> macro prevents an unused-signal warning.</p>
+            <p>Finally, the simulation control lines <code>*passed = *cyc_cnt &gt; 40</code> and <code>*failed = 1'b0</code> specify that the simulation should end successfully after 40 cycles and never fail, providing a controlled test of the NOR gate behavior.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+      <article class="tlx-card">
+        <h3>XOR gate — TLV Warm Up !</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the XOR output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="xorgate-snippet">Copy XOR code</button>
+           <button class="copy-btn" data-copy-target="xorgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="xorgate-snippet" data-download-filename="xor_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="xorgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 2-input XOR gate example in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // Invert inputs because XOR = A'.B + A.B'
+   $not_in1 = !$in1;
+   $not_in2 = !$in2;
+
+   // AND Gate
+   $and1 = $in1 & $not_in2;  // A.B'
+   $and2 = $not_in1 & $in2;  // A'.B
+
+   // OR Gate
+   $XOR_out = $and1 | $and2;  // A'.B + A.B'
+
+   // Output
+   $out = $XOR_out;
+
+   // To Avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="XOR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="XOR_GATE_WAVEFORM.png" alt="XOR gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line By Line understanding</strong>
+            <p>This TL-Verilog code implements a 2-input XOR gate using basic logic operations. It begins by specifying the TL-Verilog version and enabling Makerchip macros, while the <code>m5_makerchip_module</code> macro generates the top-level module with simulation support.</p>
+            <p>Two inputs, <code>$in1</code> and <code>$in2</code>, are derived from different bits of the cycle counter so that they toggle at different rates and produce all input combinations. The inputs are first inverted using <code>$not_in1 = !$in1</code> and <code>$not_in2 = !$in2</code>.</p>
+            <p>Then two intermediate AND operations are computed: <code>$and1 = $in1 & $not_in2</code> and <code>$and2 = $not_in1 & $in2</code>, which correspond to the cases where the inputs differ. These results are combined using an OR operation <code>$XOR_out = $and1 | $and2</code> to produce the XOR functionality. The result is assigned to the output signal <code>$out = $XOR_out</code>. Since <code>$out</code> is not used elsewhere, the <code>`BOGUS_USE($out)</code> macro is included to suppress unused-signal warnings.</p>
+            <p>Finally, the simulation is configured to pass after 40 cycles using <code>*passed = *cyc_cnt &gt; 40</code> and never fail with <code>*failed = 1'b0</code>, allowing a simple verification run of the XOR logic.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      <article class="tlx-card">
+        <h3>XNOR gate — TLV Warm Up !</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to see the two inputs and the XNOR output.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="xnorgate-snippet">Copy XNOR code</button>
+           <button class="copy-btn" data-copy-target="xnorgate-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="xnorgate-snippet" data-download-filename="xnor_gate.tlv">Download TLV</button>
+          </div>
+          <pre><code id="xnorgate-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 2-input XNOR gate example in TL-Verilog
+   // ============================================
+
+\SV
+   // Top-level module macro
+   m5_makerchip_module
+
+\TLV
+   // Define two toggling inputs
+   $in1 = *cyc_cnt[0];   // toggles every cycle
+   $in2 = *cyc_cnt[1];   // toggles every 2 cycles
+
+   // Invert inputs because XOR = A'.B + A.B', then XNOR = NOT(XOR)
+   $not_in1 = !$in1;
+   $not_in2 = !$in2;
+
+   // AND Gate for XOR parts
+   $and1 = $in1 & $not_in2;  // A.B'
+   $and2 = $not_in1 & $in2;  // A'.B
+
+   // OR Gate to get XOR
+   $XOR_out = $and1 | $and2;  // A'.B + A.B'
+
+   // NOT Gate to get XNOR
+   $XNOR_out = !$XOR_out;     // NOT(A'.B + A.B')
+
+   // Output
+   $out = $XNOR_out;
+
+   // To Avoid UNUSED-SIG warning
+   `BOGUS_USE($out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="XNOR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="XNOR_GATE_WAVEFORM.png" alt="XNOR gate waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog code implements a 2-input XNOR gate using basic logic operations. Two inputs, <code>$in1</code> and <code>$in2</code>, are assigned to bits 0 and 1 of the cycle counter so they toggle at different rates, producing all combinations of 0 and 1. The inputs are first inverted as <code>$not_in1 = !$in1</code> and <code>$not_in2 = !$in2</code>. Two intermediate AND operations, <code>$and1 = $in1 &amp; $not_in2</code> and <code>$and2 = $not_in1 &amp; $in2</code>, identify the cases where the inputs differ, which are combined using OR to compute the XOR result: <code>$XOR_out = $and1 | $and2</code>. The XOR output is then inverted with <code>$XNOR_out = !$XOR_out</code> to produce the XNOR output. This result is assigned to <code>$out = $XNOR_out</code>. Since <code>$out</code> is not otherwise used, the <code>`BOGUS_USE($out)</code> directive suppresses compiler warnings. Finally, the simulation is set to end successfully after 40 cycles using <code>*passed = *cyc_cnt &gt; 40</code> and to never fail with <code>*failed = 1'b0</code>, providing a controlled test of the XNOR gate.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see the signal activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+      
+
     </div>
   </section>
 
@@ -3142,6 +3488,96 @@ When does it become architecturally visible  ?</code></pre>
         </div>
       </article>
     </div>
+  </section>
+
+  <section class="section" id="comb-circuits">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Examples</span>
+        <h2>Hands-on: Basic Combinational Circuits TLV examples</h2>
+        <p>Small, runnable TLV snippets demonstrating basic combinational logic. Start here with a 1-bit Half Adder.</p>
+      </div>
+    </div>
+
+    <div class="basics-grid">
+
+      <article class="tlx-card">
+        <h3>1-bit Half Adder — TLV Example</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to observe Sum and Carry outputs produced from two toggling inputs.</p>
+        </div>
+
+          <div class="code-toolbar">
+           <button class="copy-btn" data-copy-target="halfadder-snippet">Copy Half Adder code</button>
+           <button class="copy-btn" data-copy-target="halfadder-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+           <button class="copy-btn" data-copy-target="halfadder-snippet" data-download-filename="half_adder.tlv">Download TLV</button>
+          </div>
+          <pre><code id="halfadder-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 1-bit Half Adder [COMBINATIONAL LOGIC]
+   // ============================================
+
+\SV
+   m5_makerchip_module
+
+\TLV
+   // Inputs
+   $A = *cyc_cnt[0];    // toggles every cycle
+   $B = *cyc_cnt[1];    // toggles every 2 cycles
+
+   // XOR -> (Sum)
+   $sum_out = ($A & !$B) | (!$A & $B);   // Sum = A XOR B
+
+   // AND -> (Carry)
+   $carry_out = $A & $B;                  // Carry = A AND B
+
+   // To Avoid unused signal warnings
+   `BOGUS_USE($sum_out)
+   `BOGUS_USE($carry_out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="1_Bit_HA_WAVEFORM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="1_Bit_HA_WAVEFORM.png" alt="1-bit Half Adder waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line-by-line understanding</strong>
+            <p>This TL-Verilog example uses Makerchip's built-in cycle counter to generate two toggling inputs. The Sum is implemented as an XOR (A & !B) | (!A & B) and the Carry as an AND (A & B). `BOGUS_USE` directives prevent unused-signal warnings. The simulation is configured to pass after 40 cycles.</p>
+          </div>
+
+          <div style="margin-top:0.9rem;">
+            <strong>How to run this in Makerchip (quick steps)</strong>
+            <ol>
+              <li>Open Makerchip IDE and paste the snippet into the <strong>Editor</strong> pane.</li>
+              <li>Ensure the file dialect mentions <code>TLV 1d</code>.</li>
+              <li>Click <em>Simulate / Run</em> and wait for translation and simulation to finish.</li>
+              <li>Open <strong>NAV-TLV</strong> to inspect expansion and <strong>WAVEFORM / VIZ</strong> to see Sum and Carry activity.</li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
   </section>
 
   <section class="section" id="examples">
