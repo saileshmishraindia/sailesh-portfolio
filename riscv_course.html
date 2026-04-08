@@ -961,6 +961,11 @@
       color: #FE9098;
     }
 
+    /* Explicit warm-up heading helper (applies to Half/Full Adders) */
+    .warm-up-heading {
+      color: #FE9098;
+    }
+
     .ide-mini-label {
       display: inline-flex;
       align-items: center;
@@ -2890,7 +2895,11 @@ Simulation PASSED!!!</div>
 
           <div style="margin-top:0.8rem;">
             <strong>WAVEFORM</strong>
-            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+            <p>This TL-Verilog code implements a 1-bit Half Adder using purely combinational logic. The first line, <code>\m5_TLV_version 1d: tl-x.org</code>, specifies the TL-Verilog version so the Makerchip environment interprets the syntax correctly, while <code>\m5</code> enables Makerchip-specific macros and directives. The comment section describes that this is a Half Adder with combinational logic, giving context but no effect on execution. Within the <code>\SV</code> block, the macro <code>m5_makerchip_module</code> generates the top-level module required for simulation, including clocks, resets, and other infrastructure, so you don’t have to define them manually.</p>
+
+            <p>In the <code>\TLV</code> section, the inputs <code>$A</code> and <code>$B</code> are assigned using <code>*cyc_cnt[0]</code> and <code>*cyc_cnt[1]</code>, which are built-in Makerchip signals that toggle at different rates—every cycle for <code>$A</code> and every two cycles for <code>$B</code>. This ensures that during simulation, all possible input combinations of a 1-bit Half Adder are generated. The line <code>$sum_out = ($A & !$B) | (!$A & $B);</code> computes the Sum output using XOR logic expressed as (A AND NOT B) OR (NOT A AND B), which produces 1 when exactly one of the inputs is 1. The next line <code>$carry_out = $A & $B;</code> computes the Carry output as a simple AND of the two inputs, which is 1 only when both inputs are 1.</p>
+
+            <p>The directives <code>`BOGUS_USE($sum_out)</code> and <code>`BOGUS_USE($carry_out)</code> suppress warnings about unused signals, since these outputs are not connected to further logic in this simple simulation. Finally, the lines <code>*passed = *cyc_cnt &gt; 40;</code> and <code>*failed = 1'b0;</code> control the simulation: it stops after 40 cycles and does not fail, providing a clean, automated test run. Overall, the code cleanly demonstrates a Half Adder in TL-Verilog using minimal, direct combinational expressions without intermediate signals or alignment issues.</p>
               <img src="INVERTER_WAVEFORM.png" alt="Inverter waveform"/>
             </div>
           </div>
@@ -3038,6 +3047,8 @@ Simulation PASSED!!!</div>
             <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
               <video controls style="width:100%;height:auto;border-radius:12px;" src="OR_GATE_DIAGRAM.mp4">Your browser does not support the video tag.</video>
             </div>
+    
+        
           </div>
 
           <div style="margin-top:0.8rem;">
@@ -3502,7 +3513,7 @@ When does it become architecturally visible  ?</code></pre>
     <div class="basics-grid">
 
       <article class="tlx-card">
-        <h3>1-bit Half Adder — TLV Example</h3>
+        <h3 class="warm-up-heading">1-bit Half Adder — TLV Example</h3>
         <div class="tlx-copy">
           <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to observe Sum and Carry outputs produced from two toggling inputs.</p>
         </div>
@@ -3576,9 +3587,210 @@ When does it become architecturally visible  ?</code></pre>
         </div>
       </article>
 
+          <article class="tlx-card">
+            <h3 class="warm-up-heading">1-bit Full Adder — TLV Example</h3>
+            <div class="tlx-copy">
+              <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to observe Sum and Carry outputs produced from three toggling inputs (A, B, Cin).</p>
+            </div>
+
+            <div class="code-toolbar">
+             <button class="copy-btn" data-copy-target="fulladder-snippet">Copy Full Adder code</button>
+             <button class="copy-btn" data-copy-target="fulladder-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+             <button class="copy-btn" data-copy-target="fulladder-snippet" data-download-filename="full_adder.tlv">Download TLV</button>
+            </div>
+            <pre><code id="fulladder-snippet">\m5_TLV_version 1d: tl-x.org
+    \m5
+
+       // ============================================
+       // 1-bit Full Adder [COMBINATIONAL LOGIC]
+       // ============================================
+
+    \SV
+       m5_makerchip_module
+
+    \TLV
+       // Inputs
+       $A = *cyc_cnt[0];    // toggles every cycle
+       $B = *cyc_cnt[1];    // toggles every 2 cycles
+
+       // Full Adder Logic (using cyc_cnt[2] directly as Cin)
+       $sum_out   = ($A ^ $B) ^ *cyc_cnt[2];
+       $carry_out = ($A & $B)
+                  | ($B & *cyc_cnt[2])
+                  | ($A & *cyc_cnt[2]);
+
+       // To Avoid unused signal warnings
+       `BOGUS_USE($sum_out)
+       `BOGUS_USE($carry_out)
+
+       // End simulation after 40 cycles
+       *passed = *cyc_cnt > 40;
+       *failed = 1'b0;
+
+    \SV
+       endmodule</code></pre>
+
+            <div class="tlx-pill-list">
+              <div>
+                <strong>DIAGRAM</strong>
+                <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+                  <video controls style="width:100%;height:auto;border-radius:12px;" src="1_Bit_FA_WAVEFORM.mp4">Your browser does not support the video tag.</video>
+                </div>
+              </div>
+
+              <div style="margin-top:0.8rem;">
+                <strong>WAVEFORM</strong>
+                <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+                  <img src="1_Bit_FA_WAVEFORM.png" alt="1-bit Full Adder waveform"/>
+                </div>
+              </div>
+
+              <div style="margin-top:0.8rem;">
+                <strong>Line-by-line understanding</strong>
+                <p>This TL-Verilog code implements a 1-bit Full Adder using clean combinational logic, similar in style to your Half Adder while avoiding alignment errors. The line <code>\m5_TLV_version 1d: tl-x.org</code> specifies the TL-Verilog version, ensuring correct syntax interpretation, and <code>\m5</code> enables Makerchip macros. The comment section simply describes that this is a combinational Full Adder. Inside the <code>\SV</code> block, the <code>m5_makerchip_module</code> macro automatically generates the top-level module and simulation environment, so you don’t need to manually define clocks or resets.</p>
+
+                <p>In the <code>\TLV</code> section, the logic begins by defining the inputs <code>$A</code> and <code>$B</code> using <code>*cyc_cnt</code>. The line <code>$A = *cyc_cnt[0];</code> assigns <code>$A</code> to the least significant bit of the cycle counter, which toggles every cycle, while <code>$B = *cyc_cnt[1];</code> assigns <code>$B</code> to the next bit, toggling every two cycles. Instead of creating a separate <code>$Cin</code> signal (which would cause alignment errors), the third input is taken directly as <code>*cyc_cnt[2]</code> inside the expressions, which toggles every four cycles and completes all input combinations for the Full Adder.</p>
+
+                <p>The line <code>$sum_out = ($A ^ $B) ^ *cyc_cnt[2];</code> computes the Sum output using XOR operations. First, <code>$A ^ $B</code> produces the XOR of the two inputs, and then this result is XORed with the carry-in (<code>*cyc_cnt[2]</code>), giving the final Full Adder sum, which is 1 when an odd number of inputs are 1. The next line <code>$carry_out = ($A & $B) | ($B & *cyc_cnt[2]) | ($A & *cyc_cnt[2]);</code> computes the Carry output. Each AND operation checks a pair of inputs that can generate a carry, and the OR combines these conditions so that the carry becomes 1 whenever any two inputs are 1.</p>
+
+                <p>The lines <code>`BOGUS_USE($sum_out)</code> and <code>`BOGUS_USE($carry_out)</code> are included to suppress warnings about unused signals, since these outputs are not connected to further logic in this simple simulation. Finally, <code>*passed = *cyc_cnt &gt; 40;</code> ensures that the simulation runs for 40 cycles before stopping successfully, and <code>*failed = 1'b0;</code> indicates that the simulation never enters a failure state. Overall, the design demonstrates a Full Adder using direct combinational expressions, avoiding intermediate signals and alignment issues in TL-Verilog.</p>
+              </div>
+            </div>
+          </article>
+
+      <article class="tlx-card">
+        <h3>1-bit Half Subtractor — TLV Example</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to observe Difference and Borrow outputs produced from two toggling inputs.</p>
+        </div>
+
+        <div class="code-toolbar">
+         <button class="copy-btn" data-copy-target="halfsubtractor-snippet">Copy Half Subtractor code</button>
+         <button class="copy-btn" data-copy-target="halfsubtractor-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+         <button class="copy-btn" data-copy-target="halfsubtractor-snippet" data-download-filename="half_subtractor.tlv">Download TLV</button>
+        </div>
+        <pre><code id="halfsubtractor-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 1-bit Half Subtractor [COMBINATIONAL LOGIC]
+   // ============================================
+
+\SV
+   m5_makerchip_module
+
+\TLV
+   // Inputs
+   $A = *cyc_cnt[0];    // toggles every cycle
+   $B = *cyc_cnt[1];    // toggles every 2 cycles
+
+   // Difference = A XOR B
+   $diff_out = ($A & !$B) | (!$A & $B);
+
+   // Borrow = NOT A AND B
+   $borrow_out = (!$A) & $B;
+
+   // To Avoid unused signal warnings
+   `BOGUS_USE($diff_out)
+   `BOGUS_USE($borrow_out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="1_Bit_HS_WAVEFORM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="1_Bit_HS_WAVEFORM.png" alt="1-bit Half Subtractor waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line by Line understanding</strong>
+            <p>This Half Subtractor code uses <code>$A</code> and <code>$B</code> as inputs, generated from <code>*cyc_cnt[0]</code> and <code>*cyc_cnt[1]</code> to toggle at different rates, ensuring all input combinations appear during simulation. The difference output <code>$diff_out</code> is computed using XOR logic, which produces 1 when exactly one of the inputs is 1. The borrow output <code>$borrow_out</code> is generated using NOT A AND B, which is 1 only when A is 0 and B is 1. The <code>`BOGUS_USE</code> directives suppress warnings about unused outputs, and the simulation stops automatically after 40 cycles with <code>*passed</code> and <code>*failed</code> signals controlling termination.</p>
+          </div>
+        </div>
+      </article>
+
     </div>
 
   </section>
+
+      <article class="tlx-card">
+        <h3 class="warm-up-heading">1-bit Full Subtractor — TLV Example</h3>
+        <div class="tlx-copy">
+          <p>Paste this into Makerchip's Editor (choose TLV 1d if prompted), run the simulation, and open the Waveform pane to observe Difference and Borrow-out produced from three toggling inputs (A, B, Bin).</p>
+        </div>
+
+        <div class="code-toolbar">
+         <button class="copy-btn" data-copy-target="fullsubtractor-snippet">Copy Full Subtractor code</button>
+         <button class="copy-btn" data-copy-target="fullsubtractor-snippet" data-open-makerchip="1">Copy & Open Makerchip</button>
+         <button class="copy-btn" data-copy-target="fullsubtractor-snippet" data-download-filename="full_subtractor.tlv">Download TLV</button>
+        </div>
+        <pre><code id="fullsubtractor-snippet">\m5_TLV_version 1d: tl-x.org
+\m5
+
+   // ============================================
+   // 1-bit Full Subtractor [COMBINATIONAL LOGIC]
+   // ============================================
+
+\SV
+   m5_makerchip_module
+
+\TLV
+   // Inputs
+   $A   = *cyc_cnt[0];    // toggles every cycle
+   $B   = *cyc_cnt[1];    // toggles every 2 cycles
+
+   // Difference = A XOR B XOR Bin (using cyc_cnt[2] as Bin)
+   $diff_out = ($A ^ $B) ^ *cyc_cnt[2];
+
+   // Borrow-out = (NOT A AND B) OR ((NOT A OR B) AND Bin)
+   $borrow_out = (!$A & $B) | ((!$A | $B) & *cyc_cnt[2]);
+
+   // To Avoid unused signal warnings
+   `BOGUS_USE($diff_out)
+   `BOGUS_USE($borrow_out)
+
+   // End simulation after 40 cycles
+   *passed = *cyc_cnt > 40;
+   *failed = 1'b0;
+
+\SV
+   endmodule</code></pre>
+
+        <div class="tlx-pill-list">
+          <div>
+            <strong>DIAGRAM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <video controls style="width:100%;height:auto;border-radius:12px;" src="1_Bit_FS_WAVEFORM.mp4">Your browser does not support the video tag.</video>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>WAVEFORM</strong>
+            <div class="ide-screenshot-frame" style="margin-top:0.6rem;">
+              <img src="1_Bit_FS_WAVEFORM.png" alt="1-bit Full Subtractor waveform"/>
+            </div>
+          </div>
+
+          <div style="margin-top:0.8rem;">
+            <strong>Line by Line understanding</strong>
+            <p>In this Full Subtractor, <code>$A</code> and <code>$B</code> are assigned from <code>*cyc_cnt[0]</code> and <code>*cyc_cnt[1]</code>, toggling every cycle and every two cycles, respectively, while the borrow-in (Bin) is taken directly as <code>*cyc_cnt[2]</code> to avoid alignment issues. The difference <code>$diff_out</code> is calculated using XOR of all three inputs, producing 1 when an odd number of inputs are 1. The borrow-out <code>$borrow_out</code> combines two conditions: <code>NOT A AND B</code> captures the basic borrow, while <code>((NOT A OR B) AND Bin)</code> accounts for a borrow from the previous stage. The <code>`BOGUS_USE</code> directives prevent unused signal warnings, and the simulation stops automatically after 40 cycles using <code>*passed</code> and <code>*failed</code>. This approach ensures a clean, fully combinational Full Subtractor without intermediate state signals.</p>
+          </div>
+        </div>
+      </article>
 
   <section class="section" id="examples">
     <div class="section-head">
