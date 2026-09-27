@@ -478,6 +478,32 @@
 		.lesson-list li + li { margin-top: 0.45rem; }
 		.lab-download { min-height: 42px; margin-top: 1rem; padding: 0.6rem 0.9rem; border: 0; border-radius: 6px; background: var(--line); color: var(--muted); cursor: not-allowed; }
 
+		.notes-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; margin-bottom: 2rem; }
+		.notes-intro .section-heading { margin: 0; }
+		.notes-total { min-width: 170px; padding-left: 1.2rem; border-left: 3px solid var(--secondary); }
+		.notes-total strong { display: block; color: var(--primary); font: 700 2.8rem/1 "Playfair Display", Georgia, serif; }
+		.notes-total span { color: var(--muted); font-size: 0.86rem; }
+		body.dark-mode .notes-total strong { color: #70dce9; }
+		.notes-controls { display: grid; grid-template-columns: minmax(260px, 1fr) repeat(2, minmax(180px, 0.28fr)); gap: 1rem; align-items: end; padding: 1.25rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+		.notes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+		.note-card { min-width: 0; display: flex; flex-direction: column; padding: 1.25rem; border: 1px solid var(--line); border-left: 3px solid var(--secondary); border-radius: 8px; background: var(--surface); }
+		.note-card h3 { margin: 0 0 0.5rem; color: var(--primary); font-size: 1.08rem; line-height: 1.35; }
+		body.dark-mode .note-card h3 { color: #70dce9; }
+		.note-card p { margin: 0 0 1rem; color: var(--muted); font-size: 0.88rem; }
+		.note-card-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+		.note-card-actions { display: grid; grid-template-columns: 1fr 44px; gap: 0.5rem; margin-top: auto; }
+		.note-open, .note-download { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; border: 1px solid var(--primary); border-radius: 6px; background: transparent; color: var(--primary); cursor: pointer; font-weight: 700; text-decoration: none; }
+		.note-open:hover, .note-download:hover { background: var(--primary); color: #fff; }
+		body.dark-mode .note-open, body.dark-mode .note-download { border-color: var(--secondary); color: var(--secondary); }
+		body.dark-mode .note-open:hover, body.dark-mode .note-download:hover { background: var(--secondary); color: #06232a; }
+		.note-dialog { width: min(1100px, calc(100% - 2rem)); height: min(92vh, 920px); padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32); }
+		.note-dialog::backdrop { background: rgba(3, 12, 22, 0.78); }
+		.note-dialog-shell { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+		.note-dialog-header { display: grid; grid-template-columns: minmax(0, 1fr) auto 44px; gap: 0.75rem; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); background: var(--surface); }
+		.note-dialog-header h2 { margin: 0; color: var(--primary); font: 700 clamp(1.1rem, 3vw, 1.6rem)/1.25 "Playfair Display", Georgia, serif; }
+		body.dark-mode .note-dialog-header h2 { color: #70dce9; }
+		.note-dialog-frame { width: 100%; height: 100%; border: 0; background: #fff; }
+
 		.closing {
 			padding: 4rem 5%;
 			background: var(--dark);
@@ -512,6 +538,9 @@
 			.stage:not(:last-child)::after { display: none; }
 			.bridge-grid { grid-template-columns: 1fr 1fr; }
 			.lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.notes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.notes-controls { grid-template-columns: 1fr 1fr; }
+			.notes-controls .notes-search { grid-column: 1 / -1; }
 			.learning-path { grid-template-columns: 1fr; }
 			.learning-path li { padding-left: 1rem; border-top: 0; border-left: 2px solid var(--line); }
 			.learning-path li::before { top: 1.4rem; left: -6px; }
@@ -540,12 +569,17 @@
 			.hero-inner { gap: 2.5rem; }
 			.section { padding: 4.5rem 1rem; }
 			.pillars, .bridge-grid { grid-template-columns: 1fr; }
-			.lab-intro, .lab-controls, .lab-grid, .lesson-brief, .lesson-grid, .equation-grid, .calculation-grid { grid-template-columns: 1fr; }
+			.lab-intro, .lab-controls, .lab-grid, .notes-intro, .notes-controls, .notes-grid, .lesson-brief, .lesson-grid, .equation-grid, .calculation-grid { grid-template-columns: 1fr; }
 			.lab-total { padding: 0 0 0.8rem; border-left: 0; border-bottom: 3px solid var(--secondary); }
+			.notes-total { padding: 0 0 0.8rem; border-left: 0; border-bottom: 3px solid var(--secondary); }
+			.notes-controls .notes-search { grid-column: 1; }
 			.lab-categories { grid-column: 1; }
 			.lab-category-options { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.4rem; }
 			.filter-chip { flex: 0 0 auto; }
 			.lab-dialog { width: calc(100% - 1rem); max-height: 94vh; }
+			.note-dialog { width: calc(100% - 1rem); height: 94vh; }
+			.note-dialog-header { grid-template-columns: minmax(0, 1fr) 44px; }
+			.note-dialog-header .note-download { display: none; }
 			.lab-dialog-header, .lab-dialog-body { padding: 1rem; }
 			.lesson-content { padding-left: 0.25rem; }
 			.lesson-flow { grid-template-columns: 1fr; gap: 0.45rem; }
@@ -578,6 +612,7 @@
 			<nav class="nav-links" id="foundationNav" aria-label="Foundation page navigation">
 				<a href="#meaning">Meaning</a>
 				<a href="#practice">Practice</a>
+				<a href="#vlsi-notes">Class Notes</a>
 				<a href="#ltspice-lab">Simulation Lab</a>
 				<a href="#progression">Progression</a>
 				<a href="#connections">Connections</a>
@@ -707,6 +742,50 @@
 			</div>
 		</section>
 
+		<section class="section" id="vlsi-notes" aria-labelledby="notes-title">
+			<div class="section-inner">
+				<div class="notes-intro reveal">
+					<div class="section-heading">
+						<span class="eyebrow">Annotated VLSI Class Notes</span>
+						<h2 id="notes-title">Study the concept, then trace it into design.</h2>
+						<p>Browse authored class material from semiconductor fundamentals and RC analysis through CMOS, analog design, HDL, VLSI flow, and LTspice practice. Open each PDF without leaving this page.</p>
+					</div>
+					<div class="notes-total" aria-label="Published notes total">
+						<strong id="notesTotal">42</strong>
+						<span>audited learning resources</span>
+					</div>
+				</div>
+
+				<div class="notes-controls reveal">
+					<div class="lab-control notes-search">
+						<label for="notesSearch">Search notes</label>
+						<div class="lab-search-wrap">
+							<i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+							<input id="notesSearch" type="search" placeholder="Try CMOS, RC, Verilog..." autocomplete="off">
+						</div>
+					</div>
+					<div class="lab-control">
+						<label for="notesCategory">Topic</label>
+						<select id="notesCategory"><option value="All">All topics</option></select>
+					</div>
+					<div class="lab-control">
+						<label for="notesLevel">Learning level</label>
+						<select id="notesLevel">
+							<option value="All">All levels</option>
+							<option value="Foundation">Foundation</option>
+							<option value="Intermediate">Intermediate</option>
+							<option value="Advanced">Advanced</option>
+						</select>
+					</div>
+				</div>
+				<div class="lab-result-row">
+					<span id="notesResultCount" role="status" aria-live="polite">Loading notes...</span>
+					<span>PDFs open in the integrated reader</span>
+				</div>
+				<div class="notes-grid" id="notesGrid"></div>
+			</div>
+		</section>
+
 		<section class="section section-alt" id="ltspice-lab" aria-labelledby="lab-title">
 			<div class="section-inner">
 				<div class="lab-intro reveal">
@@ -757,7 +836,6 @@
 					<span>Open a project for the guided experiment</span>
 				</div>
 				<div class="lab-grid" id="labGrid"></div>
-				<p class="lab-note reveal"><strong>Evidence boundary:</strong> 122 of 124 parsed source records are represented; the empty <code>Emit_foll_Darlington_amp.asc</code> and <code>Gain</code> shells are excluded. Existing raw result artifacts were not numerically parsed, and these examples are not presented as validated reference designs. Files with local paths, unresolved dependencies, unreadable unit characters, or licensing concerns are identified in their project details. Downloads remain unavailable until sanitized repository copies are published.</p>
 			</div>
 		</section>
 
@@ -898,6 +976,19 @@
 		</div>
 	</dialog>
 
+	<dialog class="note-dialog" id="noteDialog" aria-labelledby="noteDialogTitle">
+		<div class="note-dialog-shell">
+			<div class="note-dialog-header">
+				<h2 id="noteDialogTitle"></h2>
+				<a class="note-download" id="noteDialogDownload" href="#" download><i class="fas fa-download" aria-hidden="true"></i> Download PDF</a>
+				<button class="icon-button" id="noteDialogClose" type="button" aria-label="Close note reader">
+					<i class="fas fa-xmark" aria-hidden="true"></i>
+				</button>
+			</div>
+			<iframe class="note-dialog-frame" id="noteDialogFrame" title="VLSI class note reader"></iframe>
+		</div>
+	</dialog>
+
 	<script src="ltspice-lab-data.js"></script>
 	<script src="ltspice-lab-netlists.js"></script>
 	<script src="ltspice-lab-teaching.js"></script>
@@ -939,6 +1030,141 @@
 		}, { threshold: 0.12 });
 
 		document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+		const notes = [
+			{ title: 'Amplifiers in VLSI', file: 'AMPLIFIERS IN VLSI.pdf', category: 'CMOS & Analog', level: 'Intermediate', pages: 9, summary: 'An introduction to amplifier concepts in a VLSI design context.' },
+			{ title: 'Analog Characterization', file: 'ANALOG CHARACTERIZATION_Seniors.pdf', category: 'CMOS & Analog', level: 'Advanced', pages: 11, summary: 'Senior-level notes focused on analog characterization.' },
+			{ title: 'Analog VLSI Design and Characterization', file: 'ANALOG VLSI DESIGN & CHAR.pdf', category: 'VLSI Foundations', level: 'Advanced', pages: 14, summary: 'A compact bridge between analog VLSI design and characterization.' },
+			{ title: 'BJT DC Analysis', file: 'BJT DC ANALYSIS.pdf', category: 'CMOS & Analog', level: 'Intermediate', pages: 27, summary: 'DC analysis of BJT circuits, beginning with fixed-bias configurations.' },
+			{ title: 'Body Effect and Operating Regions', file: 'BODY EFFECT & OPERATING REGION.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 16, summary: 'MOS body effect and transistor regions of operation.' },
+			{ title: 'Circuit Simulation in LTspice', file: 'Cicruit Simulations in LTSpice.pdf', category: 'Simulation & Netlists', level: 'Foundation', pages: 27, summary: 'Hands-on LTspice schematic, analysis, graph, and netlist workflow.' },
+			{ title: 'Channel-Length Modulation', file: 'CLM.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 16, summary: 'Device-level notes on channel-length modulation.' },
+			{ title: 'CMOS Fabrication', file: 'CMOS FABRICATION.pdf', category: 'CMOS & Analog', level: 'Intermediate', pages: 8, summary: 'A concise lesson on the CMOS fabrication sequence.' },
+			{ title: 'CMOS Inverter', file: 'CMOS INVERTER.pdf', category: 'CMOS & Analog', level: 'Foundation', pages: 6, summary: 'Foundational notes on complementary MOS inverter operation.' },
+			{ title: 'CMOS Inverter Body Effect', file: 'CMOS_Inv_Body_effect.pdf', category: 'CMOS & Analog', level: 'Advanced', pages: 5, summary: 'A body-bias demonstration connected to well formation and inverter behavior.' },
+			{ title: 'Concept of the RC Circuit', file: 'CONCEPT OF RC CIRCUIT.pdf', category: 'RC & Circuit Analysis', level: 'Foundation', pages: 42, summary: 'Charging and discharging equations developed from circuit fundamentals.' },
+			{ title: 'Concept of the RC Circuit: Annotated', file: 'CONCEPT OF RC CIRCUIT_anotted.pdf', category: 'RC & Circuit Analysis', level: 'Foundation', pages: 46, summary: 'The expanded annotated edition of the RC circuit lesson.' },
+			{ title: 'Day 01: VLSI Classes', file: 'DAY 01 VLSI CLASSES Silicon 17-11-2024.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 7, summary: 'The opening class in the documented VLSI learning sequence.' },
+			{ title: 'Day 02: Verilog', file: 'DAY 02 [VERILOG].pdf', category: 'Digital & HDL', level: 'Foundation', pages: 10, summary: 'An introductory class on Verilog and digital design description.' },
+			{ title: 'Day 03: CircuitVerse', file: 'DAY 03 CIRCUITVERSE.pdf', category: 'Digital & HDL', level: 'Foundation', pages: 9, summary: 'A guided introduction to digital circuit construction in CircuitVerse.' },
+			{ title: 'Day 04: Semiconductor Physics', file: 'DAY 04 SEMICONDUCTOR  PHYSICS.pdf', category: 'Semiconductor Devices', level: 'Foundation', pages: 6, summary: 'The semiconductor-physics entry point in the class sequence.' },
+			{ title: 'Day 05: Semiconductor Physics Recap', file: 'DAY 05 SEMICONDUCTOR  PHYSICS [Recap].pdf', category: 'Semiconductor Devices', level: 'Foundation', pages: 9, summary: 'A structured recap of the preceding semiconductor-physics lesson.' },
+			{ title: 'Day 06: Intrinsic Semiconductor', file: 'DAY 06 INTRINSIC SEMICONDUCTOR.pdf', category: 'Semiconductor Devices', level: 'Foundation', pages: 6, summary: 'An introductory treatment of intrinsic semiconductor behavior.' },
+			{ title: 'Day 07: RC Circuit Example', file: 'DAY 07 RC CIRCUIT example.pdf', category: 'RC & Circuit Analysis', level: 'Foundation', pages: 12, summary: 'A worked transition from RC basics to circuit examples.' },
+			{ title: 'Digital System Design', file: 'DIGITAL SYSTEM DESIGN.pdf', category: 'Digital & HDL', level: 'Foundation', pages: 10, summary: 'An introduction to the digital-system-design domain within VLSI.' },
+			{ title: 'Diode Characteristics', file: 'DIODE CHARACTERISTICS_seniors.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 8, summary: 'Senior-level notes on diode characteristics.' },
+			{ title: 'End-to-End LTspice Simulation Flow', file: 'END TO END LTSpice simulation flow.pdf', category: 'Simulation & Netlists', level: 'Foundation', pages: 2, summary: 'A concise map from schematic and symbols through models, netlists, and results.' },
+			{ title: 'Enhancement NMOS', file: 'Enhancement N-MOSFET.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 11, summary: 'An introduction to enhancement-mode NMOS operation.' },
+			{ title: 'BJT Frequency Response', file: 'FREQUENCY RESPONSE OF BJT.pdf', category: 'CMOS & Analog', level: 'Advanced', pages: 15, summary: 'Frequency-response concepts applied to BJT circuits.' },
+			{ title: 'Interaction Class', file: 'INTERACTION CLASS.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 6, summary: 'A concise class-interaction resource from the teaching sequence.' },
+			{ title: 'Introduction to Analog Design', file: 'Introduction to Analog Design.pdf', category: 'CMOS & Analog', level: 'Foundation', pages: 31, summary: 'A broad starting point for analog design study.' },
+			{ title: 'Introduction to VLSI Design', file: 'INTRODUCTON TO VLSI DESIGN.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 109, summary: 'A comprehensive introduction connecting circuit concepts to VLSI design.' },
+			{ title: 'LTspice Device Simulations', file: 'LTSpice Simulations.pdf', category: 'Simulation & Netlists', level: 'Intermediate', pages: 6, summary: 'Simulation observations for MOS dimensions and drain-current behavior.' },
+			{ title: 'LTspice Simulations: Annotated', file: 'LTSpice Simulations_ANNOTED.pdf', category: 'Simulation & Netlists', level: 'Intermediate', pages: 27, summary: 'An annotated LTspice workflow with analysis and netlist examples.' },
+			{ title: 'Netlist Masterclass', file: 'NETLIST MASTERCLASS.pdf', category: 'Simulation & Netlists', level: 'Intermediate', pages: 3, summary: 'Quick notes dedicated to reading and working with circuit netlists.' },
+			{ title: 'Placement Discussion for Juniors', file: 'PLACEMENT Discussion Juniors.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 1, summary: 'A short placement-preparation discussion for junior learners.' },
+			{ title: 'PN Junction at Equilibrium: Donald', file: 'PN JUNCTION AT EQUILIBRIUM_donald.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 11, summary: 'An audience-specific lesson on equilibrium, depletion charge, and mobile carriers.' },
+			{ title: 'PN Junction at Equilibrium: Seniors', file: 'PN JUNCTION AT EQUILIBRIUM_seniors.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 7, summary: 'A senior-level edition of the PN-junction equilibrium lesson.' },
+			{ title: 'Qualitative Analysis of RC Circuits', file: 'QUALITATIVE ANALYSIS OF RC CIRCUITS.pdf', category: 'RC & Circuit Analysis', level: 'Intermediate', pages: 6, summary: 'A qualitative method for reasoning about RC circuit behavior.' },
+			{ title: 'RC Circuit Derivation', file: 'RC CIRCUIT_DERIVATION.pdf', category: 'RC & Circuit Analysis', level: 'Foundation', pages: 6, summary: 'A focused derivation of capacitor charging and discharging equations.' },
+			{ title: 'Semiconductor Physics', file: 'SEMICONDUCTOR  PHYSICS.pdf', category: 'Semiconductor Devices', level: 'Foundation', pages: 50, summary: 'The extended semiconductor-physics class notes.' },
+			{ title: 'Semiconductor Physics: Seniors', file: 'SEMICONDUCTOR  PHYSICS_seniors.pdf', category: 'Semiconductor Devices', level: 'Intermediate', pages: 11, summary: 'A condensed senior-level semiconductor-physics edition.' },
+			{ title: 'Verilog versus VHDL', file: 'VERILOG vs VHDL.pdf', category: 'Digital & HDL', level: 'Intermediate', pages: 73, summary: 'A comparative learning resource for Verilog and VHDL.' },
+			{ title: 'VLSI Design Flow', file: 'VLSI DESIGN FLOW.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 3, summary: 'A compact overview of the VLSI design flow.' },
+			{ title: 'VLSI Design Flow: Annotated', file: 'VLSI DESIGN FLOW_annoted.pdf', category: 'VLSI Foundations', level: 'Foundation', pages: 10, summary: 'The expanded annotated edition of the VLSI design-flow overview.' },
+			{ title: 'VLSI Placement Training', file: 'VLSI PLACEMENT TRAINING.pdf', category: 'VLSI Foundations', level: 'Advanced', pages: 67, summary: 'Placement preparation organized around VLSI concepts and GATE questions.' },
+			{ title: 'Voltage Transfer Characteristic of an Inverter', file: 'VTC OF INVERTER.pdf', category: 'CMOS & Analog', level: 'Intermediate', pages: 7, summary: 'A focused lesson on the CMOS inverter voltage-transfer characteristic.' }
+		];
+		const notesGrid = document.getElementById('notesGrid');
+		const notesSearch = document.getElementById('notesSearch');
+		const notesCategory = document.getElementById('notesCategory');
+		const notesLevel = document.getElementById('notesLevel');
+		const notesResultCount = document.getElementById('notesResultCount');
+		const noteDialog = document.getElementById('noteDialog');
+		const noteDialogFrame = document.getElementById('noteDialogFrame');
+		const noteDialogClose = document.getElementById('noteDialogClose');
+		const noteDialogDownload = document.getElementById('noteDialogDownload');
+		let lastNoteTrigger = null;
+
+		function noteUrl(note) {
+			return encodeURI(note.file);
+		}
+
+		function openNote(note, trigger) {
+			lastNoteTrigger = trigger;
+			const url = noteUrl(note);
+			document.getElementById('noteDialogTitle').textContent = note.title;
+			noteDialogFrame.src = url;
+			noteDialogDownload.href = url;
+			noteDialogDownload.download = note.file;
+			noteDialog.showModal();
+			document.body.style.overflow = 'hidden';
+		}
+
+		function renderNotes() {
+			const query = notesSearch.value.trim().toLowerCase();
+			const category = notesCategory.value;
+			const level = notesLevel.value;
+			const filtered = notes.filter((note) => {
+				const searchable = [note.title, note.category, note.level, note.summary, note.file].join(' ').toLowerCase();
+				return (category === 'All' || note.category === category)
+					&& (level === 'All' || note.level === level)
+					&& (!query || searchable.includes(query));
+			});
+
+			notesResultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'resource' : 'resources'} shown`;
+			if (!filtered.length) {
+				notesGrid.replaceChildren(textElement('div', 'lab-empty', 'No notes match these filters. Try another topic, level, or search term.'));
+				return;
+			}
+
+			notesGrid.replaceChildren(...filtered.map((note) => {
+				const card = document.createElement('article');
+				card.className = 'note-card';
+				const meta = document.createElement('div');
+				meta.className = 'note-card-meta';
+				meta.append(textElement('span', 'lab-badge', note.category), textElement('span', 'lab-badge', note.level), textElement('span', 'lab-badge', `${note.pages} ${note.pages === 1 ? 'page' : 'pages'}`));
+				const actions = document.createElement('div');
+				actions.className = 'note-card-actions';
+				const openButton = textElement('button', 'note-open', 'Read notes');
+				openButton.type = 'button';
+				openButton.setAttribute('aria-label', `Read ${note.title}`);
+				openButton.addEventListener('click', () => openNote(note, openButton));
+				const download = textElement('a', 'note-download', '');
+				download.href = noteUrl(note);
+				download.download = note.file;
+				download.setAttribute('aria-label', `Download ${note.title}`);
+				download.title = 'Download PDF';
+				download.append(textElement('i', 'fas fa-download', ''));
+				actions.append(openButton, download);
+				card.append(meta, textElement('h3', '', note.title), textElement('p', '', note.summary), actions);
+				return card;
+			}));
+		}
+
+		[...new Set(notes.map((note) => note.category))].sort().forEach((category) => {
+			const option = textElement('option', '', category);
+			option.value = category;
+			notesCategory.append(option);
+		});
+		notesSearch.addEventListener('input', renderNotes);
+		notesCategory.addEventListener('change', renderNotes);
+		notesLevel.addEventListener('change', renderNotes);
+		noteDialogClose.addEventListener('click', () => noteDialog.close());
+		noteDialog.addEventListener('cancel', (event) => {
+			event.preventDefault();
+			noteDialog.close();
+		});
+		noteDialog.addEventListener('click', (event) => {
+			if (event.target === noteDialog) noteDialog.close();
+		});
+		noteDialog.addEventListener('close', () => {
+			document.body.style.overflow = '';
+			noteDialogFrame.removeAttribute('src');
+			requestAnimationFrame(() => lastNoteTrigger?.focus());
+		});
+		document.getElementById('notesTotal').textContent = notes.length;
+		renderNotes();
 
 		const labProjects = window.ltspiceLabProjects || [];
 		const labNetlists = window.ltspiceLabNetlists || {};
