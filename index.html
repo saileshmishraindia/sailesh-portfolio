@@ -2709,6 +2709,31 @@
         margin-top: 0.5rem;
     }
 
+    .foundation-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.65rem 1rem;
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-style: normal;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+
+    .foundation-link:hover,
+    .foundation-link:focus-visible {
+      background: #fff;
+      color: var(--primary);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
     .section-subtitle {
         color: #fff;
         font-size: 1.1rem;
@@ -2827,8 +2852,9 @@
       <a href="#rnd">R&A</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
+      <a href="#courses">Courses</a>
       <a href="#timeline">Experience</a>
-      <a href="#mentorship">My Foundation</a>
+      <a href="My_Foundation.html">My Foundation</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="mode-toggle" id="modeToggle"><i class="fas fa-moon"></i></button>
@@ -3567,6 +3593,7 @@
             <span class="foundation-label">Under my Foundation</span>
             <h3 class="foundation-name">"VLSITech | Temple of Silicon Scholars"</h3>
             <span class="foundation-tagline">Empowering Engineers: Nibble by Nibble: From Zero to Hero !</span>
+            <a class="foundation-link" href="My_Foundation.html">Explore the foundation <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
           <i class="fas fa-microchip"></i>
         </div>

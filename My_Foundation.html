@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="The learning, circuit experimentation, teaching, and technical practice behind Sailesh Mishra's engineering work.">
+	<title>My Foundation | Er. Sailesh Mishra</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+		:root {
+			--primary: #1a237e;
+			--primary-deep: #10195f;
+			--secondary: #00bcd4;
+			--dark: #0d1b2a;
+			--light: #f5f7fa;
+			--surface: #ffffff;
+			--surface-soft: #edf3f8;
+			--text: #263238;
+			--muted: #5f7480;
+			--line: #d8e2e8;
+			--focus: #ff4081;
+			--shadow: 0 12px 32px rgba(13, 27, 42, 0.1);
+		}
+
+		* { box-sizing: border-box; }
+
+		html { scroll-behavior: smooth; }
+
+		body {
+			margin: 0;
+			background: var(--light);
+			color: var(--text);
+			font-family: "Segoe UI", "Poppins", sans-serif;
+			line-height: 1.65;
+		}
+
+		body.dark-mode {
+			--light: #121212;
+			--surface: #1b1f24;
+			--surface-soft: #222a31;
+			--text: #e5edf1;
+			--muted: #adbdc5;
+			--line: #34434b;
+			--shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+		}
+
+		a { color: inherit; }
+		button { font: inherit; }
+
+		.skip-link {
+			position: fixed;
+			top: 0.75rem;
+			left: 0.75rem;
+			z-index: 1001;
+			padding: 0.65rem 0.9rem;
+			background: var(--surface);
+			color: var(--primary);
+			border-radius: 6px;
+			transform: translateY(-150%);
+		}
+
+		.skip-link:focus { transform: translateY(0); }
+
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: rgba(255, 255, 255, 0.96);
+			border-bottom: 1px solid rgba(13, 27, 42, 0.08);
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+		}
+
+		body.dark-mode .site-header {
+			background: rgba(18, 18, 18, 0.96);
+			border-bottom-color: rgba(255, 255, 255, 0.08);
+		}
+
+		.nav-shell {
+			width: min(1180px, calc(100% - 2rem));
+			min-height: 72px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+		}
+
+		.brand {
+			color: var(--primary);
+			font-size: 1.05rem;
+			font-weight: 750;
+			text-decoration: none;
+		}
+
+		body.dark-mode .brand { color: var(--secondary); }
+
+		.nav-links { display: flex; align-items: center; gap: 1.4rem; }
+		.nav-links a { color: var(--dark); font-weight: 600; text-decoration: none; }
+		body.dark-mode .nav-links a { color: #edf5f8; }
+		.nav-links a:hover { color: var(--primary); }
+		body.dark-mode .nav-links a:hover { color: var(--secondary); }
+
+		.icon-button {
+			width: 44px;
+			height: 44px;
+			display: inline-grid;
+			place-items: center;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			background: var(--surface);
+			color: var(--dark);
+			cursor: pointer;
+		}
+
+		body.dark-mode .icon-button { color: #fff; }
+		.menu-toggle { display: none; }
+
+		.hero {
+			position: relative;
+			min-height: min(760px, 82vh);
+			overflow: hidden;
+			display: grid;
+			align-items: center;
+			padding: 7rem 5% 6rem;
+			color: #fff;
+			background-color: var(--dark);
+			background-image:
+				linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+				linear-gradient(135deg, rgba(26, 35, 126, 0.94), rgba(13, 27, 42, 0.98));
+			background-size: 32px 32px, 32px 32px, auto;
+		}
+
+		.hero::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 5px;
+			background: var(--secondary);
+		}
+
+		.hero-inner {
+			width: min(1180px, 100%);
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+			gap: 4rem;
+			align-items: center;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.55rem;
+			margin-bottom: 1rem;
+			color: #8debf5;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+		}
+
+		.hero h1 {
+			max-width: 760px;
+			margin: 0;
+			font-family: "Playfair Display", Georgia, serif;
+			font-size: clamp(3rem, 7vw, 6.3rem);
+			line-height: 0.98;
+			letter-spacing: 0;
+		}
+
+		.hero-lead {
+			max-width: 720px;
+			margin: 1.6rem 0 2rem;
+			color: rgba(255, 255, 255, 0.86);
+			font-family: "Source Serif 4", Georgia, serif;
+			font-size: clamp(1.1rem, 2vw, 1.35rem);
+		}
+
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+		.button {
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.55rem;
+			padding: 0.75rem 1.2rem;
+			border: 2px solid transparent;
+			border-radius: 999px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+		}
+
+		.button:hover { transform: translateY(-2px); }
+		.button-primary { background: var(--secondary); color: #06232a; }
+		.button-primary:hover { box-shadow: 0 8px 22px rgba(0, 188, 212, 0.3); }
+		.button-outline { border-color: rgba(255, 255, 255, 0.72); color: #fff; }
+		.button-outline:hover { background: rgba(255, 255, 255, 0.1); }
+
+		.signal-map {
+			margin: 0;
+			padding: 1.25rem;
+			border: 1px solid rgba(141, 235, 245, 0.3);
+			border-radius: 18px;
+			background: rgba(5, 19, 34, 0.72);
+			box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+		}
+
+		.signal-map figcaption {
+			margin-bottom: 1rem;
+			color: #8debf5;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.signal-step {
+			display: grid;
+			grid-template-columns: 42px 1fr;
+			gap: 0.8rem;
+			align-items: center;
+		}
+
+		.signal-index {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(141, 235, 245, 0.44);
+			border-radius: 50%;
+			color: #8debf5;
+			font: 700 0.8rem Consolas, monospace;
+		}
+
+		.signal-step strong { display: block; color: #fff; }
+		.signal-step span { color: rgba(255, 255, 255, 0.68); font-size: 0.88rem; }
+		.signal-trace { width: 1px; height: 22px; margin: 0.3rem 0 0.3rem 20px; background: rgba(141, 235, 245, 0.38); }
+
+		.section { padding: 6rem 5%; }
+		.section-alt { background: var(--surface-soft); }
+		.section-inner { width: min(1180px, 100%); margin: 0 auto; }
+
+		.section-heading { max-width: 780px; margin-bottom: 3rem; }
+		.section-heading h2 {
+			margin: 0.25rem 0 0.8rem;
+			color: var(--primary);
+			font-family: "Playfair Display", Georgia, serif;
+			font-size: clamp(2rem, 4vw, 3.25rem);
+			line-height: 1.13;
+			letter-spacing: 0;
+		}
+
+		body.dark-mode .section-heading h2 { color: #70dce9; }
+		.section-heading p { margin: 0; color: var(--muted); font-size: 1.06rem; }
+
+		.pillars {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.pillar {
+			padding: 1.65rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+
+		.pillar-number {
+			color: var(--secondary);
+			font: 700 0.78rem Consolas, monospace;
+			letter-spacing: 0.1em;
+		}
+
+		.pillar h3 { margin: 0.55rem 0; color: var(--dark); font-size: 1.25rem; }
+		body.dark-mode .pillar h3 { color: #f4f8fa; }
+		.pillar p { margin: 0; color: var(--muted); }
+		.pillar ul { margin: 1rem 0 0; padding-left: 1.15rem; color: var(--muted); }
+
+		.practice-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 2rem;
+			align-items: start;
+		}
+
+		.practice-note {
+			border-left: 4px solid var(--secondary);
+			padding: 1.5rem 1.7rem;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+
+		.practice-note h3 { margin: 0 0 0.6rem; color: var(--primary); }
+		body.dark-mode .practice-note h3 { color: #70dce9; }
+		.practice-note p { margin: 0; color: var(--muted); }
+
+		.evidence-list { display: grid; gap: 0.75rem; }
+		details {
+			border: 1px solid var(--line);
+			border-radius: 8px;
+			background: var(--surface);
+		}
+
+		summary {
+			min-height: 52px;
+			display: flex;
+			align-items: center;
+			gap: 0.65rem;
+			padding: 0.8rem 1rem;
+			color: var(--dark);
+			font-weight: 700;
+			cursor: pointer;
+		}
+
+		body.dark-mode summary { color: #f4f8fa; }
+		details p { margin: 0; padding: 0 1rem 1rem; color: var(--muted); }
+
+		.progression {
+			display: grid;
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+			gap: 0;
+			margin-top: 2rem;
+		}
+
+		.stage { position: relative; padding: 1.4rem 1rem 1.4rem 1.4rem; border-top: 3px solid var(--secondary); }
+		.stage:not(:last-child)::after {
+			content: "";
+			position: absolute;
+			top: -7px;
+			right: -5px;
+			width: 10px;
+			height: 10px;
+			border-top: 3px solid var(--secondary);
+			border-right: 3px solid var(--secondary);
+			transform: rotate(45deg);
+		}
+
+		.stage span { color: var(--secondary); font: 700 0.76rem Consolas, monospace; }
+		.stage h3 { margin: 0.45rem 0; font-size: 1rem; }
+		.stage p { margin: 0; color: var(--muted); font-size: 0.88rem; }
+
+		.bridge-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+		}
+
+		.bridge-card {
+			min-height: 210px;
+			display: flex;
+			flex-direction: column;
+			padding: 1.5rem;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			background: var(--surface);
+			color: inherit;
+			text-decoration: none;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+		}
+
+		.bridge-card:hover, .bridge-card:focus-visible {
+			transform: translateY(-3px);
+			border-color: var(--secondary);
+			box-shadow: var(--shadow);
+			outline: none;
+		}
+
+		.bridge-card i { color: var(--secondary); font-size: 1.5rem; }
+		.bridge-card h3 { margin: 1rem 0 0.45rem; color: var(--primary); }
+		body.dark-mode .bridge-card h3 { color: #70dce9; }
+		.bridge-card p { margin: 0 0 1rem; color: var(--muted); }
+		.bridge-card span { margin-top: auto; color: var(--primary); font-weight: 700; }
+		body.dark-mode .bridge-card span { color: #70dce9; }
+
+		.lab-intro { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; margin-bottom: 2.5rem; }
+		.lab-intro .section-heading { margin: 0; }
+		.lab-total { min-width: 170px; padding-left: 1.2rem; border-left: 3px solid var(--secondary); }
+		.lab-total strong { display: block; color: var(--primary); font: 700 2.8rem/1 "Playfair Display", Georgia, serif; }
+		body.dark-mode .lab-total strong { color: #70dce9; }
+		.lab-total span { color: var(--muted); font-size: 0.86rem; }
+		.learning-path { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0 0 2.5rem; padding: 0; list-style: none; }
+		.learning-path li { position: relative; padding: 1rem 1.2rem 1rem 0; border-top: 2px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+		.learning-path li::before { content: ""; position: absolute; top: -6px; left: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--secondary); }
+		.learning-path strong { display: block; margin-bottom: 0.25rem; color: var(--text); font-size: 0.95rem; }
+
+		.lab-controls { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(180px, 0.35fr); gap: 1rem; align-items: end; padding: 1.25rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+		.lab-control label, .lab-categories legend { display: block; margin-bottom: 0.45rem; color: var(--text); font-size: 0.82rem; font-weight: 700; }
+		.lab-search-wrap { position: relative; }
+		.lab-search-wrap i { position: absolute; top: 50%; left: 0.9rem; color: var(--muted); transform: translateY(-50%); }
+		.lab-control input, .lab-control select { width: 100%; height: 46px; border: 1px solid var(--line); border-radius: 6px; background: var(--light); color: var(--text); }
+		.lab-control input { padding: 0 0.9rem 0 2.5rem; }
+		.lab-control select { padding: 0 0.75rem; }
+		.lab-categories { grid-column: 1 / -1; min-width: 0; margin: 0; padding: 0; border: 0; }
+		.lab-category-options { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+		.filter-chip { min-height: 38px; padding: 0.45rem 0.8rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; font-size: 0.82rem; font-weight: 650; }
+		.filter-chip[aria-pressed="true"] { border-color: var(--primary); background: var(--primary); color: #fff; }
+		body.dark-mode .filter-chip[aria-pressed="true"] { border-color: var(--secondary); background: var(--secondary); color: #06232a; }
+		.lab-result-row { display: flex; justify-content: space-between; gap: 1rem; margin: 1.2rem 0; color: var(--muted); font-size: 0.9rem; }
+
+		.lab-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+		.lab-card { min-width: 0; display: flex; flex-direction: column; padding: 1.35rem; border: 1px solid var(--line); border-top: 3px solid var(--secondary); border-radius: 8px; background: var(--surface); box-shadow: 0 8px 20px rgba(13, 27, 42, 0.06); }
+		.lab-card-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+		.lab-badge { padding: 0.22rem 0.5rem; border-radius: 4px; background: var(--surface-soft); color: var(--muted); font-size: 0.72rem; font-weight: 700; }
+		.lab-card h3 { margin: 0 0 0.55rem; color: var(--primary); font-size: 1.16rem; line-height: 1.35; }
+		body.dark-mode .lab-card h3 { color: #70dce9; }
+		.lab-card p { margin: 0 0 1rem; color: var(--muted); font-size: 0.9rem; }
+		.lab-card-analysis { margin-bottom: 1rem; color: var(--text); font: 600 0.76rem/1.5 Consolas, monospace; overflow-wrap: anywhere; }
+		.lab-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1.1rem; }
+		.lab-tag { color: var(--muted); font-size: 0.76rem; }
+		.lab-tag:not(:last-child)::after { content: " /"; color: var(--secondary); }
+		.lab-card-button { min-height: 42px; margin-top: auto; border: 1px solid var(--primary); border-radius: 6px; background: transparent; color: var(--primary); cursor: pointer; font-weight: 700; }
+		body.dark-mode .lab-card-button { border-color: var(--secondary); color: var(--secondary); }
+		.lab-card-button:hover { background: var(--primary); color: #fff; }
+		body.dark-mode .lab-card-button:hover { background: var(--secondary); color: #06232a; }
+		.lab-empty { grid-column: 1 / -1; padding: 3rem 1rem; border-block: 1px solid var(--line); color: var(--muted); text-align: center; }
+		.lab-note { margin-top: 2rem; padding: 1rem 1.2rem; border-left: 3px solid var(--secondary); background: var(--surface); color: var(--muted); font-size: 0.88rem; }
+
+		.lab-dialog { width: min(1180px, calc(100% - 2rem)); max-height: min(92vh, 1000px); padding: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--text); box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32); }
+		.lab-dialog::backdrop { background: rgba(3, 12, 22, 0.74); }
+		.lab-dialog-header { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 1rem; align-items: start; padding: 1.4rem 1.5rem; border-bottom: 1px solid var(--line); background: var(--surface); }
+		.lab-dialog-header h2 { margin: 0.25rem 0 0; color: var(--primary); font: 700 clamp(1.45rem, 4vw, 2.2rem)/1.2 "Playfair Display", Georgia, serif; }
+		body.dark-mode .lab-dialog-header h2 { color: #70dce9; }
+		.lab-dialog-category { color: var(--secondary); font-size: 0.76rem; font-weight: 800; text-transform: uppercase; }
+		.lab-dialog-body { padding: 1.5rem; }
+		.lab-dialog-lead { margin: 0 0 1.5rem; color: var(--muted); font-family: "Source Serif 4", Georgia, serif; font-size: 1.08rem; }
+		.lesson-route { display: flex; gap: 0; margin: 0 0 1.5rem; padding: 0 0 0.65rem; overflow-x: auto; list-style: none; }
+		.lesson-route li { position: relative; flex: 0 0 auto; padding: 0.45rem 1.4rem 0.45rem 0.7rem; color: var(--muted); font-size: 0.72rem; font-weight: 700; white-space: nowrap; }
+		.lesson-route li:not(:last-child)::after { content: "\f054"; position: absolute; right: 0.45rem; color: var(--secondary); font-family: "Font Awesome 6 Free"; font-weight: 900; }
+		.lesson-brief { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-bottom: 1.25rem; border: 1px solid var(--line); background: var(--line); }
+		.lesson-brief section { padding: 1rem; background: var(--surface-soft); }
+		.lesson-brief h3, .lesson-section h3, .lesson-subsection h4 { margin: 0 0 0.45rem; color: var(--text); font-size: 0.9rem; }
+		.lesson-brief p, .lesson-section p, .lesson-section li { color: var(--muted); font-size: 0.88rem; }
+		.lesson-brief p { margin: 0; }
+		.lesson-section { border-top: 1px solid var(--line); }
+		.lesson-section > summary { display: grid; grid-template-columns: 2rem minmax(0, 1fr) 1rem; gap: 0.7rem; align-items: center; padding: 1rem 0.25rem; color: var(--primary); cursor: pointer; font-weight: 800; list-style: none; }
+		.lesson-section > summary::-webkit-details-marker { display: none; }
+		.lesson-section > summary::after { content: "+"; color: var(--secondary); font-size: 1.3rem; text-align: center; }
+		.lesson-section[open] > summary::after { content: "-"; }
+		.lesson-number { display: grid; width: 1.8rem; height: 1.8rem; place-items: center; border-radius: 4px; background: var(--primary); color: #fff; font-size: 0.78rem; }
+		body.dark-mode .lesson-number { background: var(--secondary); color: #06232a; }
+		.lesson-content { padding: 0.25rem 0.25rem 1.5rem 2.95rem; }
+		.lesson-content > p:first-child { margin-top: 0; }
+		.lesson-subsection { margin-top: 1.2rem; }
+		.lesson-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+		.lesson-callout { padding: 0.9rem 1rem; border-left: 3px solid var(--secondary); background: var(--surface-soft); }
+		.lesson-callout p { margin: 0; }
+		.lesson-status { display: inline-flex; align-items: center; min-height: 28px; margin-bottom: 0.65rem; padding: 0.25rem 0.55rem; border: 1px solid var(--line); border-radius: 4px; color: var(--text); font-size: 0.75rem; font-weight: 800; }
+		.lesson-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.2rem; margin: 0; padding: 0; list-style: none; counter-reset: lesson-flow; }
+		.lesson-flow li { position: relative; min-height: 76px; padding: 0.8rem; border-top: 3px solid var(--secondary); background: var(--surface-soft); counter-increment: lesson-flow; }
+		.lesson-flow li::before { content: counter(lesson-flow, decimal-leading-zero); display: block; margin-bottom: 0.3rem; color: var(--secondary); font-size: 0.72rem; font-weight: 800; }
+		.lesson-flow li:not(:last-child)::after { content: "\f061"; position: absolute; top: 50%; right: -1rem; color: var(--secondary); font-family: "Font Awesome 6 Free"; font-weight: 900; transform: translateY(-50%); }
+		.lab-table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--line); }
+		.component-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+		.component-table th, .component-table td { padding: 0.5rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+		.component-table th { background: var(--surface-soft); color: var(--muted); white-space: nowrap; }
+		.component-table tr:last-child td { border-bottom: 0; }
+		.netlist-panel { max-height: 390px; margin: 0; padding: 1rem; overflow: auto; border: 1px solid #25394d; border-radius: 6px; background: #07131f; color: #d7e9ed; font: 0.78rem/1.55 Consolas, "Courier New", monospace; white-space: pre; tab-size: 2; }
+		.equation-grid, .calculation-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+		.equation-item, .calculation-item { min-width: 0; padding: 0.9rem; border-top: 3px solid var(--secondary); background: var(--surface-soft); }
+		.equation-item strong, .calculation-item strong { display: block; margin-bottom: 0.35rem; font-size: 0.84rem; }
+		.equation-item code, .calculation-item code { display: block; margin-bottom: 0.4rem; color: var(--text); overflow-wrap: anywhere; }
+		.equation-item p, .calculation-item p { margin: 0.25rem 0 0; }
+		.reference-list { display: grid; gap: 0.65rem; margin: 0; padding: 0; list-style: none; }
+		.reference-list li { padding: 0.8rem; border-left: 3px solid var(--secondary); background: var(--surface-soft); }
+		.reference-list a { color: var(--primary); font-weight: 800; }
+		body.dark-mode .reference-list a, body.dark-mode .lesson-section > summary { color: #70dce9; }
+		.lesson-list { margin: 0; padding-left: 1.15rem; }
+		.lesson-list li + li { margin-top: 0.45rem; }
+		.lab-download { min-height: 42px; margin-top: 1rem; padding: 0.6rem 0.9rem; border: 0; border-radius: 6px; background: var(--line); color: var(--muted); cursor: not-allowed; }
+
+		.closing {
+			padding: 4rem 5%;
+			background: var(--dark);
+			color: #fff;
+			text-align: center;
+		}
+
+		.closing h2 {
+			max-width: 820px;
+			margin: 0 auto 1.5rem;
+			font-family: "Playfair Display", Georgia, serif;
+			font-size: clamp(1.6rem, 4vw, 2.7rem);
+			line-height: 1.25;
+			letter-spacing: 0;
+		}
+
+		.closing p { color: rgba(255, 255, 255, 0.72); }
+
+		footer { padding: 1.5rem; background: #09131f; color: #a8bac5; text-align: center; font-size: 0.88rem; }
+
+		.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+		.reveal.visible { opacity: 1; transform: none; }
+
+		:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+		@media (max-width: 900px) {
+			.hero-inner, .practice-grid { grid-template-columns: 1fr; }
+			.hero { min-height: auto; }
+			.signal-map { max-width: 620px; }
+			.progression { grid-template-columns: 1fr; }
+			.stage { border-top: 0; border-left: 3px solid var(--secondary); }
+			.stage:not(:last-child)::after { display: none; }
+			.bridge-grid { grid-template-columns: 1fr 1fr; }
+			.lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+			.learning-path { grid-template-columns: 1fr; }
+			.learning-path li { padding-left: 1rem; border-top: 0; border-left: 2px solid var(--line); }
+			.learning-path li::before { top: 1.4rem; left: -6px; }
+		}
+
+		@media (max-width: 720px) {
+			.menu-toggle { display: inline-grid; }
+			.nav-links {
+				position: absolute;
+				top: 72px;
+				left: 0;
+				right: 0;
+				display: none;
+				align-items: stretch;
+				flex-direction: column;
+				gap: 0;
+				padding: 0.75rem 1rem 1rem;
+				background: var(--surface);
+				border-bottom: 1px solid var(--line);
+				box-shadow: var(--shadow);
+			}
+			.nav-links.open { display: flex; }
+			.nav-links a { min-height: 46px; display: flex; align-items: center; padding: 0 0.5rem; color: var(--text); }
+			.nav-links .icon-button { margin-top: 0.4rem; }
+			.hero { padding: 5rem 1rem 4rem; }
+			.hero-inner { gap: 2.5rem; }
+			.section { padding: 4.5rem 1rem; }
+			.pillars, .bridge-grid { grid-template-columns: 1fr; }
+			.lab-intro, .lab-controls, .lab-grid, .lesson-brief, .lesson-grid, .equation-grid, .calculation-grid { grid-template-columns: 1fr; }
+			.lab-total { padding: 0 0 0.8rem; border-left: 0; border-bottom: 3px solid var(--secondary); }
+			.lab-categories { grid-column: 1; }
+			.lab-category-options { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 0.4rem; }
+			.filter-chip { flex: 0 0 auto; }
+			.lab-dialog { width: calc(100% - 1rem); max-height: 94vh; }
+			.lab-dialog-header, .lab-dialog-body { padding: 1rem; }
+			.lesson-content { padding-left: 0.25rem; }
+			.lesson-flow { grid-template-columns: 1fr; gap: 0.45rem; }
+			.lesson-flow li { min-height: auto; }
+			.lesson-flow li:not(:last-child)::after { display: none; }
+		}
+
+		@media (max-width: 420px) {
+			.hero h1 { font-size: 2.75rem; }
+			.button { width: 100%; }
+			.pillar, .practice-note { padding: 1.25rem; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html { scroll-behavior: auto; }
+			*, *::before, *::after { animation: none !important; transition: none !important; }
+			.reveal { opacity: 1; transform: none; }
+		}
+	</style>
+</head>
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="site-header">
+		<div class="nav-shell">
+			<a class="brand" href="index.html" aria-label="Return to Sailesh Mishra portfolio">Er. Sailesh Mishra</a>
+			<button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="foundationNav">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
+			<nav class="nav-links" id="foundationNav" aria-label="Foundation page navigation">
+				<a href="#meaning">Meaning</a>
+				<a href="#practice">Practice</a>
+				<a href="#ltspice-lab">Simulation Lab</a>
+				<a href="#progression">Progression</a>
+				<a href="#connections">Connections</a>
+				<a href="index.html#mentorship">Mentorship</a>
+				<button class="icon-button" id="modeToggle" type="button" aria-label="Switch to dark mode">
+					<i class="fas fa-moon" aria-hidden="true"></i>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content">
+		<section class="hero" aria-labelledby="foundation-title">
+			<div class="hero-inner">
+				<div>
+					<span class="eyebrow"><i class="fas fa-microchip" aria-hidden="true"></i> VLSITech | Temple of Silicon Scholars</span>
+					<h1 id="foundation-title">My Foundation</h1>
+					<p class="hero-lead">Before the projects, tools, and professional work came a repeated discipline: return to fundamentals, model the circuit, inspect its behavior, explain it clearly, and use the result to solve the next problem better.</p>
+					<div class="hero-actions">
+						<a class="button button-primary" href="#meaning">Trace the foundation <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+						<a class="button button-outline" href="index.html#projects">See engineering work</a>
+					</div>
+				</div>
+
+				<figure class="signal-map" aria-label="A five-stage map from fundamentals to engineering practice">
+					<figcaption>The working loop</figcaption>
+					<div class="signal-step"><span class="signal-index">01</span><div><strong>Understand</strong><span>Start from physical and circuit fundamentals</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">02</span><div><strong>Model</strong><span>Translate an idea into a circuit or RTL structure</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">03</span><div><strong>Simulate</strong><span>Test assumptions against observable behavior</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">04</span><div><strong>Explain</strong><span>Turn results into teachable reasoning</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">05</span><div><strong>Apply</strong><span>Carry the method into larger engineering systems</span></div></div>
+				</figure>
+			</div>
+		</section>
+
+		<section class="section" id="meaning">
+			<div class="section-inner">
+				<div class="section-heading reveal">
+					<span class="eyebrow">What lies underneath</span>
+					<h2>Not an archive. A way of working.</h2>
+					<p>The material behind this page spans semiconductor and circuit notes, repeated LTSpice experiments, annotated class material, and structured interview preparation. Together they show four practices that continue into the rest of the portfolio.</p>
+				</div>
+
+				<div class="pillars">
+					<article class="pillar reveal">
+						<span class="pillar-number">PILLAR 01</span>
+						<h3>Fundamentals before abstraction</h3>
+						<p>Semiconductor physics, PN junctions, BJT and MOSFET operation, RC behavior, CMOS fabrication, inverter transfer characteristics, and digital-system basics form the vocabulary used to reason about larger designs.</p>
+						<ul><li>Device behavior</li><li>Analog and digital foundations</li><li>CMOS and VLSI design flow</li></ul>
+					</article>
+
+					<article class="pillar reveal">
+						<span class="pillar-number">PILLAR 02</span>
+						<h3>Simulation as a thinking tool</h3>
+						<p>The LTSpice work moves from passive circuits and device characterization into amplifiers, oscillators, data-converter blocks, power supplies, protection circuits, RF stages, and application-level models.</p>
+						<ul><li>Bias, transient, AC, and frequency response</li><li>Iterative schematic refinement</li><li>Behavior checked before conclusions</li></ul>
+					</article>
+
+					<article class="pillar reveal">
+						<span class="pillar-number">PILLAR 03</span>
+						<h3>Learning through explanation</h3>
+						<p>Numbered lessons, annotated notes, recap material, and versions prepared for different levels show that understanding was repeatedly reorganized for teaching, not only collected for personal reference.</p>
+						<ul><li>Progressive lesson structure</li><li>Annotated technical notes</li><li>Audience-aware explanations</li></ul>
+					</article>
+
+					<article class="pillar reveal">
+						<span class="pillar-number">PILLAR 04</span>
+						<h3>Preparation through technical dialogue</h3>
+						<p>Placement discussions, doubt-resolution material, and cohort-based mock-interview preparation add a different test: can a concept be recalled, defended, and communicated under questioning?</p>
+						<ul><li>Concept-first interview preparation</li><li>Reasoning under constraints</li><li>Feedback and revision</li></ul>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="practice">
+			<div class="section-inner">
+				<div class="section-heading reveal">
+					<span class="eyebrow">From source material to practice</span>
+					<h2>Three bodies of work, one engineering habit</h2>
+					<p>Each body of material contributes something different. The value is in their relationship, not in publishing every file.</p>
+				</div>
+
+				<div class="practice-grid">
+					<div class="practice-note reveal">
+						<h3>The recurring pattern</h3>
+						<p>A concept is studied at device or circuit level, exercised through a model, refined by inspecting behavior, and then restated clearly enough to teach or defend. That same loop supports the portfolio's analog design, digital design, VLSI, CAD/EDA, and systems work.</p>
+					</div>
+
+					<div class="evidence-list reveal">
+						<details open>
+							<summary><i class="fas fa-wave-square" aria-hidden="true"></i> LTSpice experiments</summary>
+							<p>Verified themes include RC networks, device characterization, BJT and op-amp stages, oscillators, buck/boost and flyback conversion, protection circuits, delta-sigma and sample-and-hold blocks, and staged RF front-end work.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-chalkboard-user" aria-hidden="true"></i> Annotated VLSI classes</summary>
+							<p>The notes progress from introductory VLSI and Verilog through semiconductor physics, RC analysis, CMOS devices, inverter behavior, amplifiers, netlists, simulation flow, and design flow, with recap and audience-specific variants.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-comments" aria-hidden="true"></i> Mock-interview practice</summary>
+							<p>Recurring cohort materials indicate a structured preparation process connected to technical mentoring. Individual evaluations and named records remain private and are not linked here.</p>
+						</details>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="progression">
+			<div class="section-inner">
+				<div class="section-heading reveal">
+					<span class="eyebrow">Technical progression</span>
+					<h2>From first principles to engineering judgment</h2>
+					<p>This is a conceptual progression supported by the material, not a claim of dated milestones.</p>
+				</div>
+
+				<div class="progression reveal" aria-label="Foundation progression">
+					<article class="stage"><span>01</span><h3>Physical basis</h3><p>Silicon, junctions, carrier behavior, device regions.</p></article>
+					<article class="stage"><span>02</span><h3>Circuit behavior</h3><p>RC response, biasing, gain, feedback, switching.</p></article>
+					<article class="stage"><span>03</span><h3>Design structures</h3><p>CMOS, amplifiers, oscillators, converters, RTL.</p></article>
+					<article class="stage"><span>04</span><h3>System thinking</h3><p>Power, RF, mixed-signal, digital and application models.</p></article>
+					<article class="stage"><span>05</span><h3>Knowledge transfer</h3><p>Annotated lessons, mentoring, interview preparation.</p></article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="ltspice-lab" aria-labelledby="lab-title">
+			<div class="section-inner">
+				<div class="lab-intro reveal">
+					<div class="section-heading">
+						<span class="eyebrow">LTSpice Simulation Laboratory</span>
+						<h2 id="lab-title">Learn the circuit by changing it.</h2>
+						<p>Choose a verified simulation, understand its setup, decide what to observe, and run a focused engineering experiment. Every entry below is grounded in an audited source file.</p>
+					</div>
+					<div class="lab-total" aria-label="Laboratory inventory total">
+						<strong id="labTotal">61</strong>
+						<span>project groups from 124 source records</span>
+					</div>
+				</div>
+
+				<ol class="learning-path reveal" aria-label="Recommended simulation learning loop">
+					<li><strong>Choose</strong>Start with one circuit and one question.</li>
+					<li><strong>Understand</strong>Read topology, values, and analysis type.</li>
+					<li><strong>Observe</strong>Select meaningful nodes and currents.</li>
+					<li><strong>Experiment</strong>Change one parameter at a time.</li>
+					<li><strong>Explain</strong>Connect the result to a principle.</li>
+				</ol>
+
+				<div class="lab-controls reveal">
+					<div class="lab-control">
+						<label for="labSearch">Search simulations</label>
+						<div class="lab-search-wrap">
+							<i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+							<input id="labSearch" type="search" placeholder="Try oscillator, BJT, transient..." autocomplete="off">
+						</div>
+					</div>
+					<div class="lab-control">
+						<label for="labLevel">Learning level</label>
+						<select id="labLevel">
+							<option value="All">All levels</option>
+							<option value="Foundation">Foundation</option>
+							<option value="Intermediate">Intermediate</option>
+							<option value="Advanced">Advanced</option>
+						</select>
+					</div>
+					<fieldset class="lab-categories">
+						<legend>Category</legend>
+						<div class="lab-category-options" id="labCategories"></div>
+					</fieldset>
+				</div>
+
+				<div class="lab-result-row">
+					<span id="labResultCount" role="status" aria-live="polite">Loading projects...</span>
+					<span>Open a project for the guided experiment</span>
+				</div>
+				<div class="lab-grid" id="labGrid"></div>
+				<p class="lab-note reveal"><strong>Evidence boundary:</strong> 122 of 124 parsed source records are represented; the empty <code>Emit_foll_Darlington_amp.asc</code> and <code>Gain</code> shells are excluded. Existing raw result artifacts were not numerically parsed, and these examples are not presented as validated reference designs. Files with local paths, unresolved dependencies, unreadable unit characters, or licensing concerns are identified in their project details. Downloads remain unavailable until sanitized repository copies are published.</p>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="connections">
+			<div class="section-inner">
+				<div class="section-heading reveal">
+					<span class="eyebrow">Where it leads</span>
+					<h2>The foundation is visible in the work</h2>
+					<p>Continue into the portfolio areas where these practices become tools, projects, and professional experience.</p>
+				</div>
+
+				<div class="bridge-grid">
+					<a class="bridge-card reveal" href="index.html#skills">
+						<i class="fas fa-microchip" aria-hidden="true"></i>
+						<h3>Technical Acumen</h3>
+						<p>The tools, languages, protocols, and platforms used to turn foundational reasoning into implementation.</p>
+						<span>Explore skills <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+					</a>
+					<a class="bridge-card reveal" href="index.html#projects">
+						<i class="fas fa-diagram-project" aria-hidden="true"></i>
+						<h3>Engineering Endeavours</h3>
+						<p>Analog, digital, architecture, verification, power, and system projects where the working loop is applied.</p>
+						<span>Explore projects <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+					</a>
+					<a class="bridge-card reveal" href="index.html#timeline">
+						<i class="fas fa-briefcase" aria-hidden="true"></i>
+						<h3>Professional Engineering</h3>
+						<p>The career timeline that places this learning and experimentation in a professional context.</p>
+						<span>Explore experience <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="closing">
+			<h2>Understanding deeply, testing honestly, and explaining clearly.</h2>
+			<p>A practical link between this foundation and the portfolio's Theory of Value Addition &amp; Multiplication.</p>
+			<a class="button button-primary" href="index.html#about">Read the portfolio philosophy</a>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; <span id="currentYear"></span> Er. Sailesh Mishra · VLSITech | Temple of Silicon Scholars</p>
+	</footer>
+
+	<dialog class="lab-dialog" id="labDialog" aria-labelledby="labDialogTitle">
+		<div class="lab-dialog-header">
+			<div>
+				<span class="lab-dialog-category" id="labDialogCategory"></span>
+				<h2 id="labDialogTitle"></h2>
+			</div>
+			<button class="icon-button" id="labDialogClose" type="button" aria-label="Close project details">
+				<i class="fas fa-xmark" aria-hidden="true"></i>
+			</button>
+		</div>
+		<div class="lab-dialog-body">
+			<p class="lab-dialog-lead" id="labDialogDescription"></p>
+			<ol class="lesson-route" aria-label="Lesson sequence">
+				<li>Prerequisite</li><li>Schematic</li><li>Components</li><li>Connectivity</li><li>Operation</li><li>Netlist</li><li>SPICE syntax</li><li>Datasheet</li><li>Principle</li><li>Mathematics</li><li>Hand calculation</li><li>Estimation</li><li>LTspice</li><li>Waveform</li><li>Comparison</li><li>Experiment</li><li>Misconception</li><li>VLSI link</li><li>Self-check</li>
+			</ol>
+
+			<div class="lesson-brief">
+				<section><h3>Learning objective</h3><p id="labDialogObjective"></p></section>
+				<section><h3>Prerequisite</h3><p id="labDialogPrerequisite"></p></section>
+				<section><h3>Guiding question</h3><p id="labDialogQuestion"></p></section>
+			</div>
+
+			<details class="lesson-section" open>
+				<summary><span class="lesson-number">01</span><span>Read the schematic and component intent</span></summary>
+				<div class="lesson-content">
+					<p id="labDialogSchematic"></p>
+					<div class="lab-table-wrap"><table class="component-table"><thead><tr><th>Element</th><th>Recorded value</th><th>What</th><th>Why here</th><th>Change and observe</th></tr></thead><tbody id="labDialogComponents"></tbody></table></div>
+					<section class="lesson-subsection"><h4>Operation flow</h4><ol class="lesson-flow" id="labDialogFlow"></ol></section>
+				</div>
+			</details>
+
+			<details class="lesson-section" open>
+				<summary><span class="lesson-number">02</span><span>Connectivity, exact netlist, and SPICE syntax</span></summary>
+				<div class="lesson-content">
+					<span class="lesson-status" id="labDialogNetlistStatus"></span>
+					<p id="labDialogNetlistEvidence"></p>
+					<pre class="netlist-panel"><code id="labDialogNetlist"></code></pre>
+					<section class="lesson-subsection"><h4>Schematic-to-netlist map</h4><div class="lab-table-wrap"><table class="component-table"><thead><tr><th>Statement</th><th>Type</th><th>Node sequence</th><th>Value / model</th><th>How to read it</th></tr></thead><tbody id="labDialogMapping"></tbody></table></div></section>
+					<section class="lesson-subsection"><h4>Analysis and control statements</h4><ul class="lesson-list" id="labDialogDirectives"></ul></section>
+				</div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">03</span><span>Datasheet evidence and engineering principle</span></summary>
+				<div class="lesson-content">
+					<div class="lesson-callout"><h3>Governing principle</h3><p id="labDialogPrinciple"></p></div>
+					<section class="lesson-subsection"><h4>Verified manufacturer references</h4><ul class="reference-list" id="labDialogReferences"></ul></section>
+				</div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">04</span><span>Mathematics, hand calculation, and estimate</span></summary>
+				<div class="lesson-content">
+					<div class="equation-grid" id="labDialogEquations"></div>
+					<section class="lesson-subsection"><h4>Evidence-supported calculations</h4><div class="calculation-grid" id="labDialogCalculations"></div></section>
+				</div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">05</span><span>LTspice setup and waveform reading</span></summary>
+				<div class="lesson-content lesson-grid">
+					<section><h3>Analysis configuration</h3><ul class="lesson-list" id="labDialogAnalysis"></ul></section>
+					<section><h3>Expected behavior</h3><p id="labDialogExpected"></p></section>
+					<section><h3>Waveform task</h3><p id="labDialogObserve"></p></section>
+					<section><h3>Measurement discipline</h3><p>Name the trace and units, measure after startup where appropriate, record cursor or .meas values, and retain the analysis settings with the result.</p></section>
+				</div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">06</span><span>Theory versus simulation</span></summary>
+				<div class="lesson-content"><div class="lab-table-wrap"><table class="component-table"><thead><tr><th>Aspect</th><th>Theory / estimate</th><th>LTspice evidence</th><th>How to interpret a difference</th></tr></thead><tbody id="labDialogComparison"></tbody></table></div></div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">07</span><span>Experiment, misconception, and VLSI connection</span></summary>
+				<div class="lesson-content lesson-grid">
+					<section><h3>What-if experiments</h3><ul class="lesson-list" id="labDialogQuestions"></ul></section>
+					<section><h3>Common misconception</h3><p id="labDialogMisconception"></p></section>
+					<section><h3>VLSI connection</h3><p id="labDialogVlsi"></p></section>
+					<section><h3>Learning outcome</h3><p id="labDialogOutcome"></p></section>
+				</div>
+			</details>
+
+			<details class="lesson-section">
+				<summary><span class="lesson-number">08</span><span>Remember, self-check, and source boundary</span></summary>
+				<div class="lesson-content lesson-grid">
+					<section><h3>Remember</h3><ul class="lesson-list" id="labDialogRemember"></ul></section>
+					<section><h3>Self-check questions</h3><ul class="lesson-list" id="labDialogSelfCheck"></ul></section>
+					<section><h3>Available simulation files</h3><ul class="lesson-list" id="labDialogFiles"></ul></section>
+					<section><h3>Portability and evidence</h3><p id="labDialogPortability"></p><button class="lab-download" type="button" disabled><i class="fas fa-download" aria-hidden="true"></i> Download unavailable: sanitized sources are not deployed</button></section>
+				</div>
+			</details>
+		</div>
+	</dialog>
+
+	<script src="ltspice-lab-data.js"></script>
+	<script src="ltspice-lab-netlists.js"></script>
+	<script src="ltspice-lab-teaching.js"></script>
+	<script>
+		const body = document.body;
+		const menuToggle = document.getElementById('menuToggle');
+		const foundationNav = document.getElementById('foundationNav');
+		const modeToggle = document.getElementById('modeToggle');
+
+		function closeMenu() {
+			foundationNav.classList.remove('open');
+			menuToggle.setAttribute('aria-expanded', 'false');
+			menuToggle.setAttribute('aria-label', 'Open navigation');
+			menuToggle.querySelector('i').className = 'fas fa-bars';
+		}
+
+		menuToggle.addEventListener('click', () => {
+			const isOpen = foundationNav.classList.toggle('open');
+			menuToggle.setAttribute('aria-expanded', String(isOpen));
+			menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+			menuToggle.querySelector('i').className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+		});
+
+		foundationNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+		modeToggle.addEventListener('click', () => {
+			const isDark = body.classList.toggle('dark-mode');
+			modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+			modeToggle.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+		});
+
+		const revealObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					revealObserver.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.12 });
+
+		document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
+		const labProjects = window.ltspiceLabProjects || [];
+		const labNetlists = window.ltspiceLabNetlists || {};
+		const teaching = window.ltspiceTeaching;
+		const labGrid = document.getElementById('labGrid');
+		const labSearch = document.getElementById('labSearch');
+		const labLevel = document.getElementById('labLevel');
+		const labCategories = document.getElementById('labCategories');
+		const labResultCount = document.getElementById('labResultCount');
+		const labDialog = document.getElementById('labDialog');
+		const labDialogClose = document.getElementById('labDialogClose');
+		let activeCategory = 'All';
+		let lastLabTrigger = null;
+
+		function textElement(tag, className, text) {
+			const element = document.createElement(tag);
+			if (className) element.className = className;
+			element.textContent = text;
+			return element;
+		}
+
+		function fillList(targetId, values, useCode = false) {
+			const list = document.getElementById(targetId);
+			list.replaceChildren(...values.map((value) => {
+				const item = document.createElement('li');
+				item.append(useCode ? textElement('code', '', value) : document.createTextNode(value));
+				return item;
+			}));
+		}
+
+		function fillTable(targetId, rows) {
+			const body = document.getElementById(targetId);
+			body.replaceChildren(...rows.map((cells) => {
+				const row = document.createElement('tr');
+				cells.forEach((cell) => row.append(textElement('td', '', cell)));
+				return row;
+			}));
+		}
+
+		function renderLesson(project) {
+			const lesson = teaching.buildLesson(project, labNetlists[project.id]);
+			document.getElementById('labDialogPrerequisite').textContent = lesson.prerequisite;
+			document.getElementById('labDialogQuestion').textContent = lesson.question;
+			document.getElementById('labDialogSchematic').textContent = `Read ${project.files.join(', ')} from source to return, then identify each labeled node before predicting behavior. The representative netlist below is tied specifically to ${lesson.netlist.source || 'an unavailable source'}.`;
+			document.getElementById('labDialogPrinciple').textContent = lesson.principle;
+			document.getElementById('labDialogExpected').textContent = lesson.expected;
+			document.getElementById('labDialogObserve').textContent = lesson.waveform;
+			document.getElementById('labDialogMisconception').textContent = lesson.misconception;
+			document.getElementById('labDialogVlsi').textContent = lesson.vlsi;
+
+			fillTable('labDialogComponents', lesson.componentLessons.map((component) => [component.name, component.value, component.what, component.why, component.change]));
+			fillList('labDialogFlow', lesson.flow);
+			fillList('labDialogAnalysis', project.analysis, true);
+			fillList('labDialogQuestions', lesson.experiments);
+			fillList('labDialogRemember', lesson.remember);
+			fillList('labDialogSelfCheck', lesson.selfCheck);
+			fillList('labDialogFiles', project.files, true);
+
+			document.getElementById('labDialogNetlistStatus').textContent = lesson.netlist.status;
+			document.getElementById('labDialogNetlistEvidence').textContent = `${lesson.netlist.method} ${lesson.netlist.confidence}`;
+			document.getElementById('labDialogNetlist').textContent = lesson.netlist.text || teaching.NOT_DOCUMENTED;
+			fillTable('labDialogMapping', lesson.elementStatements.map((statement) => [statement.designator, statement.kind, statement.nodes, statement.definition, teaching.explainStatement(statement)]));
+			fillList('labDialogDirectives', lesson.directiveStatements.length
+				? lesson.directiveStatements.map((statement) => `${statement.raw} - ${teaching.explainStatement(statement)}`)
+				: [teaching.NOT_DOCUMENTED], true);
+
+			const referenceList = document.getElementById('labDialogReferences');
+			if (!lesson.references.length) {
+				referenceList.replaceChildren(textElement('li', '', `${teaching.NOT_DOCUMENTED} No manufacturer link is assigned to a generic or ambiguous model.`));
+			} else {
+				referenceList.replaceChildren(...lesson.references.map((reference) => {
+					const item = document.createElement('li');
+					const link = textElement('a', '', `${reference.part}: ${reference.title}`);
+					link.href = reference.url;
+					link.target = '_blank';
+					link.rel = 'noopener noreferrer';
+					item.append(link, textElement('p', '', `Parameters to inspect: ${reference.parameters}`));
+					return item;
+				}));
+			}
+
+			const equationGrid = document.getElementById('labDialogEquations');
+			equationGrid.replaceChildren(...lesson.equations.map((equation) => {
+				const item = document.createElement('article');
+				item.className = 'equation-item';
+				item.append(textElement('strong', '', equation.name), textElement('code', '', equation.equation), textElement('p', '', equation.use));
+				return item;
+			}));
+
+			const calculationGrid = document.getElementById('labDialogCalculations');
+			if (!lesson.calculations.length) {
+				calculationGrid.replaceChildren(textElement('div', 'lesson-callout', `A defensible numerical substitution requires topology or values that are ${teaching.NOT_DOCUMENTED.toLowerCase()}`));
+			} else {
+				calculationGrid.replaceChildren(...lesson.calculations.map((calculation) => {
+					const item = document.createElement('article');
+					item.className = 'calculation-item';
+					item.append(textElement('strong', '', calculation.label), textElement('code', '', calculation.formula), textElement('p', '', `Substitute: ${calculation.substitution}`), textElement('p', '', `Estimate: ${calculation.result}`));
+					return item;
+				}));
+			}
+
+			fillTable('labDialogComparison', lesson.comparison.map((row) => [row.aspect, row.theory, row.simulation, row.difference]));
+		}
+
+		function openLabProject(project, trigger) {
+			lastLabTrigger = trigger;
+			document.getElementById('labDialogCategory').textContent = `${project.category} · ${project.level}`;
+			document.getElementById('labDialogTitle').textContent = project.title;
+			document.getElementById('labDialogDescription').textContent = project.description;
+			document.getElementById('labDialogObjective').textContent = project.objective;
+			document.getElementById('labDialogOutcome').textContent = project.outcome;
+			document.getElementById('labDialogPortability').textContent = project.portability;
+			renderLesson(project);
+			labDialog.showModal();
+			document.body.style.overflow = 'hidden';
+		}
+
+		function renderLabCards() {
+			const query = labSearch.value.trim().toLowerCase();
+			const level = labLevel.value;
+			const filtered = labProjects.filter((project) => {
+				const searchable = [project.title, project.category, project.description, ...project.concepts, ...project.files, ...project.analysis].join(' ').toLowerCase();
+				return (activeCategory === 'All' || project.category === activeCategory)
+					&& (level === 'All' || project.level === level)
+					&& (!query || searchable.includes(query));
+			});
+
+			labResultCount.textContent = `${filtered.length} ${filtered.length === 1 ? 'project' : 'projects'} shown`;
+			if (!filtered.length) {
+				labGrid.replaceChildren(textElement('div', 'lab-empty', 'No projects match these filters. Try another category, level, or search term.'));
+				return;
+			}
+
+			const cards = filtered.map((project) => {
+				const card = document.createElement('article');
+				card.className = 'lab-card';
+				const meta = document.createElement('div');
+				meta.className = 'lab-card-meta';
+				meta.append(textElement('span', 'lab-badge', project.category), textElement('span', 'lab-badge', project.level));
+				const tags = document.createElement('div');
+				tags.className = 'lab-tags';
+				project.concepts.slice(0, 3).forEach((concept) => tags.append(textElement('span', 'lab-tag', concept)));
+				const button = textElement('button', 'lab-card-button', 'Open guided experiment');
+				button.type = 'button';
+				button.setAttribute('aria-label', `Open ${project.title}`);
+				button.addEventListener('click', () => openLabProject(project, button));
+				card.append(meta, textElement('h3', '', project.title), textElement('p', '', project.description), textElement('div', 'lab-card-analysis', project.analysis.join(' · ')), tags, button);
+				return card;
+			});
+			labGrid.replaceChildren(...cards);
+		}
+
+		['All', ...new Set(labProjects.map((project) => project.category))].forEach((category) => {
+			const button = textElement('button', 'filter-chip', category);
+			button.type = 'button';
+			button.setAttribute('aria-pressed', String(category === activeCategory));
+			button.addEventListener('click', () => {
+				activeCategory = category;
+				labCategories.querySelectorAll('button').forEach((option) => option.setAttribute('aria-pressed', String(option === button)));
+				renderLabCards();
+			});
+			labCategories.append(button);
+		});
+
+		labSearch.addEventListener('input', renderLabCards);
+		labLevel.addEventListener('change', renderLabCards);
+		labDialogClose.addEventListener('click', () => labDialog.close());
+		labDialog.addEventListener('cancel', (event) => {
+			event.preventDefault();
+			labDialog.close();
+		});
+		window.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && labDialog.open) {
+				event.preventDefault();
+				labDialog.close();
+			}
+		}, true);
+		labDialog.addEventListener('click', (event) => {
+			if (event.target === labDialog) labDialog.close();
+		});
+		labDialog.addEventListener('close', () => {
+			document.body.style.overflow = '';
+			requestAnimationFrame(() => lastLabTrigger?.focus());
+		});
+
+		document.getElementById('labTotal').textContent = labProjects.length;
+		renderLabCards();
+		document.getElementById('currentYear').textContent = new Date().getFullYear();
+	</script>
+</body>
+</html>
