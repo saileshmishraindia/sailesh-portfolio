@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Semiconductor School: a teaching-first learning environment for semiconductor physics, CMOS, VLSI, simulation, and engineering reasoning.">
+	<title>Semiconductor School | Er. Sailesh Mishra</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+		:root {
+			--primary: #1a237e;
+			--primary-deep: #10195f;
+			--secondary: #00bcd4;
+			--dark: #0d1b2a;
+			--light: #f5f7fa;
+			--surface: #ffffff;
+			--surface-soft: #edf3f8;
+			--text: #263238;
+			--muted: #5f7480;
+			--line: #d8e2e8;
+			--focus: #ff4081;
+			--shadow: 0 12px 32px rgba(13, 27, 42, 0.1);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			background: var(--light);
+			color: var(--text);
+			font-family: "Segoe UI", "Poppins", sans-serif;
+			line-height: 1.65;
+		}
+		body.dark-mode {
+			--light: #121212;
+			--surface: #1b1f24;
+			--surface-soft: #222a31;
+			--text: #e5edf1;
+			--muted: #adbdc5;
+			--line: #34434b;
+			--shadow: 0 14px 34px rgba(0, 0, 0, 0.34);
+		}
+		a { color: inherit; }
+		button { font: inherit; }
+		.skip-link {
+			position: fixed;
+			top: 0.75rem;
+			left: 0.75rem;
+			z-index: 1001;
+			padding: 0.65rem 0.9rem;
+			background: var(--surface);
+			color: var(--primary);
+			border-radius: 6px;
+			transform: translateY(-150%);
+		}
+		.skip-link:focus { transform: translateY(0); }
+
+		.site-header {
+			position: sticky;
+			top: 0;
+			z-index: 100;
+			background: rgba(255, 255, 255, 0.96);
+			border-bottom: 1px solid rgba(13, 27, 42, 0.08);
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+		}
+		body.dark-mode .site-header {
+			background: rgba(18, 18, 18, 0.96);
+			border-bottom-color: rgba(255, 255, 255, 0.08);
+		}
+		.nav-shell {
+			width: min(1180px, calc(100% - 2rem));
+			min-height: 72px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+		}
+		.brand {
+			color: var(--primary);
+			font-size: 1.05rem;
+			font-weight: 750;
+			text-decoration: none;
+		}
+		body.dark-mode .brand { color: var(--secondary); }
+		.nav-links { display: flex; align-items: center; gap: 1.2rem; }
+		.nav-links a {
+			color: var(--dark);
+			font-weight: 600;
+			text-decoration: none;
+			font-size: 0.94rem;
+		}
+		body.dark-mode .nav-links a { color: #edf5f8; }
+		.nav-links a:hover { color: var(--primary); }
+		body.dark-mode .nav-links a:hover { color: var(--secondary); }
+		.icon-button {
+			width: 44px;
+			height: 44px;
+			display: inline-grid;
+			place-items: center;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			background: var(--surface);
+			color: var(--dark);
+			cursor: pointer;
+		}
+		body.dark-mode .icon-button { color: #fff; }
+		.menu-toggle { display: none; }
+
+		.hero {
+			position: relative;
+			min-height: min(760px, 82vh);
+			overflow: hidden;
+			display: grid;
+			align-items: center;
+			padding: 7rem 5% 6rem;
+			color: #fff;
+			background-color: var(--dark);
+			background-image:
+				linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+				linear-gradient(135deg, rgba(26, 35, 126, 0.94), rgba(13, 27, 42, 0.98));
+			background-size: 32px 32px, 32px 32px, auto;
+		}
+		.hero::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 5px;
+			background: var(--secondary);
+		}
+		.hero-inner {
+			width: min(1180px, 100%);
+			margin: 0 auto;
+			display: grid;
+			grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+			gap: 4rem;
+			align-items: center;
+		}
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.55rem;
+			margin-bottom: 1rem;
+			color: #8debf5;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+		}
+		.hero h1 {
+			max-width: 760px;
+			margin: 0;
+			font-family: "Playfair Display", Georgia, serif;
+			font-size: clamp(3rem, 7vw, 6.3rem);
+			line-height: 0.98;
+			letter-spacing: 0;
+		}
+		.hero-lead {
+			max-width: 720px;
+			margin: 1.6rem 0 2rem;
+			color: rgba(255, 255, 255, 0.86);
+			font-family: "Source Serif 4", Georgia, serif;
+			font-size: clamp(1.1rem, 2vw, 1.35rem);
+		}
+		.hero-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+		.button {
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.55rem;
+			padding: 0.75rem 1.2rem;
+			border: 2px solid transparent;
+			border-radius: 999px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+		}
+		.button:hover { transform: translateY(-2px); }
+		.button-primary { background: var(--secondary); color: #06232a; }
+		.button-primary:hover { box-shadow: 0 8px 22px rgba(0, 188, 212, 0.3); }
+		.button-outline { border-color: rgba(255, 255, 255, 0.72); color: #fff; }
+		.button-outline:hover { background: rgba(255, 255, 255, 0.1); }
+		.signal-map {
+			margin: 0;
+			padding: 1.25rem;
+			border: 1px solid rgba(141, 235, 245, 0.3);
+			border-radius: 18px;
+			background: rgba(5, 19, 34, 0.72);
+			box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+		}
+		.signal-map figcaption {
+			margin-bottom: 1rem;
+			color: #8debf5;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+		.signal-step {
+			display: grid;
+			grid-template-columns: 42px 1fr;
+			gap: 0.8rem;
+			align-items: center;
+		}
+		.signal-index {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border: 1px solid rgba(141, 235, 245, 0.44);
+			border-radius: 50%;
+			color: #8debf5;
+			font: 700 0.8rem Consolas, monospace;
+		}
+		.signal-step strong { display: block; color: #fff; }
+		.signal-step span { color: rgba(255, 255, 255, 0.68); font-size: 0.88rem; }
+		.signal-trace { width: 1px; height: 22px; margin: 0.3rem 0 0.3rem 20px; background: rgba(141, 235, 245, 0.38); }
+
+		.section { padding: 6rem 5%; }
+		.section-alt { background: var(--surface-soft); }
+		.section-inner { width: min(1180px, 100%); margin: 0 auto; }
+		.section-heading { max-width: 780px; margin-bottom: 3rem; }
+		.section-heading h2 {
+			margin: 0.25rem 0 0.8rem;
+			color: var(--primary);
+			font-family: "Playfair Display", Georgia, serif;
+			font-size: clamp(2rem, 4vw, 3.25rem);
+			line-height: 1.13;
+			letter-spacing: 0;
+		}
+		body.dark-mode .section-heading h2 { color: #70dce9; }
+		.section-heading p { margin: 0; color: var(--muted); font-size: 1.06rem; }
+
+		.pillars {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1rem;
+		}
+		.pillar {
+			padding: 1.65rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.pillar-number {
+			color: var(--secondary);
+			font: 700 0.78rem Consolas, monospace;
+			letter-spacing: 0.1em;
+		}
+		.pillar h3 { margin: 0.55rem 0; color: var(--dark); font-size: 1.25rem; }
+		body.dark-mode .pillar h3 { color: #f4f8fa; }
+		.pillar p { margin: 0; color: var(--muted); }
+		.pillar ul { margin: 1rem 0 0; padding-left: 1.15rem; color: var(--muted); }
+
+		.practice-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 2rem;
+			align-items: start;
+		}
+		.practice-note {
+			border-left: 4px solid var(--secondary);
+			padding: 1.5rem 1.7rem;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.practice-note h3 { margin: 0 0 0.6rem; color: var(--primary); }
+		body.dark-mode .practice-note h3 { color: #70dce9; }
+		.practice-note p { margin: 0; color: var(--muted); }
+		.evidence-list { display: grid; gap: 0.75rem; }
+		details {
+			border: 1px solid var(--line);
+			border-radius: 8px;
+			background: var(--surface);
+		}
+		summary {
+			min-height: 52px;
+			display: flex;
+			align-items: center;
+			gap: 0.65rem;
+			padding: 0.8rem 1rem;
+			color: var(--dark);
+			font-weight: 700;
+			cursor: pointer;
+		}
+		body.dark-mode summary { color: #edf5f8; }
+		details p {
+			margin: 0;
+			padding: 0 1rem 1rem;
+			color: var(--muted);
+		}
+
+		.notes-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1rem;
+		}
+		.note-card {
+			display: flex;
+			flex-direction: column;
+			padding: 1.25rem;
+			border: 1px solid var(--line);
+			border-left: 3px solid var(--secondary);
+			border-radius: 10px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.note-tag {
+			display: inline-block;
+			width: fit-content;
+			padding: 0.3rem 0.6rem;
+			border-radius: 999px;
+			background: rgba(0, 188, 212, 0.12);
+			color: var(--primary);
+			font-size: 0.74rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+		}
+		.note-card h3 {
+			margin: 0.8rem 0 0.5rem;
+			color: var(--primary);
+			font-size: 1.18rem;
+			line-height: 1.35;
+		}
+		body.dark-mode .note-card h3 { color: #70dce9; }
+		.note-card p {
+			margin: 0 0 1rem;
+			color: var(--muted);
+			font-size: 0.92rem;
+		}
+		.note-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.5rem;
+			margin-top: auto;
+			color: var(--primary);
+			font-weight: 700;
+			text-decoration: none;
+		}
+		body.dark-mode .note-link { color: #70dce9; }
+
+		.chapter-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1rem;
+		}
+		.chapter-card {
+			padding: 1.25rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.chapter-card.available { border-top: 4px solid var(--secondary); }
+		.chapter-card.development { border-top: 4px solid #f9a825; }
+		.chapter-card h3 { margin: 0.8rem 0 0.6rem; color: var(--primary); }
+		body.dark-mode .chapter-card h3 { color: #70dce9; }
+		.chapter-card p { margin: 0; color: var(--muted); }
+		.chapter-meta {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 1rem;
+		}
+		.status {
+			display: inline-block;
+			padding: 0.3rem 0.6rem;
+			border-radius: 999px;
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+		}
+		.status.available { background: rgba(0, 200, 83, 0.12); color: #037a2d; }
+		.status.development { background: rgba(249, 168, 37, 0.12); color: #8a6200; }
+		.status.coming { background: rgba(97, 97, 97, 0.1); color: var(--muted); }
+
+		.video-grid {
+			display: grid;
+			grid-template-columns: 1.15fr 0.85fr;
+			gap: 1.2rem;
+		}
+		.video-panel, .reference-panel {
+			padding: 1.5rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.video-panel h3, .reference-panel h3 { margin-top: 0; color: var(--primary); }
+		body.dark-mode .video-panel h3, body.dark-mode .reference-panel h3 { color: #70dce9; }
+		.video-placeholder {
+			display: grid;
+			place-items: center;
+			min-height: 230px;
+			margin-top: 1rem;
+			border: 1px dashed var(--line);
+			border-radius: 12px;
+			background: linear-gradient(135deg, rgba(0, 188, 212, 0.08), rgba(26, 35, 126, 0.08));
+			color: var(--muted);
+			text-align: center;
+			font-weight: 700;
+		}
+		.reference-panel ul {
+			margin: 0.75rem 0 0;
+			padding-left: 1.15rem;
+			color: var(--muted);
+		}
+		.reference-panel li + li { margin-top: 0.6rem; }
+
+		.future-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1rem;
+		}
+		.future-card {
+			padding: 1.25rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: var(--surface);
+			box-shadow: var(--shadow);
+		}
+		.future-card h3 {
+			margin: 0 0 0.6rem;
+			font-size: 1.05rem;
+			color: var(--primary);
+		}
+		body.dark-mode .future-card h3 { color: #70dce9; }
+		.future-card p { margin: 0; color: var(--muted); }
+
+		footer {
+			padding: 1.5rem;
+			background: #09131f;
+			color: #a8bac5;
+			text-align: center;
+			font-size: 0.88rem;
+		}
+		footer a { color: #d9f8ff; }
+
+		@media (max-width: 900px) {
+			.hero-inner, .practice-grid, .video-grid, .future-grid { grid-template-columns: 1fr; }
+			.hero { min-height: auto; }
+			.notes-grid, .chapter-grid, .pillars { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 760px) {
+			.menu-toggle { display: inline-grid; }
+			.nav-links {
+				display: none;
+				position: absolute;
+				top: 72px;
+				left: 0;
+				right: 0;
+				padding: 1rem;
+				background: rgba(255, 255, 255, 0.98);
+				border-bottom: 1px solid var(--line);
+				flex-direction: column;
+				align-items: flex-start;
+				box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+			}
+			body.dark-mode .nav-links { background: rgba(18, 18, 18, 0.98); }
+			.nav-links.open { display: flex; }
+			.nav-links a { width: 100%; min-height: 46px; display: flex; align-items: center; padding: 0 0.5rem; color: var(--text); }
+			body.dark-mode .nav-links a { color: #edf5f8; }
+			.hero { padding: 5rem 1rem 4rem; }
+			.hero-inner { gap: 2.5rem; }
+			.hero h1 { font-size: 2.75rem; }
+		}
+	</style>
+</head>
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="site-header">
+		<div class="nav-shell">
+			<a class="brand" href="index.html" aria-label="Return to Sailesh Mishra portfolio">Er. Sailesh Mishra</a>
+			<button class="icon-button menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="schoolNav">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</button>
+			<nav class="nav-links" id="schoolNav" aria-label="Semiconductor School navigation">
+				<a href="#meaning">Meaning</a>
+				<a href="#practice">Practice</a>
+				<a href="#class-notes">Class Notes</a>
+				<a href="#chapters">Chapters</a>
+				<a href="#my-video">My Video</a>
+				<a href="My_Foundation.html">My Foundation</a>
+				<button class="icon-button" id="modeToggle" type="button" aria-label="Switch to dark mode">
+					<i class="fas fa-moon" aria-hidden="true"></i>
+				</button>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content">
+		<section class="hero" aria-labelledby="school-title">
+			<div class="hero-inner">
+				<div>
+					<span class="eyebrow"><i class="fas fa-microchip" aria-hidden="true"></i> Semiconductor School</span>
+					<h1 id="school-title"># Semiconductor School</h1>
+					<p class="hero-lead">This is a learning environment for students who want more than a formula list. We begin with the physical idea, build the model, test it in simulation, and then connect it to the electronics and VLSI decisions that matter later.</p>
+					<div class="hero-actions">
+						<a class="button button-primary" href="#meaning">Start the learning loop <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+						<a class="button button-outline" href="My_Foundation.html">Return to My Foundation</a>
+					</div>
+				</div>
+
+				<figure class="signal-map" aria-label="The learning loop from fundamentals to engineering thinking">
+					<figcaption>The learning loop</figcaption>
+					<div class="signal-step"><span class="signal-index">01</span><div><strong>Understand</strong><span>Start with the device and the physical idea</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">02</span><div><strong>Model</strong><span>Write the equation and the approximation</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">03</span><div><strong>Simulate</strong><span>Test the behavior in circuit and device terms</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">04</span><div><strong>Explain</strong><span>Turn the result into clear engineering reasoning</span></div></div>
+					<div class="signal-trace" aria-hidden="true"></div>
+					<div class="signal-step"><span class="signal-index">05</span><div><strong>Apply</strong><span>Carry the idea into CMOS, VLSI, and design decisions</span></div></div>
+				</figure>
+			</div>
+		</section>
+
+		<section class="section" id="meaning">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">Meaning</span>
+					<h2>Why are we learning this?</h2>
+					<p>Semiconductor School is not a place where formulas appear without context. Every chapter begins with the same question: what is physically happening, why does it matter, and where will this idea show up again in electronics and VLSI?</p>
+				</div>
+
+				<div class="pillars">
+					<article class="pillar">
+						<span class="pillar-number">PILLAR 01</span>
+						<h3>Physical intuition before math</h3>
+						<p>Before we write the equation, we look at the device, the carriers, the field, the energy levels, and the circuit conditions that create the effect.</p>
+						<ul><li>What is changing?</li><li>Why does it change?</li><li>What does the device “see”?</li></ul>
+					</article>
+
+					<article class="pillar">
+						<span class="pillar-number">PILLAR 02</span>
+						<h3>Meaning and purpose</h3>
+						<p>Every concept connects to a real engineering problem: switching, current flow, biasing, charge storage, threshold behavior, noise, gain, or speed.</p>
+						<ul><li>What problem does it describe?</li><li>Why does it exist?</li><li>When will I use it later?</li></ul>
+					</article>
+
+					<article class="pillar">
+						<span class="pillar-number">PILLAR 03</span>
+						<h3>Simulation as a guide</h3>
+						<p>Once the model is formed, simulation becomes a way to check assumptions, visualize trends, and ask better questions: what happens when the bias changes, the voltage changes, or the geometry changes?</p>
+						<ul><li>Observe the waveform</li><li>Compare with the model</li><li>Learn the reason behind the result</li></ul>
+					</article>
+
+					<article class="pillar">
+						<span class="pillar-number">PILLAR 04</span>
+						<h3>Connect it to VLSI</h3>
+						<p>Semiconductor physics is not a disconnected subject. It is the reason a transistor turns on, a cell switches, a circuit meets timing, and a chip behaves the way it does.</p>
+						<ul><li>device physics → circuit behavior</li><li>CMOS → logic and timing</li><li>VLSI → design decisions</li></ul>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="practice">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">Practice</span>
+					<h2>Learn by understanding, not by memorizing</h2>
+					<p>Practice here is designed to build engineering judgment. We do not stop at “what is the formula?” We ask: why does the answer make sense, what is physically happening, and how would this appear in a real circuit or device?</p>
+				</div>
+
+				<div class="practice-grid">
+					<div class="practice-note">
+						<h3>The progression</h3>
+						<p>Understand → Calculate → Predict → Simulate → Explain → Design. The goal is not only to get the right number. The goal is to understand why the number behaves that way and where it fits in an actual circuit.</p>
+					</div>
+
+					<div class="evidence-list">
+						<details open>
+							<summary><i class="fas fa-circle-question" aria-hidden="true"></i> Level 1 — Understand</summary>
+							<p>Simple conceptual questions about the device, the field, the carrier motion, or the operating region.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-calculator" aria-hidden="true"></i> Level 2 — Apply</summary>
+							<p>Use the model, estimate the result, and check the assumptions behind it.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-wave-square" aria-hidden="true"></i> Level 3 — Analyze</summary>
+							<p>Reason about a transistor, diode, junction, or circuit under changing conditions.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-microchip" aria-hidden="true"></i> Level 4 — Simulate</summary>
+							<p>Verify the behavior in LTspice or a similar tool and compare it with the expectation.</p>
+						</details>
+						<details>
+							<summary><i class="fas fa-rocket" aria-hidden="true"></i> Level 5 — Engineer</summary>
+							<p>Make a design choice, justify it, and explain the trade-off in terms of physics and circuit behavior.</p>
+						</details>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="class-notes">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">Class Notes</span>
+					<h2>Teaching material, in the order it was actually taught.</h2>
+					<p>These are the real lecture notes already present in the repository. They are used as the foundation of this learning path and preserved in their original order.</p>
+				</div>
+
+				<div class="notes-grid">
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 1 — Brief about VLSI</h3>
+						<p>Opening context for the VLSI learning journey and the technical mindset behind it.</p>
+						<a class="note-link" href="private/teaching-corpus/1. Brief about VLSI Lec 1.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 2 — Semiconductor Physics I</h3>
+						<p>Carrier behavior, intrinsic materials, and the first step toward device understanding.</p>
+						<a class="note-link" href="private/teaching-corpus/2. Semiconductor Physics I Lec 2.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 3 — Semiconductor Physics II</h3>
+						<p>Continuing the physical picture with deeper device-level reasoning.</p>
+						<a class="note-link" href="private/teaching-corpus/3. Semiconductor Physics II Lec 3.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 4 — PN Junction I</h3>
+						<p>Barrier formation, diffusion, and how the junction becomes the basis of many devices.</p>
+						<a class="note-link" href="private/teaching-corpus/4. PN Junction (Donald Neamen) I Lec 4.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 5 — PN Junction II</h3>
+						<p>Continuing the junction story with behavior under bias and operational insight.</p>
+						<a class="note-link" href="private/teaching-corpus/5. PN Junction (Donald Neamen) I Lec 5.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 6 — Local Electric Field</h3>
+						<p>Why field distribution matters to flow, drift, depletion, and device operation.</p>
+						<a class="note-link" href="private/teaching-corpus/6. Loc Electric Field (Donald Neamen) I Lec 6.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 7 — SCR</h3>
+						<p>A device-level concept that revisits junction physics and switching behavior.</p>
+						<a class="note-link" href="private/teaching-corpus/7. SCR (Donald Neamen) I Lec 7.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+
+					<article class="note-card">
+						<span class="note-tag">Available</span>
+						<h3>Lecture 8 — VR</h3>
+						<p>Applied reasoning and device interpretation in the advanced portion of the sequence.</p>
+						<a class="note-link" href="private/teaching-corpus/8. VR (Donald Neamen) I Lec 8.pdf" target="_blank" rel="noopener">Open PDF <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="chapters">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">Curriculum</span>
+					<h2>Foundation of the school</h2>
+					<p>The roadmap below reflects the current teaching sequence and shows what is available, in development, or planned for later.</p>
+				</div>
+
+				<div class="chapter-grid">
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 01</span></div>
+						<h3>Brief About VLSI</h3>
+						<p>Orientation to the learning journey, the technical mindset, and why devices and circuits matter in design.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 02</span></div>
+						<h3>Semiconductor Physics I</h3>
+						<p>Carriers, materials, and the earliest concepts that explain how a semiconductor behaves.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 03</span></div>
+						<h3>Semiconductor Physics II</h3>
+						<p>Deepening the physical picture and making the connection from materials to device behavior.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 04</span></div>
+						<h3>PN Junction I</h3>
+						<p>Barrier formation, depletion region, and the concept of a junction as a building block.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 05</span></div>
+						<h3>PN Junction II</h3>
+						<p>Bias conditions, current flow, and the transition from structure to operating principle.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 06</span></div>
+						<h3>Local Electric Field</h3>
+						<p>The field picture: what it tells us, why it matters, and how it shapes transport and device behavior.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 07</span></div>
+						<h3>SCR</h3>
+						<p>Switching and regenerative behavior, revisited through semiconductor and junction reasoning.</p>
+					</article>
+
+					<article class="chapter-card available">
+						<div class="chapter-meta"><span class="status available">Available</span><span>Chapter 08</span></div>
+						<h3>VR</h3>
+						<p>Advanced device interpretation and applied reasoning in the same teaching sequence.</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="my-video">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">My Video</span>
+					<h2>My explanation is still in progress.</h2>
+					<p>This area is intentionally structured so a lecture video can be added later without disturbing the learning flow. For now, the placeholder clearly distinguishes between the mentor explanation and external reference material.</p>
+				</div>
+
+				<div class="video-grid">
+					<div class="video-panel">
+						<h3>My Explanation</h3>
+						<div class="video-placeholder"><div><i class="fas fa-video" aria-hidden="true" style="font-size: 2rem; display: block; margin-bottom: 0.6rem;"></i>My Video — Coming Soon</div></div>
+					</div>
+					<div class="reference-panel">
+						<h3>Reference Material</h3>
+						<ul>
+							<li>Textbook sections and lecture notes.</li>
+							<li>Datasheets and application notes.</li>
+							<li>Diagrams, graphs, and simulation references.</li>
+							<li>Topics added in later chapters as the school grows.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="future-learning">
+			<div class="section-inner">
+				<div class="section-heading">
+					<span class="eyebrow">Future learning structure</span>
+					<h2>Built for gradual growth</h2>
+					<p>New topics can be added naturally without breaking the learning sequence. The structure supports theory, practice, simulation, notes, diagrams, and VLSI connections in a way that is easy to scale.</p>
+				</div>
+
+				<div class="future-grid">
+					<article class="future-card">
+						<h3>Foundation</h3>
+						<p>Semiconductor physics, bands, junctions, fields, and the basic physical understanding before circuit models.</p>
+					</article>
+					<article class="future-card">
+						<h3>Device & Circuit</h3>
+						<p>MOS capacitor, MOSFET, CMOS, inverters, gain stages, and the move from device physics to circuit operation.</p>
+					</article>
+					<article class="future-card">
+						<h3>VLSI Thinking</h3>
+						<p>Timing, power, structure, design flow, and the engineering decisions that turn understanding into chips.</p>
+					</article>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; <span id="currentYear"></span> Er. Sailesh Mishra · VLSITech | Temple of Silicon Scholars · <a href="My_Foundation.html">My Foundation</a></p>
+	</footer>
+
+	<script>
+		const body = document.body;
+		const menuToggle = document.getElementById('menuToggle');
+		const schoolNav = document.getElementById('schoolNav');
+		const modeToggle = document.getElementById('modeToggle');
+		document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+		function closeMenu() {
+			schoolNav.classList.remove('open');
+			menuToggle.setAttribute('aria-expanded', 'false');
+			menuToggle.setAttribute('aria-label', 'Open navigation');
+			menuToggle.querySelector('i').className = 'fas fa-bars';
+		}
+
+		menuToggle.addEventListener('click', () => {
+			const isOpen = schoolNav.classList.toggle('open');
+			menuToggle.setAttribute('aria-expanded', String(isOpen));
+			menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+			menuToggle.querySelector('i').className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+		});
+
+		schoolNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
+		modeToggle.addEventListener('click', () => {
+			const isDark = body.classList.toggle('dark-mode');
+			modeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+			modeToggle.querySelector('i').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+		});
+	</script>
+</body>
+</html>
