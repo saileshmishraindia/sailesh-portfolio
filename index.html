@@ -2838,6 +2838,15 @@
         }
     }
     
+    @media (min-width: 769px) and (max-width: 1380px) {
+      header { flex-wrap: wrap; gap: 0.4rem; }
+      header nav { order: 3; flex-basis: 100%; justify-content: center; flex-wrap: wrap; gap: 0.3rem 1rem; }
+      header .mode-toggle { margin-left: auto; }
+    }
+
+    @media (max-width: 768px) {
+      header nav { overflow-y: auto; gap: 0.7rem; padding: 4rem 1.25rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -2852,9 +2861,10 @@
       <a href="#rnd">R&A</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
-      <a href="#courses">Courses</a>
+      <a href="courses.html">Courses</a>
       <a href="#timeline">Experience</a>
       <a href="My_Foundation.html">My Foundation</a>
+      <a href="Academy.html">Academy</a>
       <a href="#contact">Contact</a>
     </nav>
     <button class="mode-toggle" id="modeToggle"><i class="fas fa-moon"></i></button>

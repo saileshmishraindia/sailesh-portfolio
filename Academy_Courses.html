@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposed Course Catalogue | VLSITech Technical Learning Academy</title>
+  <meta name="description" content="Browse proposed VLSITech courses by department and level, with prerequisites, estimated learning hours, outcomes, practical work and assessments. Enrolment is not open.">
+  <meta property="og:title" content="Proposed Course Catalogue | VLSITech">
+  <meta property="og:description" content="Six proposed technical departments. Transparent prerequisites, learning outcomes and practical assessment plans.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://saileshmishraindia.github.io/sailesh-portfolio/Academy_Courses.html">
+  <meta property="og:site_name" content="VLSITech | Temple of Silicon Scholars">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/academy.css">
+  <script src="assets/js/academy.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header"><div class="nav-shell">
+    <a class="brand" href="Academy.html"><strong>VLSITech</strong><span>My Foundation / Technical Learning Academy</span></a>
+    <button class="icon-button menu-toggle" id="academyMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="academyNav" hidden><i class="fas fa-bars" aria-hidden="true"></i></button>
+    <nav class="nav-links" id="academyNav" aria-label="Academy navigation"><a href="Academy.html">Academy</a><a href="Academy_Courses.html" aria-current="page">Courses</a><a href="Admissions.html">Admissions</a><a href="Certification.html">Certification</a><a href="Verify_Certificate.html">Verify Certificate</a><a href="My_Foundation.html">My Foundation</a><button class="icon-button" id="academyModeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" hidden><i class="fas fa-moon" aria-hidden="true"></i></button></nav>
+  </div></header>
+  <main id="main-content">
+    <div class="container"><ol class="breadcrumb" aria-label="Breadcrumb"><li><a href="index.html">Portfolio</a></li><li><a href="My_Foundation.html">My Foundation</a></li><li><a href="Academy.html">Academy</a></li><li>Courses</li></ol></div>
+    <section class="hero hero-small"><div class="container"><span class="eyebrow">VLSITech &mdash; Temple of Silicon Scholars</span><h1>Build your technical learning pathway.</h1><p class="hero-lead">A proposed course catalogue, organised around engineering fundamentals and practical evidence.</p><div class="actions"><a class="button button-primary" href="#catalogue">Explore the catalogue</a><a class="button button-outline" href="Admissions.html">Read admissions information</a></div></div></section>
+    <section class="section" id="catalogue">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">Curriculum planning / not open for enrolment</span><h2>Proposed course catalogue</h2><p>All entries are planned outlines, not active teaching offers. Learning hours are initial total-study estimates, not scheduled contact hours or promised delivery dates. Syllabi, tools and assessment requirements require final approval.</p></div>
+        <aside class="notice"><strong>Availability guide:</strong> <span class="pill">In Development</span> indicates a draft outline being developed; <span class="pill">Coming Soon</span> indicates a proposed pathway without a confirmed launch. No entry is marked Enrolment Open. No fees, instructors or batch dates have been announced.</aside>
+        <p class="notice" id="filterNotice" role="status" hidden></p>
+        <div class="filters" id="courseFilters" hidden>
+          <div><label for="departmentFilter">Academic department</label><select id="departmentFilter" aria-controls="courseCatalogue"><option value="all">All departments</option></select></div>
+          <div><label for="levelFilter">Difficulty level</label><select id="levelFilter" aria-controls="courseCatalogue"><option value="all">All levels</option><option value="Foundation">Foundation</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option></select></div>
+          <button class="button button-secondary" id="resetFilters" type="button">Reset filters</button>
+        </div>
+        <p class="result-count" id="courseResultCount" role="status" aria-live="polite">The proposed catalogue loads with JavaScript.</p>
+        <noscript><aside class="notice">JavaScript is required for the data-driven catalogue and filters. The proposed departments are Semiconductor Technology &amp; VLSI; PCB Design &amp; EDA; Programming &amp; Engineering Automation; Digital Electronics &amp; Computer Engineering; Electronics &amp; Instrumentation; and AI in Engineering. No course is open for enrolment. <a href="Academy.html#departments">Read the department overviews</a>.</aside></noscript>
+        <div id="courseCatalogue"></div>
+        <p class="empty-state" id="courseEmpty" hidden>No proposed courses match these filters. Choose another level or reset the filters.</p>
+        <aside class="notice"><strong>Resources are not enrolment.</strong> Existing <a href="My_Foundation.html#vlsi-notes">Foundation notes</a>, <a href="My_Foundation.html#ltspice-lab">simulation projects</a> and <a href="courses.html">legacy project modules</a> remain separate resources. Accessing them does not earn an academy credential.</aside>
+      </div>
+    </section>
+    <section class="closing"><div class="container"><h2>Know the expectations before you enrol.</h2><p>Read the proposed entry requirements, learning format and independent certification framework. Final course terms must be published before enrolment begins.</p><div class="actions"><a class="button button-primary" href="Admissions.html">Admissions information</a><a class="button button-outline" href="Certification.html">Certification framework</a></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>VLSITech &mdash; Temple of Silicon Scholars</strong><p>Technical Learning Academy / An extension of My Foundation.</p><a href="index.html">Return to Sailesh Mishra's professional portfolio</a></div><nav class="footer-links" aria-label="Academy policy links"><a href="Admissions.html#privacy">Privacy (provisional)</a><a href="Admissions.html#terms">Terms (provisional)</a><a href="Admissions.html#fees-refunds">Fees &amp; refunds (pending)</a><a href="Certification.html">Certification framework</a><a href="Academy.html#contact">Contact</a></nav></div><p class="legal">Independent private technical education initiative. Academy-issued certificates are independent training credentials, not university degrees, UGC-recognised qualifications or government-recognised vocational qualifications. No statutory recognition or affiliation is claimed. &copy; VLSITech / Er. Sailesh Mishra.</p></div></footer>
+</body>
+</html>

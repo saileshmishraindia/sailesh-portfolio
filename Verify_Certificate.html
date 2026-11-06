@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate Verification Interface | VLSITech Technical Learning Academy</title>
+  <meta name="description" content="VLSITech certificate verification interface. No authoritative registry is connected; input checks cannot confirm authenticity. Learn about verification and privacy safeguards.">
+  <meta property="og:title" content="Certificate Verification Interface | VLSITech">
+  <meta property="og:description" content="Online verification is not connected to an authoritative registry. No student records or fabricated verification results are published.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://saileshmishraindia.github.io/sailesh-portfolio/Verify_Certificate.html">
+  <meta property="og:site_name" content="VLSITech | Temple of Silicon Scholars">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/academy.css">
+  <script src="assets/js/academy.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header"><div class="nav-shell">
+    <a class="brand" href="Academy.html"><strong>VLSITech</strong><span>My Foundation / Technical Learning Academy</span></a>
+    <button class="icon-button menu-toggle" id="academyMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="academyNav" hidden><i class="fas fa-bars" aria-hidden="true"></i></button>
+    <nav class="nav-links" id="academyNav" aria-label="Academy navigation"><a href="Academy.html">Academy</a><a href="Academy_Courses.html">Courses</a><a href="Admissions.html">Admissions</a><a href="Certification.html">Certification</a><a href="Verify_Certificate.html" aria-current="page">Verify Certificate</a><a href="My_Foundation.html">My Foundation</a><button class="icon-button" id="academyModeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" hidden><i class="fas fa-moon" aria-hidden="true"></i></button></nav>
+  </div></header>
+  <main id="main-content">
+    <div class="container"><ol class="breadcrumb" aria-label="Breadcrumb"><li><a href="index.html">Portfolio</a></li><li><a href="My_Foundation.html">My Foundation</a></li><li><a href="Academy.html">Academy</a></li><li>Certificate verification</li></ol></div>
+    <section class="hero hero-small"><div class="container"><span class="eyebrow">Public credential status / service not connected</span><h1>Trust requires an authoritative record.</h1><p class="hero-lead">A certificate design or a correctly formatted ID is not proof of authenticity.</p><p>This interface is prepared for future registry integration. It cannot verify any certificate today.</p></div></section>
+    <section class="section" id="verify">
+      <div class="container verification-shell">
+        <div class="section-heading"><span class="eyebrow">Registry connection: unavailable</span><h2>Certificate ID lookup</h2><p>GitHub Pages hosts static files. No authoritative certificate backend or controlled verification dataset is connected. No certificate records or student personal details are stored in this frontend.</p></div>
+        <div class="card">
+          <form class="verification-form" id="certificateForm" novalidate>
+            <div><label for="certificateId">Certificate ID</label><input id="certificateId" type="text" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="idHelp verificationResult" placeholder="Enter the ID printed on a certificate"></div>
+            <button class="button button-primary" id="verifyButton" type="submit" disabled>Verify</button>
+          </form>
+          <p class="muted" id="idHelp">Provisional input format: 6&ndash;64 letters, numbers or hyphens, beginning with a letter or number. This checks format only. Do not enter a name, email address, Aadhaar number or other personal identifier.</p>
+          <div class="verification-result" id="verificationResult" role="status" aria-live="polite" aria-atomic="true" data-state="unavailable"><h2>Online verification is not connected</h2><p>No certificate has been checked. Entering an ID will not establish whether it exists or is authentic. The current interface does not send IDs to a server, save them or place them in a URL.</p></div>
+          <noscript><p class="notice">JavaScript is disabled. The input cannot be submitted; no registry lookup is available regardless. Read the framework or contact the academy for a general enquiry without sending personal documents.</p></noscript>
+        </div>
+        <aside class="notice"><strong>No fabricated results.</strong> There is no hardcoded student array, demonstration certificate record or credential generated by this site. An unavailable service is not the same as an invalid certificate.</aside>
+      </div>
+    </section>
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">How a future service must work</span><h2>Show status without exposing student records.</h2><p>Before a result can be authoritative, an approved registry must control who can issue, correct, revoke and supersede credentials, preserve an audit trail and publish only proportionate public information.</p></div>
+        <div class="grid">
+          <article class="card"><h3>Valid or not found</h3><p>A valid result must come from an authorised registry, not a local ID-format test. A not-found result can only follow an actual registry lookup and should not expose unrelated records.</p></article>
+          <article class="card"><h3>Revoked or superseded</h3><p>A future result must distinguish a withdrawn credential from one replaced after correction. Private misconduct details and replacement-holder information should not be disclosed.</p></article>
+          <article class="card"><h3>Unavailable</h3><p>No connection, an unconfigured service or a lookup failure must never be reported as a successful verification or as evidence that the credential does not exist. Today, this is the only registry state available.</p></article>
+        </div>
+        <aside class="notice"><strong>Privacy-first integration.</strong> A future lookup should return only the certificate ID, course title, issue date and current status where lawful. Do not expose student names, email, birth dates, marks or identity documents by default. Apply access control for administrative changes, rate limiting, abuse monitoring and a published correction route. Final policy and legal review are required before launch.</aside>
+        <div class="actions"><a class="button button-secondary" href="Certification.html">Read certification framework</a><a class="button button-secondary" href="Admissions.html#privacy">Read privacy boundaries</a><a class="button button-secondary" href="Academy.html#contact">General academy enquiry</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>VLSITech &mdash; Temple of Silicon Scholars</strong><p>Technical Learning Academy / An extension of My Foundation.</p><a href="index.html">Return to Sailesh Mishra's professional portfolio</a></div><nav class="footer-links" aria-label="Academy policy links"><a href="Admissions.html#privacy">Privacy (provisional)</a><a href="Admissions.html#terms">Terms (provisional)</a><a href="Admissions.html#fees-refunds">Fees &amp; refunds (pending)</a><a href="Certification.html">Certification framework</a><a href="Academy.html#contact">Contact</a></nav></div><p class="legal">Independent private technical education initiative. Academy-issued certificates are independent training credentials, not university degrees, UGC-recognised qualifications or government-recognised vocational qualifications. No statutory recognition or affiliation is claimed. &copy; VLSITech / Er. Sailesh Mishra.</p></div></footer>
+</body>
+</html>

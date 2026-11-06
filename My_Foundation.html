@@ -529,6 +529,22 @@
 
 		:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
+		.academy-intro { border-block: 1px solid var(--line); }
+		.academy-intro .eyebrow { color: var(--primary); }
+		body.dark-mode .academy-intro .eyebrow { color: #70dce9; }
+		.academy-intro .bridge-card { min-height: 180px; }
+		.academy-intro .bridge-card h3 { font-size: 1.1rem; }
+		.academy-philosophy { margin: 2rem 0 1rem; color: var(--primary); font: 700 0.9rem/1.8 Consolas, monospace; }
+		body.dark-mode .academy-philosophy { color: #70dce9; }
+		.academy-disclosure { max-width: 900px; color: var(--muted); font-size: 0.9rem; }
+		html { scroll-padding-top: 6rem; }
+
+		@media (min-width: 721px) and (max-width: 1180px) {
+			.nav-shell { flex-wrap: wrap; justify-content: center; padding-block: 0.6rem; }
+			.nav-links { flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; }
+			html { scroll-padding-top: 10rem; }
+		}
+
 		@media (max-width: 900px) {
 			.hero-inner, .practice-grid { grid-template-columns: 1fr; }
 			.hero { min-height: auto; }
@@ -563,6 +579,7 @@
 				box-shadow: var(--shadow);
 			}
 			.nav-links.open { display: flex; }
+			.nav-links { max-height: calc(100dvh - 72px); overflow-y: auto; }
 			.nav-links a { min-height: 46px; display: flex; align-items: center; padding: 0 0.5rem; color: var(--text); }
 			.nav-links .icon-button { margin-top: 0.4rem; }
 			.hero { padding: 5rem 1rem 4rem; }
@@ -611,12 +628,12 @@
 			</button>
 			<nav class="nav-links" id="foundationNav" aria-label="Foundation page navigation">
 				<a href="#meaning">Meaning</a>
+				<a href="Academy.html">Academy</a>
 				<a href="#practice">Practice</a>
 				<a href="#vlsi-notes">Class Notes</a>
 				<a href="#ltspice-lab">Simulation Lab</a>
 				<a href="#progression">Progression</a>
 				<a href="#connections">Connections</a>
-				<a href="Semiconductor_School.html">Semiconductor School</a>
 				<a href="index.html#mentorship">Mentorship</a>
 				<button class="icon-button" id="modeToggle" type="button" aria-label="Switch to dark mode">
 					<i class="fas fa-moon" aria-hidden="true"></i>
@@ -634,7 +651,6 @@
 					<p class="hero-lead">Before the projects, tools, and professional work came a repeated discipline: return to fundamentals, model the circuit, inspect its behavior, explain it clearly, and use the result to solve the next problem better.</p>
 					<div class="hero-actions">
 						<a class="button button-primary" href="#meaning">Trace the foundation <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-						<a class="button button-outline" href="Semiconductor_School.html">Explore Semiconductor School</a>
 						<a class="button button-outline" href="index.html#projects">See engineering work</a>
 					</div>
 				</div>
@@ -691,6 +707,27 @@
 						<ul><li>Concept-first interview preparation</li><li>Reasoning under constraints</li><li>Feedback and revision</li></ul>
 					</article>
 				</div>
+			</div>
+		</section>
+
+		<section class="section academy-intro" id="academy" aria-labelledby="academy-title">
+			<div class="section-inner">
+				<div class="section-heading reveal">
+					<span class="eyebrow">Technical Learning Academy / An extension of My Foundation</span>
+					<h2 id="academy-title">VLSITech Technical Learning Academy</h2>
+					<p>From Understanding Fundamentals to Demonstrating Engineering Competence. The Foundation's concept-first practice now extends into proposed structured learning pathways, combining technical study, simulation, practical assignments and project evaluation.</p>
+				</div>
+				<div class="bridge-grid">
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=vlsi#catalogue"><i class="fas fa-microchip" aria-hidden="true"></i><h3>Semiconductor Technology &amp; VLSI</h3><p>Devices, CMOS, analog and digital IC design, RTL, verification and physical-design fundamentals.</p><span>Explore proposed pathways</span></a>
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=pcb#catalogue"><i class="fas fa-draw-polygon" aria-hidden="true"></i><h3>PCB Design &amp; Electronic Design Automation</h3><p>Schematics, libraries, layout, routing, design checks and signal/power integrity.</p><span>Explore proposed pathways</span></a>
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=programming#catalogue"><i class="fas fa-code" aria-hidden="true"></i><h3>Programming &amp; Engineering Automation</h3><p>Python, shell scripting, data processing and repeatable engineering workflows.</p><span>Explore proposed pathways</span></a>
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=digital#catalogue"><i class="fas fa-memory" aria-hidden="true"></i><h3>Digital Electronics &amp; Computer Engineering</h3><p>Logic, sequential systems, memories, computer architecture and processor fundamentals.</p><span>Explore proposed pathways</span></a>
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=electronics#catalogue"><i class="fas fa-wave-square" aria-hidden="true"></i><h3>Electronics &amp; Instrumentation</h3><p>Circuit analysis, analog electronics, operational amplifiers and electronic measurements.</p><span>Explore proposed pathways</span></a>
+					<a class="bridge-card reveal" href="Academy_Courses.html?department=ai#catalogue"><i class="fas fa-brain" aria-hidden="true"></i><h3>Artificial Intelligence in Engineering</h3><p>AI and machine learning foundations, data analysis and responsible AI-assisted workflows.</p><span>Explore proposed pathways</span></a>
+				</div>
+				<p class="academy-philosophy">UNDERSTAND &rarr; EXPLORE &rarr; IMPLEMENT &rarr; EVALUATE &rarr; CERTIFY</p>
+				<p class="academy-disclosure">An independent private technical education initiative, currently in curriculum planning. The proposed participation, completion and achievement certificates are independently issued training credentials, not university degrees, UGC-recognised qualifications or government-recognised vocational qualifications. No course enrolment or certificate issuance is active. The existing Foundation resources remain available below.</p>
+				<div class="hero-actions"><a class="button button-primary" href="Academy.html">Explore the Academy <i class="fas fa-arrow-right" aria-hidden="true"></i></a><a class="button bridge-card-link" href="Certification.html">Read the proposed certification framework</a></div>
 			</div>
 		</section>
 
@@ -1089,7 +1126,7 @@
 		let lastNoteTrigger = null;
 
 		function noteUrl(note) {
-			return encodeURI(note.file);
+			return `VLSI%20TECH%20CLASSES%20(Notes%20Annoted)/${encodeURIComponent(note.file)}`;
 		}
 
 		function openNote(note, trigger) {
