@@ -1126,7 +1126,7 @@
 		let lastNoteTrigger = null;
 
 		function noteUrl(note) {
-			return `VLSI%20TECH%20CLASSES%20(Notes%20Annoted)/${encodeURIComponent(note.file)}`;
+			return encodeURI(note.file);
 		}
 
 		function openNote(note, trigger) {
