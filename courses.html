@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Courses — Sailesh Mishra</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    body{font-family:Inter,system-ui,Arial,sans-serif;margin:0;color:#222}
+    header{display:flex;align-items:center;gap:1rem;padding:1rem;background:#0f172a;color:#fff}
+    .logo{font-weight:700}
+    nav a{color:#cbd5e1;margin-right:1rem;text-decoration:none}
+    main{padding:2rem;max-width:980px;margin:0 auto}
+    .foundation-banner{background:linear-gradient(90deg,#0b1220 0%,#0b5fff 100%);color:#fff;padding:2rem 1rem;text-align:center;border-bottom:4px solid rgba(255,255,255,0.06);box-shadow:0 6px 18px rgba(11,95,255,0.08)}
+    .foundation-banner .foundation-content{display:flex;gap:1rem;align-items:center;justify-content:center}
+    .foundation-banner i{font-size:2rem;opacity:0.98;color:rgba(255,255,255,0.95)}
+    .foundation-banner .foundation-text{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .foundation-banner .foundation-label{font-size:1.2rem;opacity:0.98}
+    .foundation-banner .foundation-name{margin:0.15rem 0 0.2rem 0;font-weight:800;font-size:2rem}
+    .foundation-banner .foundation-tagline{font-size:1.2rem;opacity:0.98;font-family:"Times New Roman", Times, serif}
+    .divider{height:8px;background:linear-gradient(90deg,rgba(11,95,255,0.06),rgba(11,95,255,0.03));margin-bottom:0}
+    .course-card{border:1px solid #e6e9ef;border-radius:8px;padding:1rem;margin:0.8rem 0}
+    .course-card h3{margin:0 0 0.5rem 0;color:#0b5fff}
+    ol{padding-left:1.2rem}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem}
+    .project-card{background:#fff;border-radius:10px;padding:0.6rem;border:1px solid #e9eef6;box-shadow:0 6px 18px rgba(12,24,48,0.04);cursor:pointer}
+    .project-card h3{color:#072a8a;margin:0.6rem 0 0.25rem}
+    .project-card p{margin:0 0 0.8rem;color:#334155;font-size:0.95rem}
+    .card-meta{border-top:1px dashed #eef3fb;padding-top:0.6rem;margin-top:0.4rem;font-size:0.92rem;color:#475569}
+    .card-meta ul{padding-left:1rem;margin:0 0 0.5rem}
+    .card-meta a.exercise-link{display:inline-block;background:#0b5fff;color:#fff;padding:0.35rem 0.6rem;border-radius:6px;text-decoration:none;font-size:0.9rem}
+    .slider .indicators{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;gap:6px}
+    .slider .indicators button{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,0.6);opacity:0.9;cursor:pointer;padding:0}
+    .slider .indicators button.active{background:#0b5fff}
+    .slider{position:relative;overflow:hidden;border-radius:8px;background:#f6f8fb;height:160px}
+    .slider .slides{width:100%;height:100%;position:relative}
+    .slider img.slide{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 600ms ease;will-change:opacity}
+    .slider img.slide.visible{opacity:1}
+    .slider button.prev,.slider button.next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.95);border:0;padding:6px 10px;border-radius:6px;cursor:pointer;z-index:6}
+    .slider button.prev{left:8px}
+    .slider button.next{right:8px}
+    .card-link{display:block;text-decoration:none;color:inherit}
+    .card-link:focus{outline:3px solid rgba(11,95,255,0.18);outline-offset:4px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Er. Sailesh Mishra</div>
+    <nav>
+      <a href="index.html#home">Home</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#courses">Courses</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="foundation-banner" role="banner" aria-label="Temple Of Silicon Scholars banner">
+    <div class="foundation-content">
+      <i class="fas fa-university" aria-hidden="true"></i>
+      <div class="foundation-text">
+        <span class="foundation-label">Under my Foundation</span>
+        <h3 class="foundation-name">"VLSITech | Temple of Silicon Scholars"</h3>
+        <span class="foundation-tagline">Empowering Technical Undergrads: Nibble by Nibble: From Zero to Hero !</span>
+      </div>
+      <i class="fas fa-microchip" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="divider" aria-hidden="true"></div>
+
+  <main id="courses">
+    <h1>Courses — Project Modules</h1>
+    <p>Explore each module as a project card. Use the image sliders to preview practical exercises and example outputs.</p>
+
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?logic-gates&sig=1,https://source.unsplash.com/800x600/?logic-gates&sig=2,https://source.unsplash.com/800x600/?logic-gates&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>VLSI For Freshers</h3>
+        <p>Introductory VLSI concepts, device basics and simple RTL exercises.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Device physics overview</li>
+            <li>RTL intro & simple gate TLV exercises</li>
+          </ul>
+          <a class="exercise-link" href="vlsi_for_freshers.html">Open Exercises</a>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?pcb,printed-circuit&sig=1,https://source.unsplash.com/800x600/?pcb,printed-circuit&sig=2,https://source.unsplash.com/800x600/?pcb,printed-circuit&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Digital Design & RTL Coding</h3>
+        <p>RTL design flows, Verilog/SystemVerilog and TL‑Verilog exercises.</p>
+        <div class="card-meta">
+          <ul>
+            <li>RTL structure & combinational logic</li>
+            <li>Inverter, buffer, and module examples</li>
+          </ul>
+          <a class="exercise-link" href="digital_design.html">Open Exercise</a>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?fpga,development-board&sig=1,https://source.unsplash.com/800x600/?fpga,development-board&sig=2,https://source.unsplash.com/800x600/?fpga,development-board&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Computer Architecture Fundamentals</h3>
+        <p>Data path, pipelining, and small RISC-V CPU projects.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Adder trees & ALU basics</li>
+            <li>Full adder TLV exercise</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercise</button>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?verilog,code&sig=1,https://source.unsplash.com/800x600/?verilog,code&sig=2,https://source.unsplash.com/800x600/?verilog,code&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Timing Analysis & STA</h3>
+        <p>Hands-on STA checks and constraint-writing projects.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Write constraints for a small RTL block</li>
+            <li>Run simple timing checks</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?breadboard,makerspace&sig=1,https://source.unsplash.com/800x600/?breadboard,makerspace&sig=2,https://source.unsplash.com/800x600/?breadboard,makerspace&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Physical Design Essentials</h3>
+        <p>Floorplanning, placement and routing mini-projects.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Basic floorplan exercise</li>
+            <li>Placement considerations</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?oscilloscope,measurement&sig=1,https://source.unsplash.com/800x600/?oscilloscope,measurement&sig=2,https://source.unsplash.com/800x600/?oscilloscope,measurement&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Low-Power Design Techniques</h3>
+        <p>Clock gating, power domains and low-power RTL patterns.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Clock gating patterns</li>
+            <li>Power domain partitioning</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 7 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?semiconductor,chip&sig=1,https://source.unsplash.com/800x600/?semiconductor,chip&sig=2,https://source.unsplash.com/800x600/?semiconductor,chip&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Verification & UVM Basics</h3>
+        <p>Testbench projects and constrained-random verification exercises.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Write a simple testbench</li>
+            <li>Simulate TLV snippets and capture waveforms</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?microcontroller,arduino&sig=1,https://source.unsplash.com/800x600/?microcontroller,arduino&sig=2,https://source.unsplash.com/800x600/?microcontroller,arduino&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Analog/Mixed-Signal Intro</h3>
+        <p>Basic analog block simulations and mixed-signal integration examples.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Simulate a simple analog block</li>
+            <li>Integrate with digital TLV harness</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 9 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?soldering,electronics&sig=1,https://source.unsplash.com/800x600/?soldering,electronics&sig=2,https://source.unsplash.com/800x600/?soldering,electronics&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Embedded Systems & SoC Integration</h3>
+        <p>Peripherals, bus integration and bring-up lab exercises.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Peripheral bring-up</li>
+            <li>SoC integration checklist</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+
+      <!-- Card 10 -->
+      <article class="project-card" tabindex="0">
+        <div class="slider" data-images="https://source.unsplash.com/800x600/?embedded,hardware&sig=1,https://source.unsplash.com/800x600/?embedded,hardware&sig=2,https://source.unsplash.com/800x600/?embedded,hardware&sig=3">
+          <button class="prev">❮</button>
+          <div class="slides"></div>
+          <button class="next">❯</button>
+        </div>
+        <h3>Design for Test & Manufacturing</h3>
+        <p>Scan, BIST and DFT mini-projects to learn manufacturability practices.</p>
+        <div class="card-meta">
+          <ul>
+            <li>Scan chain basics</li>
+            <li>Simple BIST example</li>
+          </ul>
+          <button class="exercise-link" type="button">Open Exercises</button>
+        </div>
+      </article>
+    </div>
+    
+    <div class="closure" style="margin-top:1.6rem;text-align:center">
+      <p style="margin-bottom:0.6rem">Ready to start the hands-on labs? Open the worked examples and TLV snippets.</p>
+      <a class="cta" href="riscv_course.html#comb-circuits" style="display:inline-block;background:#0b5fff;color:#fff;padding:0.6rem 1rem;border-radius:8px;text-decoration:none">Open Hands-on Examples</a>
+    </div>
+  </main>
+
+  <script>
+    // Centralized, synchronized sliders with cross-fade transitions and unified autoplay
+    (function(){
+      const SYNC_MS = 4000; // global tick interval
+      const sliders = [];
+
+      function makeSlider(slider){
+        const raw = slider.getAttribute('data-images')||'';
+        const images = raw.split(',').map(s=>s.trim()).filter(Boolean);
+        const slidesEl = slider.querySelector('.slides');
+        if(images.length===0){ slidesEl.innerHTML = '<div class="slide">No preview</div>'; return; }
+
+        images.forEach((src,i)=>{
+          const img = document.createElement('img');
+          img.className = 'slide';
+          img.src = src;
+          if(i===0) img.classList.add('visible');
+          slidesEl.appendChild(img);
+        });
+
+        const items = ()=>slidesEl.querySelectorAll('.slide');
+        const indicators = document.createElement('div'); indicators.className = 'indicators';
+        images.forEach((_,i)=>{
+          const b = document.createElement('button');
+          if(i===0) b.classList.add('active');
+          b.addEventListener('click', ()=>{ state.idx = i; state.show(state.idx); });
+          indicators.appendChild(b);
+        });
+        slider.appendChild(indicators);
+
+        function updateIndicators(n){ Array.from(indicators.children).forEach((b,i)=> b.classList.toggle('active', i===n)); }
+
+        const state = { slider, imagesLength: images.length, idx: 0, paused: false, show: (n)=>{ items().forEach((it,i)=> it.classList.toggle('visible', i===n)); updateIndicators(n); } };
+
+        const prev = slider.querySelector('.prev');
+        const next = slider.querySelector('.next');
+        prev.addEventListener('click', ()=>{ state.idx = (state.idx-1+state.imagesLength)%state.imagesLength; state.show(state.idx); });
+        next.addEventListener('click', ()=>{ state.idx = (state.idx+1)%state.imagesLength; state.show(state.idx); });
+
+        // pause on hover
+        slider.addEventListener('mouseenter', ()=> state.paused = true);
+        slider.addEventListener('mouseleave', ()=> state.paused = false);
+
+        // touch-swipe
+        let touchStartX = 0;
+        slider.addEventListener('touchstart', (e)=>{ touchStartX = e.changedTouches[0].screenX; state.paused = true; });
+        slider.addEventListener('touchend', (e)=>{ const d = e.changedTouches[0].screenX - touchStartX; if(Math.abs(d)>40){ if(d<0) state.idx=(state.idx+1)%state.imagesLength; else state.idx=(state.idx-1+state.imagesLength)%state.imagesLength; state.show(state.idx); } state.paused=false; });
+
+        // keyboard nav
+        slider.setAttribute('tabindex','0');
+        slider.addEventListener('keydown', (e)=>{ if(e.key==='ArrowLeft'){ state.idx=(state.idx-1+state.imagesLength)%state.imagesLength; state.show(state.idx); } if(e.key==='ArrowRight'){ state.idx=(state.idx+1)%state.imagesLength; state.show(state.idx); } });
+
+        // preload images (simple)
+        images.forEach(u=>{ const im=new Image(); im.src=u; });
+
+        sliders.push(state);
+      }
+
+      document.querySelectorAll('.slider').forEach(makeSlider);
+
+      // single global timer to sync all sliders
+      setInterval(()=>{
+        sliders.forEach(s=>{ if(s.paused) return; s.idx = (s.idx+1)%s.imagesLength; s.show(s.idx); });
+      }, SYNC_MS);
+    })();
+  </script>
+</body>
+</html>

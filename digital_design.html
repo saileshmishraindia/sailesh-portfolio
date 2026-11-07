@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Digital Design & RTL Coding — Temple Of Silicon Scholars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    body{font-family:Inter,system-ui,Arial,sans-serif;margin:0;color:#111}
+    header{background:#07111f;color:#fff;padding:18px}
+    .container{max-width:980px;margin:22px auto;padding:0 16px}
+    .card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 6px 18px rgba(10,20,30,.06);margin-bottom:18px}
+    pre{background:#0f1724;color:#e6eef8;padding:12px;border-radius:6px;overflow:auto}
+    .btn{display:inline-block;padding:8px 12px;border-radius:6px;background:#0b5fff;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Digital Design & RTL Coding</h1>
+      <p style="opacity:.9">Small, hands-on RTL exercises and explanations in TL‑Verilog and Verilog.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Course outline</h2>
+      <ul>
+        <li>Boolean algebra refresher</li>
+        <li>Combinational building blocks: gates, adders, multiplexers</li>
+        <li>Sequential basics: flip-flops, registers and finite-state machines</li>
+        <li>RTL best-practices and clocking</li>
+        <li>Small hands-on projects: half-adder, full-adder, simple ALU
+        </li>
+      </ul>
+      <p><a class="btn" href="courses.html">Back to Courses</a></p>
+    </section>
+
+    <section class="card">
+      <h2>TL‑Verilog Examples</h2>
+
+      <h3>1-bit Inverter</h3>
+      <pre id="inv">// TL‑Verilog: 1-bit inverter
+`default_nettype none
+
+module inverter(input logic a, output logic y);
+  always_comb y = ~a;
+endmodule
+</pre>
+      <p><button class="btn" onclick="copyText('inv')">Copy</button> <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a></p>
+
+      <h3 style="margin-top:14px">1-bit Half Adder</h3>
+      <pre id="half">// TL‑Verilog: half adder
+module half_adder(input logic a, b, output logic sum, cout);
+  assign sum = a ^ b;
+  assign cout = a & b;
+endmodule
+</pre>
+      <p><button class="btn" onclick="copyText('half')">Copy</button> <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a></p>
+
+      <h3 style="margin-top:14px">1-bit Full Adder</h3>
+      <pre id="full">// TL‑Verilog: full adder
+module full_adder(input logic a, b, cin, output logic sum, cout);
+  assign {cout, sum} = a + b + cin;
+endmodule
+</pre>
+      <p><button class="btn" onclick="copyText('full')">Copy</button> <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a></p>
+
+    </section>
+
+    <section class="card">
+      <h2>Exercises</h2>
+      <ol>
+        <li>Implement a 4-bit ripple-carry adder using the full_adder module.</li>
+        <li>Create a simple FSM to detect the sequence 101 on a single input stream.</li>
+        <li>Experiment with clock gating: create a gated register and simulate power savings.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    function copyText(id){
+      const el=document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(()=>alert('Copied'));
+    }
+  </script>
+</body>
+</html>

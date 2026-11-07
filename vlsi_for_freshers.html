@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VLSI For Freshers — Temple Of Silicon Scholars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;color:#222}
+    .hero{background:#0b1220;color:#fff;padding:48px 16px;text-align:left}
+    .hero h1{font-family:Times New Roman,serif;font-size:2.25rem;margin:0}
+    .container{max-width:980px;margin:28px auto;padding:0 16px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:28px}
+    .card{background:#fff;border-radius:8px;padding:18px;box-shadow:0 6px 18px rgba(10,20,30,.06)}
+    pre{background:#0f1724;color:#e6eef8;padding:12px;border-radius:6px;overflow:auto}
+    .btn{display:inline-block;padding:8px 12px;border-radius:6px;background:#1f6feb;color:#fff;text-decoration:none}
+    .meta ul{margin:0;padding-left:18px}
+    .examples .example{margin-bottom:12px}
+    .example .controls{margin-top:6px}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>VLSI For Freshers</h1>
+      <p style="opacity:.9;margin-top:8px;max-width:720px">A compact, hands-on introduction to VLSI fundamentals — digital logic, silicon basics, simple RTL with TL‑Verilog, and practical board-level debug workflows.</p>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="grid">
+      <div class="card">
+        <h2>Course Overview</h2>
+        <p class="meta">This mini-course is aimed at engineers new to VLSI and digital design. It covers:</p>
+        <ul>
+          <li>Combinational logic (gates, adders, comparators)</li>
+          <li>Sequential elements (flip-flops, registers)</li>
+          <li>RTL flow with TL‑Verilog and Makerchip</li>
+          <li>FPGA prototyping and basic measurement (oscilloscope, logic analyzer)</li>
+          <li>Intro to PCB/board bring-up and soldering basics</li>
+        </ul>
+
+        <h3 style="margin-top:18px">Modules</h3>
+        <ol>
+          <li>Intro & Tools — TL‑Verilog, Makerchip, simulation</li>
+          <li>Logic Primitives & Combinational Circuits</li>
+          <li>Sequential Basics — Flip-flops & Timing</li>
+          <li>RTL Composition — Small datapaths</li>
+          <li>FPGA Prototyping & Measurement</li>
+          <li>Mini Project: 4-bit ALU</li>
+        </ol>
+
+        <p style="margin-top:14px"><a class="btn" href="courses.html">Back to Courses</a></p>
+      </div>
+
+      <aside class="card">
+        <h3>Quick Facts</h3>
+        <ul>
+          <li>Duration: Self-paced</li>
+          <li>Format: Read + Hands-on TL‑Verilog exercises</li>
+          <li>Prereq: Basic digital logic</li>
+        </ul>
+
+        <h4 style="margin-top:12px">Resources</h4>
+        <ul>
+          <li><a href="https://makerchip.com" target="_blank">Makerchip</a></li>
+          <li><a href="https://www.chipsalliance.org/" target="_blank">Chips Alliance</a></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section style="margin-top:28px" class="card examples">
+      <h2>Hands-on TL‑Verilog Examples</h2>
+
+      <div class="example">
+        <h3>1-bit Inverter</h3>
+        <pre id="inv-code">// TL‑Verilog: 1-bit inverter
+\`default_nettype none
+
+module inverter(input logic a, output logic y);
+  always_comb y = ~a;
+endmodule
+</pre>
+        <div class="controls">
+          <button class="btn" onclick="copyCode('inv-code')">Copy</button>
+          <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a>
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>1-bit D Flip-Flop</h3>
+        <pre id="ff-code">// TL‑Verilog: D flip-flop
+module dff(input logic clk, input logic d, output logic q);
+  always_ff @(posedge clk) q <= d;
+endmodule
+</pre>
+        <div class="controls">
+          <button class="btn" onclick="copyCode('ff-code')">Copy</button>
+          <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a>
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>1-bit Full Adder (TL‑Verilog)</h3>
+        <pre id="fa-code">// TL‑Verilog: 1-bit full adder
+module full_adder(input logic a, b, cin, output logic sum, cout);
+  assign {cout, sum} = a + b + cin;
+endmodule
+</pre>
+        <div class="controls">
+          <button class="btn" onclick="copyCode('fa-code')">Copy</button>
+          <a class="btn" href="#" onclick="alert('Open in Makerchip: paste code into makerchip editor')">Open in Makerchip</a>
+        </div>
+      </div>
+
+    </section>
+
+    <section style="margin-top:18px" class="card">
+      <h2>Next Steps</h2>
+      <p>Shall I:</p>
+      <ul>
+        <li>Add more TL‑Verilog exercises from `riscv_course.html` (copy content into this page)</li>
+        <li>Download and host example images locally</li>
+        <li>Wire up 'Open in Makerchip' to auto-open a prepared session</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function copyCode(id){
+      const el = document.getElementById(id);
+      navigator.clipboard.writeText(el.textContent).then(()=>{
+        alert('Code copied to clipboard');
+      });
+    }
+  </script>
+</body>
+</html>

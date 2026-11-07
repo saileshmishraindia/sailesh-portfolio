@@ -1,0 +1,281 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,600&display=swap');
+
+  :root {
+    --gold: #B87333;
+    --gold-light: #E8C97A;
+    --ink: #1A1208;
+    --parchment: #F9F3E8;
+    --rule: #C8A96E;
+    --muted: #6B5A3E;
+  }
+
+  .vision-wrap {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--parchment);
+    border: 1.5px solid var(--rule);
+    border-radius: 2px;
+    padding: 0;
+    max-width: 720px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .corner {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border-color: var(--gold);
+    border-style: solid;
+    opacity: 0.6;
+  }
+  .corner-tl { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .corner-tr { top: 10px; right: 10px; border-width: 2px 2px 0 0; }
+  .corner-bl { bottom: 10px; left: 10px; border-width: 0 0 2px 2px; }
+  .corner-br { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+  .header {
+    background: linear-gradient(135deg, #1A1208 0%, #3A2A14 60%, #2A1E0A 100%);
+    padding: 36px 48px 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .header-rule {
+    width: 60px;
+    height: 1.5px;
+    background: var(--gold-light);
+    margin: 0 auto 18px;
+    opacity: 0.7;
+  }
+
+  .header-label {
+    font-family: 'Source Serif 4', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #F5E9CC;
+    line-height: 1.25;
+    margin: 0 0 6px;
+  }
+
+  .header-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-light);
+    opacity: 0.85;
+    margin-top: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .body {
+    padding: 36px 52px 40px;
+  }
+
+  .principle {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .principle:nth-child(1) { animation-delay: 0.05s; }
+  .principle:nth-child(2) { animation-delay: 0.12s; }
+  .principle:nth-child(3) { animation-delay: 0.19s; }
+  .principle:nth-child(4) { animation-delay: 0.26s; }
+  .principle:nth-child(5) { animation-delay: 0.33s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .principle-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    opacity: 0.35;
+    line-height: 1;
+    min-width: 36px;
+    padding-top: 2px;
+    user-select: none;
+  }
+
+  .principle-content {}
+
+  .principle-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 5px;
+    letter-spacing: 0.01em;
+  }
+
+  .principle-body {
+    font-size: 14.5px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    opacity: 0.35;
+    margin: 4px 0 30px;
+  }
+
+  .highlight-box {
+    background: #1A1208;
+    border-left: 3px solid var(--gold);
+    border-radius: 1px;
+    padding: 16px 20px;
+    margin: 8px 0 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .highlight-symbol {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .highlight-text {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: #E8D8B0;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .highlight-text strong {
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .footer {
+    border-top: 1px solid var(--rule);
+    padding: 16px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0.7;
+  }
+
+  .footer-text {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-ornament {
+    font-size: 18px;
+    color: var(--gold);
+    opacity: 0.5;
+    letter-spacing: 4px;
+  }
+</style>
+
+<div class="vision-wrap">
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="header">
+    <div class="header-rule"></div>
+    <div class="header-label">Vision Statement</div>
+    <div class="header-title">The Theory of Value Addition<br>&amp; Multiplication</div>
+    <div class="header-name">— Er. Sailesh</div>
+  </div>
+
+  <div class="body">
+
+    <div class="principle">
+      <div class="principle-num">I</div>
+      <div class="principle-content">
+        <p class="principle-head">Work is Worship</p>
+        <p class="principle-body">Treat your organization's project as your own endeavor — your own enterprise. The ownership mindset transforms ordinary effort into extraordinary outcomes.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="principle">
+      <div class="principle-num">II</div>
+      <div class="principle-content">
+        <p class="principle-head">Salary as a Privilege</p>
+        <p class="principle-body">The salary provided by the organization grants us the privilege to make others happy, fill our belly with favorite delicacies, fulfill our own dreams, our friends' dreams, our parents' dreams — and the list is inexhaustible.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="principle">
+      <div class="principle-num">III</div>
+      <div class="principle-content">
+        <p class="principle-head">Leverage, Not Complicate</p>
+        <p class="principle-body">Your addition to the team should leverage the work, bridge the gaps present at various levels, and fine-tune things — never complicate tasks. Simplicity in execution is the mark of mastery.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="highlight-box">
+      <div class="highlight-symbol">10×</div>
+      <p class="highlight-text"><strong>Delivery should always be ≥ 10× Assigned.</strong> Not something more, not something new — but the same assigned task executed with far greater optimality. Excellence is not addition; it is amplification.</p>
+    </div>
+
+    <div class="principle">
+      <div class="principle-num">V</div>
+      <div class="principle-content">
+        <p class="principle-head">Worth of Service, Not Degree</p>
+        <p class="principle-body">It is not the degree that pays you — it is the value addition you put forth. It is the worth of your service that truly pays. Credentials open doors; competence keeps them open.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="principle">
+      <div class="principle-num">VI</div>
+      <div class="principle-content">
+        <p class="principle-head">Throughput over Time</p>
+        <p class="principle-body">The main payload is the quality of service, not the quantity of time spent in office. Technically, throughput should be high while remaining both efficient and optimal. Output defines presence.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-text">Value · Excellence · Purpose</span>
+    <span class="footer-ornament">✦ ✦ ✦</span>
+  </div>
+</div>
